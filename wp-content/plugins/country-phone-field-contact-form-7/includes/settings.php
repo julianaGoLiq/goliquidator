@@ -260,7 +260,7 @@
 	<?php
 	}
 
-    public function nb_cpf_phone_section_cb(){
+    public function nb_cpf_phone_section_cb( $args ){
         $options = get_option( 'nb_cpf_options' );
 	?>
 		<input type="hidden" name="nb_cpf_options[defaultCountry]" value="<?php echo isset( $options['defaultCountry'] ) ? $options['defaultCountry'] : ''; ?>" />

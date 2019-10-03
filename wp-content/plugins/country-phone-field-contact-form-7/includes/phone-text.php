@@ -51,7 +51,11 @@ function nbcpf_phonetext_form_tag_handler( $tag ) {
 	if ( $tag->has_option( 'readonly' ) ) {
 		$atts['readonly'] = 'readonly';
 	}
-
+	
+	if ( $tag->has_option( 'numberonly') ) {
+		$atts['data-numberonly'] = 'true';
+	}
+	
 	if ( $tag->is_required() ) {
 		$atts['aria-required'] = 'true';
 	}
@@ -100,11 +104,28 @@ function nbcpf_phonetext_validation_filter( $result, $tag ) {
 	if ( $tag->is_required() && '' == $value ) {
 		$result->invalidate( $tag, wpcf7_get_message( 'invalid_required' ) );
 	}
-	if ( '' != $value && ( ! is_numeric($value) ) ) {
-		$result->invalidate( $tag, "Phone number must be numbers only." );
+	if ( '' !== $value ) {
+		$maxlength = $tag->get_maxlength_option();
+		$minlength = $tag->get_minlength_option();
+
+		if ( $maxlength and $minlength and $maxlength < $minlength ) {
+			$maxlength = $minlength = null;
+		}
+
+		$code_units = wpcf7_count_code_units( stripslashes( $value ) );
+
+		if ( false !== $code_units ) {
+			if ( $maxlength and $maxlength < $code_units ) {
+				$result->invalidate( $tag, wpcf7_get_message( 'invalid_too_long' ) );
+			} elseif ( $minlength and $code_units < $minlength ) {
+				$result->invalidate( $tag, wpcf7_get_message( 'invalid_too_short' ) );
+			}
+		}
 	}
-	if ( '' != $value && strlen($value) < 6 ) {
-		$result->invalidate( $tag, "Phone number value is too short" );
+	if ( $tag->has_option( 'numberonly') ) {
+		if ( '' != $value && ( ! is_numeric($value) ) ) {
+			$result->invalidate( $tag, __('Phone number must be numbers only', 'nb-cpf') );
+		}
 	}
 	
 	return $result;
@@ -165,6 +186,16 @@ function nbcpf_tag_generator_phonetext( $contact_form, $args = '' ) {
 	<tr>
 	<th scope="row"><label for="<?php echo esc_attr( $args['content'] . '-class' ); ?>"><?php echo esc_html( __( 'Class attribute', 'nb-cpf' ) ); ?></label></th>
 	<td><input type="text" name="class" class="classvalue oneline option" id="<?php echo esc_attr( $args['content'] . '-class' ); ?>" /></td>
+	</tr>
+	
+	<tr>
+	<th scope="row"><?php echo esc_html( __( 'Field Validation', 'nb-cpf' ) ); ?></th>
+	<td>
+		<fieldset>
+		<legend class="screen-reader-text"><?php echo esc_html( __( 'Field Validation', 'nb-cpf' ) ); ?></legend>
+		<label><input type="checkbox" name="numberonly" class="option"/> <?php echo esc_html( __( 'Number Only', 'nb-cpf' ) ); ?></label>
+		</fieldset>
+	</td>
 	</tr>
 
 </tbody>

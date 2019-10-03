@@ -2,7 +2,7 @@
 /*
 Plugin Name: Country & Phone Field Contact Form 7
 Description: Add country drop down with flags and phone number with country phone extensions field in contact form 7.
-Version: 2.1.2
+Version: 2.1.4
 Author: Narinder Singh Bisht
 Author URI: http://narindersingh.in
 License: GPL3
@@ -16,14 +16,19 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 class NB_CPF_Plugin{
 	
 	public function __construct(){
-		
+		add_action( 'plugins_loaded', array( $this, 'nb_load_plugin_textdomain' ) );
 		if(class_exists('WPCF7')){
+			
 			$this->nb_plugin_constants();
 			require_once NB_CPF_PATH . 'includes/autoload.php';
 		}else{
 			add_action( 'admin_notices', array( $this, 'nb_admin_error_notice' ) );
 		}
 		
+	}
+	
+	public function nb_load_plugin_textdomain() {
+		load_plugin_textdomain( 'nb-cpf', false, basename( dirname( __FILE__ ) ) . '/languages/' );
 	}
 	
 	/*

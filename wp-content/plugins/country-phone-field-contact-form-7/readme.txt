@@ -1,8 +1,9 @@
 === Country & Phone Field Contact Form 7 ===
-Contributors: narinderbisht
+Contributors: narinderbisht,webgrex
+Donate link: https://www.paypal.me/webgrex
 Tags: country dropdown, flags, phone extension, form, contact form
 Requires at least: 4.8
-Tested up to: 5.2.2
+Tested up to: 5.2.3
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -47,6 +48,14 @@ Add only selected countries iso code from settings section. Contact >> CPF Setti
 = How disable country dial code (+)? =
 
 Enable option for dial code disable form plugin settings. Contact >> CPF Settings.
+
+= How to apply number only validation on phone field? =
+
+While adding the field, enable number only validation checkbox. If you already added the field. Just add "numberonly" option in field shortcode. e.g [phonetext phonetext-178 numberonly]
+
+= How maxlength and minlength validation apply on phone field? =
+
+Please use contact form 7 standard featured minlength and maxlength option. It will work for you.
 
 == Screenshots ==
 
@@ -97,3 +106,8 @@ First version of plugin.
 * fixed phone number validation bug.
 2.1.2
 * fixed IP Address issue. It was PHP based. Now I convert to JavaScript based. So client end IP tracking is working fine.
+2.1.3
+* plugin is translate ready now.
+* phone number validation has updated. Now user can manage number only validation from field settings.
+2.1.4
+* settings page php warning message has fixed.
