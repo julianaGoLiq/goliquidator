@@ -1,0 +1,273 @@
+/*HIDE LANGUAGE SWITCHER*/
+#polylang-2,
+#polylang-3{
+	display: none !important;
+}
+/*HIDE SEARCH BAR*/
+#custom_html-6,
+#custom_html-7{
+	display: none !important;
+}
+/*HIDE FORM AGENDAR CITAS*/
+.formulario-cita .ofertas{
+	display: none !important;
+}
+/*----------------------*/
+.qodef-search-opener .icon_search::before {
+    font-size: 23px !important;
+}
+/**/
+.carousel.slide.qodef-full-screen{
+	-webkit-transition-duration: 0.3s;
+	-moz-transition-duration: 0.3s;
+	-ms-transition-duration: 0.3s;
+	-o-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+}
+
+.qodef-top-bar,
+body:not(.page-id-7) .qodef-smooth-transition-loader.qodef-mimic-ajax, 
+body:not(.page-id-7) .qodef-wipe-holder {
+    display: none !important;
+}
+
+.qodef-portfolio-list-holder-outer.qodef-ptf-gallery article .qodef-item-text-overlay {
+background-color: rgba(0,0,0,.7);
+}
+
+.qodef-hide-portfolio .qodef-elements-holder-item:nth-child(2n) .qodef-item-title-holder .qodef-item-title,
+.qodef-hide-portfolio .qodef-elements-holder-item:nth-child(3n) .qodef-item-title-holder .qodef-item-title {
+ display: none;
+}
+
+h2{
+    color: black;
+}
+
+.styles_grids_with_icons h4{
+    color: #1A6197 !important;
+    font-size: 18px;
+    font-family: 'Open Sans';
+    font-weight: bold;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.styles_grids_with_icons p{
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+header div.qodef-logo-wrapper a {
+    width: 185px !important;
+    height: 42px !important;
+}
+
+.qodef-testimonial-author-name{
+    color: #1E6799 !important;
+}
+.styles_grids_with_icons .vc_col-sm-4 img,
+.styles_grids_with_icons h4{
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -ms-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
+.styles_grids_with_icons .vc_col-sm-4:hover img, 
+.styles_grids_with_icons .vc_col-sm-4:hover h4{
+    -webkit-filter: grayscale(0);
+    -moz-filter: grayscale(0);
+    -ms-filter: grayscale(0);
+    -o-filter: grayscale(0);
+    filter: grayscale(0);
+}
+
+
+.form-group {
+    margin-bottom: -10px !important;
+}
+
+.form-group span.productos-interes{
+	margin-bottom: 20px !important;
+	position: relative;
+	display: inline-block;
+}
+input[type="submit"]{
+	margin-top: 20px;
+}
+
+input#pais{
+	height: 37px;
+    border-radius: 5px;
+}
+.selected-flag .flag{
+	margin-top: 10px !important;
+}
+.icontact img{
+    padding-bottom: 62px;
+}
+.counter_liquidator .qodef-counter-title{
+	display: inline-block;
+    margin-top: 0px !important;
+    top: -10px !important;
+    position: relative;
+    padding-left: 5px;
+}
+.counter_liquidator .qodef-counter-title{
+	font-size: 63px;
+}
+.counter_liquidator .qodef-counter{
+	font-weight: bold !important;
+    font-size: 65px !important;
+}
+.counter_liquidator .qodef-counter-text{
+	font-size: 15px;
+    margin-top: -5px !important;
+}
+.formulario label{
+	color: black !important;
+}
+.formulario input[type="submit"]{
+	padding: 10px 30px;
+}
+#submit_comment, .post-password-form input[type=submit], .qodef-woocommerce-page #reviews input[type=submit], input.wpcf7-form-control.wpcf7-submit{
+	padding: 0 60px !important;
+}
+h1, h2{
+	font-weight: bold !important;
+}
+
+#color-blue
+.qodef-title.qodef-breadcrumb-type .qodef-title-holder .qodef-breadcrumbs .qodef-current,
+.qodef-main-menu > ul > li.qodef-active-item > a{
+	color: #1E6799 !important;
+}
+.qodef-breadcrumbs-inner *{
+	font-family: Poppins,sans-serif !important;
+}
+
+.logo-whatsapp,
+.qodef-right-from-main-menu-widget{
+	display:inline-block;
+}
+
+.qodef-right-from-main-menu-widget{
+	position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    height: 100%;
+	padding-right:10px;
+}
+
+.qodef-right-from-main-menu-widget *{
+	font-family: Poppins,sans-serif;
+	font-size: 20px;
+	color: black;
+	font-weight: 700;
+}
+.widget_polylang select{
+	border: 0px;
+}
+.widget_polylang i{
+	padding-right: 5px;
+}
+
+#custom_html-3, #custom_html-3 *,
+#custom_html-7, #custom_html-7 *,
+#polylang-2, #polylang-2 *{
+	height: 100%;
+}
+
+.widget_polylang * {
+    height: auto;
+}
+
+.widget_polylang ul{
+	list-style: none;
+}
+.logo-whatsapp, #custom_html-7 a{
+	padding-top: 30px;
+	position: relative;
+	display: inline-block;
+}
+#custom_html-2 .logo-whatsapp{
+	padding-top: 0px;
+}
+.logo-whatsapp i{
+	font-size: 25px;
+}
+.logo-whatsapp i:hover{
+	color: #7AAF2D !important;
+}
+
+.qodef-search-opener span::before{
+	text-decoration: none;
+}
+.qodef-four-columns-inner p{
+	line-height: 1.7;
+}
+footer .qodef-footer-top:not(.qodef-footer-top-full) .qodef-container-inner {
+    padding: 50px 0 30px;
+}
+
+ #video {
+	 position: absolute;
+	 left: 0;
+	 top: -280px;
+	 width: 100%;
+	 height: auto;
+	 z-index: 1;
+	 visibility: visible;
+ }
+
+.sup-video .qodef-custom-font-holder{
+	z-index: 3;
+    position: relative;
+}
+
+.sup-video .qodef-elements-holder{
+	background-color: rgba(0,0,0,0.4) !important;
+    position: relative !important;
+    z-index: 2;
+}
+.text-white h2{
+	color: white !important;
+}
+
+footer .qodef-footer-top-holder a:hover {
+    color: white !important;
+}
+
+/*
+ * COLOR HOVER BUTTON SLIDER*/
+.qodef-btn.qodef-btn-solid:not(.qodef-btn-custom-hover-bg):hover {
+    background-color: #191919!important;
+    text-decoration: none !important;
+}
+/*COLOR HOVER BUTTON SECTIONS*/
+.qodef-btn.qodef-btn-solid:not(.qodef-btn-custom-hover-color):hover{
+	text-decoration: none !important;
+}
+
+.decoration-link{
+	text-decoration: underline;
+}
+
+.formulario input[type="submit"]:hover{
+	color: white !important;
+}
+
+/*RESPONSIVE DESIGN*/
+@media screen and (max-width: 2000px) and (min-width: 1500px){}
+@media screen and (max-width: 2000px){
+	/*.carousel.slide.qodef-full-screen{
+		height: 550px !important;
+		overflow: hidden;
+	}*/
+}
+@media screen and (max-width: 1600px){}
+@media screen and (max-width: 1200px){}
+@media screen and (max-width: 991px){}
+@media screen and (max-width: 767px){}
+@media screen and (max-width: 592px){}
