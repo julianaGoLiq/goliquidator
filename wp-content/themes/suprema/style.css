@@ -12,35 +12,3 @@ License URI: licence/GPL.txt
 CSS changes can be made in files in the /css/ folder. This is a placeholder file required by WordPress, so do not delete it.
 
 */
-.popup_suscripcion{
-	cursor: pointer;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	border: 1px solid #FFF;
-	padding-left: 5px;
-	padding-right: 5px;
-	font-size: 11px;
-	text-decoration:none;
-}
-.qodef-column-inner .textwidget .popup_suscripcion:hover{
-	cursor: pointer;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	border: 1px solid #FFF;
-	padding-left: 5px;
-	padding-right: 5px;
-	font-size: 11px;
-	text-decoration:none;
-	background-color:#fff;
-	color:#191919 !important;
-}
-.img_boletin{
-	margin-left: 5px;
-}
-.img_boletin:hover{
-	margin-left: 5px;
-	color:#191919;
-}
-.text_boletin:hover{
-	color:#191919;
-}
