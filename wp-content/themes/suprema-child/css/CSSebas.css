@@ -67,20 +67,20 @@ header div.qodef-logo-wrapper a {
 }
 .styles_grids_with_icons .vc_col-sm-4 img,
 .styles_grids_with_icons h4{
+    -webkit-filter: grayscale(0%);
+    -moz-filter: grayscale(0%);
+    -ms-filter: grayscale(0%);
+    -o-filter: grayscale(0%);
+    filter: grayscale(0%);
+}
+
+.styles_grids_with_icons .vc_col-sm-4:hover img, 
+.styles_grids_with_icons .vc_col-sm-4:hover h4{
     -webkit-filter: grayscale(100%);
     -moz-filter: grayscale(100%);
     -ms-filter: grayscale(100%);
     -o-filter: grayscale(100%);
     filter: grayscale(100%);
-}
-
-.styles_grids_with_icons .vc_col-sm-4:hover img, 
-.styles_grids_with_icons .vc_col-sm-4:hover h4{
-    -webkit-filter: grayscale(0);
-    -moz-filter: grayscale(0);
-    -ms-filter: grayscale(0);
-    -o-filter: grayscale(0);
-    filter: grayscale(0);
 }
 
 
