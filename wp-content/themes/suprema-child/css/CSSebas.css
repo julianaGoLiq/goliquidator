@@ -227,7 +227,7 @@ footer .qodef-footer-top:not(.qodef-footer-top-full) .qodef-container-inner {
 }
 
 .sup-video .qodef-elements-holder{
-	background-color: rgba(0,0,0,0.4) !important;
+	background-color: rgba(10,10,10,0.7) !important;
     position: relative !important;
     z-index: 2;
 }
