@@ -441,7 +441,7 @@ if(!function_exists('suprema_qodef_header_meta')) {
     function suprema_qodef_header_meta() { ?>
 
         <meta charset="<?php bloginfo('charset'); ?>"/>
-        <link rel="profile" href="http://gmpg.org/xfn/11"/>
+        <link rel="profile" href="https://gmpg.org/xfn/11"/>
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>"/>
 
     <?php }

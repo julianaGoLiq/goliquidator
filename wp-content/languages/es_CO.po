@@ -12462,7 +12462,7 @@ msgstr "Menú"
 
 #: wp-includes/admin-bar.php:172
 msgid "https://wordpress.org/support/forum/requests-and-feedback"
-msgstr "http://es.forums.wordpress.org/forum/peticiones-y-feedback"
+msgstr "https://es.forums.wordpress.org/forum/peticiones-y-feedback"
 
 #: wp-includes/admin-bar.php:171
 msgid "Feedback"
@@ -12473,7 +12473,7 @@ msgstr "Sugerencias"
 #: wp-includes/update.php:153 wp-includes/update.php:345
 #: wp-includes/update.php:527
 msgid "https://wordpress.org/support/"
-msgstr "http://es.forums.wordpress.org/"
+msgstr "https://es.forums.wordpress.org/"
 
 #: wp-includes/admin-bar.php:163
 msgid "Support Forums"
