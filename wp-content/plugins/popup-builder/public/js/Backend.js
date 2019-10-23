@@ -80,6 +80,28 @@ SGPBBackend.prototype.sgInit = function()
 	this.popupBuilderButton();
 };
 
+SGPBBackend.prototype.changeTab = function(tab)
+{
+	jQuery('#sgpb-editor-options-tab-content-wrapper-'+tab).css('display', 'none');
+	var i, tabContent, tabLinks;
+
+	tabContent = jQuery('.sgpb-editor-options-tab-content-wrapper');
+	tabContent.each(function(){
+		jQuery(this).css('display', 'none');
+	});
+	tabLinks = jQuery('.sgpb-editor-tab-links');
+	tabLinks.each(function(){
+		jQuery(this).removeClass('sgpb-active-tab');
+	});
+	jQuery('#sgpb-editor-options-tab-content-wrapper-'+tab).css('display', 'block');
+	jQuery('.sgpb-editor-tab-'+tab).addClass('sgpb-active-tab');
+	this.rangeSlider();
+};
+
+SGPBBackend.prototype.resetCssEditorContent = function() {
+	jQuery('.editor-content-css').val(SGPB_CSS_EDITOR_DEFAULT_CONTENT[0]);
+}
+
 SGPBBackend.prototype.popupBuilderButton = function()
 {
 	var that = this;
@@ -1456,6 +1478,7 @@ SGPBBackend.prototype.backgroundImageUpload = function()
 			jQuery('.sgpb-show-background-image-container').css({'background-image': 'url("' + attachment.url + '")'});
 			jQuery('.sgpb-show-background-image-container').html('');
 			jQuery('#js-background-upload-image').val(attachment.url);
+			jQuery('input[name="sgpb-background-image"]').attr('value', attachment.url);
 			jQuery('.js-sgpb-remove-background-image').removeClass('sg-hide');
 		});
 		/* Open the uploader dialog */
@@ -1765,6 +1788,9 @@ SGPBBackend.resetCount = function(popupId)
 
 SGPBBackend.prototype.autosave = function()
 {
+	if (!jQuery('#titlediv').length) {
+		return false;
+	}
 	var allPopupData = jQuery('form#post').serializeArray();
 	var data = {
 		nonce: SGPB_JS_PARAMS.nonce,

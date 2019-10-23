@@ -84,7 +84,7 @@ class ScriptsLoader
 		foreach ($popups as $popup) {
 			$popupId = $popup->getId();
 
-			$popupContent = apply_filters('sgpbPopupContentLoadToPage', $popup->getPopupTypeContent());
+			$popupContent = apply_filters('sgpbPopupContentLoadToPage', $popup->getPopupTypeContent(), $popupId);
 
 			$events = $popup->getPopupAllEvents($postId, $popupId, $popup);
 			// if popup's data has already loaded into the page with the same event

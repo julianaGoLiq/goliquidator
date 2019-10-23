@@ -840,20 +840,24 @@ class AdminHelper
 	 * Get image encoded data from URL
 	 *
 	 * @param $imageUrl
-	 * @param $boolean
+	 * @param $shouldNotConvertBase64
 	 *
 	 * @return string
 	 */
 
-	public static function getImageDataFromUrl($imageUrl, $boolean = false)
+	public static function getImageDataFromUrl($imageUrl, $shouldNotConvertBase64 = false)
 	{
 		$remoteData = wp_remote_get($imageUrl);
+		$originalImageUrl = $imageUrl;
 		if (is_wp_error($remoteData) || (isset($remoteData['response']) && $remoteData['response']['code'] == 404)) {
-			if ($boolean) {
+			if ($shouldNotConvertBase64) {
 				$imageUrl = SG_POPUP_IMG_URL.'NoImage.png';
 			}
 		}
-		if (!$boolean) {
+		if (is_wp_error($remoteData) && empty($remoteData->error_data)) {
+			$imageUrl = $originalImageUrl;
+		}
+		if (!$shouldNotConvertBase64) {
 			$imageData = wp_remote_retrieve_body($remoteData);
 			$imageUrl = base64_encode($imageData);
 		}
@@ -1773,7 +1777,7 @@ class AdminHelper
 	public static function removeAllNonPrintableCharacters($title, $defaultValue)
 	{
 		$titleRes = $title;
-		$pattern  ='/[\\\^£$%&*()}{@#~?><>,|=_+¬-]/';
+		$pattern  = '/[\\\^£$%&*()}{@#~?><>,|=_+¬-]/';
 		$title = preg_replace($pattern, '', $title);
 		$title = mb_ereg_replace($pattern, '', $title);
 		$title = htmlspecialchars($title, ENT_IGNORE, 'UTF-8');
@@ -1783,5 +1787,56 @@ class AdminHelper
 		}
 
 		return $titleRes;
+	}
+
+	public static function renderCustomScripts($popupId)
+	{
+		$finalResult = '';
+		$postMeta = get_post_meta($popupId, 'sg_popup_scripts', true);
+		if (empty($postMeta)) {
+			return '';
+		}
+		$defaultData = \ConfigDataHelper::defaultData();
+
+		// get scripts
+		$jsPostMeta = @$postMeta['js'];
+		$jsDefaultData = $defaultData['customEditorContent']['js'];
+		$customScripts = '<script id="sgpb-custom-script-'.$popupId.'">';
+		$finalContent = '';
+		if (!empty($jsPostMeta)) {
+			foreach ($jsDefaultData as $key => $value) {
+				$eventName = 'sgpb'.$key;
+				$content = @$jsPostMeta['sgpb-'.$key];
+				if (empty($content) || $key == 'ShouldOpen' || $key == 'ShouldClose') {
+					continue;
+				}
+				$content = str_replace('popupId', $popupId, $content);
+				$content = html_entity_decode($content);
+
+				$finalContent .= 'sgAddEvent(window, "'.$eventName.'", function(e) {';
+				$finalContent .= 'if (e.detail.popupId == "'.$popupId.'") {';
+				$finalContent .= $content;
+				$finalContent .= '};';
+				$finalContent .= '});';
+			}
+		}
+		$customScripts .= $finalContent;
+		$customScripts .= '</script>';
+
+		// get styles
+		$cssPostMeta = @$postMeta['css'];
+		$customStyles = '<style id="sgpb-custom-style-'.$popupId.'">';
+		$finalContent = '';
+		if (!empty($cssPostMeta)) {
+			$finalContent = str_replace('popupId', $popupId, $cssPostMeta);
+			$finalContent = html_entity_decode($finalContent);
+		}
+		$customStyles .= $finalContent;
+		$customStyles .= '</style>';
+
+		$finalResult .= $customScripts;
+		$finalResult .= $customStyles;
+
+		return $finalResult;
 	}
 }

@@ -2315,3 +2315,189 @@ input:checked + .sgpb-slider:before {
 	right: -3px;
 	top: 6px;
 }
+
+.sgpb-editor ::placeholder {
+	color: #CCCCCC;
+	font-style: italic;
+}
+
+.reset-button {
+	color: #0073aa !important;
+	float: right !important;
+	border: 1px solid #ccc !important;
+	background-color: #f7f7f7 !important;
+	padding: 4px 8px !important;
+	font-size: 13px !important;
+	cursor: pointer !important;
+	border-radius: 2px !important;
+	margin-right: 35px !important;
+	margin-bottom: 5px !important;
+	top: -3px !important;
+	font-weight: 600 !important;
+}
+
+.reset-button:hover {
+	color: #f7f7f7 !important;
+	background-color: #0073aa !important;
+}
+
+.sgpb-editor {
+	border: 1px solid #ddd;
+	border-top: none;
+	background-color: #f7f7f7;
+}
+
+.editor-static-text {
+	padding-top: 10px;
+	border: none;
+}
+
+.editor-static-text div {
+	color: black;
+	margin-left: 30px;
+	margin-right: 30px;
+	padding: 3px 8px;
+}
+
+.editor-content {
+	font-style: normal !important;
+	padding: 10px;
+	color: black !important;
+	height: 100px;
+	width: 100%;
+	margin-top: 0px;
+	margin-bottom: 20px !important;
+}
+
+.editor-content-css {
+	height: 400px;
+}
+
+.sgpb-editor-options-tabs-wrapper {
+	background-color: white !important;
+	overflow: hidden;
+}
+
+.sgpb-editor-options-tabs-wrapper input {
+	color: black !important;
+	border-radius: 0px !important;
+	background-color: rgba(204, 204, 204, 0.4) !important;
+	border: 1px solid #ddd !important;
+}
+
+/* Change background color of buttons on hover */
+.sgpb-editor-options-tabs-wrapper input:hover {
+	background-color: #cccccc !important;
+	color: #636363 !important;
+}
+
+/* Create an active/current tablink class */
+.sgpb-editor-options-tabs-wrapper .sgpb-active-tab {
+	background-color: #f7f7f7 !important;
+	box-shadow: none !important;
+	border-bottom: 1px solid #f7f7f7 !important;
+}
+
+.sgpb-editor-tab-links {
+	background-color: #ffffff;
+}
+
+.sgpb-editor-tab-2
+{
+	border-left: none !important;
+}
+
+/* notification center styles */
+.sgpb-notification-center-wrapper {
+	display: inline-block;
+	max-width: 1240px;
+	width: 98%;
+	margin: 20px 0 1px;
+	/*padding: 20px 20px 0;*/
+	border: 1px solid #e5e5e5;
+	background-color: #fdfdfd;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .04);
+}
+
+.sgpb-notification-center-wrapper h3 {
+	border-bottom: 1px solid #cccccc;
+	padding-bottom: 15px;
+	padding-left: 20px;
+}
+
+.sgpb-notification-center-wrapper .dashicons-flag {
+	color: #01B9FF;
+}
+
+.sgpb-single-notification-wrapper {
+	width:100%;
+	display: inline-block;
+	padding: 0 20px;
+}
+
+.sgpb-each-notification-wrapper-js .sgpb-single-notification-wrapper:not(:first-child) {
+	margin: 10px 0 0;
+}
+
+.sgpb-single-notification-wrapper {
+	margin-left: 2px !important;
+}
+
+.sgpb-each-notification-wrapper-js .sgpb-single-notification-wrapper:not(:first-child) .sgpb-single-notification-close-btn {
+	/*margin-top: 25px;*/
+}
+
+.sgpb-single-notification {
+	display: inline-block;
+	width: 88%;
+	min-height: 25px;
+	float:left;
+	line-height: 1.4;
+	padding: 11px 15px;
+	font-size: 14px;
+	text-align: left;
+	background-color: #fff;
+	border-left: 4px solid #01B9FF;
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,.2);
+}
+
+.sgpb-single-notification-close-btn {
+	width: 8%;
+	float:right;
+}
+
+.sgpb-single-notification-wrapper .button.dismiss {
+	flex: 0 0 45px;
+	width: 45px;
+	height: 45px;
+	margin-left: 10px;
+	line-height: inherit;
+	padding: 0;
+	outline: none;
+	cursor: pointer;
+}
+
+.sgpb-each-notification-wrapper-js {
+	padding-bottom: 15px;
+}
+
+.sgpb-disabled {
+	opacity: 0.5;
+}
+
+.sgpb-menu-item-notification {
+	display: inline-block;
+	vertical-align: top;
+	box-sizing: border-box;
+	margin: 1px 0 -1px 3px;
+	padding: 0 5px;
+	min-width: 18px;
+	height: 18px;
+	border-radius: 9px;
+	background-color: #ca4a1f;
+	color: #fff;
+	font-size: 12px;
+	line-height: 1.5;
+	text-align: center;
+	z-index: 26;
+}

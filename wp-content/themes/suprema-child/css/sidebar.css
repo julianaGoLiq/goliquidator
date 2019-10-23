@@ -1,0 +1,46 @@
+.parent_category{
+    width: 100%;
+    float: left;
+    color: #101010 !important;
+    font-size: 15px;
+    line-height: 1.5em;
+    font-weight: 500;
+    letter-spacing: -.2px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.children_category{
+    width: 100%;
+    float: left;
+    color: #6d6d6d !important;
+    line-height: 1.5em;
+    letter-spacing: -.2px;
+    font-size: 14px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.side_bar_row_up:before{
+    content: "\32";
+    position: absolute;
+    right: 0px;
+    font-family: 'ElegantIcons';
+    font-size: 20px;
+}
+.side_bar_row_down:before{
+    content: "\33";
+    position: absolute;
+    right: 0px;
+    font-family: 'ElegantIcons';
+    font-size: 20px;
+}
+.woocommerce .products.standard .product .qodef-product-list-product-title{
+    font-size: 15px;
+}
+.child_alt_price{
+    font-size: 12px;
+    line-height: 32px;
+    font-weight: 500;
+    font-family: Poppins,sans-serif;
+    letter-spacing: -.2px;
+    color: #6aa636;
+}

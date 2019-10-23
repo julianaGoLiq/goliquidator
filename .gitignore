@@ -7,3 +7,5 @@ error_log
 .idea/
 goliquidator_cooming_soon.zip
 .htaccess
+wp-content/uploads/2019/10/**
+wp-content/uploads/2016/**

@@ -3,7 +3,6 @@ namespace sgpb;
 use \WP_Query;
 use \SgpbPopupConfig;
 use \SgpbDataConfig;
-
 class Actions
 {
 	public $customPostTypeObj;
@@ -56,7 +55,6 @@ class Actions
 		add_action('wp_before_admin_bar_render', array($this, 'pluginActivated'), 10, 2);
 		add_action('admin_head', array($this, 'hidePageBuilderEditButtons'));
 		add_action('admin_head', array($this, 'hidePublishingActions'));
-		add_action('admin_notices', array($this, 'inactiveExtensionNotice'));
 		new Ajax();
 	}
 
@@ -262,13 +260,21 @@ class Actions
 			require_once(SG_POPUP_VIEWS_PATH.'mainRateUsBanner.php');
 		}
 
-		if (!get_option('SGPB_ASK_FOR_REVIEW_BANNER_CLOSED') && $post_type == SG_POPUP_POST_TYPE) {
+		/*if (!get_option('SGPB_ASK_FOR_REVIEW_BANNER_CLOSED') && $post_type == SG_POPUP_POST_TYPE) {
 			echo AdminHelper::showReviewPopup();
-		}
+		}*/
 	}
 
 	public function pluginNotices()
 	{
+		if (function_exists('get_current_screen')) {
+			$screen = get_current_screen();
+			$screenId = $screen->id;
+			if ($screenId == 'edit-popupbuilder') {
+				$notificationsObj = new SGPBNotificationCenter();
+				echo $notificationsObj->displayNotifications();
+			}
+		}
 		$extensions =  AdminHelper::getAllActiveExtensions();
 		$updated = get_option('sgpb_extensions_updated');
 

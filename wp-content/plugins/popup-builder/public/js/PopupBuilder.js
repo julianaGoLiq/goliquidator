@@ -422,8 +422,22 @@ SGPBPopup.prototype.prepareOpen = function()
 	var popupType = this.popupData['sgpb-type'];
 	this.setUpPopupConfig();
 	var that = this;
-
 	var popupConfig = this.getPopupConfig();
+
+	popupConfig.customShouldOpen = function() {
+		var instructions = popupData['sgpb-ShouldOpen'];
+		var F = new Function (instructions);
+
+		return(F());
+	}
+
+	popupConfig.customShouldClose = function() {
+		var instructions = popupData['sgpb-ShouldClose'];
+		var F = new Function (instructions);
+
+		return(F());
+	}
+
 	this.setPopupDimensions();
 
 	if (popupData['sgpb-disable-popup-closing'] == 'on') {
@@ -1421,6 +1435,7 @@ SGPBPopup.prototype.closeButtonDisplay = function(popupId, display, delay)
 
 SGPBPopup.prototype.open = function(args)
 {
+	var customEvent = this.customEvent;
 	var config = this.getPopupConfig();
 	var popupId = this.getPopupId();
 	var eventName = this.eventName;
@@ -1454,6 +1469,7 @@ SGPBPopup.prototype.open = function(args)
 		/* don't allow to count popup opening */
 		this.setCountPopupOpen(false);
 	}
+	popup.customEvent = customEvent;
 	popup.open();
 	this.setPopupObj(popup);
 
@@ -2493,7 +2509,6 @@ SgpbEventListener.prototype.sgpbClick = function(listenerObj, eventData)
 	popupIds.push(popupId);
 	var mapId = listenerObj.filterPopupId(popupId);
 	popupIds.push(mapId);
-
 	for(var key in popupIds) {
 		var popupId = popupIds[key];
 		if (!popupIds.hasOwnProperty(key)) {
@@ -2542,6 +2557,7 @@ SgpbEventListener.prototype.sgpbClick = function(listenerObj, eventData)
 						var mapId = listenerObj.filterPopupId(popupId);
 						popupObj = SGPBPopup.createPopupObjById(mapId);
 					}
+					popupObj.customEvent = 'Click';
 					popupObj.prepareOpen();
 					clickCount = 1;
 				}, delay);
@@ -2602,6 +2618,7 @@ SgpbEventListener.prototype.sgpbHover = function(listenerObj, eventData)
 						var mapId = listenerObj.filterPopupId(popupId);
 						popupObj = SGPBPopup.createPopupObjById(mapId);
 					}
+					popupObj.customEvent = 'Hover';
 					popupObj.prepareOpen();
 					hoverCount = 1;
 				}, delay);

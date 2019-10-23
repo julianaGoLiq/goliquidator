@@ -42,6 +42,7 @@ function my_theme_scripts_function() {
 	wp_enqueue_script( 'JSAwesome', 'https://kit.fontawesome.com/bfa2e8f487.js');
 	wp_enqueue_script( 'JSebas', get_stylesheet_directory_uri() . '/js/JSebas.js?v=0.1.7');
 	wp_enqueue_style( 'CSSebas', get_stylesheet_directory_uri() . '/css/CSSebas.css?v=0.5.5');
+    wp_enqueue_style( 'Sidebar', get_stylesheet_directory_uri() . '/css/sidebar.css');
 
 }
 
@@ -55,3 +56,72 @@ function wpdocs_enqueue_custom_admin_style() {
 add_action( 'admin_enqueue_scripts', 'wpdocs_enqueue_custom_admin_style' );
 
 
+remove_action('suprema_qodef_woocommerce_shop_loop_item_categories', 'suprema_qodef_woocommerce_shop_loop_categories');
+
+function wpb_hook_javascript() {
+    ?>
+    <script>
+        jQuery(document).ready(function($) {
+            $('ul.product-categories li.cat-parent >a').removeAttr("href");
+            $('ul.product-categories li.cat-parent >a').addClass( "parent_category" );
+
+            $('ul.product-categories li.cat-parent >ul.children').hide();
+
+            $('ul.product-categories li.cat-parent ul.children li.cat-item a').addClass( "children_category" );
+
+            $('ul.product-categories li.cat-parent >a').append('<span class="side_bar_row_down"></span>');
+
+            $('ul.product-categories li.cat-parent >a').on( "click", function() {
+                var elem = $( this ).parent();
+                var rowSpan = $( this ).find('span');
+
+                if(elem.hasClass( "parent_active" )){
+                    elem.find('ul.children').hide(500);
+                    elem.removeClass( "parent_active" );
+                    rowSpan.removeClass('side_bar_row_up');
+                    rowSpan.addClass('side_bar_row_down');
+                }else{
+                    elem.find('ul.children').show(500);
+                    elem.addClass( "parent_active" );
+                    rowSpan.removeClass('side_bar_row_down');
+                    rowSpan.addClass('side_bar_row_up');
+                }
+
+            });
+        })
+    </script>
+    <?php
+}
+add_action('wp_head', 'wpb_hook_javascript');
+
+//add subtitle to product
+
+add_action('woocommerce_after_shop_loop_item_title', 'suprema_child_after_shop_loop_item_title', 6 );
+
+function suprema_child_after_shop_loop_item_title(){
+    global $post;
+    $_subtitle = the_field('subtitulo', $post->ID);
+    echo sprintf('<span class="child_subtitle">%s</span>', $_subtitle);
+}
+//show message
+    add_filter('woocommerce_get_price_html', 'suprema_child_get_price_html', 10, 2);
+function suprema_child_get_price_html($price, $product){
+    if(!$price){
+        echo '<div class="child_alt_price">'.get_option( 'wcslider_alt_price' ).'</div>';
+    }
+    return $price;
+}
+
+//
+
+add_filter( 'woocommerce_get_settings_products', 'suprema_child_get_settings_products', 10, 2 );
+function suprema_child_get_settings_products( $settings, $current_section ) {
+
+    $settings[] = array(
+        'name'     => __( 'Product label price', 'product-label-price' ),
+        'desc_tip' => __( 'Texto alternativo al precio' ),
+        'id'       => 'wcslider_alt_price',
+        'type'     => 'text',
+    );
+    return $settings;
+}

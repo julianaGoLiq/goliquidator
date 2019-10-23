@@ -496,10 +496,9 @@ abstract class SGPopup
 		}
 		if (!empty($data['sgpb-events'])) {
 			$this->setEvents($data['sgpb-events']);
-
 			unset($data['sgpb-events']);
 		}
-
+		$data = $this->customScriptsSave($data);
 		$this->setOptions($data);
 
 		$targets = $this->targetSave();
@@ -541,6 +540,48 @@ abstract class SGPopup
 
 		$data = apply_filters('sgpbConvertImagesToData', $data);
 		$this->setSanitizedData($data);
+	}
+
+	private function customScriptsSave($data)
+	{
+		$popupId = $this->getId();
+		$popupContent = $this->getContent();
+
+		$defaultData = ConfigDataHelper::defaultData();
+		$defaultDataJs = $defaultData['customEditorContent']['js'];
+		$defaultDataCss = $defaultData['customEditorContent']['css'];
+
+		$finalData = array('js' => array(), 'css' => array());
+		$alreadySavedData = get_post_meta($popupId, 'sg_popup_scripts', true);
+
+		// get styles
+		$finalData['css'] = htmlspecialchars($data['sgpb-css-editor']);
+		unset($data['sgpb-css-editor']);
+		if ($finalData['css'] === $defaultDataCss[0]) {
+			unset($finalData['css']);
+		}
+
+		// get scripts
+		foreach ($defaultDataJs as $key => $value) {
+			if ($data['sgpb-'.$key] == '') {
+				unset($data['sgpb-'.$key]);
+				continue;
+			}
+			if ($key == 'ShouldOpen' || $key == 'ShouldClose') {
+				$finalData['js']['sgpb-'.$key] = $data['sgpb-'.$key];
+				continue;
+			}
+			$finalData['js']['sgpb-'.$key] = $data['sgpb-'.$key];
+			unset($data['sgpb-'.$key]);
+		}
+
+		if ($alreadySavedData == $finalData) {
+			return $data;
+		}
+
+		update_post_meta($popupId, 'sg_popup_scripts', $finalData);
+
+		return $data;
 	}
 
 	private function targetSave()
@@ -759,7 +800,7 @@ abstract class SGPopup
 			}
 		}
 
-		$popupSavedData += self::getPopupOptionsById($popupId, $saveMode);
+		$popupSavedData = array_merge($popupSavedData, self::getPopupOptionsById($popupId, $saveMode));
 
 		return $popupSavedData;
 	}

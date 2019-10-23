@@ -9,7 +9,7 @@ Tags: popup, pop up, wordpress popup, popup maker, exit popup, popup builder, wo
 Requires at least: 3.8
 Tested up to: 5.3
 Requires PHP: 5.3.3
-Stable tag: 3.49
+Stable tag: 3.50
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -184,6 +184,13 @@ Go to the Popup Builder settings and set your desired options.
 13. Facebook popup
 
 == Changelog ==
+
+= Version 3.50 =
+* Added new feature to add custom JS and CSS codes. You can add your custom JS logic to control popup opening also you can add custom CSS to change popup styles.
+* Bug fixed related to image upload.
+* Big fixed related to popup opening events. Sometimes it didn't get saved.
+* Code improvements. We have changed the auto save option to not call AJAX every time.
+
 
 = Version 3.49 =
 * Added async image preloading to make Image popup loads faster.
@@ -1056,7 +1063,7 @@ Leave us a good review :)
 
 == Upgrade Notice ==
 
-Current Version of Popup Builder is 3.49
+Current Version of Popup Builder is 3.50
 
 == Other Notes ==
 

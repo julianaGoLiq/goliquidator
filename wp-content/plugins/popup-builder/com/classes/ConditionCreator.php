@@ -113,10 +113,10 @@ class ConditionCreator
 							?>
 						</div>
 					<?php endif; ?>
-
+					<?php if (($conditionName == 'hiddenOption')): ?>
 						<?php $hiddenContent = self::getHiddenDataContent($conditionDataObj); ?>
 							<div class="sg-hide-condition-row"><div id="<?php echo $idHiddenDiv;?>"><?php echo $hiddenContent; ?></div></div>
-
+					<?php endif; ?>
 				<?php endforeach;?>
 				<?php echo self::createConditionOperators($conditionDataObj, $idHiddenDiv); ?>
 			</div>

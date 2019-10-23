@@ -65,6 +65,8 @@ class PopupBuilderInit
 		require_once(SG_POPUP_CLASSES_PATH.'Actions.php');
 		require_once(SG_POPUP_LIBS_PATH.'Table.php');
 		require_once(SG_POPUP_CLASSES_PATH.'Updates.php');
+		require_once(SG_POPUP_CLASSES_PATH.'NotificationCenter.php');
+		require_once(SG_POPUP_CLASSES_PATH.'Notification.php');
 	}
 
 	public function actions()

@@ -100,6 +100,7 @@ class SgpbPopupConfig
 		self::addDefine('SGPB_APP_POPUP_TABLE_LIMIT', 15);
 		self::addDefine('SGPB_SUBSCRIBERS_ERROR_TABLE_NAME', 'sgpb_subscription_error_log');
 		self::addDefine('SGPB_CRON_REPEAT_INTERVAL', 1);
+		self::addDefine('SGPB_NOTIFICATIONS_CRON_REPEAT_INTERVAL', 1);
 		self::addDefine('SGPB_BANNER_CRON_TEXT_URL', 'https://popup-builder.com/sgpb-banner.php?banner=main');
 		self::addDefine('SGPB_METABOX_BANNER_CRON_TEXT_URL', 'https://popup-builder.com/sgpb-banner.php?banner=sidebar1');
 		self::addDefine('SGPB_FACEBOOK_APP_ID', 540547196484707);
@@ -124,7 +125,6 @@ class SgpbPopupConfig
 		self::addDefine('SG_POPUP_AUTORESPONDER_POST_TYPE', 'sgpbautoresponder');
 		self::addDefine('SGPB_INACTIVE_EXTENSIONS', 'inactivePBExtensions');
 		self::addDefine('SGPB_POPUP_LICENSE_SCREEN', SG_POPUP_POST_TYPE.'_page_'.SGPB_POPUP_LICENSE);
-
 		self::addDefine('SGPB_SUBSCRIPTION_ERROR_MESSAGE', __('There was an error while trying to send your request. Please try again', SG_POPUP_TEXT_DOMAIN).'.');
 		self::addDefine('SGPB_SUBSCRIPTION_VALIDATION_MESSAGE', __('This field is required', SG_POPUP_TEXT_DOMAIN).'.');
 		self::addDefine('SGPB_SUBSCRIPTION_EMAIL_MESSAGE', __('Please enter a valid email address', SG_POPUP_TEXT_DOMAIN).'.');

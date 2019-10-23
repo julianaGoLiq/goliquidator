@@ -45,6 +45,55 @@ class Filters
 		add_filter('sgpbOptionAvailable', array($this, 'filterOption'), 10, 1);
 		add_filter('export_wp_filename', array($this, 'exportFileName'), 10, 1);
 		add_filter('sgpbAdvancedOptionsDefaultValues', array($this, 'defaultAdvancedOptionsValues'), 10, 1);
+		add_filter('sgpbPopupContentLoadToPage', array($this, 'popupContentLoadToPage'), 10, 2);
+		add_filter('sgpbExtraNotifications', array($this, 'sgpbExtraNotifications'), 10, 1);
+	}
+
+	public function popupContentLoadToPage($content, $popupId)
+	{
+		$customScripts = AdminHelper::renderCustomScripts($popupId);
+		$content .= $customScripts;
+
+		return $content;
+	}
+
+	public function sgpbExtraNotifications($notifications)
+	{
+		$inactiveExtensionNotice = array();
+		$dontShowLicenseBanner = get_option('sgpb-hide-license-notice-banner');
+		if ($dontShowLicenseBanner) {
+			return $notifications;
+		}
+
+		$inactive = AdminHelper::getOption('SGPB_INACTIVE_EXTENSIONS');
+		$hasInactiveExtensions = AdminHelper::hasInactiveExtensions();
+
+		if (!$inactive) {
+			AdminHelper::updateOption('SGPB_INACTIVE_EXTENSIONS', 1);
+			if ($hasInactiveExtensions) {
+				AdminHelper::updateOption('SGPB_INACTIVE_EXTENSIONS', 'inactive');
+				$inactive = 'inactive';
+			}
+
+		}
+
+		if ($hasInactiveExtensions && $inactive == 'inactive') {
+			$licenseSectionUrl = menu_page_url(SGPB_POPUP_LICENSE, false);
+			$partOfContent = '<br><br>'.__('<a href="'.$licenseSectionUrl.'">Follow the link</a> to finalize the activation.', SG_POPUP_TEXT_DOMAIN);
+			$message = '<b>'.__('Thank you for choosing our plugin!', SG_POPUP_TEXT_DOMAIN).'</b>';
+			$message .= '<br>';
+			$message .= '<br>';
+			$message .= '<b>'.__('You have activated Popup Builder extension(s). Please, don\'t forget to activate the license key(s) as well.', SG_POPUP_TEXT_DOMAIN).'</b>';
+			$message .= '<b>'.$partOfContent.'</b>';
+
+			$inactiveExtensionNotice['priority'] = 1;
+			$inactiveExtensionNotice['type'] = 1;
+			$inactiveExtensionNotice['message'] = $message;
+
+			$notifications[] = $inactiveExtensionNotice;
+		}
+
+		return $notifications;
 	}
 
 	public function excludeSitemapsYoast($exclude = false, $postType)
@@ -181,6 +230,13 @@ class Filters
 			'priority' => 'high'
 		);
 
+		$metaboxes['customCssJs'] = array(
+			'key' => 'customCssJs',
+			'displayName' => 'Custom JS or CSS',
+			'filePath' => SG_POPUP_VIEWS_PATH.'customEditor.php',
+			'priority' => 'low'
+		);
+
 		return $metaboxes;
 	}
 
@@ -189,7 +245,7 @@ class Filters
 		foreach ($events as $eventKey => $eventData) {
 			if (isset($eventData['param'])) {
 				if ($eventData['param'] == SGPB_CSS_CLASS_ACTIONS_KEY) {
-					unset($events);
+					unset($events[$eventKey]);
 					$events[] = array('param' => 'click');
 					$events[] = array('param' => 'hover');
 					$events[] = array('param' => 'confirm');

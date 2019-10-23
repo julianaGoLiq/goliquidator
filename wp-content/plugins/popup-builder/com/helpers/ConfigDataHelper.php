@@ -289,6 +289,27 @@ class ConfigDataHelper
 			)
 		);
 
+		$data['customEditorContent'] = array(
+			'js' => array(
+				'ShouldOpen' => '<b>Opening events:</b><br><br><b>#1</b> Add the code you want to run <b>before</b> the popup opening. This will be a condition for opening the popup, that is processed and defined before the popup opening. If the return value is <b>"true"</b> then the popup will open, if the value is <b>"false"</b> the popup won\'t open.',
+				'WillOpen' => '<b>#2</b> Add the code you want to run <b>before</b> the popup opens. This will be the code that will work in the process of opening the popup. <b>true/false</b> conditions will not work in this phase.',
+				'DidOpen' => '<b>#3</b> Add the code you want to run <b>after</b> the popup opens. This code will work when the popup is already open on the page.',
+				'ShouldClose' => '<b>Closing events:</b><br><br><b>#1</b> Add the code that will be fired <b>before</b> the popup closes. This will be a condition for the popup closing. If the return value is <b>"true"</b> then the popup will close, if the value is <b>"false"</b> the popup won\'t close.',
+				'WillClose' => '<b>#2</b> Add the code you want to run <b>before</b> the popup closes.  This will be the code that will work in the process of closing the popup. <b>true/false</b> conditions will not work in this phase.',
+				'DidClose' => '<b>#3</b> Add the code you want to run <b>after</b> the popup closes. This code will work when the popup is already closed on the page.'
+			),
+			'css' => array(
+				'/*popup content wrapper*/'."\n".
+				'.sgpb-content-popupId {'."\n\n".'}'."\n\n".
+
+				'/*overlay*/'."\n".
+				'.sgpb-popup-overlay-popupId {'."\n\n".'}'."\n\n".
+
+				'/*popup wrapper*/'."\n".
+				'.sgpb-popup-builder-content-popupId {'."\n\n".'}'."\n\n"
+			)
+		);
+
 		$data['htmlCustomButtonArgs'] = array(
 			'template' => array(
 				'fieldWrapperAttr' => array(
