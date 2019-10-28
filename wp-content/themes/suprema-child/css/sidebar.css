@@ -190,6 +190,13 @@
 .side_bar_row_plus{
     display: none;
 }
+#tab-description h2{
+    display: block;
+    font-size: 18px;
+    line-height: 1.35em;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
 /** RESPONSIVE */
 @media only screen and (max-width: 767px) {
     .qodef-single-product-info-bottom #tab-description{

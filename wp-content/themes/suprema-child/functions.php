@@ -160,6 +160,11 @@ function suprema_child_remove_product_tabs($tabs){
     unset($tabs['reviews']);
     return $tabs;
 }
+add_filter('woocommerce_product_description_heading', 'suprema_child_description_product_tabs', 10, 1);
+function suprema_child_description_product_tabs($titulo){
+    return 'Información adicional';
+}
+
 /**
 remove add to cart
  **/
