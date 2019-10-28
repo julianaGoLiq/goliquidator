@@ -88,6 +88,24 @@ function wpb_hook_javascript() {
                 }
 
             });
+
+            $('.widget_product_categories h4').addClass( "main_category_sidebar" );
+            $('.widget_product_categories h4').addClass( "main_active" );
+            $('.widget_product_categories h4').append('<span class="side_bar_row_plus"></span>');
+
+            $('.main_category_sidebar').on( "click", function() {
+                if($( this ).hasClass( "main_active" )){
+                    $('.product-categories').removeClass('inactive').addClass( "active" );
+                    $('.widget_product_categories h4 span').removeClass('side_bar_row_plus').addClass( "side_bar_row_less" );
+                    $( this ).removeClass('main_active');
+                }else{
+                    $('.product-categories').removeClass('active').addClass( "inactive" );
+                    $( this ).addClass('main_active');
+                    $('.widget_product_categories h4 span').removeClass('side_bar_row_less').addClass( "side_bar_row_plus" );
+                }
+            });
+
+
         })
     </script>
     <?php
@@ -106,8 +124,11 @@ function suprema_child_after_shop_loop_item_title(){
 //show message
     add_filter('woocommerce_get_price_html', 'suprema_child_get_price_html', 10, 2);
 function suprema_child_get_price_html($price, $product){
+    global $post;
     if(!$price){
-        echo '<div class="child_alt_price">'.get_option( 'wcslider_alt_price' ).'</div>';
+        $_alternativo_al_precio = the_field('alternativo_al_precio', $post->ID);
+        echo sprintf('<span class="child_alt_price">%s</span>', $_alternativo_al_precio);
+
     }
     return $price;
 }
@@ -125,3 +146,46 @@ function suprema_child_get_settings_products( $settings, $current_section ) {
     );
     return $settings;
 }
+/**
+ * Remove related products output
+ */
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+
+/**
+Remove tabs
+ **/
+add_filter('woocommerce_product_tabs', 'suprema_child_remove_product_tabs', 11, 1);
+function suprema_child_remove_product_tabs($tabs){
+    unset($tabs['additional_information']);
+    unset($tabs['reviews']);
+    return $tabs;
+}
+/**
+remove add to cart
+ **/
+
+add_filter( 'woocommerce_is_purchasable', '__return_false');
+/** SKU */
+
+add_action( 'woocommerce_single_product_summary', 'suprema_child__show_sku',19 );
+function suprema_child__show_sku(){
+    global $product;
+    echo '<hr /><div class="child_subtitle_sku"><span class="sku">SKU: </span><span class="sku-info">' . $product->get_sku().'</span></div>';
+}
+
+/** tab */
+add_filter('woocommerce_product_tabs','suprema_child_wc_product_tabs_contact_form7',10,1);
+function suprema_child_wc_product_tabs_contact_form7($tabs){
+    $tabs['product_form'] = array(
+        'title'    => __( 'Enquiry', 'woocommerce' ),
+        'priority' => 20,
+        'callback' => 'wc_product_contact_form7_tab'
+    );
+    return $tabs;
+}
+function wc_product_contact_form7_tab(){
+    global $product;
+    $subject    =   $product->post->post_title;
+    echo do_shortcode('[contact-form-7 id="557" title="'.$subject.']');
+}
+

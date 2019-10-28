@@ -670,6 +670,8 @@ class WC_Product_CSV_Importer_Controller {
 			'catalog_visibility' => __( 'Visibility in catalog', 'woocommerce' ),
 			'short_description'  => __( 'Short description', 'woocommerce' ),
 			'description'        => __( 'Description', 'woocommerce' ),
+			'subtitulo'          => __( 'Subtitulo', 'woocommerce' ),
+            'alternativo_al_precio'          => __( 'Alternativo al precio' ),
 			'price'              => array(
 				'name'    => __( 'Price', 'woocommerce' ),
 				'options' => array(

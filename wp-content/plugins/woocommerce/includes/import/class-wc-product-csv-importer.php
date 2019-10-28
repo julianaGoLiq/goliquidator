@@ -692,8 +692,10 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
 			'date_on_sale_from' => array( $this, 'parse_date_field' ),
 			'date_on_sale_to'   => array( $this, 'parse_date_field' ),
 			'name'              => array( $this, 'parse_skip_field' ),
+            'subtitulo'         => array( $this, 'parse_skip_field' ),
 			'short_description' => array( $this, 'parse_description_field' ),
 			'description'       => array( $this, 'parse_description_field' ),
+            'alternativo_al_precio' => array( $this, 'parse_description_field' ),
 			'manage_stock'      => array( $this, 'parse_bool_field' ),
 			'low_stock_amount'  => array( $this, 'parse_stock_quantity_field' ),
 			'backorders'        => array( $this, 'parse_backorders_field' ),
@@ -1083,6 +1085,14 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
 
 			$result = $this->process_item( $parsed_data );
 
+			if(isset($result['id']) && $result['id']){
+			    $idData = $result['id'];
+			    $subt = (isset($parsed_data['subtitulo']))?$parsed_data['subtitulo']:'';
+			    $this->setSubtitle($idData, $subt);
+                $alt = (isset($parsed_data['alternativo_al_precio']))?$parsed_data['alternativo_al_precio']:'';
+                $this->setAlternativoAlPrecio($idData, $alt);
+            }
+
 			if ( is_wp_error( $result ) ) {
 				$result->add_data( array( 'row' => $this->get_row_id( $parsed_data ) ) );
 				$data['failed'][] = $result;
@@ -1102,4 +1112,50 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
 
 		return $data;
 	}
+
+	function setSubtitle($_productId, $_subtitle){
+        global $wpdb;
+        $meta_id = $wpdb->get_row("SELECT meta_id FROM $wpdb->postmeta WHERE (meta_key = 'subtitulo' AND post_id = '". $_productId ."')");
+        if($meta_id && $meta_id->meta_id){
+            $wpdb->query($wpdb->prepare("UPDATE $wpdb->postmeta SET meta_value='.$_subtitle.' WHERE meta_id='".$meta_id['meta_id']."' "));
+        }else{
+
+            $subtitleID = $wpdb->get_row("SELECT post_name FROM $wpdb->posts WHERE (post_type = 'acf-field' AND post_excerpt = 'subtitulo')");
+            if($subtitleID && $subtitleID->post_name){
+                $wpdb->insert($wpdb->postmeta, array(
+                    'post_id' => $_productId,
+                    'meta_key' => '_subtitulo',
+                    'meta_value' => $subtitleID->post_name
+                ));
+                $wpdb->insert($wpdb->postmeta, array(
+                    'post_id' => $_productId,
+                    'meta_key' => 'subtitulo',
+                    'meta_value' => $_subtitle
+                ));
+            }
+        }
+    }
+
+    function setAlternativoAlPrecio($_productId, $_textoAlt){
+        global $wpdb;
+        $meta_id = $wpdb->get_row("SELECT meta_id FROM $wpdb->postmeta WHERE (meta_key = 'alternativo_al_precio' AND post_id = '". $_productId ."')");
+        if($meta_id && $meta_id->meta_id){
+            $wpdb->query($wpdb->prepare("UPDATE $wpdb->postmeta SET meta_value='.$_textoAlt.' WHERE meta_id='".$meta_id['meta_id']."' "));
+        }else{
+
+            $subtitleID = $wpdb->get_row("SELECT post_name FROM $wpdb->posts WHERE (post_type = 'acf-field' AND post_excerpt = 'alternativo_al_precio')");
+            if($subtitleID && $subtitleID->post_name){
+                $wpdb->insert($wpdb->postmeta, array(
+                    'post_id' => $_productId,
+                    'meta_key' => '_alternativo_al_precio',
+                    'meta_value' => $subtitleID->post_name
+                ));
+                $wpdb->insert($wpdb->postmeta, array(
+                    'post_id' => $_productId,
+                    'meta_key' => 'alternativo_al_precio',
+                    'meta_value' => $_textoAlt
+                ));
+            }
+        }
+    }
 }
