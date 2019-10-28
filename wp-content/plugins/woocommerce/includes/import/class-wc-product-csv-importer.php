@@ -1085,12 +1085,17 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
 
 			$result = $this->process_item( $parsed_data );
 
-			if(isset($result['id']) && $result['id']){
-			    $idData = $result['id'];
-			    $subt = (isset($parsed_data['subtitulo']))?$parsed_data['subtitulo']:'';
-			    $this->setSubtitle($idData, $subt);
-                $alt = (isset($parsed_data['alternativo_al_precio']))?$parsed_data['alternativo_al_precio']:'';
-                $this->setAlternativoAlPrecio($idData, $alt);
+			try{
+                if ( !is_wp_error( $result ) ) {
+                    if (isset($result['id']) && $result['id']) {
+                        $idData = $result['id'];
+                        $subt = (isset($parsed_data['subtitulo'])) ? $parsed_data['subtitulo'] : '';
+                        $this->setSubtitle($idData, $subt);
+                        $alt = (isset($parsed_data['alternativo_al_precio'])) ? $parsed_data['alternativo_al_precio'] : '';
+                        $this->setAlternativoAlPrecio($idData, $alt);
+                    }
+                }
+            }catch (Exception $e){
             }
 
 			if ( is_wp_error( $result ) ) {
