@@ -1122,7 +1122,7 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
         global $wpdb;
         $meta_id = $wpdb->get_row("SELECT meta_id FROM $wpdb->postmeta WHERE (meta_key = 'subtitulo' AND post_id = '". $_productId ."')");
         if($meta_id && $meta_id->meta_id){
-            $wpdb->query($wpdb->prepare("UPDATE $wpdb->postmeta SET meta_value='.$_subtitle.' WHERE meta_id='".$meta_id['meta_id']."' "));
+            $wpdb->query($wpdb->prepare("UPDATE $wpdb->postmeta SET meta_value='.$_subtitle.' WHERE meta_id='".$meta_id->meta_id."' "));
         }else{
 
             $subtitleID = $wpdb->get_row("SELECT post_name FROM $wpdb->posts WHERE (post_type = 'acf-field' AND post_excerpt = 'subtitulo')");
@@ -1145,7 +1145,7 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
         global $wpdb;
         $meta_id = $wpdb->get_row("SELECT meta_id FROM $wpdb->postmeta WHERE (meta_key = 'alternativo_al_precio' AND post_id = '". $_productId ."')");
         if($meta_id && $meta_id->meta_id){
-            $wpdb->query($wpdb->prepare("UPDATE $wpdb->postmeta SET meta_value='.$_textoAlt.' WHERE meta_id='".$meta_id['meta_id']."' "));
+            $wpdb->query($wpdb->prepare("UPDATE $wpdb->postmeta SET meta_value='.$_textoAlt.' WHERE meta_id='".$meta_id->meta_id."' "));
         }else{
 
             $subtitleID = $wpdb->get_row("SELECT post_name FROM $wpdb->posts WHERE (post_type = 'acf-field' AND post_excerpt = 'alternativo_al_precio')");
