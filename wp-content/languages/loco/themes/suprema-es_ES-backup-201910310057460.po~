@@ -1,0 +1,1581 @@
+# Copyright (C) 2019 Select Themes
+# This file is distributed under the GNU General Public License.
+msgid ""
+msgstr ""
+"Project-Id-Version: Suprema 2.2\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/suprema\n"
+"Last-Translator: goliquidator <juliana.trujillo@pinacourt.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2019-07-11T12:05:23+02:00\n"
+"PO-Revision-Date: 2019-10-31 00:57+0000\n"
+"X-Generator: Loco https://localise.biz/\n"
+"X-Domain: suprema\n"
+"\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Loco-Version: 2.3.1; wp-5.2.4"
+
+#. Theme Name of the theme
+msgid "Suprema"
+msgstr ""
+
+#. Theme URI of the theme
+msgid "http://suprema.select-themes.com/"
+msgstr ""
+
+#. Description of the theme
+msgid "Suprema – Multipurpose eCommerce Theme"
+msgstr ""
+
+#. Author of the theme
+msgid "Select Themes"
+msgstr ""
+
+#. Author URI of the theme
+msgid "http://themeforest.net/user/select-themes"
+msgstr ""
+
+#: \404.php:14
+msgid "Page you are looking is not found"
+msgstr ""
+
+#: \404.php:22
+msgid ""
+"The page you are looking for does not exist. It may have been moved, or "
+"removed altogether. Perhaps you can return back to the site's homepage and "
+"see if you can find what you are looking for."
+msgstr ""
+
+#. Template Name of the theme
+msgid "Blog: Chequered"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Blog: Standard Whole Post"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Blog: Standard"
+msgstr ""
+
+#: \comments.php:4
+msgid "No Comments"
+msgstr ""
+
+#: \comments.php:4
+msgid " Comment "
+msgstr ""
+
+#: \comments.php:4
+msgid " Comments "
+msgstr ""
+
+#: \comments.php:9
+msgid ""
+"This post is password protected. Enter the password to view any comments."
+msgstr ""
+
+#: \comments.php:32
+msgid "Sorry, the comment form is closed at this time."
+msgstr ""
+
+#: \comments.php:45
+msgid "Leave a Comment"
+msgstr ""
+
+#: \comments.php:46
+msgid "Post a Reply to %s"
+msgstr ""
+
+#: \comments.php:49
+msgid "Cancel Reply"
+msgstr ""
+
+#: \comments.php:50
+msgid "Submit comment"
+msgstr ""
+
+#: \comments.php:51
+msgid "Write your comment here..."
+msgstr ""
+
+#: \comments.php:55
+msgid "Your full name"
+msgstr ""
+
+#: \comments.php:56
+msgid "E-mail address"
+msgstr ""
+
+#: \comments.php:57
+msgid "Website"
+msgstr ""
+
+#: \framework\admin\skins\select\templates\anchors-save.php:18
+#: \framework\admin\skins\select\templates\header.php:10
+msgid "Save Changes"
+msgstr ""
+
+#: \framework\admin\skins\select\templates\content-import.php:98
+msgid "The import process may take some time. Please be patient."
+msgstr ""
+
+#: \framework\admin\skins\select\templates\content-import.php:117
+msgid "Important notes:"
+msgstr ""
+
+#: \framework\admin\skins\select\templates\content-import.php:119
+msgid ""
+"Please note that import process will take time needed to download all "
+"attachments from demo web site."
+msgstr ""
+
+#: \framework\admin\skins\select\templates\content-import.php:120
+msgid ""
+"If you plan to use shop, please install WooCommerce before you run import."
+msgstr ""
+
+#: \framework\lib\qode.functions.php:550
+msgid ""
+"Note that writing permissions aren't set for folders containing css and js "
+"files on your server.\n"
+"\t\t\t\t\tWe recommend setting writing permissions in order to optimize your "
+"site performance.\n"
+"\t\t\t\t\tFor further instructions, please refer to our documentation."
+msgstr ""
+
+#: \framework\lib\qode.functions.php:711
+msgid ""
+"Installation of the \"Qode\n"
+"            Core\" plugin is\n"
+"            essential for\n"
+"            proper\n"
+"            theme functioning. Please "
+msgstr ""
+
+#: \framework\lib\qode.functions.php:716
+msgid "install"
+msgstr ""
+
+#: \framework\lib\qode.functions.php:716
+msgid ""
+" this\n"
+"            plugin and activate it"
+msgstr ""
+
+#: \framework\lib\qode.layout.php:707 \framework\lib\qode.layout.php:747
+#: \framework\lib\qode.layout.php:2179 \framework\lib\qode.layout.php:2230
+#: \framework\lib\qode.layout.php:2339 \framework\lib\qode.layout.php:2391
+#: \framework\lib\qode.layout.php:2505 \framework\lib\qode.layout.php:2559
+#: \framework\lib\qode.layout.php:2663 \framework\lib\qode.layout.php:2733
+msgid "Image thumbnail"
+msgstr ""
+
+#: \framework\lib\qode.layout.php:718 \framework\lib\qode.layout.php:719
+#: \framework\lib\qode.layout.php:758 \framework\lib\qode.layout.php:759
+#: \framework\lib\qode.layout.php:2198 \framework\lib\qode.layout.php:2199
+#: \framework\lib\qode.layout.php:2249 \framework\lib\qode.layout.php:2250
+#: \framework\lib\qode.layout.php:2359 \framework\lib\qode.layout.php:2360
+#: \framework\lib\qode.layout.php:2411 \framework\lib\qode.layout.php:2412
+#: \framework\lib\qode.layout.php:2683 \framework\lib\qode.layout.php:2684
+#: \framework\lib\qode.layout.php:2753 \framework\lib\qode.layout.php:2754
+msgid "Select Image"
+msgstr ""
+
+#: \framework\lib\qode.layout.php:719 \framework\lib\qode.layout.php:759
+#: \framework\lib\qode.layout.php:2110 \framework\lib\qode.layout.php:2199
+#: \framework\lib\qode.layout.php:2250 \framework\lib\qode.layout.php:2360
+#: \framework\lib\qode.layout.php:2412 \framework\lib\qode.layout.php:2684
+#: \framework\lib\qode.layout.php:2754
+msgid "Upload"
+msgstr ""
+
+#: \framework\lib\qode.layout.php:721 \framework\lib\qode.layout.php:761
+#: \framework\lib\qode.layout.php:2201 \framework\lib\qode.layout.php:2252
+#: \framework\lib\qode.layout.php:2362 \framework\lib\qode.layout.php:2414
+#: \framework\lib\qode.layout.php:2686 \framework\lib\qode.layout.php:2756
+#: \includes\nav-menu\edit_custom_walker.php:324
+msgid "Remove"
+msgstr ""
+
+#: \framework\lib\qode.layout.php:1059 \framework\lib\qode.layout.php:1097
+#: \framework\lib\qode.layout.php:1197 \framework\lib\qode.layout.php:1250
+#: \framework\lib\qode.layout.php:1356 \framework\lib\qode.layout.php:1409
+#: \framework\lib\qode.layout.php:1462 \framework\lib\qode.layout.php:1515
+#: \framework\lib\qode.layout.php:1568 \framework\lib\qode.layout.php:1621
+msgid "Yes"
+msgstr ""
+
+#: \framework\lib\qode.layout.php:1061 \framework\lib\qode.layout.php:1099
+#: \framework\lib\qode.layout.php:1199 \framework\lib\qode.layout.php:1252
+#: \framework\lib\qode.layout.php:1358 \framework\lib\qode.layout.php:1411
+#: \framework\lib\qode.layout.php:1464 \framework\lib\qode.layout.php:1517
+#: \framework\lib\qode.layout.php:1570 \framework\lib\qode.layout.php:1623
+msgid "No"
+msgstr ""
+
+#: \framework\lib\qode.layout.php:1144
+msgid "On"
+msgstr ""
+
+#: \framework\lib\qode.layout.php:1146
+msgid "Off"
+msgstr ""
+
+#: \framework\lib\qode.layout.php:1303
+msgid "Image"
+msgstr ""
+
+#: \framework\lib\qode.layout.php:1305
+msgid "Video"
+msgstr ""
+
+#: \framework\lib\qode.layout.php:2112
+msgid "Remove All"
+msgstr ""
+
+#: \framework\lib\qode.layout.php:2858
+msgid ""
+"You have successfully connected with your Twitter account. If you have any "
+"issues fetching data from Twitter try reconnecting."
+msgstr ""
+
+#: \framework\lib\qode.layout.php:2864
+msgid "Re-connect with Twitter"
+msgstr ""
+
+#: \framework\lib\qode.layout.php:2864 \framework\lib\qode.layout.php:2874
+msgid "Connect with Twitter"
+msgstr ""
+
+#: \framework\lib\qode.layout.php:2876
+msgid ""
+"Connecting with Twitter will enable you to show your latest tweets on your "
+"site"
+msgstr ""
+
+#: \framework\lib\qode.layout.php:2909
+msgid ""
+"You have successfully connected with your Instagram account. If you have any "
+"issues fetching data from Instagram try reconnecting."
+msgstr ""
+
+#: \framework\lib\qode.layout.php:2916
+msgid "Re-connect with Instagram"
+msgstr ""
+
+#: \framework\lib\qode.layout.php:2916 \framework\lib\qode.layout.php:2927
+msgid "Connect with Instagram"
+msgstr ""
+
+#: \framework\lib\qode.layout.php:2929
+msgid ""
+"Connecting with Instagram will enable you to show your latest photos on your "
+"site"
+msgstr ""
+
+#: \framework\modules\blog\blog-functions.php:209
+msgid "Load More"
+msgstr ""
+
+#: \framework\modules\blog\blog-functions.php:504
+msgid "Pingback:"
+msgstr ""
+
+#: \framework\modules\blog\blog-functions.php:724
+#: \framework\modules\blog\blog-functions.php:846
+#: \framework\modules\shortcodes\blog-list\templates\boxes.php:36
+#: \framework\modules\shortcodes\blog-list\templates\masonry.php:34
+msgid "Continue reading"
+msgstr ""
+
+#: \framework\modules\blog\blog-functions.php:1037
+msgid "Sorry, no posts matched your criteria."
+msgstr ""
+
+#: \framework\modules\blog\templates\parts\audio.php:4
+msgid "Your browser don't support audio player"
+msgstr ""
+
+#: \framework\modules\blog\templates\parts\no-posts.php:2
+#: \framework\modules\shortcodes\blog-list\templates\blog-list-holder.php:15
+#: \search.php:43
+msgid "No posts were found."
+msgstr ""
+
+#: \framework\modules\blog\templates\parts\post-info-author.php:1
+msgid "by"
+msgstr ""
+
+#: \framework\modules\blog\templates\parts\post-info-category.php:1
+msgid "in "
+msgstr ""
+
+#: \framework\modules\blog\templates\parts\post-info-comments.php:1
+msgid "Comments"
+msgstr ""
+
+#: \framework\modules\blog\templates\parts\post-info-comments.php:1
+msgid "Comment"
+msgstr ""
+
+#: \framework\modules\blog\templates\parts\video.php:17
+#: \framework\modules\portfolio\templates\single\media\self.php:14
+#: \vc-templates\vc_row.php:218
+msgid "video thumb"
+msgstr ""
+
+#: \framework\modules\blog\templates\single\parts\related-posts.php:4
+msgid "Related Posts"
+msgstr ""
+
+#: \framework\modules\blog\templates\single\parts\tags.php:2
+#: \framework\modules\portfolio\templates\single\parts\tags.php:12
+msgid "Tags:"
+msgstr ""
+
+#: \framework\modules\fullscreenmenu\fullscreen-menu-functions.php:7
+msgid "Fullscreen Navigation"
+msgstr ""
+
+#: \framework\modules\header\functions.php:10
+msgid "Main Navigation"
+msgstr ""
+
+#: \framework\modules\header\templates\parts\logo.php:5
+msgid "logo"
+msgstr ""
+
+#: \framework\modules\header\templates\parts\logo.php:6
+msgid "dark logo"
+msgstr ""
+
+#: \framework\modules\header\templates\parts\logo.php:7
+msgid "light logo"
+msgstr ""
+
+#: \framework\modules\header\templates\parts\mobile-logo.php:5
+msgid "mobile logo"
+msgstr ""
+
+#: \framework\modules\header\widget-areas-functions.php:11
+msgid "Top Bar Left"
+msgstr ""
+
+#: \framework\modules\header\widget-areas-functions.php:20
+msgid "Top Bar Center"
+msgstr ""
+
+#: \framework\modules\header\widget-areas-functions.php:28
+msgid "Top Bar Right"
+msgstr ""
+
+#: \framework\modules\header\widget-areas-functions.php:45
+msgid "Right From Main Menu"
+msgstr ""
+
+#: \framework\modules\header\widget-areas-functions.php:49
+msgid ""
+"Widgets added here will appear on the right hand side from the main menu"
+msgstr ""
+
+#: \framework\modules\header\widget-areas-functions.php:65
+msgid "Right From Mobile Logo"
+msgstr ""
+
+#: \framework\modules\header\widget-areas-functions.php:69
+msgid ""
+"Widgets added here will appear on the right hand side from the mobile logo"
+msgstr ""
+
+#: \framework\modules\header\widget-areas-functions.php:84
+msgid "Sticky Right"
+msgstr ""
+
+#: \framework\modules\header\widget-areas-functions.php:88
+msgid "Widgets added here will appear on the right hand side in sticky menu"
+msgstr ""
+
+#: \framework\modules\like\like.php:131 \framework\modules\like\like.php:144
+#: \framework\modules\like\like.php:157
+msgid "Like this"
+msgstr ""
+
+#: \framework\modules\like\like.php:134 \framework\modules\like\like.php:147
+#: \framework\modules\like\like.php:160
+msgid "You already like this!"
+msgstr ""
+
+#: \framework\modules\popup\options-map\map.php:15
+msgid "No contact forms found"
+msgstr ""
+
+#: \framework\modules\portfolio\templates\single\parts\categories.php:14
+msgid "Category:"
+msgstr ""
+
+#: \framework\modules\portfolio\templates\single\parts\date.php:4
+msgid "Date:"
+msgstr ""
+
+#: \framework\modules\portfolio\templates\single\parts\social.php:4
+msgid "Share:"
+msgstr ""
+
+#: \framework\modules\search\templates\types\fullscreen-search.php:14
+msgid "Type what you are searching for:"
+msgstr ""
+
+#: \framework\modules\search\templates\types\fullscreen-search.php:18
+msgid "Type Here"
+msgstr ""
+
+#: \framework\modules\search\templates\types\search-covers-header.php:9
+#: \framework\modules\search\templates\types\search-slides-from-header-bottom.php:8
+#: \framework\modules\search\templates\types\search-slides-from-window-top.php:9
+#: \framework\modules\title\title-functions.php:136
+#: \framework\modules\widgets\search-opener\search-opener.php:110
+#: \searchform.php:3
+msgid "Search"
+msgstr ""
+
+#: \framework\modules\shortcodes\accordions\accordion-tab.php:24
+msgid "Select Accordion Tab"
+msgstr ""
+
+#: \framework\modules\shortcodes\accordions\accordion-tab.php:36
+msgid "Title"
+msgstr ""
+
+#: \framework\modules\shortcodes\accordions\accordion-tab.php:39
+msgid "Section"
+msgstr ""
+
+#: \framework\modules\shortcodes\accordions\accordion-tab.php:40
+msgid "Enter accordion section title."
+msgstr ""
+
+#: \framework\modules\shortcodes\accordions\accordion-tab.php:44
+msgid "Section ID"
+msgstr ""
+
+#: \framework\modules\shortcodes\accordions\accordion-tab.php:46
+msgid ""
+"Enter optional row ID. Make sure it is unique, and it is valid as w3c "
+"specification: %s (Must not have spaces)"
+msgstr ""
+
+#: \framework\modules\shortcodes\accordions\accordion-tab.php:46
+msgid "link"
+msgstr ""
+
+#: \framework\modules\shortcodes\accordions\accordion-tab.php:66
+msgid "Title Background Color"
+msgstr ""
+
+#: \framework\modules\shortcodes\accordions\accordion.php:26
+msgid "Select Accordion"
+msgstr ""
+
+#: \framework\modules\shortcodes\accordions\accordion.php:37
+msgid "Extra class name"
+msgstr ""
+
+#: \framework\modules\shortcodes\accordions\accordion.php:39
+msgid ""
+"Style particular content element differently - add a class name and refer to "
+"it in custom CSS."
+msgstr ""
+
+#: \framework\modules\shortcodes\blockquote\blockquote.php:37
+msgid "Select Blockquote"
+msgstr ""
+
+#: \framework\modules\shortcodes\blog-list\blog-list.php:27
+msgid "Select Blog List"
+msgstr ""
+
+#: \framework\modules\shortcodes\blog-list\blog-list.php:37
+#: \includes\nav-menu\edit_custom_walker.php:206
+#: \includes\plugins\class-tgm-plugin-activation.php:2634
+msgid "Type"
+msgstr ""
+
+#: \framework\modules\shortcodes\button\button.php:39
+msgid "Select Button"
+msgstr ""
+
+#: \framework\modules\shortcodes\button\button.php:183
+msgid "Insert margin in format: 0px 0px 1px 0px"
+msgstr ""
+
+#: \framework\modules\shortcodes\calltoaction\call-to-action.php:52
+msgid "Select Call To Action"
+msgstr ""
+
+#: \framework\modules\shortcodes\countdown\countdown.php:38
+msgid "Select Countdown"
+msgstr ""
+
+#: \framework\modules\shortcodes\counter\counter.php:37
+msgid "Select Counter"
+msgstr ""
+
+#: \framework\modules\shortcodes\customfont\custom-font.php:37
+msgid "Select Custom Font"
+msgstr ""
+
+#: \framework\modules\shortcodes\elements-holder\elements-holder-item.php:21
+msgid "Select Elements Holder Item"
+msgstr ""
+
+#: \framework\modules\shortcodes\elements-holder\elements-holder.php:18
+msgid "Select Elements Holder"
+msgstr ""
+
+#: \framework\modules\shortcodes\featured-product-list\featured-product-list.php:35
+msgid "Select Featured Product List"
+msgstr ""
+
+#: \framework\modules\shortcodes\google-map\google-map.php:21
+msgid "Select Google Map"
+msgstr ""
+
+#: \framework\modules\shortcodes\icon\icon.php:36
+msgid "Select Icon"
+msgstr ""
+
+#: \framework\modules\shortcodes\icon\icon.php:81
+msgid "Please insert border radius(Rounded corners) in px. For example: 4 "
+msgstr ""
+
+#: \framework\modules\shortcodes\icon-list-item\icon-list-item.php:34
+msgid "Select Icon List Item"
+msgstr ""
+
+#: \framework\modules\shortcodes\icon-with-text\icon-with-text.php:37
+msgid "Select Icon With Text"
+msgstr ""
+
+#: \framework\modules\shortcodes\imagegallery\image-gallery.php:35
+msgid "Select Image Gallery"
+msgstr ""
+
+#: \framework\modules\shortcodes\interactive-banner\templates\info-over.php:11
+msgid "banner image"
+msgstr ""
+
+#: \framework\modules\shortcodes\message\message.php:28
+msgid "Select Message"
+msgstr ""
+
+#: \framework\modules\shortcodes\ordered-list\ordered-list.php:18
+msgid "Select List - Ordered"
+msgstr ""
+
+#: \framework\modules\shortcodes\piecharts\piechartbasic\pie-chart-basic.php:37
+msgid "Select Pie Chart"
+msgstr ""
+
+#: \framework\modules\shortcodes\piecharts\piechartdoughnut\pie-chart-doughnut.php:59
+msgid "Select Pie Chart 3 (Doughnut)"
+msgstr ""
+
+#: \framework\modules\shortcodes\piecharts\piechartpie\pie-chart-pie.php:59
+msgid "Select Pie Chart 2 (Pie)"
+msgstr ""
+
+#: \framework\modules\shortcodes\piecharts\piechartwithicon\pie-chart-with-icon.php:34
+msgid "Select Pie Chart With Icon"
+msgstr ""
+
+#: \framework\modules\shortcodes\pricing-table\pricing-table.php:18
+msgid "Select Pricing Table"
+msgstr ""
+
+#: \framework\modules\shortcodes\pricing-table\pricing-tables.php:19
+msgid "Select Pricing Tables"
+msgstr ""
+
+#: \framework\modules\shortcodes\product-list\product-list.php:43
+msgid "Select Product List"
+msgstr ""
+
+#: \framework\modules\shortcodes\progress-bar\progress-bar.php:20
+msgid "Select Progress Bar"
+msgstr ""
+
+#: \framework\modules\shortcodes\separator\separator.php:23
+msgid "Select Separator"
+msgstr ""
+
+#: \framework\modules\shortcodes\shop-masonry\templates\shop-filter.php:6
+msgid "All"
+msgstr ""
+
+#: \framework\modules\shortcodes\socialshare\social-share.php:43
+msgid "Select Social Share"
+msgstr ""
+
+#: \framework\modules\shortcodes\socialshare\social-share.php:257
+msgid "Share on facebook"
+msgstr ""
+
+#: \framework\modules\shortcodes\socialshare\social-share.php:260
+msgid "Share on twitter"
+msgstr ""
+
+#: \framework\modules\shortcodes\socialshare\social-share.php:263
+msgid "Share on google+"
+msgstr ""
+
+#: \framework\modules\shortcodes\socialshare\social-share.php:266
+msgid "Share on linkedin"
+msgstr ""
+
+#: \framework\modules\shortcodes\socialshare\social-share.php:269
+msgid "Share on tumblr"
+msgstr ""
+
+#: \framework\modules\shortcodes\socialshare\social-share.php:272
+msgid "Share on pinterest"
+msgstr ""
+
+#: \framework\modules\shortcodes\socialshare\social-share.php:275
+msgid "Share on vk"
+msgstr ""
+
+#: \framework\modules\shortcodes\socialshare\templates\dropdown.php:4
+msgid "Share"
+msgstr ""
+
+#: \framework\modules\shortcodes\tabs\tab.php:28
+msgid "Select Tab"
+msgstr ""
+
+#: \framework\modules\shortcodes\tabs\tabs.php:29
+msgid "Select Tabs"
+msgstr ""
+
+#: \framework\modules\shortcodes\team\team.php:73
+msgid "Select Team"
+msgstr ""
+
+#: \framework\modules\shortcodes\unordered-list\unordered-list.php:30
+msgid "Select List - Unordered"
+msgstr ""
+
+#: \framework\modules\shortcodes\videobutton\video-button.php:37
+msgid "Select Video Button"
+msgstr ""
+
+#: \framework\modules\title\title-functions.php:106
+msgid " Tag"
+msgstr ""
+
+#: \framework\modules\title\title-functions.php:118
+msgid "Author:"
+msgstr ""
+
+#: \framework\modules\title\title-functions.php:147
+msgid "404 - Page not found"
+msgstr ""
+
+#: \framework\modules\title\title-functions.php:176
+msgid "Archive"
+msgstr ""
+
+#: \framework\modules\title\title-functions.php:271
+msgid "Search results for "
+msgstr ""
+
+#: \framework\modules\title\title-functions.php:330
+msgid "Posts tagged "
+msgstr ""
+
+#: \framework\modules\title\title-functions.php:334
+msgid "Articles posted by "
+msgstr ""
+
+#: \framework\modules\title\title-functions.php:347
+msgid "Page"
+msgstr ""
+
+#: \framework\modules\widgets\instagram\instagram.php:10
+msgid "Display instagram images"
+msgstr ""
+
+#: \framework\modules\widgets\latest-post\latest-posts.php:9
+msgid "Display posts from your blog"
+msgstr ""
+
+#: \framework\modules\woocommerce\widgets\woocommerce-dropdown-cart.php:7
+msgid "Select Woocommerce Dropdown Cart"
+msgstr ""
+
+#: \framework\modules\woocommerce\widgets\woocommerce-dropdown-cart.php:73
+#: \framework\modules\woocommerce\widgets\woocommerce-dropdown-cart.php:182
+msgid "Quantity: "
+msgstr ""
+
+#: \framework\modules\woocommerce\widgets\woocommerce-dropdown-cart.php:77
+#: \framework\modules\woocommerce\widgets\woocommerce-dropdown-cart.php:186
+#: \woocommerce\cart\cart.php:57
+msgid "Remove this item"
+msgstr ""
+
+#: \framework\modules\woocommerce\widgets\woocommerce-dropdown-cart.php:85
+#: \framework\modules\woocommerce\widgets\woocommerce-dropdown-cart.php:194
+#: \woocommerce\cart\cart-totals.php:92 \woocommerce\cart\cart-totals.php:93
+#: \woocommerce\cart\cart.php:35 \woocommerce\cart\cart.php:119
+msgid "Total"
+msgstr ""
+
+#: \framework\modules\woocommerce\widgets\woocommerce-dropdown-cart.php:96
+#: \framework\modules\woocommerce\widgets\woocommerce-dropdown-cart.php:206
+msgid "View Cart"
+msgstr ""
+
+#: \framework\modules\woocommerce\widgets\woocommerce-dropdown-cart.php:97
+#: \framework\modules\woocommerce\widgets\woocommerce-dropdown-cart.php:209
+msgid "Checkout"
+msgstr ""
+
+#: \framework\modules\woocommerce\widgets\woocommerce-dropdown-cart.php:102
+#: \framework\modules\woocommerce\widgets\woocommerce-dropdown-cart.php:215
+msgid "No products in the cart."
+msgstr ""
+
+#: \framework\modules\woocommerce\widgets\woocommerce-dropdown-login.php:7
+msgid "Select Woocommerce My Account Menu"
+msgstr ""
+
+#: \framework\modules\woocommerce\widgets\woocommerce-dropdown-login.php:26
+msgid "My Account"
+msgstr ""
+
+#: \framework\modules\woocommerce\widgets\woocommerce-dropdown-login.php:45
+msgid "Login"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-config.php:67
+msgid "My Account Dropdown"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:88
+msgid "Sale!"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:103
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:116
+msgid "First name"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:104
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:117
+msgid "Last name"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:105
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:118
+msgid "Company name"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:106
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:119
+msgid "Address"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:107
+msgid "Email"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:108
+msgid "Phone"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:109
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:120
+#: \woocommerce\cart\shipping-calculator.php:91
+msgid "Postcode / ZIP"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:110
+#: \woocommerce\cart\shipping-calculator.php:55
+#: \woocommerce\cart\shipping-calculator.php:60
+#: \woocommerce\cart\shipping-calculator.php:72
+msgid "State / County"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:111
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:121
+#: \woocommerce\cart\shipping-calculator.php:83
+msgid "City"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:161
+msgid "Options"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:301
+msgid "Apply Coupon"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:320
+msgid "Update Cart"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:339
+msgid "Proceed to Checkout"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:357
+msgid "Update Totals"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:377
+msgid "Pay for order"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:402
+msgid "Place Order"
+msgstr ""
+
+#: \framework\modules\woocommerce\woocommerce-template-hooks.php:430
+msgid "Out of stock!"
+msgstr ""
+
+#: \framework\qode-framework.php:516
+#: \includes\plugins\class-tgm-plugin-activation.php:402
+msgid "Dismiss this notice"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Full Width"
+msgstr ""
+
+#: \functions.php:927
+msgid "No more posts"
+msgstr ""
+
+#: \functions.php:928
+msgid "Loading new posts..."
+msgstr ""
+
+#. translators: %s: title of menu item which is invalid
+#: \includes\nav-menu\edit_custom_walker.php:78
+msgid "%s (Invalid)"
+msgstr ""
+
+#. translators: %s: title of menu item in draft status
+#: \includes\nav-menu\edit_custom_walker.php:82
+msgid "%s (Pending)"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:107
+msgid "Move up"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:120
+msgid "Move down"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:122
+#: \includes\nav-menu\edit_custom_walker.php:124
+msgid "Edit Menu Item"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:133
+msgid "URL"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:140
+msgid "Navigation Label"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:146
+msgid "Title Attribute"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:153
+msgid "Open link in a new window/tab"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:158
+msgid "CSS Classes (optional)"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:164
+msgid "Link Relationship (XFN)"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:170
+msgid "Description"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:172
+msgid ""
+"The description will be displayed in the menu if the current theme supports "
+"it."
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:180
+msgid "Anchor"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:191
+msgid "Don't link"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:201
+msgid "Don't show"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:216
+msgid "Wide menu position"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:228
+msgid "Background image for Dropdown"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:230
+msgid ""
+"If option 'Full Width Background for Wide Dropdown Type' is enabled this "
+"applies only to 1st level dropdown - otherwise this applies to any dropdown "
+"level menu"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:243
+msgid "Icon Pack"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:249
+msgid "Only with \"default\" & \"wide with icons\" menu types"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:260
+msgid "Icon"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:281
+msgid "Dropdown Featured Item"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:291
+msgid "Custom widget area"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:302
+msgid "Only with \"wide & wide with icons\" menu type"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:311
+msgid "Original: %s"
+msgstr ""
+
+#: \includes\nav-menu\edit_custom_walker.php:325
+msgid "Cancel"
+msgstr ""
+
+#: \includes\nav-menu\sticky-navigation-walker.php:176
+#: \includes\nav-menu\top-navigation-walker.php:178
+msgid "New"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:334
+#: \includes\plugins\plugins-activation.php:89
+msgid "Install Required Plugins"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:335
+#: \includes\plugins\plugins-activation.php:90
+msgid "Install Plugins"
+msgstr ""
+
+#. translators: %s: plugin name.
+#: \includes\plugins\class-tgm-plugin-activation.php:337
+#: \includes\plugins\plugins-activation.php:91
+msgid "Installing Plugin: %s"
+msgstr ""
+
+#. translators: %s: plugin name.
+#: \includes\plugins\class-tgm-plugin-activation.php:339
+msgid "Updating Plugin: %s"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:340
+#: \includes\plugins\plugins-activation.php:92
+msgid "Something went wrong with the plugin API."
+msgstr ""
+
+#. translators: 1: plugin name(s).
+#: \includes\plugins\class-tgm-plugin-activation.php:341
+#: \includes\plugins\plugins-activation.php:93
+msgid "This theme requires the following plugin: %1$s."
+msgid_plural "This theme requires the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: plugin name(s).
+#: \includes\plugins\class-tgm-plugin-activation.php:347
+#: \includes\plugins\plugins-activation.php:94
+msgid "This theme recommends the following plugin: %1$s."
+msgid_plural "This theme recommends the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: plugin name(s).
+#: \includes\plugins\class-tgm-plugin-activation.php:353
+#: \includes\plugins\plugins-activation.php:99
+msgid ""
+"The following plugin needs to be updated to its latest version to ensure "
+"maximum compatibility with this theme: %1$s."
+msgid_plural ""
+"The following plugins need to be updated to their latest version to ensure "
+"maximum compatibility with this theme: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: plugin name(s).
+#: \includes\plugins\class-tgm-plugin-activation.php:359
+msgid "There is an update available for: %1$s."
+msgid_plural "There are updates available for the following plugins: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: plugin name(s).
+#: \includes\plugins\class-tgm-plugin-activation.php:365
+#: \includes\plugins\plugins-activation.php:96
+msgid "The following required plugin is currently inactive: %1$s."
+msgid_plural "The following required plugins are currently inactive: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: plugin name(s).
+#: \includes\plugins\class-tgm-plugin-activation.php:371
+#: \includes\plugins\plugins-activation.php:97
+msgid "The following recommended plugin is currently inactive: %1$s."
+msgid_plural "The following recommended plugins are currently inactive: %1$s."
+msgstr[0] ""
+msgstr[1] ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:377
+#: \includes\plugins\plugins-activation.php:101
+msgid "Begin installing plugin"
+msgid_plural "Begin installing plugins"
+msgstr[0] ""
+msgstr[1] ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:382
+msgid "Begin updating plugin"
+msgid_plural "Begin updating plugins"
+msgstr[0] ""
+msgstr[1] ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:387
+msgid "Begin activating plugin"
+msgid_plural "Begin activating plugins"
+msgstr[0] ""
+msgstr[1] ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:392
+#: \includes\plugins\plugins-activation.php:103
+msgid "Return to Required Plugins Installer"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:393
+#: \includes\plugins\class-tgm-plugin-activation.php:912
+#: \includes\plugins\class-tgm-plugin-activation.php:2618
+#: \includes\plugins\class-tgm-plugin-activation.php:3665
+msgid "Return to the Dashboard"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:394
+#: \includes\plugins\class-tgm-plugin-activation.php:3244
+#: \includes\plugins\plugins-activation.php:104
+msgid "Plugin activated successfully."
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:395
+#: \includes\plugins\class-tgm-plugin-activation.php:3037
+msgid "The following plugin was activated successfully:"
+msgid_plural "The following plugins were activated successfully:"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: plugin name.
+#: \includes\plugins\class-tgm-plugin-activation.php:397
+msgid "No action taken. Plugin %1$s was already active."
+msgstr ""
+
+#. translators: 1: plugin name.
+#: \includes\plugins\class-tgm-plugin-activation.php:399
+msgid ""
+"Plugin not activated. A higher version of %s is needed for this theme. "
+"Please update the plugin."
+msgstr ""
+
+#. translators: 1: dashboard link.
+#: \includes\plugins\class-tgm-plugin-activation.php:401
+msgid "All plugins installed and activated successfully. %1$s"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:403
+msgid ""
+"There are one or more required or recommended plugins to install, update or "
+"activate."
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:404
+msgid "Please contact the administrator of this site for help."
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:607
+msgid "This plugin needs to be updated to be compatible with your theme."
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:608
+msgid "Update Required"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:1019
+msgid ""
+"The remote plugin package does not contain a folder with the desired slug "
+"and renaming did not work."
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:1019
+#: \includes\plugins\class-tgm-plugin-activation.php:1022
+msgid ""
+"Please contact the plugin provider and ask them to package their plugin "
+"according to the WordPress guidelines."
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:1022
+msgid ""
+"The remote plugin package consists of more than one file, but the files are "
+"not packaged in a folder."
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:1206
+#: \includes\plugins\class-tgm-plugin-activation.php:3033
+msgctxt "plugin A *and* plugin B"
+msgid "and"
+msgstr ""
+
+#. translators: %s: version number
+#: \includes\plugins\class-tgm-plugin-activation.php:2067
+msgid "TGMPA v%s"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2358
+msgid "Required"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2361
+msgid "Recommended"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2377
+msgid "WordPress Repository"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2380
+msgid "External Source"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2383
+msgid "Pre-Packaged"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2400
+msgid "Not Installed"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2404
+msgid "Installed But Not Activated"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2406
+msgid "Active"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2412
+msgid "Required Update not Available"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2415
+msgid "Requires Update"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2418
+msgid "Update recommended"
+msgstr ""
+
+#. translators: 1: install status, 2: update status
+#: \includes\plugins\class-tgm-plugin-activation.php:2427
+msgctxt "Install/Update Status"
+msgid "%1$s, %2$s"
+msgstr ""
+
+#. translators: 1: number of plugins.
+#: \includes\plugins\class-tgm-plugin-activation.php:2473
+msgctxt "plugins"
+msgid "All <span class=\"count\">(%s)</span>"
+msgid_plural "All <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: number of plugins.
+#: \includes\plugins\class-tgm-plugin-activation.php:2477
+msgid "To Install <span class=\"count\">(%s)</span>"
+msgid_plural "To Install <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: number of plugins.
+#: \includes\plugins\class-tgm-plugin-activation.php:2481
+msgid "Update Available <span class=\"count\">(%s)</span>"
+msgid_plural "Update Available <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: 1: number of plugins.
+#: \includes\plugins\class-tgm-plugin-activation.php:2485
+msgid "To Activate <span class=\"count\">(%s)</span>"
+msgid_plural "To Activate <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2567
+msgctxt "as in: \"version nr unknown\""
+msgid "unknown"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2575
+msgid "Installed version:"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2583
+msgid "Minimum required version:"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2595
+msgid "Available version:"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2618
+msgid "No plugins to install, update or activate."
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2632
+msgid "Plugin"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2633
+msgid "Source"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2638
+msgid "Version"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2639
+msgid "Status"
+msgstr ""
+
+#. translators: %2$s: plugin name in screen reader markup
+#: \includes\plugins\class-tgm-plugin-activation.php:2688
+msgid "Install %2$s"
+msgstr ""
+
+#. translators: %2$s: plugin name in screen reader markup
+#: \includes\plugins\class-tgm-plugin-activation.php:2693
+msgid "Update %2$s"
+msgstr ""
+
+#. translators: %2$s: plugin name in screen reader markup
+#: \includes\plugins\class-tgm-plugin-activation.php:2699
+msgid "Activate %2$s"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2769
+msgid "Upgrade message from the plugin author:"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2802
+msgid "Install"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2808
+msgid "Update"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2811
+msgid "Activate"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2842
+msgid "No plugins were selected to be installed. No action taken."
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2844
+msgid "No plugins were selected to be updated. No action taken."
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2885
+msgid "No plugins are available to be installed at this time."
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2887
+msgid "No plugins are available to be updated at this time."
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:2993
+msgid "No plugins were selected to be activated. No action taken."
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:3019
+msgid "No plugins are available to be activated at this time."
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:3243
+msgid "Plugin activation failed."
+msgstr ""
+
+#. translators: 1: plugin name, 2: action number 3: total number of actions.
+#: \includes\plugins\class-tgm-plugin-activation.php:3583
+msgid "Updating Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#. translators: 1: plugin name, 2: error message.
+#: \includes\plugins\class-tgm-plugin-activation.php:3586
+msgid "An error occurred while installing %1$s: <strong>%2$s</strong>."
+msgstr ""
+
+#. translators: 1: plugin name.
+#: \includes\plugins\class-tgm-plugin-activation.php:3588
+msgid "The installation of %1$s failed."
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:3592
+msgid ""
+"The installation and activation process is starting. This process may take a "
+"while on some hosts, so please be patient."
+msgstr ""
+
+#. translators: 1: plugin name.
+#: \includes\plugins\class-tgm-plugin-activation.php:3594
+msgid "%1$s installed and activated successfully."
+msgstr ""
+
+#. translators: 1: plugin name.
+#: \includes\plugins\class-tgm-plugin-activation.php:3594
+#: \includes\plugins\class-tgm-plugin-activation.php:3602
+msgid "Show Details"
+msgstr ""
+
+#. translators: 1: plugin name.
+#: \includes\plugins\class-tgm-plugin-activation.php:3594
+#: \includes\plugins\class-tgm-plugin-activation.php:3602
+msgid "Hide Details"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:3595
+msgid "All installations and activations have been completed."
+msgstr ""
+
+#. translators: 1: plugin name, 2: action number 3: total number of actions.
+#: \includes\plugins\class-tgm-plugin-activation.php:3597
+msgid "Installing and Activating Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:3600
+msgid ""
+"The installation process is starting. This process may take a while on some "
+"hosts, so please be patient."
+msgstr ""
+
+#. translators: 1: plugin name.
+#: \includes\plugins\class-tgm-plugin-activation.php:3602
+msgid "%1$s installed successfully."
+msgstr ""
+
+#: \includes\plugins\class-tgm-plugin-activation.php:3603
+msgid "All installations have been completed."
+msgstr ""
+
+#. translators: 1: plugin name, 2: action number 3: total number of actions.
+#: \includes\plugins\class-tgm-plugin-activation.php:3605
+msgid "Installing Plugin %1$s (%2$d/%3$d)"
+msgstr ""
+
+#: \includes\plugins\plugins-activation.php:60
+msgid "Envato Market"
+msgstr ""
+
+#. Template Name of the theme
+#: \includes\plugins\plugins-activation.php:66
+msgid "WooCommerce"
+msgstr ""
+
+#: \includes\plugins\plugins-activation.php:72
+msgid "Contact Form 7"
+msgstr ""
+
+#: \includes\plugins\plugins-activation.php:95
+msgid ""
+"Sorry, but you do not have the correct permissions to install the %s plugin. "
+"Contact the administrator of this site for help on getting the plugin "
+"installed."
+msgid_plural ""
+"Sorry, but you do not have the correct permissions to install the %s plugins."
+" Contact the administrator of this site for help on getting the plugins "
+"installed."
+msgstr[0] ""
+msgstr[1] ""
+
+#: \includes\plugins\plugins-activation.php:98
+msgid ""
+"Sorry, but you do not have the correct permissions to activate the %s plugin."
+" Contact the administrator of this site for help on getting the plugin "
+"activated."
+msgid_plural ""
+"Sorry, but you do not have the correct permissions to activate the %s "
+"plugins. Contact the administrator of this site for help on getting the "
+"plugins activated."
+msgstr[0] ""
+msgstr[1] ""
+
+#: \includes\plugins\plugins-activation.php:100
+msgid ""
+"Sorry, but you do not have the correct permissions to update the %s plugin. "
+"Contact the administrator of this site for help on getting the plugin "
+"updated."
+msgid_plural ""
+"Sorry, but you do not have the correct permissions to update the %s plugins. "
+"Contact the administrator of this site for help on getting the plugins "
+"updated."
+msgstr[0] ""
+msgstr[1] ""
+
+#: \includes\plugins\plugins-activation.php:102
+msgid "Activate installed plugin"
+msgid_plural "Activate installed plugins"
+msgstr[0] ""
+msgstr[1] ""
+
+#: \includes\plugins\plugins-activation.php:105
+msgid "All plugins installed and activated successfully. %s"
+msgstr ""
+
+#: \includes\sidebar\qode-custom-sidebar.php:18
+msgid "Custom Widget Area"
+msgstr ""
+
+#: \includes\sidebar\qode-custom-sidebar.php:42
+msgid "Enter Name of the new Widget Area"
+msgstr ""
+
+#: \includes\sidebar\qode-custom-sidebar.php:43
+msgid "Add Widget Area"
+msgstr ""
+
+#. Template Name of the theme
+msgid "Landing Page"
+msgstr ""
+
+#: \woocommerce\cart\cart-shipping.php:47
+msgid "Shipping costs will be calculated once you have provided your address."
+msgstr ""
+
+#: \woocommerce\cart\cart-shipping.php:49
+msgid ""
+"There are no shipping methods available. Please double check your address, "
+"or contact us if you need any help."
+msgstr ""
+
+#: \woocommerce\cart\cart-totals.php:28
+msgid "Cart Totals"
+msgstr ""
+
+#: \woocommerce\cart\cart-totals.php:33 \woocommerce\cart\cart-totals.php:34
+msgid "Subtotal"
+msgstr ""
+
+#: \woocommerce\cart\cart-totals.php:55 \woocommerce\cart\cart-totals.php:56
+msgid "Shipping"
+msgstr ""
+
+#: \woocommerce\cart\cart-totals.php:71
+msgid "(estimated for %s)"
+msgstr ""
+
+#: \woocommerce\cart\cart.php:32 \woocommerce\cart\cart.php:76
+msgid "Product"
+msgstr ""
+
+#: \woocommerce\cart\cart.php:33 \woocommerce\cart\cart.php:95
+msgid "Price"
+msgstr ""
+
+#: \woocommerce\cart\cart.php:34 \woocommerce\cart\cart.php:101
+msgid "Quantity"
+msgstr ""
+
+#: \woocommerce\cart\cart.php:90
+msgid "Available on backorder"
+msgstr ""
+
+#: \woocommerce\cart\cart.php:136
+msgid "Got a Coupon?"
+msgstr ""
+
+#: \woocommerce\cart\cart.php:137
+msgid "Coupon Code"
+msgstr ""
+
+#: \woocommerce\cart\shipping-calculator.php:30
+msgid "Calculate shipping"
+msgstr ""
+
+#: \woocommerce\cart\shipping-calculator.php:36
+msgid "Select a country&hellip;"
+msgstr ""
+
+#: \woocommerce\cart\shipping-calculator.php:61
+msgid "Select a state&hellip;"
+msgstr ""
+
+#. translators: %s: Quantity.
+#: \woocommerce\global\quantity-input.php:28
+#: \woocommerce\global\quantity-input.php:44
+msgid "%s quantity"
+msgstr ""
+
+#: \woocommerce\global\quantity-input.php:39
+msgctxt "Product quantity input tooltip"
+msgid "Qty"
+msgstr ""
+
+#: \woocommerce\product-searchform.php:25
+msgid "Search for:"
+msgstr ""
+
+#: \woocommerce\product-searchform.php:26
+msgid "Search products&hellip;"
+msgstr ""
+
+#: \woocommerce\product-searchform.php:26
+msgctxt "label"
+msgid "Search for:"
+msgstr ""
+
+#: \woocommerce\single-product\product-image.php:86
+#: \woocommerce\single-product\product-thumbnails.php:44
+msgid "Placeholder"
+msgstr ""

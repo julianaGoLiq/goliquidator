@@ -56,17 +56,21 @@
     font-size: 15px;
 }
 .child_alt_price{
-    font-size: 12px;
-    line-height: 32px;
-    font-weight: 500;
+    font-size: 15px;
     font-family: Poppins,sans-serif;
     letter-spacing: -.2px;
     color: #6aa636;
+    margin: 0px !important;
 }
 .qodef-single-product-summary .child_alt_price{
-    font-size: 26px;
-    font-weight: lighter;
+    font-family: 'Open Sans',sans-serif;
+    font-size: 21px;
+    font-weight: 600;
 }
+.qodef-single-product-summary .price .woocommerce-Price-amount{
+    font-size: 21px;
+}
+
 .child_subtitle_sku{
     font-size: 14px;
     margin-top: 5px;
@@ -197,6 +201,37 @@
     font-weight: 600;
     margin-bottom: 10px;
 }
+#search-2 h4{
+    text-transform: lowercase;
+}
+#search-2 h4::first-letter{
+    text-transform: capitalize;
+}
+#searchform #searchsubmit{
+    background-color: #78ad2b;
+}
+#searchform #searchsubmit:hover{
+    background-color: #73993a;
+}
+.woocommerce-ordering{
+    text-align: right;
+}
+#woocommerce_recently_viewed_products-2{
+    float: left;
+}
+.woocommerce-Price-amount{
+    font-size: 15px;
+    color: #6aa636;
+    letter-spacing: 0.5px;
+}
+#woocommerce_recently_viewed_products-2 .qodef-product-list-widget-price-wrapper{
+display: none;
+}
+.qodef-product-standard-button-holder .qodef-btn-icon i.qodef-icon-linear-icon{
+    display: none;
+}
+
+
 /** RESPONSIVE */
 @media only screen and (max-width: 767px) {
     .qodef-single-product-info-bottom #tab-description{

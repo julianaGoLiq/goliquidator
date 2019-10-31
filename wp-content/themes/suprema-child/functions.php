@@ -62,8 +62,13 @@ function wpb_hook_javascript() {
     ?>
     <script>
         jQuery(document).ready(function($) {
+
+            $("ul.product-categories li").each(function(){
+                $(this).addClass( "parent_li" );
+            });
+
             $('ul.product-categories li.cat-parent >a').removeAttr("href");
-            $('ul.product-categories li.cat-parent >a').addClass( "parent_category" );
+            $('li.parent_li >a').addClass( "parent_category" );
 
             $('ul.product-categories li.cat-parent >ul.children').hide();
 
