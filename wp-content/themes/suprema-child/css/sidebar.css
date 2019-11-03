@@ -181,6 +181,8 @@
 }
 .widget_product_categories{
     position: relative;
+    float: left;
+    width: 100%;
 }
 .widget_product_categories h4{
     cursor: default;

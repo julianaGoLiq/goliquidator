@@ -115,7 +115,7 @@ function wpb_hook_javascript() {
     </script>
     <?php
 }
-add_action('wp_head', 'wpb_hook_javascript');
+//add_action('wp_head', 'wpb_hook_javascript');
 
 //add subtitle to product
 
