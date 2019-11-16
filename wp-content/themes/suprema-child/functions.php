@@ -109,9 +109,7 @@ function wpb_hook_javascript() {
                     $('.widget_product_categories h4 span').removeClass('side_bar_row_less').addClass( "side_bar_row_plus" );
                 }
             });
-
-
-        })
+        });
     </script>
     <?php
 }
@@ -199,3 +197,52 @@ function wc_product_contact_form7_tab(){
     echo do_shortcode('[contact-form-7 id="557" title="'.$subject.']');
 }
 
+add_filter( 'wp_nav_menu_items', 'suprema_child_add_wsp', 10, 2 );
+function suprema_child_add_wsp( $menu, $args ) {
+    if ( 'main-navigation' !== $args->theme_location )
+        return $menu;
+    if(strpos($menu, "sticky-nav-menu-item")!== false){
+        return $menu;
+    }
+    if(strpos($menu, "mobile-menu-item-")!== false){
+        return $menu;
+    }
+    $menu .= '<li class="nav-menu-item-wsp">' . '<a href="https://api.whatsapp.com/send?phone=13059274105" target="_blank" ><div class="logo-whatsapp"><i class="fab fa-whatsapp"></i></div></a>'. '</li>';
+    return $menu;
+}
+
+add_filter( 'wp_nav_menu_items', 'suprema_child_add_search', 10, 2 );
+
+function suprema_child_add_search( $menu, $args ) {
+    if ( 'main-navigation' !== $args->theme_location )
+        return $menu;
+
+    if(strpos($menu, "sticky-nav-menu-item")!== false){
+        return $menu;
+    }
+    if(strpos($menu, "mobile-menu-item-")!== false){
+        return $menu;
+    }
+    $form = '<form id="searchform-search" role="search" action="' . esc_url( home_url( '/' ) ) . '" method="get" style="display:none">'.
+        '<input id="s_input" name="s" type="text" value="' . get_search_query() . '" placeholder="' . __( 'Buscar producto', 'woocommerce' ) . '" />'.
+        '<input id="searchsubmit_input" type="submit" value="&#x55;" />'.
+        '<input name="post_type" type="hidden" value="product" />'.
+        '</form>'.
+        ' <script type="text/javascript">'.
+        'function showSearchbox(){
+    if (jQuery("#searchform-search").is(":visible")) {
+        jQuery("#searchform-search").css("display", "none");
+    } else {
+        jQuery("#searchform-search").css("display", "block");
+    }
+}'.
+        '</script>';
+
+    $menu .= '<li class="nav-menu-item-search">' .
+        '<a href="javascript:void(0)" onclick="showSearchbox()" >'.
+       '<span class="item_outer"><span class="item_inner"><span class="menu_icon_wrapper"><i class="menu_icon blank fa" aria-hidden="true"></i></span><span class="item_text"><span aria-hidden="true" class="qodef-icon-font-elegant icon_search "></span> </span></span></span>'.
+        '</a>'.
+        $form.
+        '</li>';
+    return $menu;
+}
