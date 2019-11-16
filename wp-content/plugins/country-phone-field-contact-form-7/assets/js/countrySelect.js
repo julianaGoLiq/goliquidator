@@ -28,7 +28,9 @@
 		ESC: 27,
 		PLUS: 43,
 		A: 65,
-		Z: 90
+		Z: 90,
+		SPACE: 32,
+        TAB: 9
 	}, windowLoaded = false;
 	// keep track of if the window.load event has fired as impossible to check after the fact
 	$(window).on('load', function() {
@@ -118,13 +120,13 @@
 			this.countryInput.wrap($("<div>", {
 				"class": mainClass
 			}));
-			var flagsContainer = $("<div>", {
+			this.flagsContainer = $("<div>", {
 				"class": "flag-dropdown"
 			}).insertBefore(this.countryInput);
 			// currently selected flag (displayed to left of input)
 			var selectedFlag = $("<div>", {
 				"class": "selected-flag"
-			}).appendTo(flagsContainer);
+			}).appendTo(this.flagsContainer);
 			this.selectedFlagInner = $("<div>", {
 				"class": "flag"
 			}).appendTo(selectedFlag);
@@ -135,7 +137,7 @@
 			// country list contains: preferred countries, then divider, then all countries
 			this.countryList = $("<ul>", {
 				"class": "country-list v-hide"
-			}).appendTo(flagsContainer);
+			}).appendTo(this.flagsContainer);
 			if (this.preferredCountries.length) {
 				this._appendListItems(this.preferredCountries, "preferred");
 				$("<li>", {
@@ -204,6 +206,18 @@
 		// initialise the main event listeners: input keyup, and click selected flag
 		_initListeners: function() {
 			var that = this;
+			// hack for input nested inside label: clicking the selected-flag to open the dropdown would then automatically trigger a 2nd click on the input which would close it again
+            var label = this.countryInput.closest("label");
+            if (label.length) {
+                label.on("click" + this.ns, function(e) {
+                    // if the dropdown is closed, then focus the input, else ignore the click
+                    if (that.countryList.hasClass("hide")) {
+                        that.countryInput.focus();
+                    } else {
+                        e.preventDefault();
+                    }
+                });
+            }
 			// Update flag on keyup.
 			// Use keyup instead of keypress because we want to update on backspace
 			// and instead of keydown because the value hasn't updated when that
@@ -211,9 +225,11 @@
 			// NOTE: better to have this one listener all the time instead of
 			// starting it on focus and stopping it on blur, because then you've
 			// got two listeners (focus and blur)
-			this.countryInput.on("keyup" + this.ns, function() {
+			
+			/* this.countryInput.on("keyup" + this.ns, function() {
 				that._updateFlagFromInputVal();
-			});
+			}); */
+			
 			// toggle country dropdown on click
 			var selectedFlag = this.selectedFlagInner.parent();
 			selectedFlag.on("click" + this.ns, function(e) {
@@ -227,12 +243,30 @@
 			// Despite above note, added blur to ensure partially spelled country
 			// with correctly chosen flag is spelled out on blur. Also, correctly
 			// selects flag when field is autofilled
-			this.countryInput.on("blur" + this.ns, function() {
+			
+			/* this.countryInput.on("blur" + this.ns, function() {
 				if (that.countryInput.val() != that.getSelectedCountryData().name) {
 					that.setCountry(that.countryInput.val());
 				}
 				that.countryInput.val(that.getSelectedCountryData().name);
-			});
+			}); */
+			
+			// open dropdown list if currently focused
+            this.flagsContainer.on("keydown" + that.ns, function(e) {
+                var isDropdownHidden = that.countryList.hasClass("hide");
+                if (isDropdownHidden && (e.which == keys.UP || e.which == keys.DOWN || e.which == keys.SPACE || e.which == keys.ENTER)) {
+                    // prevent form from being submitted if "ENTER" was pressed
+                    e.preventDefault();
+                    // prevent event from being handled again by document
+                    e.stopPropagation();
+                    that._showDropdown();
+                }
+                // allow navigation from dropdown to input on TAB
+                if (e.which == keys.TAB) {
+                    that._closeDropdown();
+                }
+            });
+			
 		},
 		_initAutoCountry: function() {
 			if (this.options.initialCountry === "auto") {
@@ -281,7 +315,7 @@
 		},
 		// Show the dropdown
 		_showDropdown: function() {
-			console.log(this.countryList);
+			//console.log(this.countryList);
 			this._setDropdownPosition();
 			// update highlighting and scroll to active list item
 			var activeListItem = this.countryList.children(".active");
@@ -318,12 +352,12 @@
 			// (except when this initial opening click is bubbling up)
 			// we cannot just stopPropagation as it may be needed to close another instance
 			var isOpening = true;
-			/*$("html").on("click" + this.ns, function(e) {
+			$("html").on("click" + this.ns, function(e) {
 				if (!isOpening) {
 					that._closeDropdown();
 				}
 				isOpening = false;
-			});*/
+			}); 
 			// Listen for up/down scrolling, enter to select, or letters to jump to country name.
 			// Use keydown as keypress doesn't fire for non-char keys and we want to catch if they
 			// just hit down and hold it to scroll down (no keyup event).

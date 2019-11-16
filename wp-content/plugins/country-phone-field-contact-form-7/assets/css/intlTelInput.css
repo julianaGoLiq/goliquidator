@@ -59,6 +59,11 @@
       .intl-tel-input .selected-flag .iti-arrow.up {
         border-top: none;
         border-bottom: 4px solid #555; }
+	.intl-tel-input .country-list {
+		list-style:none;
+	padding:0;
+	margin:0;
+	}
   .intl-tel-input .country-list {
     position: absolute;
     z-index: 2;
@@ -85,6 +90,8 @@
       padding-bottom: 5px;
       margin-bottom: 5px;
       border-bottom: 1px solid #CCC; }
+	  .intl-tel-input .country-list li.country {
+      list-style:none; }
     .intl-tel-input .country-list .country {
       padding: 5px 10px; }
       .intl-tel-input .country-list .country .dial-code {

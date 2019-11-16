@@ -10,12 +10,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-07-11T12:05:23+02:00\n"
-"PO-Revision-Date: 2019-10-31 00:57+0000\n"
+"PO-Revision-Date: 2019-11-16 21:05+0000\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Domain: suprema\n"
 "Language: es_ES\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Loco-Version: 2.3.1; wp-5.2.4"
+"X-Loco-Version: 2.3.1; wp-5.3"
 
 #. Theme Name of the theme
 msgid "Suprema"
@@ -1567,7 +1567,7 @@ msgstr ""
 
 #: \woocommerce\product-searchform.php:26
 msgid "Search products&hellip;"
-msgstr ""
+msgstr "Buscar"
 
 #: \woocommerce\product-searchform.php:26
 msgctxt "label"

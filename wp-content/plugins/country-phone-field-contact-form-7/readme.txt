@@ -1,9 +1,9 @@
 === Country & Phone Field Contact Form 7 ===
 Contributors: narinderbisht,webgrex
 Donate link: https://www.paypal.me/webgrex
-Tags: country dropdown, flags, phone extension, form, contact form
+Tags: country dropdown, flags, phone extension, form, contact form, contact form 7
 Requires at least: 4.8
-Tested up to: 5.2.3
+Tested up to: 5.3
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -111,3 +111,6 @@ First version of plugin.
 * phone number validation has updated. Now user can manage number only validation from field settings.
 2.1.4
 * settings page php warning message has fixed.
+2.1.5
+* auto hide the country drop-down after click outside the drop-down container.
+* remove drop-down default listing style and css updated.

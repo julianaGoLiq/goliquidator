@@ -300,6 +300,57 @@ ul.products li.product .qodef-product-standard-info-top{
 #searchsubmit_input:hover{
     background-color: #73993a;
 }
+.logo_whatsapp_mobile{
+    margin-right: 5px;
+}
+.logo_whatsapp_mobile a .logo-whatsapp{
+    color: #252525;
+    padding-top: 0px;
+}
+#woocommerce_product_search-2{
+    display: none;
+    position: absolute;
+    right: 0px;
+    top: 40px;
+    padding: 5px;
+}
+#woocommerce_product_search-2 .woocommerce-product-search{
+    width: 220px;
+}
+#woocommerce_product_search-2 .woocommerce-product-search input[type="submit"]{
+    margin: 0px;
+    text-decoration: none;
+    color: #fff;
+    font-family: ElegantIcons,sans-serif;
+    font-weight: 400;
+    cursor: pointer;
+    white-space: nowrap;
+    float: right;
+    background: #78ad2b;
+    height: 30px;
+}
+#woocommerce_product_search-2 .woocommerce-product-search .search-field{
+    height: 30px;
+    border: 1px solid #d5d5d5;
+    padding: 5px;
+}
+#woocommerce_product_search-2 .woocommerce-product-search input[type="submit"]:hover {
+    background-color: #73993a;
+}
+#mobile_search_tools .item_outer{
+    font-size: 20px;
+    position: relative;
+    top: 1px;
+    margin-left: 10px;
+    color: #252525;
+    font-weight: bold;
+}
+
+.qodef-mobile-header .qodef-mobile-header-inner .qodef-position-right-inner{
+    position: relative;
+}
+
+
 /** RESPONSIVE */
 @media only screen and (max-width: 767px) {
     .qodef-single-product-info-bottom #tab-description{

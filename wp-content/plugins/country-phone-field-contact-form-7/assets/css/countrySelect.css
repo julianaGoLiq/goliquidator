@@ -56,6 +56,11 @@
 	border-top:none;
 	border-bottom:4px solid #555
 }
+.country-select ul.country-list{
+	list-style:none;
+	padding:0;
+	margin:0;
+}
 .country-select .country-list{
 	position:absolute;
 	z-index:2;
@@ -84,6 +89,9 @@
 	padding-bottom:5px;
 	margin-bottom:5px;
 	border-bottom:1px solid #ccc
+}
+.country-select .country-list li.country{
+	list-style:none;
 }
 .country-select .country-list .country{
 	padding:5px 10px
