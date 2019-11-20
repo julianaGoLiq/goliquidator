@@ -1,0 +1,55 @@
+.chat_flotante_wsp_messenger .whatsapp{
+    position:fixed;
+    width:60px;
+    height:60px;
+    bottom:195px;
+    right:26px;
+    text-align:center;
+    border-radius:50px;
+    box-shadow: 5px 4px 13px -2px rgba(0,0,0,0.1);
+    font-size:30px;
+    z-index:1000;
+}
+.chat_flotante_wsp_messenger .whatsapp:hover{
+    box-shadow:-1px 8px 27px -2px rgba(0,0,0,0.25);
+}
+.chat_flotante_wsp_messenger .messenger{
+    position:fixed;
+    width:60px;
+    height:60px;
+    bottom:125px;
+    right:26px;
+    text-align:center;
+    border-radius:50px;
+    box-shadow: 5px 4px 13px -2px rgba(0,0,0,0.1);
+    z-index:1000;
+}
+.chat_flotante_wsp_messenger .messenger:hover{
+    box-shadow:-1px 8px 27px -2px rgba(0,0,0,0.25);
+}
+
+
+/** RESPONSIVE */
+@media only screen and (max-width: 767px) {
+    .chat_flotante_wsp_messenger .whatsapp{
+        right:20px;
+        bottom:175px;
+        width:40px;
+        height:40px;
+
+    }
+    .chat_flotante_wsp_messenger .whatsapp img{
+        width:40px;
+        height:40px;
+    }
+    .chat_flotante_wsp_messenger .messenger{
+        right:20px;
+        bottom:125px;
+        width:40px;
+        height:40px;
+    }
+    .chat_flotante_wsp_messenger .messenger img{
+        width:40px;
+        height:40px;
+    }
+}

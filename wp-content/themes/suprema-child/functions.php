@@ -197,7 +197,7 @@ function wc_product_contact_form7_tab(){
     echo do_shortcode('[contact-form-7 id="557" title="'.$subject.']');
 }
 
-add_filter( 'wp_nav_menu_items', 'suprema_child_add_wsp', 10, 2 );
+//add_filter( 'wp_nav_menu_items', 'suprema_child_add_wsp', 10, 2 );
 function suprema_child_add_wsp( $menu, $args ) {
     if ( 'main-navigation' !== $args->theme_location )
         return $menu;
@@ -211,7 +211,7 @@ function suprema_child_add_wsp( $menu, $args ) {
     return $menu;
 }
 
-add_filter( 'wp_nav_menu_items', 'suprema_child_add_search', 10, 2 );
+//add_filter( 'wp_nav_menu_items', 'suprema_child_add_search', 10, 2 );
 
 function suprema_child_add_search( $menu, $args ) {
     if ( 'main-navigation' !== $args->theme_location )
@@ -246,3 +246,31 @@ function suprema_child_add_search( $menu, $args ) {
         '</li>';
     return $menu;
 }
+
+add_action('wp_head', 'wpb_hook_javascript_footer');
+function wpb_hook_javascript_footer() {
+    ?>
+    <script>
+        jQuery(document).ready(function($) {
+            var parentT2= $('#text-2').parent().parent();
+            if($(parentT2)){
+                $(parentT2).addClass('mobile_fotter_2');
+            }
+            var parentT3= $('#text-3').parent().parent();
+           if($(parentT3)){
+               $(parentT3).addClass('mobile_fotter_3');
+           }
+            var parentT4= $('#text-4').parent().parent();
+            if($(parentT4)){
+                $(parentT4).addClass('mobile_fotter_4');
+            }
+            var parentT5= $('#text-5').parent().parent();
+            if($(parentT5)){
+                $(parentT5).addClass('mobile_fotter_5');
+            }
+
+        });
+    </script>
+    <?php
+}
+

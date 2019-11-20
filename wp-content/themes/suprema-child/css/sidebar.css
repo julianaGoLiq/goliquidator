@@ -349,7 +349,57 @@ ul.products li.product .qodef-product-standard-info-top{
 .qodef-mobile-header .qodef-mobile-header-inner .qodef-position-right-inner{
     position: relative;
 }
-
+.nav-menu-item-search .qodef-search-opener .icon_search{
+    padding-top: 30px;
+    position: relative;
+    display: inline-block;
+}
+.sticky-nav-menu-item-wsp .logo-whatsapp{
+    padding-top: 15px;
+    position: relative;
+    display: inline-block;
+}
+custom_html-8{
+    padding-right: 5px;
+}
+#custom_html-8 .textwidget a{
+    color: #252525;
+}
+#custom_html-8 .textwidget a:hover, #custom_html-9 .textwidget a:hover {
+    color: #78ad2b;
+}
+#custom_html-8 .textwidget a .fa-whatsapp, #custom_html-9 .textwidget a .fa-whatsapp{
+    font-weight: 500;
+    font-size: 25px;
+    letter-spacing: 0;
+}
+#custom_html-9 .logo-whatsapp{
+    padding-top: 5px;
+}
+#custom_html-9 .logo-whatsapp .fa-whatsapp{
+    color: #252525;
+}
+#custom_html-9{
+    padding-right: 5px;
+}
+.qodef-position-right .qodef-position-right-inner a.qodef-search-opener{
+    margin: 0px;
+    position: relative;
+    top: 8px;
+}
+.qodef-position-right .qodef-position-right-inner a.qodef-search-opener .icon_search{
+    font-size: 25px;
+}
+.qodef-mobile-header .qodef-mobile-header-inner .qodef-position-right .fa-whatsapp{
+    color: #252525;
+}
+.qodef-mobile-header .qodef-mobile-header-inner .qodef-position-right .logo-whatsapp{
+    padding-top: 15px;
+}
+.qodef-mobile-header .qodef-mobile-header-inner .qodef-search-opener{
+    top: 3px !important;
+    margin-left: 5px !important;
+}
 
 /** RESPONSIVE */
 @media only screen and (max-width: 767px) {
@@ -420,7 +470,27 @@ ul.products li.product .qodef-product-standard-info-top{
     .qodef-mobile-header .qodef-vertical-align-containers .qodef-position-right{
         float: right;
     }
+
+    .qodef-four-columns-inner .mobile_fotter_3{
+        width: 49% !important;
+    }
+    .qodef-four-columns-inner .mobile_fotter_4{
+        width: 49% !important;
+    }
+
 }
 
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+    .qodef-four-columns-inner .mobile_fotter_2{
+        width: 50% !important;
+    }
+    .qodef-four-columns-inner .mobile_fotter_3{
+        width: 50% !important;
+    }
+    .qodef-four-columns-inner .mobile_fotter_4{
+        width: 50% !important;
+    }
+    .qodef-four-columns-inner .mobile_fotter_5{
+        width: 50% !important;
+    }
 }

@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-07-11T12:05:23+02:00\n"
-"PO-Revision-Date: 2019-11-20 01:12+0000\n"
+"PO-Revision-Date: 2019-11-16 21:05+0000\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Domain: suprema\n"
 "Language: es_ES\n"
@@ -426,11 +426,11 @@ msgstr ""
 
 #: \framework\modules\search\templates\types\fullscreen-search.php:14
 msgid "Type what you are searching for:"
-msgstr "¿Qué está buscando?"
+msgstr ""
 
 #: \framework\modules\search\templates\types\fullscreen-search.php:18
 msgid "Type Here"
-msgstr "Escriba aquí"
+msgstr ""
 
 #: \framework\modules\search\templates\types\search-covers-header.php:9
 #: \framework\modules\search\templates\types\search-slides-from-header-bottom.php:8
