@@ -477,7 +477,22 @@ custom_html-8{
     .qodef-four-columns-inner .mobile_fotter_4{
         width: 49% !important;
     }
-
+    .wpb_single_image.vc_align_left{
+        text-align: center !important;
+    }
+    .wpb_wrapper .qodef-section-inner .qodef-section-inner-margin .vc_column_container{
+        margin-bottom: 20px;
+    }
+    .txt_org{
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+    }
+    .txt_mde{
+        text-align: center;
+        display: inline-block;
+        width: 100%;
+    }
 }
 
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
@@ -492,5 +507,15 @@ custom_html-8{
     }
     .qodef-four-columns-inner .mobile_fotter_5{
         width: 50% !important;
+    }
+    .counter_liquidator .qodef-counter{
+        font-size: 50px !important;
+    }
+    .counter_liquidator .qodef-counter-title{
+        font-size: 50px !important;
+    }
+    .vc_column_container > .vc_column-inner{
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }
