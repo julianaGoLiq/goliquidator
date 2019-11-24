@@ -400,8 +400,22 @@ custom_html-8{
     top: 3px !important;
     margin-left: 5px !important;
 }
+.qodef-product-standard-info-top{
+    font-size: 15px;
+}
 
 /** RESPONSIVE */
+@media only screen and (min-width: 768px) {
+    #popmake-387 .pum-close{
+        top: 0px;
+        right: -40px;
+        background: no-repeat;
+        font-size: 35px !important;
+        font-weight: 100;
+        border: none;
+        font-family: 'Open Sans',sans-serif;
+    }
+}
 @media only screen and (max-width: 767px) {
     .qodef-single-product-info-bottom #tab-description{
         width: 100%;
@@ -493,6 +507,52 @@ custom_html-8{
         display: inline-block;
         width: 100%;
     }
+    #agendar_cita_mapa_iframe{
+        height: 200px;
+    }
+    .form_ciudad_class
+    {
+        margin-top: 30px;
+    }
+    .tener_en_cuenta{
+        margin-top: 35px;
+    }
+    .formulario-cita .submit_btn_primary{
+        text-align: center;
+    }
+
+    .qodef-column-inner ul.products li.product{
+        margin-bottom: 35px !important;
+    }
+    .formulario-contactenos .form_contact_country{
+        margin-bottom: 20px !important;
+    }
+    .porque_comprarnos_confianza, .porque_comprarnos_versatilidad{
+        margin-top: 25px;
+    }
+    #popmake-387{
+        max-width: 100% !important;
+        width: 100% !important;
+        top: 0px !important;
+        left: 0px !important;
+        padding: 5px;
+        margin: 0px;
+        bottom: 0px !important;
+        right: 0px !important;
+    }
+
+}
+
+/*v */
+@media only screen and (max-width: 767px) and (orientation: portrait){
+    #page_why_buy_us .qodef-elements-holder-item{
+        background-position-y: 45%;
+    }
+}
+@media only screen and (max-width: 767px) and (orientation: landscape){
+    #page_why_buy_us .qodef-elements-holder-item{
+        background-position-y: 50%;
+    }
 }
 
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
@@ -517,5 +577,24 @@ custom_html-8{
     .vc_column_container > .vc_column-inner{
         padding-left: 10px;
         padding-right: 10px;
+    }
+    .contactenos_comunicarse_hablenos .image, .contactenos_comunicarse_hablenos .image{
+        float: left;
+        width: 55px;
+        margin-right: 10px;
+    }
+    .contactenos_comunicarse_hablenos .texto, .contactenos_comunicarse_hablenos .texto{
+        float: left;
+        width: 62%;
+    }
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation: portrait){
+    #page_why_buy_us .qodef-elements-holder-item{
+        background-position-y: 45%;
+    }
+}
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation: landscape){
+    #page_why_buy_us .qodef-elements-holder-item{
+        background-position-y: 61%;
     }
 }
