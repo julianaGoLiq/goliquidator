@@ -404,6 +404,70 @@ custom_html-8{
     font-size: 15px;
 }
 
+#popmake-723{
+    border: 20px solid #e1e1e1;
+    padding: 0px;
+}
+#popmake-723 .content_novedades_texto
+{
+    padding-top: 50px;
+    padding-left: 60px;
+    padding-right: 60px;
+    text-align: center;
+    padding-bottom: 20px;
+
+}
+#popmake-723 .content_novedades_texto p{
+    color: #010101;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0px;
+    margin: 0px;
+    line-height: 22px;
+}
+#popmake-723 .content_novedades_texto div{
+    color: #767676;
+    font-size: 15px;
+    letter-spacing: 0px;
+    margin-top: 20px;
+    line-height: 37px;
+}
+.content_novedades_button{
+    background-color: #1d5d9a;
+    text-align: center;
+    float: left;
+    width: 100%;
+}
+.popup_suscripcionnews{
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 1px solid #fff;
+    color: #fff;
+}
+.text_boletin_news{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.popup_suscripcionnews{
+    cursor: pointer;
+    width: 220px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    transform: translate(55%);
+}
+.content_novedades_button{
+    text-align: center;
+    padding: 10px;
+}
+.content_novedades_button .popup_suscripcionnews .fa-angle-right {
+    position: absolute;
+    top: 15px;
+    right: 10px;
+}
 /** RESPONSIVE */
 @media only screen and (min-width: 768px) {
     #popmake-387 .pum-close{
@@ -540,7 +604,24 @@ custom_html-8{
         bottom: 0px !important;
         right: 0px !important;
     }
-
+    #popmake-723{
+        min-width: 100%!important;
+        max-width: 100%!important;
+        left: 0px !important;
+    }
+    .popup_suscripcionnews{
+        transform: translate(25%);
+    }
+    #popmake-723 .content_novedades_texto{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    #popmake-723 .content_novedades_texto p{
+        font-size: 18px;
+    }
+    #popmake-723 .content_novedades_texto div{
+        font-size: 14px;
+    }
 }
 
 /*v */
