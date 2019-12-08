@@ -680,6 +680,9 @@ custom_html-8{
         float: left;
         width: 62%;
     }
+    #rev_slider_1_1, #rev_slider_1_1_wrapper {
+        max-height: 340px !important;
+    }
 }
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation: portrait){
     #page_why_buy_us .qodef-elements-holder-item{
@@ -689,5 +692,10 @@ custom_html-8{
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation: landscape){
     #page_why_buy_us .qodef-elements-holder-item{
         background-position-y: 61%;
+    }
+}
+@media only screen and (min-device-width : 1024px) and (max-device-width : 1366px) {
+    #rev_slider_1_1, #rev_slider_1_1_wrapper {
+        max-height: 450px !important;
     }
 }
