@@ -478,9 +478,6 @@ custom_html-8{
     font-family: 'Open Sans',sans-serif;
     font-size: 30px;
 }
-#rev_slider_1_1 rs-slide.slider_one_backgrouund rs-sbg-wrap rs-sbg{
-    background-image: url("/wp-content/uploads/2019/12/home_mobile_baner768_638.jpg") !important;
-}
 
 /** RESPONSIVE */
 @media only screen and (min-width: 768px) {
@@ -646,6 +643,11 @@ custom_html-8{
     }
     #type_sales_id .qodef-section-inner-margin .vc_column_container{
         margin-top: 40px;
+    }
+    #rev_slider_1_1 rs-slide.slider_one_backgrouund rs-sbg-wrap rs-sbg{
+        background-image: url("/wp-content/uploads/2019/12/home_mobile_baner768_638.jpg") !important;
+        background-size: cover !important;
+        background-position: right bottom !important;
     }
 }
 
