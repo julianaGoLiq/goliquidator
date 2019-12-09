@@ -637,6 +637,16 @@ custom_html-8{
     #popmake-723 .content_novedades_texto div{
         font-size: 14px;
     }
+    .styles_grids_with_icons h4{
+        padding-bottom: 0px;
+        padding-top: 0px;
+    }
+    #type_sales_id{
+        padding-top: 0px !important;
+    }
+    #type_sales_id .qodef-section-inner-margin .vc_column_container{
+        margin-top: 40px;
+    }
 }
 
 /*v */
