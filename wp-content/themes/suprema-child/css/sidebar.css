@@ -491,7 +491,8 @@ custom_html-8{
 #column_como_comprar_id .vc_column-inner, #column_por_que_id .vc_column-inner{
     padding: 0px !important;
 }
-
+#content_video_player #video{
+}
 
 /** RESPONSIVE */
 @media only screen and (min-width: 768px) {
@@ -708,6 +709,12 @@ custom_html-8{
     #column_our_catalog_id .catalog_button{
         text-align: center !important;
     }
+    #video{
+        top: -35px;
+    }
+    .touch .qodef-parallax-section-holder.qodef-parallax-section-holder-touch-disabled{
+        min-height: 195px !important;
+    }
 }
 @media only screen and (max-width: 767px) and (orientation: landscape){
     #page_why_buy_us .qodef-elements-holder-item{
@@ -723,6 +730,12 @@ custom_html-8{
     }
     #column_our_catalog_id .catalog_button{
         text-align: center !important;
+    }
+    #video{
+        top: -155px;
+    }
+    .touch .qodef-parallax-section-holder.qodef-parallax-section-holder-touch-disabled{
+        min-height: 235px !important;
     }
 }
 
@@ -770,10 +783,16 @@ custom_html-8{
     #page_why_buy_us .qodef-elements-holder-item{
         background-position-y: 45%;
     }
+    #video{
+        top: -150px;
+    }
 }
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation: landscape){
     #page_why_buy_us .qodef-elements-holder-item{
         background-position-y: 61%;
+    }
+    #video{
+        top: -235px;
     }
 }
 @media only screen and (min-device-width : 1024px) and (max-device-width : 1366px) {
