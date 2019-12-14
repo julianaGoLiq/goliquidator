@@ -26,6 +26,12 @@ class chat_flotante extends WP_Widget {
                 <img alt="MESSENGER CHAT" src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/messenger_chatweb.png' ?>" />
             </a>
         </div>
+
+        <div class="google_panel_flotante">
+            <a href="<?php echo  $instance["google_input"];?>" class="google_panel" target="_blank">
+                <img alt="Google" src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/google_reviews.png' ?>" />
+            </a>
+        </div>
 <?php
 
     }
@@ -41,6 +47,11 @@ class chat_flotante extends WP_Widget {
             <label for="<?php echo $this->get_field_id('messenger_input'); ?>">Messenger Code</label>
             <input class="widefat" id="<?php echo $this->get_field_id('messenger_input'); ?>" name="<?php echo $this->get_field_name('messenger_input'); ?>" type="text" value="<?php echo esc_attr($instance["messenger_input"]); ?>" />
         </p>
+
+        <p>
+            <label for="<?php echo $this->get_field_id('google_input'); ?>">Google url</label>
+            <input class="widefat" id="<?php echo $this->get_field_id('google_input'); ?>" name="<?php echo $this->get_field_name('google_input'); ?>" type="text" value="<?php echo esc_attr($instance["google_input"]); ?>" />
+        </p>
   <?php
     }
 
@@ -50,6 +61,7 @@ class chat_flotante extends WP_Widget {
         $instance = $old_instance;
         $instance["whatsapp_input"] = strip_tags($new_instance["whatsapp_input"]);
         $instance["messenger_input"] = strip_tags($new_instance["messenger_input"]);
+        $instance["google_input"] = strip_tags($new_instance["google_input"]);
         return $instance;
 
     }

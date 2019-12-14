@@ -141,7 +141,7 @@ h1, h2{
 #color-blue
 .qodef-title.qodef-breadcrumb-type .qodef-title-holder .qodef-breadcrumbs .qodef-current,
 .qodef-main-menu > ul > li.qodef-active-item > a{
-	color: #1E6799 !important;
+	color: #78ad2b !important;
 }
 .qodef-breadcrumbs-inner *{
 	font-family: Poppins,sans-serif !important;

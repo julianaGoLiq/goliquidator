@@ -493,6 +493,13 @@ custom_html-8{
 }
 #content_video_player #video{
 }
+#row_testimonials_id{
+    background-color: #f5f5f5 !important;
+}
+.qodef-main-menu ul li.qodef-active-item a, .qodef-main-menu ul li:hover a{
+    color:#252525 !important;
+}
+
 
 /** RESPONSIVE */
 @media only screen and (min-width: 768px) {
@@ -715,6 +722,9 @@ custom_html-8{
     .touch .qodef-parallax-section-holder.qodef-parallax-section-holder-touch-disabled{
         min-height: 195px !important;
     }
+    #column_por_que_id{
+        display: none;
+    }
 }
 @media only screen and (max-width: 767px) and (orientation: landscape){
     #page_why_buy_us .qodef-elements-holder-item{
@@ -736,6 +746,9 @@ custom_html-8{
     }
     .touch .qodef-parallax-section-holder.qodef-parallax-section-holder-touch-disabled{
         min-height: 235px !important;
+    }
+    #column_por_que_id{
+        display: none;
     }
 }
 
@@ -784,7 +797,20 @@ custom_html-8{
         background-position-y: 45%;
     }
     #video{
-        top: -150px;
+        top: -157px;
+    }
+    .touch .qodef-parallax-section-holder.qodef-parallax-section-holder-touch-disabled{
+        min-height: 293px !important;
+    }
+    .qodef-testimonials-holder .qodef-testimonials.owl-carousel .owl-buttons .owl-prev{
+    }
+    .qodef-testimonials-holder .qodef-testimonials.owl-carousel .owl-buttons .owl-next{
+    }
+    .qodef-mobile-opener-icon-holder{
+        font-size: 25px;
+    }
+    .qodef-mobile-header .qodef-position-center-inner .qodef-mobile-logo-wrapper a{
+        height: 34px !important;
     }
 }
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation: landscape){
@@ -793,6 +819,18 @@ custom_html-8{
     }
     #video{
         top: -235px;
+    }
+    .qodef-testimonials-holder .qodef-testimonials.owl-carousel .owl-buttons .owl-prev{
+        left: -5% !important;
+    }
+    .qodef-testimonials-holder .qodef-testimonials.owl-carousel .owl-buttons .owl-next{
+        right: -5% !important;
+    }
+    .qodef-mobile-opener-icon-holder{
+        font-size: 25px;
+    }
+    .qodef-mobile-header .qodef-position-center-inner .qodef-mobile-logo-wrapper a{
+        height: 34px !important;
     }
 }
 @media only screen and (min-device-width : 1024px) and (max-device-width : 1366px) {
