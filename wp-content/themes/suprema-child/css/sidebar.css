@@ -58,7 +58,7 @@
 .child_alt_price{
     font-size: 15px;
     font-family: Poppins,sans-serif;
-    letter-spacing: -.2px;
+    letter-spacing: .5px;
     color: #6aa636;
     margin: 5px 0px 0px 0px !important;
 
@@ -405,7 +405,7 @@ custom_html-8{
     margin-left: 5px !important;
 }
 .qodef-product-standard-info-top{
-    font-size: 15px;
+    font-size: 13px;
 }
 
 #popmake-723{
@@ -526,7 +526,13 @@ custom_html-8{
     font-weight: lighter !important;
     font-size: 50px;
 }
-
+.qodef-sidebar .widget_recently_viewed_products .product_list_widget .qodef-product-list-category{
+    display: none;
+}
+#reviews input[type="submit"], input.wpcf7-form-control.wpcf7-submit:hover{
+    background-color: #73993a !important;
+    color: #FFF !important;
+}
 
 /** RESPONSIVE */
 @media only screen and (min-width: 768px) {
@@ -550,8 +556,6 @@ custom_html-8{
         margin-right: auto;
     }
 }
-
-
 @media only screen and (max-width: 767px) {
     .qodef-single-product-info-bottom #tab-description{
         width: 100%;
@@ -730,6 +734,27 @@ custom_html-8{
         right: 15px;
         position: relative;
     }
+    #nuestro_catalogo_descripcion_id .wpb_wrapper span,
+    #como_comprar_descripcion_id .wpb_wrapper span,
+    #por_que_comprar_desc_id .wpb_wrapper span{
+        font-size: 15px !important;
+        line-height: 21px !important;
+    }
+    #sp-testimonial-free-820 .tfree-client-testimonial{
+        font-size: 13px;
+        line-height: 22px;
+    }
+
+    #popmake-387 .popmake-close{
+        background: none;
+        border: none;
+        color: #808080;
+        font-size: 30px;
+        font-weight: lighter;
+        box-shadow: none;
+        font-family: arial, sans-serif;;
+    }
+
 }
 
 /*v */
@@ -809,6 +834,7 @@ custom_html-8{
     #como_comprar_column_id .qodef-elements-holder-item-content .qodef-custom-font-holder,
     #porque_comprar_column_id .qodef-elements-holder-item-content .qodef-custom-font-holder{
         font-size: 43px !important;
+        line-height: 42px !important;
     }
 
     .sp-testimonial-free-wrapper .slick-prev .fa-angle-left{
@@ -822,6 +848,12 @@ custom_html-8{
 
     #btn_about_our_id{
         top: -10px;
+    }
+    #nuestro_catalogo_descripcion_id .wpb_wrapper span,
+    #como_comprar_descripcion_id .wpb_wrapper span,
+    #por_que_comprar_desc_id .wpb_wrapper span{
+        font-size: 16px !important;
+        line-height: 26px !important;
     }
 }
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation: portrait){
@@ -882,10 +914,7 @@ custom_html-8{
         text-align: center !important;
         letter-spacing: -0.5px !important;
     }
-    #nuestro_catalogo_descripcion_id, #como_comprar_descripcion_id{
-        font-size: 15px;
-        line-height: 20px;
-    }
+
     #como_comprar_column_id .como_comprar_space{
         height: 20px !important;
     }
@@ -893,8 +922,12 @@ custom_html-8{
         display: none !important;
     }
 }
-@media only screen and (max-width: 768px ){
-
+@media only screen and (min-width: 834px ) and (max-width: 1024px ) {
+    #column_our_catalog_id .qodef-elements-holder-item {
+        background-position-x: 49%;
+        background-size: 140%;
+        background-repeat: no-repeat;
+    }
 }
 
 @media only screen and (max-width: 360px ) and (max-width: 374px ){
