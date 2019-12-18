@@ -34,7 +34,6 @@
     bottom:15px;
     left:15px;
     text-align:center;
-    box-shadow: 5px 4px 13px -2px rgba(0,0,0,0.1);
     font-size:30px;
     z-index:1000;
 }
@@ -69,7 +68,6 @@
         width: 110px;
         height: 53px;
         text-align:center;
-        box-shadow: 5px 4px 13px -2px rgba(0,0,0,0.1);
         font-size:30px;
         z-index:1000;
     }

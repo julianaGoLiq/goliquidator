@@ -20,4 +20,5 @@ add_action('wp_enqueue_scripts','chat_flotante_header');
 
 function chat_flotante_header() {
     wp_enqueue_style( 'chat_flotante', plugin_dir_url( __FILE__ ) . 'assets/css/chat_flotante.css');
+    wp_enqueue_style( 'font_awesome', plugin_dir_url( __FILE__ ) . 'assets/css/all.min.css');
 }

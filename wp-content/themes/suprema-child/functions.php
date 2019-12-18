@@ -269,7 +269,11 @@ function wpb_hook_javascript_footer() {
                 $(parentT5).addClass('mobile_fotter_5');
             }
 
+            if($('#porque_comprar_image_space_id')){
+                $('#porque_comprar_image_space_id').parent().parent().parent().addClass("porque_comprar_background");
+            }
         });
+
     </script>
     <?php
 }
