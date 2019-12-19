@@ -533,6 +533,13 @@ custom_html-8{
     background-color: #73993a !important;
     color: #FFF !important;
 }
+#sp-testimonial-free-wrapper-820 .sp-testimonial-free-section .slick-prev:hover,
+#sp-testimonial-free-wrapper-820 .sp-testimonial-free-section .slick-next:hover{
+    color: #1e6799 !important;
+}
+#sp-testimonial-free-820 .slick-next::before, #sp-testimonial-free-820 .slick-prev::before{
+    content: '' !important;
+}
 
 /** RESPONSIVE */
 @media only screen and (min-width: 768px) {
