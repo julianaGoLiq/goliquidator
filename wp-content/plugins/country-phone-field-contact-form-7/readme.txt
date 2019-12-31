@@ -1,26 +1,30 @@
 === Country & Phone Field Contact Form 7 ===
 Contributors: narinderbisht,webgrex
 Donate link: https://www.paypal.me/webgrex
-Tags: country dropdown, flags, phone extension, form, contact form, contact form 7
+Tags: country dropdown, flags, phone extension, form, contact form, contact form 7, country dropdown plugin, international telephone input, Country & Phone Field, WordPress plugin
 Requires at least: 4.8
 Tested up to: 5.3
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Add country drop down with flags and phone number with country phone extensions field in contact form 7.
+Add country drop down with flags and phone number with country phone extension fields in contact form 7.
 
 == Description ==
-Plugin is type of addon of wordpress contact form 7 plugin. This plugin add new two fields. Country list and country phone extensions list. This plugin help user create a country drop-down list with country flags. User have no needs manually adding countries name in standard drop-down field of contact form 7.
+Country & Phone Field Contact Form 7 plugin is **an add-on for Contact Form 7** plugin. This plugin **add two new form tag fields** that is **Country list** (form-tag: country drop-down) and **Country Phone extensions list** (form-tag: phone number) in Contact form 7.
+
+Country & Phone Field Contact Form 7 helps you in creating a country drop-down list with country flags. The tag field will automatically add countries name in standard drop-down field of contact form 7.
+
+How to add the fields in the contact form 7 
+1.) Once you have installed activated the Country & Phone Field Contact Form 7 plugin.
+2.) Add the form-tag  "country drop-down" and  "phone number"  to your form and save the changes.
 
 Requirments:
 * Contact form 7 must be active plugin.
 
 = Recommended Plugins =
-
-The following plugins are recommended for Contact Form 7 users:
-
-* [Contact form 7](https://wordpress.org/plugins/contact-form-7/) by takayukister - With Conact form 7, you can use this plugin. Without contact form 7 this plugin have no needs.
+The following plugin is recommended for Country & Phone Field Contact Form 7 users:
+* [Contact form 7](https://wordpress.org/plugins/contact-form-7/) by takayukister – With Conact form 7, you can use this plugin. Without contact form 7 this plugin have no needs.
 
 == Installation ==
 
@@ -63,12 +67,13 @@ Please use contact form 7 standard featured minlength and maxlength option. It w
 1. screenshot-2.png
 1. screenshot-3.png
 1. screenshot-4.png
+1. screenshot-5.png
+1. screenshot-6.png
 
 == Changelog ==
 
 1.0.0
-
-First version of plugin.
+*First version of plugin.
 
 1.0.1
 * Update FAQs
@@ -114,3 +119,7 @@ First version of plugin.
 2.1.5
 * auto hide the country drop-down after click outside the drop-down container.
 * remove drop-down default listing style and css updated.
+2.1.6
+* update plugin documentation/description
+* update plugin css fixes
+* update plugin screenshots.

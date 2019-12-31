@@ -1,11 +1,12 @@
 <?php
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
 /**
  * Testimonial - route class
+ *
  * @since 2.0
  */
 class SP_TFREE_Router {
@@ -51,16 +52,6 @@ class SP_TFREE_Router {
 	 */
 	function sp_tfree_function() {
 		include_once SP_TFREE_PATH . 'includes/functions.php';
-	}
-
-	/**
-	 * MetaBox
-	 *
-	 * @since 1.0
-	 * @return void
-	 */
-	function sp_tfree_metabox() {
-		include_once SP_TFREE_PATH . 'admin/views/metabox/sp-framework.php';
 	}
 
 }

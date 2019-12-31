@@ -3,7 +3,7 @@ Contributors: shapedplugin
 Donate link: http://shapedplugin.com/donate
 Tags: testimonial, testimonials, testimonial showcase, testimonials showcase, testimonial slider, testimonials slider, testimonial carousel, testimonial front-end submission form, testimonials widget, easy testimonial, testimonial rotator, random testimonials, custom testimonial, collect testimonials, social proof, simple testimonial plugin, best testimonials showcase plugin, free testimonial, customers reviews
 Requires at least: 4.0
-Tested up to: 5.3
+Tested up to: 5.3.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,122 +84,6 @@ Testimonials are a great way to strengthen your brand and reliability with new c
 
 = SUPPORT =
 If you find any issue or need help, please ask us. We are active in WordPress.org [Support Forum](https://shapedplugin.com/support-forum/).
-
-
-= TESTIMONIAL PRO =
-
-**[Testimonial Pro](https://shapedplugin.com/plugin/testimonial-pro/)** vastly improves your styling & user experience and lets you showcase & collect fresh testimonials quickly without coding skills. The Premium version of the plugin comes with the following tons of useful and amazing advanced features. Check it out now!
-
-= EACH TESTIMONIAL INCLUDES FOLLOWING INPUT FIELDS =
-
-* Image
-* Video 
-* Testimonial title or Tagline 
-* Testimonial content or Review message
-* Reviewer name 
-* Rating star 
-* Reviewer identity or Position 
-* Company name
-* Location
-* Mobile or Telephone
-* E-mail
-* Date
-* Website URL 
-* And Social profile links (Facebook, Twitter, Google Plus, LinkedIn, Instagram, YouTube, Pinterest, Skype, StumbleUpon, Reddit, Dribbble, SnapChat etc.) 
-
->You can easily show/hide and customize every field.
-
-The plugin is packed with so many flexible and useful features Layouts (Slider, Grid, Masonry, Filter, and List), 10+ Professionally Pre-designed Themes, 840+ Google fonts, Star rating system, Front-End submission, Video testimonials, Advanced link options, 12+ Social profiles, Absolute freedom on design customization (Colors, Spacings, Alignment, An arrangement of meta fields etc.) It’s possible to craft almost any design what you can imagine. Get designer quality results without writing a single line of code.
-
-The Testimonial Plugin works great out of the box and super handy. You may expect to find all the must feature like absolute responsiveness, WPBakery integration, WPML Ready, Schema.org compliant JSON-LD markup to appear correctly in search results, shortcode support and more.
-
-
-= PRO VERSION KEY FEATURES =
-
-* Advanced Shortcode Generator, with advanced query options.
-* **5+ Testimonial Layouts** (e.g. Slider, Grid, Masonry, Filter, and List).
-* **10+ Professionally Pre-designed Themes.**
-* **840+ Google Fonts** (You can also load your theme or custom fonts).
-* **100+ Advanced Styling and Layout Customization Options** (Position, fonts family, weights, size, line-height, alignment, transform, letter spacing, color etc).
-* **Display reviews of your product or service.**
-* Showcase Unlimited Testimonials (Multiple Testimonials showcase anywhere you like).
-* **Thumbnail Slider for Testimonial.**
-* Duplicate or Clone Testimonial Sliders or Showcase (built-in duplicate option).
-* **Testimonials Showcase from specific Categories.**
-* **Display Specific Testimonials.**
-* **Testimonials Filtering by Categories.**
-* Pagination for grid, filter, masonry, and list layouts.
-* **Video Testimonial.**
-* Lightbox functionality for video with icon and overlay color options.
-* **Front-end Submission Form to Collect Testimonials.**
-* Drag & drop sorting Submission Form fields.
-* Customize the Form by adding or removing fields and changing properties like the order, label, color, and placeholder.
-* New Testimonial Notifications e-mail to one, or more, addresses when a new testimonial is submitted.
-* Testimonial Pending in Dashboard for approval by Admin.
-* Admins and Editors can edit the testimonials before publishing.
-* **Star rating system.**
-* **Google reCAPTCHA for Testimonial Form spam protection.**
-* Testimonial Carousel that shows 2 or more testimonials on each slide.
-* You can re-order your testimonials simply by drag & drop, or choose to display the testimonials randomly.
-* Create, edit, re-order, delete, and manage Testimonials with no coding knowledge!
-* **Rich Snippets/Structured Data compatible.**
-* Customize the testimonial border thickness and background color.
-* 12+ Social profile icons.
-* Change social profile icon position, style (Square, Round, Circle), color, border, background, and hover color.
-* **3 Testimonial thumbnail or image styles (Square, Round, Circle).**
-* Border or box-shadow option for Testimonial thumbnail or image.
-* Set the Testimonial image dimension: (width or height) from settings.
-* Set a margin between the testimonials.
-* Show excerpt (Read More option).
-* Excerpt custom limit option.
-* **Testimonial Detail or Read More Link Type (Expand, PopUp).**
-* Change Read more button text, color, hover etc.
-* Pagination for grid, filter, list and masonry layouts.
-* Automatic Identity or Position & Company Name linking via Website URL.
-* Multi-creative use plugin: Testimonials, Team, Logos etc.
-* Store testimonials for unlimited use.
-* Sort by date, random or custom order.
-* Smart AutoPlay on/off.
-* Set AutoPlay speed.
-* Set slide scroll speed.
-* Set number of Testimonial(s) to scroll at a time.
-* Ticker mode carousel for testimonials.
-* 8+ different navigation positions.
-* 15+ Modern navigation and pagination styles.
-* 6 different navigation arrows.
-* Infinite Looping.
-* Testimonial fade effect.
-* Testimonials order & order by (date, title, modified, author, random).
-* Pause on hover.
-* Auto-height option for testimonials.
-* Set the number of column in mobile, tablet & desktop.
-* Testimonial content and Reviewer information alignment (left, center, right).
-* Simple embedding using shortcode, PHP function, Shortcode Generator on post editor or via the widget.
-* Custom CSS option to override styles, if necessary without editing the CSS files.
-* Unlimited color option for all the elements.
-* **Ready for translation with [WPML](https://wpml.org/), [Polylang](https://wordpress.org/plugins/polylang/), [qTranslate-x](https://wordpress.org/plugins/qtranslate-x/), [GTranslate](https://wordpress.org/plugins/gtranslate/), [Google Language Translator](https://wordpress.org/plugins/google-language-translator/), [WPGlobus](https://wordpress.org/plugins/wpglobus/)**. 
-* Widget ready.
-* RTL ready.
-* **WPBakery integrated.**
-* Guaranteed to Work with your any WordPress site.
-* Super simple, easy-to-use, powerful, and intuitive backend interface.
-* No more pain writing any shortcode.
-* All features of the free version.
-* Any new features we add in the future (which is often).
-* And so much more!
-
-
-= TOP REASONS TO BUY PRO =
-* **Fast & Friendly Support.**
-* Full Installation Document, User guide, and Tutorials.
-* Built-in Automatic Updates to new versions.
-* 100% Money Back Guarantee.
-
-
-=== Testimonial Pro - Admin Panel Overview ===
-[youtube https://www.youtube.com/watch?v=OA7LgaZHwIY]
-
-
 
 = NOTE =
 This plugin is actively being developed & improved. We’re far from done and are adding new features, functionality, and fixes daily. If there’s a feature you want but we don’t have yet, please [let us know](https://shapedplugin.com/contact-us/).
@@ -314,6 +198,11 @@ Thank you!
 
 
 == Changelog ==
+
+= 2.1.5 - Dec 17, 2019 =
+* Improved: Dashboard UI.
+* Fix: WordPress 5.3.1 compatible issue.
+
 = 2.1.4 - Mar 22, 2019 =
 * Fix: WordPress 5.2.1 compatible issue.
 

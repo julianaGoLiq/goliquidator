@@ -1,6 +1,7 @@
 <?php
 /**
  * This file render the shortcode to the frontend
+ *
  * @package testimonial-free
  */
 if ( ! defined( 'ABSPATH' ) ) {
@@ -9,18 +10,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Testimonial - Shortcode Render class
+ *
  * @since 2.0
  */
 if ( ! class_exists( 'TFREE_Shortcode_Render' ) ) {
 	class TFREE_Shortcode_Render {
 
-		public $tfree_five_star = '<i class="fa fa-star" aria-hidden="true"></i>
+		public $tfree_five_star  = '<i class="fa fa-star" aria-hidden="true"></i>
 					<i class="fa fa-star" aria-hidden="true"></i>
 					<i class="fa fa-star" aria-hidden="true"></i>
 					<i class="fa fa-star" aria-hidden="true"></i>
 					<i class="fa fa-star" aria-hidden="true"></i>
 					';
-		public $tfree_four_star = '
+		public $tfree_four_star  = '
 					<i class="fa fa-star" aria-hidden="true"></i>
 					<i class="fa fa-star" aria-hidden="true"></i>
 					<i class="fa fa-star" aria-hidden="true"></i>
@@ -34,14 +36,14 @@ if ( ! class_exists( 'TFREE_Shortcode_Render' ) ) {
 					<i class="fa fa-star-o" aria-hidden="true"></i>
 					<i class="fa fa-star-o" aria-hidden="true"></i>
 					';
-		public $tfree_two_star = '
+		public $tfree_two_star   = '
 					<i class="fa fa-star" aria-hidden="true"></i>
 					<i class="fa fa-star" aria-hidden="true"></i>
 					<i class="fa fa-star-o" aria-hidden="true"></i>
 					<i class="fa fa-star-o" aria-hidden="true"></i>
 					<i class="fa fa-star-o" aria-hidden="true"></i>
 					';
-		public $tfree_one_star = '
+		public $tfree_one_star   = '
 					<i class="fa fa-star" aria-hidden="true"></i>
 					<i class="fa fa-star-o" aria-hidden="true"></i>
 					<i class="fa fa-star-o" aria-hidden="true"></i>
@@ -86,49 +88,102 @@ if ( ! class_exists( 'TFREE_Shortcode_Render' ) ) {
 		 * @since 2.0
 		 */
 		public function shortcode_render( $attributes ) {
-			extract( shortcode_atts( array(
-				'id' => '',
-			), $attributes, 'sp_testimonial' ) );
+
+			shortcode_atts(
+				array(
+					'id' => '',
+				), $attributes, 'sp_testimonial'
+			);
 
 			$post_id = $attributes['id'];
 
-			$theme_style                    = get_post_meta( $post_id, 'tfree_themes', true );
-			$number_of_total_testimonials   = get_post_meta( $post_id, 'tfree_number_of_total_testimonials', true );
-			$order_by                       = get_post_meta( $post_id, 'tfree_order_by', true );
-			$order                          = get_post_meta( $post_id, 'tfree_order', true );
-			$number_of_column               = get_post_meta( $post_id, 'tfree_number_of_column', true );
-			$number_of_column_desktop       = get_post_meta( $post_id, 'tfree_number_of_column_desktop', true );
-			$number_of_column_small_desktop = get_post_meta( $post_id, 'tfree_number_of_column_small_desktop', true );
-			$number_of_column_mobile        = get_post_meta( $post_id, 'tfree_number_of_column_mobile', true );
-			$number_of_column_tablet        = get_post_meta( $post_id, 'tfree_number_of_column_tablet', true );
-			$auto_play_speed                = get_post_meta( $post_id, 'tfree_auto_play_speed', true );
-			$scroll_speed                   = get_post_meta( $post_id, 'tfree_scroll_speed', true );
-			$nav_arrow_color                = get_post_meta( $post_id, 'tfree_nav_arrow_color', true );
-			$nav_arrow_hover                = get_post_meta( $post_id, 'tfree_nav_arrow_hover', true );
-			$pagination_color               = get_post_meta( $post_id, 'tfree_pagination_color', true );
-			$pagination_active_color        = get_post_meta( $post_id, 'tfree_pagination_active_color', true );
-			$star_rating_color              = get_post_meta( $post_id, 'tfree_star_rating_color', true );
-			$position_color                 = get_post_meta( $post_id, 'tfree_position_color', true );
-			$reviewer_name_color            = get_post_meta( $post_id, 'tfree_reviewer_name_color', true );
-			$testimonial_content_color      = get_post_meta( $post_id, 'tfree_testimonial_content_color', true );
-			$testimonial_title_color        = get_post_meta( $post_id, 'tfree_testimonial_title_color', true );
-			$section_title_color            = get_post_meta( $post_id, 'tfree_section_title_color', true );
+			$shortcode_data = get_post_meta( $post_id, 'sp_tpro_shortcode_options', true );
 
-			$section_title       = $this->get_meta( $post_id, 'tfree_section_title', 'true' );
-			$testimonial_title   = $this->get_meta( $post_id, 'tfree_testimonial_title', 'true' );
-			$testimonial_content = $this->get_meta( $post_id, 'tfree_testimonial_content', 'true' );
-			$reviewer_name       = $this->get_meta( $post_id, 'tfree_reviewer_name', 'true' );
-			$reviewer_position   = $this->get_meta( $post_id, 'tfree_position', 'true' );
-			$star_rating         = $this->get_meta( $post_id, 'tfree_star_rating', 'true' );
-			$auto_play           = $this->get_meta( $post_id, 'tfree_auto_play', 'true' );
-			$pause_on_hover      = $this->get_meta( $post_id, 'tfree_pause_on_hover', 'true' );
-			$infinite_loop       = $this->get_meta( $post_id, 'tfree_infinite_loop', 'true' );
-			$navigation          = $this->get_meta( $post_id, 'tfree_navigation', 'true' );
-			$pagination          = $this->get_meta( $post_id, 'tfree_pagination', 'true' );
-			$adaptive_height     = $this->get_meta( $post_id, 'tfree_adaptive', 'true' );
-			$swipe_on            = $this->get_meta( $post_id, 'tfree_swipe', 'true' );
-			$mouse_draggable     = $this->get_meta( $post_id, 'tfree_mouse_draggable', 'true' );
-			$rtl_mode            = $this->get_meta( $post_id, 'tfree_rtl', 'true' );
+			// General Settings.
+			$theme_style                    = isset( $shortcode_data['theme_style'] ) ? $shortcode_data['theme_style'] : 'theme-one';
+			$number_of_total_testimonials   = isset( $shortcode_data['number_of_total_testimonials'] ) ? $shortcode_data['number_of_total_testimonials'] : '10';
+			$order_by                       = isset( $shortcode_data['testimonial_order_by'] ) ? $shortcode_data['testimonial_order_by'] : 'date';
+			$order                          = isset( $shortcode_data['testimonial_order'] ) ? $shortcode_data['testimonial_order'] : 'DESC';
+			$number_of_column               = isset( $shortcode_data['number_of_testimonials'] ) ? $shortcode_data['number_of_testimonials'] : '1';
+			$number_of_column_desktop       = isset( $shortcode_data['number_of_testimonials_desktop'] ) ? $shortcode_data['number_of_testimonials_desktop'] : '1';
+			$number_of_column_small_desktop = isset( $shortcode_data['number_of_testimonials_small_desktop'] ) ? $shortcode_data['number_of_testimonials_small_desktop'] : '1';
+			$number_of_column_tablet        = isset( $shortcode_data['number_of_testimonials_tablet'] ) ? $shortcode_data['number_of_testimonials_tablet'] : '1';
+			$number_of_column_mobile        = isset( $shortcode_data['number_of_testimonials_mobile'] ) ? $shortcode_data['number_of_testimonials_mobile'] : '1';
+
+			// Slider Settings.
+			$slider_auto_play = isset( $shortcode_data['slider_auto_play'] ) ? $shortcode_data['slider_auto_play'] : 'true';
+			switch ( $slider_auto_play ) {
+				case 'true':
+					$auto_play        = 'true';
+					$auto_play_mobile = 'true';
+					break;
+				case 'off_on_mobile':
+					$auto_play        = 'true';
+					$auto_play_mobile = 'false';
+					break;
+				case 'false':
+					$auto_play        = 'false';
+					$auto_play_mobile = 'false';
+					break;
+			}
+			$slider_auto_play_speed       = isset( $shortcode_data['slider_auto_play_speed'] ) ? $shortcode_data['slider_auto_play_speed'] : '3000';
+			$slider_scroll_speed          = isset( $shortcode_data['slider_scroll_speed'] ) ? $shortcode_data['slider_scroll_speed'] : '600';
+			$slider_pause_on_hover        = isset( $shortcode_data['slider_pause_on_hover'] ) && true === $shortcode_data['slider_pause_on_hover'] ? 'true' : 'false';
+			$slider_infinite              = isset( $shortcode_data['slider_infinite'] ) && true === $shortcode_data['slider_infinite'] ? 'true' : 'false';
+			$slider_navigation            = isset( $shortcode_data['navigation'] ) ? $shortcode_data['navigation'] : 'true';
+			$navigation_arrow_color       = isset( $shortcode_data['navigation_arrow_color'] ) ? $shortcode_data['navigation_arrow_color'] : '#444444';
+			$navigation_hover_arrow_color = isset( $shortcode_data['navigation_hover_arrow_color'] ) ? $shortcode_data['navigation_hover_arrow_color'] : '#52b3d9';
+			switch ( $slider_navigation ) {
+				case 'true':
+					$navigation        = 'true';
+					$navigation_mobile = 'true';
+					break;
+				case 'hide_on_mobile':
+					$navigation        = 'true';
+					$navigation_mobile = 'false';
+					break;
+				case 'false':
+					$navigation        = 'false';
+					$navigation_mobile = 'false';
+					break;
+			}
+			$slider_pagination       = isset( $shortcode_data['pagination'] ) ? $shortcode_data['pagination'] : 'true';
+			$pagination_color        = isset( $shortcode_data['pagination_color'] ) ? $shortcode_data['pagination_color'] : '#cccccc';
+			$pagination_active_color = isset( $shortcode_data['pagination_active_color'] ) ? $shortcode_data['pagination_active_color'] : '#52b3d9';
+			switch ( $slider_pagination ) {
+				case 'true':
+					$pagination        = 'true';
+					$pagination_mobile = 'true';
+					break;
+				case 'hide_on_mobile':
+					$pagination        = 'true';
+					$pagination_mobile = 'false';
+					break;
+				case 'false':
+					$pagination        = 'false';
+					$pagination_mobile = 'false';
+					break;
+			}
+			$adaptive_height  = isset( $shortcode_data['adaptive_height'] ) && true === $shortcode_data['adaptive_height'] ? 'true' : 'false';
+			$slider_swipe     = isset( $shortcode_data['slider_swipe'] ) && true === $shortcode_data['slider_swipe'] ? 'true' : 'false';
+			$slider_draggable = isset( $shortcode_data['slider_draggable'] ) && true === $shortcode_data['slider_draggable'] ? 'true' : 'false';
+			$rtl_mode         = isset( $shortcode_data['rtl_mode'] ) && true === $shortcode_data['rtl_mode'] ? 'true' : 'false';
+
+			// Stylization.
+			$section_title     = isset( $shortcode_data['section_title'] ) ? $shortcode_data['section_title'] : '';
+			$testimonial_title = isset( $shortcode_data['testimonial_title'] ) ? $shortcode_data['testimonial_title'] : '';
+			$testimonial_text  = isset( $shortcode_data['testimonial_text'] ) ? $shortcode_data['testimonial_text'] : '';
+			$reviewer_name     = isset( $shortcode_data['testimonial_client_name'] ) ? $shortcode_data['testimonial_client_name'] : '';
+			$star_rating       = isset( $shortcode_data['testimonial_client_rating'] ) ? $shortcode_data['testimonial_client_rating'] : '';
+			$star_rating_color = isset( $shortcode_data['testimonial_client_rating_color'] ) ? $shortcode_data['testimonial_client_rating_color'] : '#f3bb00';
+			$reviewer_position = isset( $shortcode_data['client_designation'] ) ? $shortcode_data['client_designation'] : '';
+
+			// Typography.
+			$section_title_color      = isset( $shortcode_data['section_title_typography'] ) ? $shortcode_data['section_title_typography']['color'] : '#444444';
+			$testimonial_title_color  = isset( $shortcode_data['testimonial_title_typography'] ) ? $shortcode_data['testimonial_title_typography']['color'] : '#333333';
+			$testimonial_text_color   = isset( $shortcode_data['testimonial_text_typography'] ) ? $shortcode_data['testimonial_text_typography']['color'] : '#333333';
+			$client_name_color        = isset( $shortcode_data['client_name_typography'] ) ? $shortcode_data['client_name_typography']['color'] : '#333333';
+			$client_designation_color = isset( $shortcode_data['client_designation_company_typography'] ) ? $shortcode_data['client_designation_company_typography']['color'] : '#444444';
 
 			// Enqueue Script.
 			wp_enqueue_script( 'tfree-slick-min-js' );
@@ -146,44 +201,44 @@ if ( ! class_exists( 'TFREE_Shortcode_Render' ) ) {
             }
             #sp-testimonial-free-wrapper-' . $post_id . ' .sp-testimonial-free-section .slick-prev,
 			#sp-testimonial-free-wrapper-' . $post_id . ' .sp-testimonial-free-section .slick-next{
-				color: ' . $nav_arrow_color . ';
+				color: ' . $navigation_arrow_color . ';
 			}
             #sp-testimonial-free-wrapper-' . $post_id . ' .sp-testimonial-free-section .slick-prev:hover,
 			#sp-testimonial-free-wrapper-' . $post_id . ' .sp-testimonial-free-section .slick-next:hover{
-				color: ' . $nav_arrow_hover . ';
+				color: ' . $navigation_hover_arrow_color . ';
 			}
 			';
-			if ( $navigation == 'true' ) {
+			if ( 'true' == $navigation ) {
 				$outline .= '#sp-testimonial-free-wrapper-' . $post_id . ' .sp-testimonial-free-section{
 					padding: 0 50px;
 				}';
 			}
-			if ( $star_rating == 'true' ) {
+			if ( $star_rating ) {
 				$outline .= '#sp-testimonial-free-wrapper-' . $post_id . ' .sp-testimonial-free-section .tfree-client-rating{
 					color: ' . $star_rating_color . ';
 				}';
 			}
-			if ( $reviewer_position == 'true' ) {
+			if ( $reviewer_position ) {
 				$outline .= '#sp-testimonial-free-wrapper-' . $post_id . ' .sp-testimonial-free-section .tfree-client-designation{
-					color: ' . $position_color . ';
+					color: ' . $client_designation_color . ';
 				}';
 			}
-			if ( $reviewer_name == 'true' ) {
+			if ( $reviewer_name ) {
 				$outline .= '#sp-testimonial-free-wrapper-' . $post_id . ' .sp-testimonial-free-section h2.tfree-client-name{
-					color: ' . $reviewer_name_color . ';
+					color: ' . $client_name_color . ';
 				}';
 			}
-			if ( $testimonial_content == 'true' ) {
+			if ( $testimonial_text ) {
 				$outline .= '#sp-testimonial-free-wrapper-' . $post_id . ' .sp-testimonial-free-section .tfree-client-testimonial{
-					color: ' . $testimonial_content_color . ';
+					color: ' . $testimonial_text_color . ';
 				}';
 			}
-			if ( $testimonial_title == 'true' ) {
+			if ( $testimonial_title ) {
 				$outline .= '#sp-testimonial-free-wrapper-' . $post_id . ' .sp-testimonial-free-section .tfree-testimonial-title h3{
 					color: ' . $testimonial_title_color . ';
 				}';
 			}
-			if ( $section_title == 'true' ) {
+			if ( $section_title ) {
 				$outline .= '#sp-testimonial-free-wrapper-' . $post_id . ' .sp-testimonial-free-section .tfree-testimonial-title h3{
 					color: ' . $section_title_color . ';
 				}';
@@ -202,64 +257,55 @@ if ( ! class_exists( 'TFREE_Shortcode_Render' ) ) {
 
 			$outline .= '<div id="sp-testimonial-free-wrapper-' . $post_id . '" class="sp-testimonial-free-wrapper">';
 
-			if ( 'true' == $section_title ) {
+			if ( $section_title ) {
 				$outline .= '<h2 class="sp-testimonial-free-section-title">' . get_the_title( $post_id ) . '</h2>';
 			}
 
-			$outline .= '<div id="sp-testimonial-free-' . $post_id . '" class="sp-testimonial-free-section tfree-style-' . $theme_style . '" data-slick=\'{"dots": ' . $pagination . ', "adaptiveHeight": ' . $adaptive_height . ', "pauseOnHover": ' . $pause_on_hover . ', "slidesToShow": ' . $number_of_column . ', "speed": ' . $scroll_speed . ', "arrows": ' . $navigation . ', "autoplay": ' . $auto_play . ', "autoplaySpeed": ' . $auto_play_speed . ', "swipe": ' . $swipe_on . ', "draggable": ' . $mouse_draggable . ', "rtl": ' . $rtl_mode . ', "infinite": ' . $infinite_loop . ', "responsive": [ {"breakpoint": 1280, "settings": { "slidesToShow": ' . $number_of_column_desktop . ' } }, {"breakpoint": 980, "settings": { "slidesToShow": ' . $number_of_column_small_desktop . ' } }, {"breakpoint": 736, "settings": { "slidesToShow": ' . $number_of_column_tablet . ' } }, {"breakpoint": 480, "settings": { "slidesToShow": ' . $number_of_column_mobile . ' } } ] }\'>';
+			$outline .= '<div id="sp-testimonial-free-' . $post_id . '" class="sp-testimonial-free-section tfree-style-' . $theme_style . '" data-slick=\'{"dots": ' . $pagination . ', "adaptiveHeight": ' . $adaptive_height . ', "pauseOnHover": ' . $slider_pause_on_hover . ', "slidesToShow": ' . $number_of_column . ', "speed": ' . $slider_scroll_speed . ', "arrows": ' . $navigation . ', "autoplay": ' . $auto_play . ', "autoplaySpeed": ' . $slider_auto_play_speed . ', "swipe": ' . $slider_swipe . ', "draggable": ' . $slider_draggable . ', "rtl": ' . $rtl_mode . ', "infinite": ' . $slider_infinite . ', "responsive": [
+				{
+					"breakpoint": 1280, "settings": { "slidesToShow": ' . $number_of_column_desktop . ' } 
+				},
+				{
+					"breakpoint": 980, "settings": { "slidesToShow": ' . $number_of_column_small_desktop . ' } 
+				},
+				{
+					"breakpoint": 736, "settings": { "slidesToShow": ' . $number_of_column_tablet . ' } 
+				},
+				{
+					"breakpoint": 480, "settings": {
+						"slidesToShow": ' . $number_of_column_mobile . ',
+						"dots": ' . $pagination_mobile . ',
+						"arrows": ' . $navigation_mobile . ',
+						"autoplay": ' . $auto_play_mobile . '
+					} 
+				}
+				] }\'>';
 
 			if ( $post_query->have_posts() ) {
 				while ( $post_query->have_posts() ) :
 					$post_query->the_post();
-					$testimonial_data   = get_post_meta( get_the_ID(), 'sp_tpro_meta_options', true );
-					$tfree_designation  = ( isset( $testimonial_data['tpro_designation'] ) ? $testimonial_data['tpro_designation']: '' );
-					$tfree_name         = ( isset( $testimonial_data['tpro_name'] ) ? $testimonial_data['tpro_name']: '' );
-					$tfree_rating_star = ( isset( $testimonial_data['tpro_rating'] ) ? $testimonial_data['tpro_rating']: '' );
 
-					if ( 'theme-one' == $theme_style ) {
+					$testimonial_data  = get_post_meta( get_the_ID(), 'sp_tpro_meta_options', true );
+					$tfree_designation = ( isset( $testimonial_data['tpro_designation'] ) ? $testimonial_data['tpro_designation'] : '' );
+					$tfree_name        = ( isset( $testimonial_data['tpro_name'] ) ? $testimonial_data['tpro_name'] : '' );
+					$tfree_rating_star = ( isset( $testimonial_data['tpro_rating'] ) ? $testimonial_data['tpro_rating'] : '' );
+
+					if ( 'theme-one' === $theme_style ) {
 						include SP_TFREE_PATH . '/public/views/templates/theme-one.php';
 					}
 
-				endwhile;
+					endwhile;
 			} else {
 				$outline .= '<h2 class="sp-not-testimonial-found">' . esc_html__( 'No testimonials found', 'testimonial-free' ) . '</h2>';
 			}
 
-			$outline .= '</div>';
-			$outline .= '</div>';
+					$outline .= '</div>';
+					$outline .= '</div>';
 
-			wp_reset_query();
+					wp_reset_postdata();
 
-			return $outline;
+					return $outline;
 
-		}
-
-		/**
-		 * Get post meta by id and key
-		 *
-		 * @param $post_id
-		 * @param $key
-		 * @param $default
-		 *
-		 * @return string|void
-		 */
-		public function get_meta( $post_id, $key, $default = null ) {
-			$meta = get_post_meta( $post_id, $key, true );
-			if ( empty( $meta ) && $default ) {
-				$meta = $default;
-			}
-
-			if ( 'zero' == $meta ) {
-				$meta = '0';
-			}
-			if ( 'on' == $meta ) {
-				$meta = 'true';
-			}
-			if ( 'off' == $meta ) {
-				$meta = 'false';
-			}
-
-			return esc_attr( $meta );
 		}
 
 	}

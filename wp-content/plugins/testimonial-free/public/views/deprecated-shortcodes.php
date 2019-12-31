@@ -5,12 +5,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Testimonial Free shortcode.
 function sp_testimonial_free_shortcode( $atts ) {
-	extract( shortcode_atts( array(
-		'color'      => '#52b3d9',
-		'nav'        => 'true',
-		'pagination' => 'true',
-		'autoplay'   => 'true',
-	), $atts, 'testimonial-free' ) );
+	extract(
+		shortcode_atts(
+			array(
+				'color'      => '#52b3d9',
+				'nav'        => 'true',
+				'pagination' => 'true',
+				'autoplay'   => 'true',
+			), $atts, 'testimonial-free'
+		)
+	);
 
 	$args = array(
 		'post_type'      => 'spt_testimonial',
@@ -66,16 +70,17 @@ function sp_testimonial_free_shortcode( $atts ) {
 
 	$outline .= '<div id="sp-testimonial-free' . $custom_id . '" class="sp-testimonial-section">';
 	if ( $que->have_posts() ) {
-		while ( $que->have_posts() ) : $que->the_post();
+		while ( $que->have_posts() ) :
+			$que->the_post();
 
 			$tf_designation = esc_html( get_post_meta( get_the_ID(), 'tf_designation', true ) );
 
-			$testimonial_data  = get_post_meta( get_the_ID(), 'sp_tpro_meta_options', true );
+			$testimonial_data = get_post_meta( get_the_ID(), 'sp_tpro_meta_options', true );
 
 			$outline .= '<div class="testimonial-free text-center">';
 			if ( has_post_thumbnail( $que->post->ID ) ) {
 				$outline .= '<div class="tf-client-image">';
-				$outline .= get_the_post_thumbnail( $que->post->ID, 'tf-client-image-size', array( 'class' => "tf-client-img" ) );
+				$outline .= get_the_post_thumbnail( $que->post->ID, 'tf-client-image-size', array( 'class' => 'tf-client-img' ) );
 				$outline .= '</div>';
 			}
 			$outline .= '<div class="tf-client-testimonial">';
@@ -90,9 +95,9 @@ function sp_testimonial_free_shortcode( $atts ) {
 			$outline .= '</h2>';
 			if ( isset( $testimonial_data['tpro_designation'] ) || $tf_designation ) {
 				$outline .= '<h6 class="tf-client-designation">';
-				if ( isset( $tf_designation ) && $tf_designation !== '') {
+				if ( isset( $tf_designation ) && $tf_designation !== '' ) {
 					$outline .= $tf_designation;
-				} elseif( isset( $testimonial_data['tpro_designation'] ) ) {
+				} elseif ( isset( $testimonial_data['tpro_designation'] ) ) {
 					$outline .= $testimonial_data['tpro_designation'];
 				}
 
@@ -107,7 +112,7 @@ function sp_testimonial_free_shortcode( $atts ) {
 	}
 	$outline .= '</div>';
 
-	wp_reset_query();
+	wp_reset_postdata();
 
 	return $outline;
 

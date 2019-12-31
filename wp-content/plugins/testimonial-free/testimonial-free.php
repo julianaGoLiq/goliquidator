@@ -1,9 +1,18 @@
 <?php
 /**
+ * This file is read by WordPress to generate the plugin information in the plugin
+ * admin area. This file also includes all of the dependencies used by the plugin,
+ * registers the activation and deactivation functions, and defines a function
+ * that starts the plugin.
+ *
+ * @link              https://shapedplugin.com
+ * @since             1.0
+ * @package           Testimonial
+ *
  * Plugin Name:     Testimonial
  * Plugin URI:      https://shapedplugin.com/plugin/testimonial-pro/
  * Description:     Most Customizable and Powerful Testimonials Showcase Plugin for WordPress that allows you to manage and display Testimonials or Reviews on any page or widget.
- * Version:         2.1.4
+ * Version:         2.1.5
  * Author:          ShapedPlugin
  * Author URI:      https://shapedplugin.com/
  * Text Domain:     testimonial-free
@@ -14,20 +23,51 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
 
-/**
- * Handles core plugin hooks and action setup.
- *
- * @package testimonial-free
- * @since 2.0
- */
+if ( ! function_exists( 'activate_testimonial' ) ) {
+	/**
+	 * The code that runs during plugin activation.
+	 * This action is documented in includes/class-testimonial-activator.php
+	 */
+	function activate_testimonial() {
+		require_once plugin_dir_path( __FILE__ ) . 'includes/class-testimonial-activator.php';
+		Testimonial_Activator::activate();
+	}
+}
+
+if ( ! function_exists( 'deactivate_testimonial' ) ) {
+	/**
+	 * The code that runs during plugin deactivation.
+	 * This action is documented in includes/class-testimonial-deactivator.php
+	 */
+	function deactivate_testimonial() {
+		require_once plugin_dir_path( __FILE__ ) . 'includes/class-testimonial-deactivator.php';
+		Testimonial_Deactivator::deactivate();
+	}
+}
+
+register_activation_hook( __FILE__, 'activate_testimonial' );
+register_deactivation_hook( __FILE__, 'deactivate_testimonial' );
+
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-testimonial-updates.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/views/notices/review.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/views/tp-metabox/classes/setup.class.php';
+//require_once plugin_dir_path( __FILE__ ) . 'admin/views/testimonial-settings.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/views/testimonial-metaboxs.php';
+
 if ( ! class_exists( 'SP_Testimonial_FREE' ) ) {
+	/**
+	 * Handles core plugin hooks and action setup.
+	 *
+	 * @package testimonial-free
+	 * @since 2.0
+	 */
 	class SP_Testimonial_FREE {
 		/**
 		 * Plugin version
 		 *
 		 * @var string
 		 */
-		public $version = '2.1.4';
+		public $version = '2.1.5';
 
 		/**
 		 * @var SP_TFREE_Testimonial $shortcode
@@ -38,11 +78,6 @@ if ( ! class_exists( 'SP_Testimonial_FREE' ) ) {
 		 * @var SP_TFREE_Shortcodes $shortcode
 		 */
 		public $shortcode;
-
-		/**
-		 * @var SP_TFREE_MetaBox $metabox
-		 */
-		public $metabox;
 
 		/**
 		 * @var SP_TFREE_Router $router
@@ -160,13 +195,12 @@ if ( ! class_exists( 'SP_Testimonial_FREE' ) ) {
 		 */
 		public function add_plugin_action_links( $links, $file ) {
 
-			if ( $file == SP_TFREE_BASENAME ) {
-				$new_links = array(
-					sprintf( '<a href="%s" style="%s">%s</a>', 'https://shapedplugin.com/plugin/testimonial-pro', 'color:red;font-weight:bold', __( 'Go Pro!', 'testimonial-free' ) ),
-					sprintf( '<a href="%s">%s</a>', admin_url( 'edit.php?post_type=sp_tfree_shortcodes' ), __( 'Shortcode Generator', 'testimonial-free' ) ),
-				);
+			if ( SP_TFREE_BASENAME === $file ) {
+				$ui_links = sprintf( '<a href="%s">%s</a>', admin_url( 'edit.php?post_type=sp_tfree_shortcodes' ), __( 'Shortcode Generator', 'testimonial-free' ) );
 
-				return array_merge( $new_links, $links );
+				array_unshift( $links, $ui_links );
+
+				$links['go_pro'] = sprintf( '<a href="%s" style="%s">%s</a>', 'https://shapedplugin.com/plugin/testimonial-pro', 'color:#1dab87;font-weight:bold', __( 'Go Premium!', 'testimonial-free' ) );
 			}
 
 			return $links;
@@ -182,9 +216,8 @@ if ( ! class_exists( 'SP_Testimonial_FREE' ) ) {
 		 *
 		 * @return array
 		 */
-
 		function after_testimonial_free_row_meta( $plugin_meta, $file ) {
-			if ( $file == SP_TFREE_BASENAME ) {
+			if ( SP_TFREE_BASENAME === $file ) {
 				$plugin_meta[] = '<a href="https://shapedplugin.com/demo/testimonial-pro/" target="_blank">' . __( 'Live Demo', 'testimonial-free' ) . '</a>';
 			}
 
@@ -214,8 +247,6 @@ if ( ! class_exists( 'SP_Testimonial_FREE' ) ) {
 		 * @since 2.0
 		 */
 		function instantiate() {
-
-			$this->metabox     = SP_TFREE_MetaBox::getInstance();
 			$this->testimonial = SP_TFREE_Testimonial::getInstance();
 			$this->shortcode   = SP_TFREE_Shortcodes::getInstance();
 
@@ -240,7 +271,6 @@ if ( ! class_exists( 'SP_Testimonial_FREE' ) ) {
 		 */
 		function includes() {
 			$this->page()->sp_tfree_function();
-			$this->page()->sp_tfree_metabox();
 			$this->router->includes();
 		}
 
@@ -313,25 +343,28 @@ if ( ! class_exists( 'SP_Testimonial_FREE' ) ) {
 						$rating_star = $testimonial_data['tpro_rating'];
 						$fill_star   = '<i style="color: #f3bb00;" class="fa fa-star"></i>';
 						$empty_star  = '<i class="fa fa-star"></i>';
-						if ( $rating_star == 'one_star' ) {
-							$column_field = '<span style="font-size: 16px; color: #d4d4d4;">' . $fill_star . $empty_star . $empty_star . $empty_star . $empty_star . '</span>';
-						} elseif ( $rating_star == 'two_star' ) {
-							$column_field = '<span style="font-size: 16px; color: #d4d4d4;">' . $fill_star . $fill_star . $empty_star . $empty_star . $empty_star . '</span>';
-						} elseif ( $rating_star == 'three_star' ) {
-							$column_field = '<span style="font-size: 16px; color: #d4d4d4;">' . $fill_star . $fill_star . $fill_star . $empty_star . $empty_star . '</span>';
-						} elseif ( $rating_star == 'four_star' ) {
-							$column_field = '<span style="font-size: 16px; color: #d4d4d4;">' . $fill_star . $fill_star . $fill_star . $fill_star . $empty_star . '</span>';
-						} elseif ( $rating_star == 'five_star' ) {
-							$column_field = '<span style="font-size: 16px; color: #d4d4d4;">' . $fill_star . $fill_star . $fill_star . $fill_star . $fill_star . '</span>';
-						} else {
-							$column_field = '';
+						switch ( $rating_star ) {
+							case 'one_star':
+								$column_field = '<span style="font-size: 16px; color: #d4d4d4;">' . $fill_star . $empty_star . $empty_star . $empty_star . $empty_star . '</span>';
+								break;
+							case 'two_star':
+								$column_field = '<span style="font-size: 16px; color: #d4d4d4;">' . $fill_star . $fill_star . $empty_star . $empty_star . $empty_star . '</span>';
+								break;
+							case 'three_star':
+								$column_field = '<span style="font-size: 16px; color: #d4d4d4;">' . $fill_star . $fill_star . $fill_star . $empty_star . $empty_star . '</span>';
+								break;
+							case 'four_star':
+								$column_field = '<span style="font-size: 16px; color: #d4d4d4;">' . $fill_star . $fill_star . $fill_star . $fill_star . $empty_star . '</span>';
+								break;
+							case 'five_star':
+								$column_field = '<span style="font-size: 16px; color: #d4d4d4;">' . $fill_star . $fill_star . $fill_star . $fill_star . $fill_star . '</span>';
+								break;
+							default:
+								$column_field = '<span aria-hidden="true">—</span>';
+								break;
 						}
 
-						if ( $column_field !== '' ) {
-							echo $column_field;
-						} else {
-							echo '<span aria-hidden="true">—</span>';
-						}
+						echo $column_field;
 					}
 
 					break;
@@ -368,7 +401,7 @@ if ( ! class_exists( 'SP_Testimonial_FREE' ) ) {
 		 * @param $plugin
 		 */
 		function redirect_help_page( $plugin ) {
-			if ( $plugin == SP_TFREE_BASENAME ) {
+			if ( SP_TFREE_BASENAME === $plugin ) {
 				exit( wp_redirect( admin_url( 'edit.php?post_type=spt_testimonial&page=tfree_help' ) ) );
 			}
 		}
@@ -386,7 +419,5 @@ function sp_testimonial_free() {
 	return SP_Testimonial_FREE::instance();
 }
 
-if ( ! in_array( 'testimonial-pro/testimonial-pro.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
-	// sp_testimonial_free instance.
-	sp_testimonial_free();
-}
+// sp_testimonial_free instance.
+sp_testimonial_free();

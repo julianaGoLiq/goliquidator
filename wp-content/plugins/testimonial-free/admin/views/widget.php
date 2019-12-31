@@ -1,6 +1,7 @@
 <?php
 /**
  * Testimonial Widget
+ *
  * @since 2.0
  */
 function sp_testimonial_free_widget() {
@@ -11,9 +12,10 @@ add_action( 'widgets_init', 'sp_testimonial_free_widget' );
 class TFREE_Widget_Content extends WP_Widget {
 
 	function __construct() {
-		parent::__construct( 'TFREE_Widget_Content', __( 'Testimonial', 'testimonial-free' ),
+		parent::__construct(
+			'TFREE_Widget_Content', __( 'Testimonial', 'testimonial-free' ),
 			array(
-				'description' => __( 'Display Testimonials.', 'testimonial-free' )
+				'description' => __( 'Display Testimonials.', 'testimonial-free' ),
 			)
 		);
 	}
@@ -71,10 +73,11 @@ class TFREE_Widget_Content extends WP_Widget {
 					$selected
 				);
 			}
-			echo "</select></p>";
+			echo '</select></p>';
 
 		} else {
-			echo sprintf( '<p>%1$s <a href="' . admin_url( 'post-new.php?post_type=sp_tfree_shortcodes' ) . '">%3$s</a> %2$s</p>',
+			echo sprintf(
+				'<p>%1$s <a href="' . admin_url( 'post-new.php?post_type=sp_tfree_shortcodes' ) . '">%3$s</a> %2$s</p>',
 				__( 'You did not generate any shortcode yet.', 'testimonial-free' ),
 				__( 'to generate a new shortcode now.', 'testimonial-free' ),
 				__( 'click here', 'testimonial-free' )
@@ -97,21 +100,25 @@ class TFREE_Widget_Content extends WP_Widget {
 	}
 
 	private function shortcodes_list() {
-		$shortcodes = get_posts( array(
-			'post_type'   => 'sp_tfree_shortcodes',
-			'post_status' => 'publish',
-		) );
+		$shortcodes = get_posts(
+			array(
+				'post_type'   => 'sp_tfree_shortcodes',
+				'post_status' => 'publish',
+			)
+		);
 
 		if ( count( $shortcodes ) < 1 ) {
 			return array();
 		}
 
-		return array_map( function ( $shortcode ) {
-			return (object) array(
-				'id'    => absint( $shortcode->ID ),
-				'title' => esc_html( $shortcode->post_title ),
-			);
-		}, $shortcodes );
+		return array_map(
+			function ( $shortcode ) {
+					return (object) array(
+						'id'    => absint( $shortcode->ID ),
+						'title' => esc_html( $shortcode->post_title ),
+					);
+			}, $shortcodes
+		);
 	}
 
 }

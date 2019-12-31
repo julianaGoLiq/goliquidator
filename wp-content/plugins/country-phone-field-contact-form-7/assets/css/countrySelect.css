@@ -88,7 +88,8 @@
 .country-select .country-list .divider{
 	padding-bottom:5px;
 	margin-bottom:5px;
-	border-bottom:1px solid #ccc
+	border-bottom:1px solid #ccc;
+	list-style:none;
 }
 .country-select .country-list li.country{
 	list-style:none;

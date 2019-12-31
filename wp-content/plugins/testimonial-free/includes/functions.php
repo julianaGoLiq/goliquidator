@@ -53,8 +53,10 @@ class SP_Testimonial_Free_Functions {
 		$screen = get_current_screen();
 		if ( 'spt_testimonial' == get_post_type() || $screen->id == 'spt_testimonial_page_tfree_help' || $screen->post_type == 'sp_tfree_shortcodes' ) {
 			$url  = 'https://wordpress.org/support/plugin/testimonial-free/reviews/?filter=5#new-post';
-			$text = sprintf( __( 'If you like <strong>Testimonial</strong> please leave us a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating. Your Review is very important to us as it helps us to grow more. ', 'testimonial-free' ),
-				$url );
+			$text = sprintf(
+				__( 'If you like <strong>Testimonial</strong> please leave us a <a href="%s" target="_blank">&#9733;&#9733;&#9733;&#9733;&#9733;</a> rating. Your Review is very important to us as it helps us to grow more. ', 'testimonial-free' ),
+				$url
+			);
 		}
 
 		return $text;
@@ -64,64 +66,47 @@ class SP_Testimonial_Free_Functions {
 	 * Admin Menu
 	 */
 	function admin_menu() {
-		add_submenu_page( 'edit.php?post_type=spt_testimonial', __( 'Testimonial Help', 'testimonial-free' ), __( 'Help', 'testimonial-free' ), 'manage_options', 'tfree_help', array( $this, 'help_page_callback'
-		) );
+		add_submenu_page(
+			'edit.php?post_type=spt_testimonial', __( 'Testimonial Pro', 'testimonial-free' ), __( 'Premium', 'testimonial-free' ), 'manage_options', 'testimonial_premium', array(
+				$this,
+				'premium_page_callback',
+			)
+		);
+		add_submenu_page(
+			'edit.php?post_type=spt_testimonial', __( 'Testimonial Help', 'testimonial-free' ), __( 'Help', 'testimonial-free' ), 'manage_options', 'tfree_help', array(
+				$this,
+				'help_page_callback',
+			)
+		);
 	}
 
 	/**
-	 * Help Page Callback
+	 * Premium Page Callback
 	 */
-	public function help_page_callback() {
+	public function premium_page_callback() {
 		?>
-		<div class="wrap about-wrap sp-tfree-help">
-			<h1><?php _e( 'Welcome to Testimonial!', 'testimonial-free' ); ?></h1>
-			<p class="about-text"><?php _e( 'Thank you for installing Testimonial! You\'re now running the most popular Testimonial plugin.
-This video playlist will help you get started with the plugin.', 'testimonial-free' ); ?></p>
+		<div class="wrap about-wrap sp-tfree-help sp-tfree-upgrade">
+			<h1><?php _e( 'Upgrade to <span>Testimonial Pro</span>', 'testimonial-free' ); ?></h1>
+			<p class="about-text">
+			<?php
+			esc_html_e(
+				'Get more Advanced Functionality & Flexibility with the Premium version.', 'testimonial-free'
+			);
+			?>
+			</p>
 			<div class="wp-badge"></div>
-
-			<hr>
-
-			<div class="headline-feature feature-video">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/htnj97_K3ys?list=PLoUb-7uG-5jPTDu5wiWwKhJNuWFWSyA5T" frameborder="0" allowfullscreen></iframe>
-			</div>
-
-			<hr>
-
-			<div class="feature-section three-col">
-				<div class="col">
-					<div class="sp-tfree-feature sp-tfree-text-center">
-						<i class="sp-tfree-font-icon fa fa-life-ring"></i>
-						<h3>Need any Assistance?</h3>
-						<p>Our Expert Support Team is always ready to help you out promptly.</p>
-						<a href="https://shapedplugin.com/support-forum/" target="_blank" class="button
-						button-primary">Contact Support</a>
-					</div>
-				</div>
-				<div class="col">
-					<div class="sp-tfree-feature sp-tfree-text-center">
-						<i class="sp-tfree-font-icon fa fa-file-text"></i>
-						<h3>Looking for Documentation?</h3>
-						<p>We have detailed documentation on every aspects of Testimonial.</p>
-						<a href="https://shapedplugin.com/docs/testimonial/" target="_blank" class="button button-primary">Documentation</a>
-					</div>
-				</div>
-				<div class="col">
-					<div class="sp-tfree-feature sp-tfree-text-center">
-						<i class="sp-tfree-font-icon fa fa-thumbs-up"></i>
-						<h3>Like This Plugin?</h3>
-						<p>If you like Testimonial, please leave us a 5 star rating.</p>
-						<a href="https://wordpress.org/support/plugin/testimonial-free/reviews/#new-post" target="_blank" class="button
-						button-primary">Rate the Plugin</a>
-					</div>
-				</div>
-			</div>
+			<ul>
+				<li class="tfree-upgrade-btn"><a href="https://shapedplugin.com/plugin/testimonial-pro/" target="_blank">Buy Testimonial Pro <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iMTc5MiIgaGVpZ2h0PSIxNzkyIiB2aWV3Qm94PSIwIDAgMTc5MiAxNzkyIiBmaWxsPSIjZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0xMTUyIDg5NnEwIDI2LTE5IDQ1bC00NDggNDQ4cS0xOSAxOS00NSAxOXQtNDUtMTktMTktNDV2LTg5NnEwLTI2IDE5LTQ1dDQ1LTE5IDQ1IDE5bDQ0OCA0NDhxMTkgMTkgMTkgNDV6Ii8+PC9zdmc+" alt="" style="max-width: 15px;"/></a></li>
+				<li class="tfree-upgrade-btn"><a href="https://shapedplugin.com/demo/testimonial-pro" target="_blank">Live Demo & All Features <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB3aWR0aD0iMTUiIGhlaWdodD0iMTUiIHZpZXdCb3g9IjAgMCAxNzkyIDE3OTIiIGZpbGw9IiMwMDczYWEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PHBhdGggZD0iTTk3OSA5NjBxMCAxMy0xMCAyM2wtNDY2IDQ2NnEtMTAgMTAtMjMgMTB0LTIzLTEwbC01MC01MHEtMTAtMTAtMTAtMjN0MTAtMjNsMzkzLTM5My0zOTMtMzkzcS0xMC0xMC0xMC0yM3QxMC0yM2w1MC01MHExMC0xMCAyMy0xMHQyMyAxMGw0NjYgNDY2cTEwIDEwIDEwIDIzem0zODQgMHEwIDEzLTEwIDIzbC00NjYgNDY2cS0xMCAxMC0yMyAxMHQtMjMtMTBsLTUwLTUwcS0xMC0xMC0xMC0yM3QxMC0yM2wzOTMtMzkzLTM5My0zOTNxLTEwLTEwLTEwLTIzdDEwLTIzbDUwLTUwcTEwLTEwIDIzLTEwdDIzIDEwbDQ2NiA0NjZxMTAgMTAgMTAgMjN6Ii8+PC9zdmc+" alt="" style="max-width: 15px;"/></a></li>
+			</ul>
 
 			<hr>
 
 			<div class="sp-tfree-pro-features">
-				<h2 class="sp-tfree-text-center">Upgrade to Testimonial Pro!</h2>
-				<p class="sp-tfree-text-center sp-tfree-pro-subtitle">We've added 100+ extra features in our Premium Version of this plugin. Let’s see some amazing features.</p>
-				<div class="feature-section three-col masonry-section">
+				<h2 class="sp-tfree-text-center">Premium Features You'll Love</h2>
+				<p class="sp-tfree-text-center sp-tfree-pro-subtitle">We've added 150+ extra features in our Premium Version of this plugin. Let’s see some amazing features.</p>
+
+				<div class="feature-section three-col">
 					<div class="col">
 						<div class="sp-tfree-feature">
 							<h3><span class="dashicons dashicons-yes"></span>Advanced Shortcode Generator</h3>
@@ -286,11 +271,86 @@ This video playlist will help you get started with the plugin.', 'testimonial-fr
 						</div>
 					</div>
 				</div>
+
+			</div>
+			<hr>					
+			<h2 class="sp-tfree-text-center sp-tfree-promo-video-title">Watch How <b>Testimonial Pro</b> Works</h2>
+				<div class="headline-feature feature-video">
+
+				<iframe width="1050" height="590" src="https://www.youtube.com/embed/OA7LgaZHwIY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				</div>
+				<hr>
+				<div class="sp-tfree-join-community sp-tfree-text-center">
+					<h2>Join the <b>20000+</b> Happy Users Worldwide!</h2>
+					<a class="tfree-upgrade-btn" target="_blank" href="https://shapedplugin.com/plugin/testimonial-pro/">Get a license instantly</a>
+					<p>Every purchase comes with <b>7-day</b> money back guarantee and access to our incredibly Top-notch Support with lightening-fast response time and 100% satisfaction rate. One-Time payment, lifetime automatic update.</p>
+				</div>
+				<br>
+				<br>
+
+				<hr>
+				<div class="sp-tfree-upgrade-sticky-footer sp-tfree-text-center">
+					<p><a href="https://shapedplugin.com/demo/testimonial-pro/" target="_blank" class="button
+					button-primary">Live Demo</a> <a href="https://shapedplugin.com/plugin/testimonial-pro/" target="_blank" class="button button-primary">Upgrade Now</a></p>
+				</div>
 			</div>
 
-			<div class="sp-tfree-upgrade-sticky-footer sp-tfree-text-center">
-				<p><a href="https://shapedplugin.com/demo/testimonial-pro/" target="_blank" class="button
-				button-primary">Live Demo</a> <a href="https://shapedplugin.com/plugin/testimonial-pro/" target="_blank" class="button button-primary">Upgrade Now</a></p>
+			</div>
+		<?php
+	}
+
+	/**
+	 * Help Page Callback
+	 */
+	public function help_page_callback() {
+		?>
+		<div class="wrap about-wrap sp-tfree-help">
+			<h1><?php _e( 'Welcome to Testimonial!', 'testimonial-free' ); ?></h1>
+			<p class="about-text">
+			<?php
+			_e(
+				'Thank you for installing Testimonial! You\'re now running the most popular Testimonial plugin.
+This video playlist will help you get started with the plugin.', 'testimonial-free'
+			);
+			?>
+									</p>
+			<div class="wp-badge"></div>
+
+			<hr>
+
+			<div class="headline-feature feature-video">
+				<iframe width="560" height="315" src="https://www.youtube.com/embed/htnj97_K3ys?list=PLoUb-7uG-5jPTDu5wiWwKhJNuWFWSyA5T" frameborder="0" allowfullscreen></iframe>
+			</div>
+
+			<hr>
+
+			<div class="feature-section help-section three-col">
+				<div class="col">
+					<div class="sp-tfree-feature sp-tfree-text-center">
+						<i class="sp-tfree-font-icon fa fa-life-ring"></i>
+						<h3>Need any Assistance?</h3>
+						<p>Our Expert Support Team is always ready to help you out promptly.</p>
+						<a href="https://shapedplugin.com/support-forum/" target="_blank" class="button
+						button-primary">Contact Support</a>
+					</div>
+				</div>
+				<div class="col">
+					<div class="sp-tfree-feature sp-tfree-text-center">
+						<i class="sp-tfree-font-icon fa fa-file-text"></i>
+						<h3>Looking for Documentation?</h3>
+						<p>We have detailed documentation on every aspects of Testimonial.</p>
+						<a href="https://shapedplugin.com/docs/docs/testimonial/" target="_blank" class="button button-primary">Documentation</a>
+					</div>
+				</div>
+				<div class="col">
+					<div class="sp-tfree-feature sp-tfree-text-center">
+						<i class="sp-tfree-font-icon fa fa-thumbs-up"></i>
+						<h3>Like This Plugin?</h3>
+						<p>If you like Testimonial, please leave us a 5 star rating.</p>
+						<a href="https://wordpress.org/support/plugin/testimonial-free/reviews/#new-post" target="_blank" class="button
+						button-primary">Rate the Plugin</a>
+					</div>
+				</div>
 			</div>
 
 		</div>
@@ -307,11 +367,10 @@ new SP_Testimonial_Free_Functions();
  * Multi Language Support
  *
  * @since 2.0
- *
  */
 
 // Polylang plugin support for multi language support.
-if ( class_exists('Polylang') ) {
+if ( class_exists( 'Polylang' ) ) {
 
 	add_filter( 'pll_get_post_types', 'sp_tfree_testimonial_polylang', 10, 2 );
 
@@ -322,24 +381,9 @@ if ( class_exists('Polylang') ) {
 			unset( $post_types['sp_tfree_shortcodes'] );
 		} else {
 			// enables language and translation management for 'tspt_testimonial,sp_free_shortcodes'.
-			$post_types['spt_testimonial'] = 'spt_testimonial';
+			$post_types['spt_testimonial']     = 'spt_testimonial';
 			$post_types['sp_tfree_shortcodes'] = 'sp_tfree_shortcodes';
 		}
 		return $post_types;
 	}
-
-}
-
-/**
- * Change the post type
- */
-global $wpdb;
-$old_post_types = array( 'testimonial-free' => 'spt_testimonial' );
-foreach ( $old_post_types as $old_type => $type ) {
-	$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->posts} SET post_type = REPLACE(post_type, %s, %s) 
-                         WHERE post_type LIKE %s", $old_type, $type, $old_type ) );
-	$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->posts} SET guid = REPLACE(guid, %s, %s) 
-                         WHERE guid LIKE %s", "post_type={$old_type}", "post_type={$type}", "%post_type={$type}%" ) );
-	$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->posts} SET guid = REPLACE(guid, %s, %s) 
-                         WHERE guid LIKE %s", "/{$old_type}/", "/{$type}/", "%/{$old_type}/%" ) );
 }
