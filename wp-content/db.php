@@ -1,1 +1,0 @@
-/usr/local/var/www/go/goliquidator/wp-content/plugins/query-monitor/wp-content/db.php
