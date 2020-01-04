@@ -21,7 +21,7 @@ class menu_catalogo extends WP_Widget {
         $all_categories = get_categories( $this->getArgs() );
         echo '<div class="main_menu_category">';
         echo '<input type="hidden" id="current_cat_id" value="'.$cateID.'" />';
-        echo '<h4 id="h4_menu_category" class="main_category_sidebar main_active">'.__('Categorías').'<span class="side_bar_row_plus"></span></h4>';
+        echo '<h4 id="h4_menu_category" class="main_category_sidebar main_active">'.__('Categorías','menu_catalogo').'<span class="side_bar_row_plus"></span></h4>';
 
         $this->tree($all_categories, 0, 0);
         echo '</div>';
@@ -35,7 +35,7 @@ class menu_catalogo extends WP_Widget {
         if($parendId==0){
             $linkPath = home_url( '/' ).'catalogo';
             echo '<li class="li_cat_parent">';
-            echo '<a href="'.$linkPath.'" class="a_parent">'.__('Todo').'</a>';
+            echo '<a href="'.$linkPath.'" class="a_parent">'.__('Todo','menu_catalogo').'</a>';
             echo '</li>';
         }
         foreach($all_categories as $key=>$item){

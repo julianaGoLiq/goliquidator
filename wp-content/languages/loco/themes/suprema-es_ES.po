@@ -5,17 +5,17 @@ msgstr ""
 "Project-Id-Version: Suprema 2.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/theme/suprema\n"
 "Last-Translator: goliquidator <juliana.trujillo@pinacourt.com>\n"
-"Language-Team: Español\n"
+"Language-Team: Spanish (Spain)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2019-07-11T12:05:23+02:00\n"
-"PO-Revision-Date: 2019-11-20 01:12+0000\n"
+"PO-Revision-Date: 2020-01-03 22:42+0000\n"
 "X-Generator: Loco https://localise.biz/\n"
 "X-Domain: suprema\n"
 "Language: es_ES\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Loco-Version: 2.3.1; wp-5.3"
+"X-Loco-Version: 2.3.1; wp-5.3.2"
 
 #. Theme Name of the theme
 msgid "Suprema"
@@ -426,11 +426,11 @@ msgstr ""
 
 #: \framework\modules\search\templates\types\fullscreen-search.php:14
 msgid "Type what you are searching for:"
-msgstr "¿Qué está buscando?"
+msgstr "What are you searching for?"
 
 #: \framework\modules\search\templates\types\fullscreen-search.php:18
 msgid "Type Here"
-msgstr "Escriba aquí"
+msgstr ""
 
 #: \framework\modules\search\templates\types\search-covers-header.php:9
 #: \framework\modules\search\templates\types\search-slides-from-header-bottom.php:8
@@ -439,7 +439,7 @@ msgstr "Escriba aquí"
 #: \framework\modules\widgets\search-opener\search-opener.php:110
 #: \searchform.php:3
 msgid "Search"
-msgstr "Buscar"
+msgstr "Search"
 
 #: \framework\modules\shortcodes\accordions\accordion-tab.php:24
 msgid "Select Accordion Tab"

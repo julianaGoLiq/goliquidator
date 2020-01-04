@@ -541,6 +541,24 @@ custom_html-8{
     content: '' !important;
 }
 
+#media_image-2, #media_image-3{
+	padding-top: 35px;
+	padding-left: 5px;
+}
+#media_image-2 .image, #media_image-3 .image, #media_image-6 .image, #media_image-7 .image{
+	vertical-align: top;
+}
+#media_image-7, #media_image-6{
+	padding-left: 15px;
+	padding-top: 25px;
+	vertical-align: top;
+}
+#media_image-4, #media_image-5{
+	margin-left: 5px;
+}
+#media_image-4 .image, #media_image-5 .image{
+	width: 20px;
+}
 /** RESPONSIVE */
 @media only screen and (min-width: 768px) {
     #popmake-387 .pum-close{
