@@ -41,3 +41,11 @@ msgstr "Categories"
 #: includes/widget.php:38
 msgid "All"
 msgstr "All"
+
+#: includes/widget.php:38
+msgid "All"
+msgstr "All"
+
+#: includes/widget.php:38
+msgid "Additional information"
+msgstr "Additional information"

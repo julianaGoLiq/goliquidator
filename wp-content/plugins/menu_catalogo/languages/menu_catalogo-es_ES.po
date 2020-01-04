@@ -40,5 +40,5 @@ msgid "Categories"
 msgstr "Categorías"
 
 #: includes/widget.php:38
-msgid "All"
-msgstr "Todo"
+msgid "Additional information"
+msgstr "Información Adicional"
