@@ -35,9 +35,9 @@ msgid "yo"
 msgstr ""
 
 #: includes/widget.php:24
-msgid "Categorías"
-msgstr "Catalog"
+msgid "Categories"
+msgstr "Categories"
 
 #: includes/widget.php:38
-msgid "Todo"
+msgid "All"
 msgstr "All"
