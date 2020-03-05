@@ -23,6 +23,11 @@
     padding-bottom: 0px;
     margin-bottom: 5px;
     float: left;
+    font-family: 'Open Sans',sans-serif;
+    font-size: 13px;
+    line-height: 26px;
+    color: #777;
+    font-weight: 400;
 }
 .a_child:hover{
     color:#777;

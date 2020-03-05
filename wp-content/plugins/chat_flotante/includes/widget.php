@@ -18,17 +18,17 @@ class chat_flotante extends WP_Widget {
     public function widget( $args, $instance ) {
         ?>
         <div class="chat_flotante_wsp_messenger">
-            <a href="https://api.whatsapp.com/send?phone=<?php echo  $instance["whatsapp_input"];?>" class="whatsapp" target="_blank">
+            <a href="https://api.whatsapp.com/send?phone=<?php echo  $instance["whatsapp_input"];?>" class="whatsapp" target="_blank" onClick=“ga(‘send’, ‘event’, ‘Whatsapp-button’, ‘click-whapp’, ‘Whatsapp’);”>
                 <img alt="WHATSAPP CHAT" src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/whatsapp_chatweb.png' ?>" />
             </a>
 
-            <a href="https://m.me/<?php echo  $instance["messenger_input"];?>" class="messenger" target="_blank" onclick="window.open(this.href, this.target, 'width=900,height=600,top=100,left=300,scrollbars=NO,menubar=NO,titlebar= NO,status=NO,toolbar=NO'); return false;">
+            <a href="https://m.me/<?php echo  $instance["messenger_input"];?>" class="messenger" target="_blank" onclick="window.open(this.href, this.target, 'width=900,height=600,top=100,left=300,scrollbars=NO,menubar=NO,titlebar= NO,status=NO,toolbar=NO'); return false;" onClick=“ga(‘send’, ‘event’, ‘messenger-button’, ‘click-mssngr’, ‘messenger’);”>
                 <img alt="MESSENGER CHAT" src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/messenger_chatweb.png' ?>" />
             </a>
         </div>
 
         <div class="google_panel_flotante">
-            <a href="<?php echo  $instance["google_input"];?>" class="google_panel" target="_blank">
+            <a href="<?php echo  $instance["google_input"];?>" class="google_panel" target="_blank" onClick=“ga(‘send’, ‘event’, ‘reviews-button’, ‘click-reviews’, ‘google-reviews’);”>
                 <img alt="Google" src="<?php echo plugin_dir_url( __FILE__ ) . '../assets/images/google_reviews.png' ?>" />
             </a>
         </div>

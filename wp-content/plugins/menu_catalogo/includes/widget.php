@@ -33,7 +33,7 @@ class menu_catalogo extends WP_Widget {
         $classA = ($parendId==0)?'a_parent':'a_child';
         echo '<ul id="ul_'.$classUl.'_'.$parendId.'" class="ul_'.$classUl.'" >';
         if($parendId==0){
-            $linkPath = home_url( '/' ).'catalogo';
+            $linkPath = get_permalink( wc_get_page_id( 'shop' ) );
             echo '<li class="li_cat_parent">';
             echo '<a href="'.$linkPath.'" class="a_parent">'.__('All').'</a>';
             echo '</li>';

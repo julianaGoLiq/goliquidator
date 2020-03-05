@@ -1,4 +1,4 @@
-.parent_category{
+F.parent_category{
     width: 100%;
     float: left;
     color: #101010 !important;
@@ -9,7 +9,7 @@
     padding-top: 5px;
     padding-bottom: 5px;
 }
-.children_category{
+.children_category{-pro
     width: 100%;
     float: left;
     color: #6d6d6d !important;
@@ -59,7 +59,7 @@
     font-size: 15px;
     font-family: Poppins,sans-serif;
     letter-spacing: .5px;
-    color: #6aa636;
+    color: #6aa636 !important;
     margin: 5px 0px 0px 0px !important;
 
 }
@@ -70,6 +70,14 @@
 }
 .qodef-single-product-summary .price .woocommerce-Price-amount{
     font-size: 21px;
+}
+
+.qodef-single-product-summary p{
+    font-size: 15px;
+    line-height: 26px;
+    font-family: open sans,sans-serif;
+    font-weight: 400;
+    color: #212121;
 }
 
 .child_subtitle_sku{
@@ -124,7 +132,7 @@
     line-height: 26px;
     font-family: open sans,sans-serif;
     font-weight: 400;
-    color: #777;
+    color: #212121;
 }
 #tab-description h4{
     font-size: 21px;
@@ -139,7 +147,7 @@
     color: #101010;
 }
 #tab-description b{
-    font-weight: 800;
+    font-weight: bold;
     color: #1a5f9b;
 }
 #tab-description strong{
@@ -151,16 +159,22 @@
 }
 #tab-description ul li{
 font-size: 15px;
+color: #212121;
+font-family: 'Open Sans',sans-serif;
+line-height: 26px;
+font-weight: 400;
+}
 }
 
 /** */
-.woocommerce-product-details__short-description  p{
-    font-size: 15px;
+.woocommerce-product-details__short-description p{
+    font-size: 15px !important;
     line-height: 26px;
     font-family: open sans,sans-serif;
     font-weight: 400;
-    color: #777;
+    color: #212121 !important;
 }
+
 .woocommerce-product-details__short-description  h4{
     font-size: 21px;
     font-weight: 600;
@@ -174,7 +188,7 @@ font-size: 15px;
     color: #101010;
 }
 .woocommerce-product-details__short-description  b{
-    font-weight: 800;
+    font-weight: bold;
     color: #1a5f9b;
 }
 .woocommerce-product-details__short-description  strong{
@@ -406,6 +420,7 @@ custom_html-8{
 }
 .qodef-product-standard-info-top{
     font-size: 13px;
+
 }
 
 #popmake-723{
