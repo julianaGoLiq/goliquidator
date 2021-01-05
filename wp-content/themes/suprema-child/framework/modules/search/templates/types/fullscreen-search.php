@@ -23,6 +23,7 @@
 								<div class="qodef-line4"></div>
 							</div>
                             <input name="post_type" type="hidden" value="product" />
+                            <input type="hidden" name="type_aws" value="true">
 							<input type="submit" class="qodef-search-submit" value="&#x55;" />
 						</div>
 					</form>
