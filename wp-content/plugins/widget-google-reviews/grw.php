@@ -1,11 +1,13 @@
 <?php
 /*
-Plugin Name: Google Reviews Widget
+Plugin Name: Widget for Google Reviews
 Plugin URI: https://richplugins.com/business-reviews-bundle-wordpress-plugin
 Description: Instantly Google Places Reviews on your website to increase user confidence and SEO.
 Author: RichPlugins <support@richplugins.com>
-Version: 1.8.2
+Version: 1.8.9
 Author URI: https://richplugins.com
+Text Domain: widget-google-reviews
+Domain Path: /languages
 */
 
 require(ABSPATH . 'wp-includes/version.php');
@@ -13,9 +15,9 @@ require(ABSPATH . 'wp-includes/version.php');
 include_once(dirname(__FILE__) . '/api/urlopen.php');
 include_once(dirname(__FILE__) . '/helper/debug.php');
 
-define('GRW_VERSION',            '1.8.2');
+define('GRW_VERSION',            '1.8.9');
 define('GRW_GOOGLE_PLACE_API',   'https://maps.googleapis.com/maps/api/place/');
-define('GRW_GOOGLE_AVATAR',      'https://lh3.googleusercontent.com/-8hepWJzFXpE/AAAAAAAAAAI/AAAAAAAAAAA/I80WzYfIxCQ/s50-c/114307615494839964028.jpg');
+define('GRW_GOOGLE_AVATAR',      'https://lh3.googleusercontent.com/-8hepWJzFXpE/AAAAAAAAAAI/AAAAAAAAAAA/I80WzYfIxCQ/s128-c/114307615494839964028.jpg');
 define('GRW_PLUGIN_URL',         plugins_url(basename(plugin_dir_path(__FILE__ )), basename(__FILE__)));
 
 function grw_options() {
@@ -149,6 +151,12 @@ function grw_exist_install($current_version, $last_active_version) {
                 grw_refresh_reviews(array($place_id));
             }
         break;
+        case version_compare($last_active_version, '1.8.7', '<'):
+            $row = $wpdb->get_results("SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name = '" . $wpdb->prefix . "grp_google_review' AND column_name = 'hide'");
+            if(empty($row)){
+                $wpdb->query("ALTER TABLE " . $wpdb->prefix . "grp_google_review ADD hide VARCHAR(1) DEFAULT '' NOT NULL");
+            }
+        break;
     }
 }
 
@@ -188,6 +196,7 @@ function grw_install_db() {
            "author_name VARCHAR(255),".
            "author_url VARCHAR(255),".
            "profile_photo_url VARCHAR(255),".
+           "hide VARCHAR(1) DEFAULT '' NOT NULL,".
            "PRIMARY KEY (`id`),".
            "UNIQUE INDEX grp_google_review_hash (`hash`),".
            "INDEX grp_google_place_id (`google_place_id`)".
@@ -229,6 +238,7 @@ function grw_shortcode($atts) {
     global $wpdb;
 
     if (!grw_enabled()) return '';
+    if (!class_exists('Goog_Reviews_Widget')) return '';
 
     $shortcode_atts = array();
     foreach (Goog_Reviews_Widget::$widget_fields as $field => $value) {
@@ -243,7 +253,7 @@ function grw_shortcode($atts) {
     if (empty($place_id)) {
         ?>
         <div class="grw-error" style="padding:10px;color:#b94a48;background-color:#f2dede;border-color:#eed3d7;max-width:200px;">
-            <?php echo grw_i('<b>Google Reviews Business</b>: required attribute place_id is not defined'); ?>
+            <?php echo grw_i('<b>Google Reviews Widget</b>: required attribute place_id is not defined'); ?>
         </div>
         <?php
     } else {
@@ -359,6 +369,46 @@ function grw_request_handler() {
                             $status = 'failed';
                         }
                         $response = compact('status', 'result');
+                    }
+                    header('Content-type: text/javascript');
+                    echo json_encode($response);
+                    die();
+                }
+            break;
+            case 'grw_db_reviews':
+                if (current_user_can('manage_options')) {
+                    if (isset($_GET['grw_wpnonce']) === false) {
+                        $error = grw_i('Unable to call request. Make sure you are accessing this page from the Wordpress dashboard.');
+                        $response = compact('error');
+                    } else {
+                        check_admin_referer('grw_wpnonce', 'grw_wpnonce');
+
+                        include_once(dirname(__FILE__) . '/grw-reviews-helper.php');
+
+                        $reviews = $wpdb->get_results($wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "grp_google_review WHERE google_place_id = %d ORDER BY time DESC", $_GET['id']));
+
+                        ob_start();
+                        grw_place_reviews(null, $reviews, 'zzz', 120, false, true, true, true, false, false, true);
+                        $response = ob_get_clean();
+                    }
+                    header('Content-type: text/html');
+                    header('Access-Control-Allow-Origin: *');
+                    echo $response;
+                    die();
+                }
+            break;
+            case 'grw_hide_review':
+                if (current_user_can('manage_options')) {
+                    if (isset($_POST['grw_wpnonce']) === false) {
+                        $error = grw_i('Unable to call request. Make sure you are accessing this page from the Wordpress dashboard.');
+                        $response = compact('error');
+                    } else {
+                        check_admin_referer('grw_wpnonce', 'grw_wpnonce');
+
+                        $review = $wpdb->get_row($wpdb->prepare("SELECT * FROM " . $wpdb->prefix . "grp_google_review WHERE id = %d", $_POST['id']));
+                        $hide = $review->hide == '' ? 'y' : '';
+                        $wpdb->update($wpdb->prefix . 'grp_google_review', array('hide' => $hide), array('id' => $_POST['id']));
+                        $response = array('hide' => $hide);
                     }
                     header('Content-type: text/javascript');
                     echo json_encode($response);

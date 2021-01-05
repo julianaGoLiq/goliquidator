@@ -1,26 +1,13 @@
 <?php
-/**
-* get geo location
-*/
-function get_geo_details($IPaddress) {
-	
-	$ip_url = "http://ipinfo.io/";
-	if (file_get_contents($ip_url) && ini_get('allow_url_fopen')){
-		$json       = file_get_contents( $ip_url );
-		$details    = json_decode($json);
-		return $details;
-	}
-}
 
 /* Include all js and css files for active theme */
 function nb_cpf_embedCssJs() {
 
     wp_enqueue_style( 'nbcpf-intlTelInput-style', NB_CPF_URL . 'assets/css/intlTelInput.min.css' );
 	wp_enqueue_style( 'nbcpf-countryFlag-style', NB_CPF_URL . 'assets/css/countrySelect.min.css' );
-	wp_enqueue_script( 'nbcpf-intlTelInput-script', NB_CPF_URL . 'assets/js/intlTelInput.min.js', array( 'jquery' ) );
-	wp_enqueue_script( 'nbcpf-countryFlag-script', NB_CPF_URL . 'assets/js/countrySelect.min.js', array( 'jquery' ) );
-	//wp_enqueue_script( 'nbcpf-countryFlag-custom-script', NB_CPF_URL . '/assets/js/custom_script.js', array( 'jquery' ) );
-
+	wp_enqueue_script( 'nbcpf-intlTelInput-script', NB_CPF_URL . 'assets/js/intlTelInput.min.js', array( 'jquery' ), false, true );
+	wp_enqueue_script( 'nbcpf-countryFlag-script', NB_CPF_URL . 'assets/js/countrySelect.min.js', array( 'jquery' ), false, true );
+	
 	$nb_cpf_settings_options = get_option( 'nb_cpf_options' );
 	$IPaddress  =   $_SERVER['REMOTE_ADDR'];
 	
@@ -29,18 +16,7 @@ function nb_cpf_embedCssJs() {
 		
 	} else {
 		$defaultCountry = '';
-		/* if(isset( $nb_cpf_settings_options['country_auto_select'] ) && $nb_cpf_settings_options['country_auto_select'] == 1){
-			$geo_data    =   get_geo_details($IPaddress);
-			
-			if(isset($geo_data->country)){
-				$defaultCountry = 'defaultCountry: "'.strtolower($geo_data->country).'",';
-			}
-			else {
-				$defaultCountry = '';
-			}
-		}else{
-			$defaultCountry = '';
-		} */
+		
 	}
 	if(isset( $nb_cpf_settings_options['onlyCountries'] ) && $nb_cpf_settings_options['onlyCountries'] !=''){
 		$onlyCountries = 'onlyCountries: '.json_encode(explode(',',$nb_cpf_settings_options['onlyCountries'])).',';
@@ -64,17 +40,6 @@ function nb_cpf_embedCssJs() {
 		$phone_defaultCountry = 'initialCountry: "'.strtolower( $nb_cpf_settings_options['phone_defaultCountry'] ).'",';
 	} else {
 		$phone_defaultCountry = '';
-		/* if(isset( $nb_cpf_settings_options['phone_auto_select'] ) && $nb_cpf_settings_options['phone_auto_select'] == 1){
-			$geo_data    =   get_geo_details($IPaddress);
-			if(isset($geo_data->country)){
-				$phone_defaultCountry = 'initialCountry: "'.strtolower($geo_data->country).'",';
-			}
-			else {
-				$phone_defaultCountry = '';
-			}
-		} else {
-			$phone_defaultCountry = '';
-		} */
 		
 	}
 	if(isset( $nb_cpf_settings_options['phone_onlyCountries'] ) && $nb_cpf_settings_options['phone_onlyCountries'] !=''){

@@ -1,4 +1,4 @@
-$.notify.addStyle("metro", {
+jQuery.notify.addStyle("metro", {
     html:
         "<div>" +
             "<div class='image' data-notify-html='image'/>" +

@@ -7,7 +7,7 @@ namespace Composer\Autoload;
 use Composer\AutoloadWPMediaImagifyWordPressPlugin\ClassLoader as ClassLoaderWPMediaImagifyWordPressPlugin;
 
 
-class ComposerStaticInit9a65f06d351d3ca28131bdc6dbd92154
+class ComposerStaticInitf1640175f625fada43e0bece341f846d
 {
     public static $prefixLengthsPsr4 = array (
         'I' => 
@@ -18,6 +18,7 @@ class ComposerStaticInit9a65f06d351d3ca28131bdc6dbd92154
             'Imagify\\ThirdParty\\FormidablePro\\' => 33,
             'Imagify\\ThirdParty\\EnableMediaReplace\\' => 38,
             'Imagify\\ThirdParty\\AS3CF\\' => 25,
+            'Imagify\\Tests\\' => 14,
             'Imagify\\Deprecated\\Traits\\' => 26,
             'Imagify\\' => 8,
         ),
@@ -56,6 +57,10 @@ class ComposerStaticInit9a65f06d351d3ca28131bdc6dbd92154
         array (
             0 => __DIR__ . '/../..' . '/inc/3rd-party/amazon-s3-and-cloudfront/classes',
         ),
+        'Imagify\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Tests',
+        ),
         'Imagify\\Deprecated\\Traits\\' => 
         array (
             0 => __DIR__ . '/../..' . '/inc/deprecated/Traits',
@@ -93,6 +98,7 @@ class ComposerStaticInit9a65f06d351d3ca28131bdc6dbd92154
         'Composer\\Installers\\CraftInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/CraftInstaller.php',
         'Composer\\Installers\\CroogoInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/CroogoInstaller.php',
         'Composer\\Installers\\DecibelInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/DecibelInstaller.php',
+        'Composer\\Installers\\DframeInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/DframeInstaller.php',
         'Composer\\Installers\\DokuWikiInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/DokuWikiInstaller.php',
         'Composer\\Installers\\DolibarrInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/DolibarrInstaller.php',
         'Composer\\Installers\\DrupalInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/DrupalInstaller.php',
@@ -110,6 +116,7 @@ class ComposerStaticInit9a65f06d351d3ca28131bdc6dbd92154
         'Composer\\Installers\\JoomlaInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/JoomlaInstaller.php',
         'Composer\\Installers\\KanboardInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/KanboardInstaller.php',
         'Composer\\Installers\\KirbyInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/KirbyInstaller.php',
+        'Composer\\Installers\\KnownInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/KnownInstaller.php',
         'Composer\\Installers\\KodiCMSInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/KodiCMSInstaller.php',
         'Composer\\Installers\\KohanaInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/KohanaInstaller.php',
         'Composer\\Installers\\LanManagementSystemInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/LanManagementSystemInstaller.php',
@@ -121,6 +128,7 @@ class ComposerStaticInit9a65f06d351d3ca28131bdc6dbd92154
         'Composer\\Installers\\MagentoInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/MagentoInstaller.php',
         'Composer\\Installers\\MajimaInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/MajimaInstaller.php',
         'Composer\\Installers\\MakoInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/MakoInstaller.php',
+        'Composer\\Installers\\MantisBTInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/MantisBTInstaller.php',
         'Composer\\Installers\\MauticInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/MauticInstaller.php',
         'Composer\\Installers\\MayaInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/MayaInstaller.php',
         'Composer\\Installers\\MediaWikiInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/MediaWikiInstaller.php',
@@ -144,6 +152,7 @@ class ComposerStaticInit9a65f06d351d3ca28131bdc6dbd92154
         'Composer\\Installers\\PxcmsInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/PxcmsInstaller.php',
         'Composer\\Installers\\RadPHPInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/RadPHPInstaller.php',
         'Composer\\Installers\\ReIndexInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/ReIndexInstaller.php',
+        'Composer\\Installers\\Redaxo5Installer' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/Redaxo5Installer.php',
         'Composer\\Installers\\RedaxoInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/RedaxoInstaller.php',
         'Composer\\Installers\\RoundcubeInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/RoundcubeInstaller.php',
         'Composer\\Installers\\SMFInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/SMFInstaller.php',
@@ -151,9 +160,11 @@ class ComposerStaticInit9a65f06d351d3ca28131bdc6dbd92154
         'Composer\\Installers\\SilverStripeInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/SilverStripeInstaller.php',
         'Composer\\Installers\\SiteDirectInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/SiteDirectInstaller.php',
         'Composer\\Installers\\SyDESInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/SyDESInstaller.php',
+        'Composer\\Installers\\SyliusInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/SyliusInstaller.php',
         'Composer\\Installers\\Symfony1Installer' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/Symfony1Installer.php',
         'Composer\\Installers\\TYPO3CmsInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/TYPO3CmsInstaller.php',
         'Composer\\Installers\\TYPO3FlowInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/TYPO3FlowInstaller.php',
+        'Composer\\Installers\\TaoInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/TaoInstaller.php',
         'Composer\\Installers\\TheliaInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/TheliaInstaller.php',
         'Composer\\Installers\\TuskInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/TuskInstaller.php',
         'Composer\\Installers\\UserFrostingInstaller' => __DIR__ . '/..' . '/composer/installers/src/Composer/Installers/UserFrostingInstaller.php',
@@ -250,6 +261,7 @@ class ComposerStaticInit9a65f06d351d3ca28131bdc6dbd92154
         'Imagify_Assets_Deprecated' => __DIR__ . '/../..' . '/inc/deprecated/classes/class-imagify-assets-deprecated.php',
         'Imagify_Attachment' => __DIR__ . '/../..' . '/inc/deprecated/classes/class-imagify-attachment.php',
         'Imagify_Auto_Optimization' => __DIR__ . '/../..' . '/inc/classes/class-imagify-auto-optimization.php',
+        'Imagify_Auto_Optimization_Deprecated' => __DIR__ . '/../..' . '/inc/deprecated/classes/class-imagify-auto-optimization-deprecated.php',
         'Imagify_Cron_Library_Size' => __DIR__ . '/../..' . '/inc/classes/class-imagify-cron-library-size.php',
         'Imagify_Cron_Rating' => __DIR__ . '/../..' . '/inc/classes/class-imagify-cron-rating.php',
         'Imagify_Cron_Sync_Files' => __DIR__ . '/../..' . '/inc/classes/class-imagify-cron-sync-files.php',
@@ -276,16 +288,16 @@ class ComposerStaticInit9a65f06d351d3ca28131bdc6dbd92154
         'Imagify_Settings' => __DIR__ . '/../..' . '/inc/classes/class-imagify-settings.php',
         'Imagify_User' => __DIR__ . '/../..' . '/inc/classes/class-imagify-user.php',
         'Imagify_Views' => __DIR__ . '/../..' . '/inc/classes/class-imagify-views.php',
-        'WP_Async_Request' => __DIR__ . '/..' . '/a5hleyrich/wp-background-processing/classes/wp-async-request.php',
-        'WP_Background_Process' => __DIR__ . '/..' . '/a5hleyrich/wp-background-processing/classes/wp-background-process.php',
+        'Imagify_WP_Async_Request' => __DIR__ . '/../..' . '/inc/classes/Dependencies/deliciousbrains/wp-background-processing/classes/wp-async-request.php',
+        'Imagify_WP_Background_Process' => __DIR__ . '/../..' . '/inc/classes/Dependencies/deliciousbrains/wp-background-processing/classes/wp-background-process.php',
     );
 
     public static function getInitializer(ClassLoaderWPMediaImagifyWordPressPlugin $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit9a65f06d351d3ca28131bdc6dbd92154::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit9a65f06d351d3ca28131bdc6dbd92154::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit9a65f06d351d3ca28131bdc6dbd92154::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitf1640175f625fada43e0bece341f846d::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitf1640175f625fada43e0bece341f846d::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitf1640175f625fada43e0bece341f846d::$classMap;
 
         }, null, ClassLoaderWPMediaImagifyWordPressPlugin::class);
     }

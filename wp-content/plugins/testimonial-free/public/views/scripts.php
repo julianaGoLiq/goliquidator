@@ -42,6 +42,8 @@ class SP_TFREE_Front_Scripts {
 		wp_enqueue_style( 'tfree-font-awesome', SP_TFREE_URL . 'public/assets/css/font-awesome.min.css', array(), SP_TFREE_VERSION );
 		wp_enqueue_style( 'tfree-deprecated-style', SP_TFREE_URL . 'public/assets/css/deprecated-style.css', array(), SP_TFREE_VERSION );
 		wp_enqueue_style( 'tfree-style', SP_TFREE_URL . 'public/assets/css/style.css', array(), SP_TFREE_VERSION );
+		include SP_TFREE_PATH . '/includes/custom-css.php';
+		wp_add_inline_style( 'tfree-style', $custom_css );
 
 		// JS Files.
 		wp_register_script( 'tfree-slick-min-js', SP_TFREE_URL . 'public/assets/js/slick.min.js', array( 'jquery' ), SP_TFREE_VERSION, true );

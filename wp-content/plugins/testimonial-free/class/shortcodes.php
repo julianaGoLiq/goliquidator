@@ -47,16 +47,18 @@ class SP_TFREE_Shortcodes {
 	function register_post_type() {
 		register_post_type(
 			'sp_tfree_shortcodes', array(
-				'label'           => __( 'Generate Shortcode', 'testimonial-free' ),
-				'description'     => __( 'Generate Shortcode for Testimonial', 'testimonial-free' ),
-				'public'          => false,
-				'show_ui'         => true,
-				'show_in_menu'    => 'edit.php?post_type=spt_testimonial',
-				'hierarchical'    => false,
-				'query_var'       => false,
-				'supports'        => array( 'title' ),
-				'capability_type' => 'post',
-				'labels'          => array(
+				'label'              => __( 'Generate Shortcode', 'testimonial-free' ),
+				'description'        => __( 'Generate Shortcode for Testimonial', 'testimonial-free' ),
+				'public'             => false,
+				'has_archive'        => false,
+				'publicly_queryable' => false,
+				'show_ui'            => true,
+				'show_in_menu'       => 'edit.php?post_type=spt_testimonial',
+				'hierarchical'       => false,
+				'query_var'          => false,
+				'supports'           => array( 'title' ),
+				'capability_type'    => 'post',
+				'labels'             => array(
 					'name'               => __( 'Testimonial Shortcodes', 'testimonial-free' ),
 					'singular_name'      => __( 'Testimonial Shortcode', 'testimonial-free' ),
 					'menu_name'          => __( 'Shortcode Generator', 'testimonial-free' ),

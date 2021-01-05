@@ -58,6 +58,36 @@ if (!class_exists('WC_Disable_Categories')) {
             $suffix = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
             wp_register_script('woocommerce_admin', WC()->plugin_url() . '/assets/js/admin/woocommerce_admin' . $suffix . '.js', array('jquery', 'jquery-blockui', 'jquery-ui-sortable', 'jquery-ui-widget', 'jquery-ui-core', 'jquery-tiptip'), WC_VERSION);
             wp_enqueue_script('woocommerce_admin');
+
+            $locale  = localeconv();
+            $decimal = isset( $locale['decimal_point'] ) ? $locale['decimal_point'] : '.';
+
+            $params = array(
+                /* translators: %s: decimal */
+                'i18n_decimal_error'                => sprintf( __( 'Please enter with one decimal point (%s) without thousand separators.', 'woocommerce' ), $decimal ),
+                /* translators: %s: price decimal separator */
+                'i18n_mon_decimal_error'            => sprintf( __( 'Please enter with one monetary decimal point (%s) without thousand separators and currency symbols.', 'woocommerce' ), wc_get_price_decimal_separator() ),
+                'i18n_country_iso_error'            => __( 'Please enter in country code with two capital letters.', 'woocommerce' ),
+                'i18n_sale_less_than_regular_error' => __( 'Please enter in a value less than the regular price.', 'woocommerce' ),
+                'i18n_delete_product_notice'        => __( 'This product has produced sales and may be linked to existing orders. Are you sure you want to delete it?', 'woocommerce' ),
+                'i18n_remove_personal_data_notice'  => __( 'This action cannot be reversed. Are you sure you wish to erase personal data from the selected orders?', 'woocommerce' ),
+                'decimal_point'                     => $decimal,
+                'mon_decimal_point'                 => wc_get_price_decimal_separator(),
+                'ajax_url'                          => admin_url( 'admin-ajax.php' ),
+                'strings'                           => array(
+                    'import_products' => __( 'Import', 'woocommerce' ),
+                    'export_products' => __( 'Export', 'woocommerce' ),
+                ),
+                'nonces'                            => array(
+                    'gateway_toggle' => wp_create_nonce( 'woocommerce-toggle-payment-gateway-enabled' ),
+                ),
+                'urls'                              => array(
+                    'import_products' => current_user_can( 'import' ) ? esc_url_raw( admin_url( 'edit.php?post_type=product&page=product_importer' ) ) : null,
+                    'export_products' => current_user_can( 'export' ) ? esc_url_raw( admin_url( 'edit.php?post_type=product&page=product_exporter' ) ) : null,
+                ),
+            );
+
+            wp_localize_script( 'woocommerce_admin', 'woocommerce_admin', $params );
         }
 
         public function add_plugin_meta($plugin_meta, $plugin_file) {
@@ -125,26 +155,26 @@ if (!class_exists('WC_Disable_Categories')) {
 
         }
 
-        $('.upload_image_button').click(function() {
+        jQuery('.upload_image_button').click(function() {
             var send_attachment_bkp = wp.media.editor.send.attachment;
-            var button = $(this);
+            var button = jQuery(this);
             wp.media.editor.send.attachment = function(props, attachment) {
-                $(button).parent().prev().attr('src', attachment.url);
-                $(button).prev().val(attachment.id);
-                $(button).prev().val(attachment.id);
+                jQuery(button).parent().prev().attr('src', attachment.url);
+                jQuery(button).prev().val(attachment.id);
+                jQuery(button).prev().val(attachment.id);
                 wp.media.editor.send.attachment = send_attachment_bkp;
             }
             wp.media.editor.open(button);
             return false;
         });
 
-        $('.remove_image_button').click(function() {
+        jQuery('.remove_image_button').click(function() {
             var answer = confirm('Are you sure?');
             if (answer == true) {
-                var src = $(this).parent().prev().attr('data-src');
-                $(this).parent().prev().attr('src', src);
-                $(this).prev().prev().val('');
-                $(this).prev().val('');
+                var src = jQuery(this).parent().prev().attr('data-src');
+                jQuery(this).parent().prev().attr('src', src);
+                jQuery(this).prev().prev().val('');
+                jQuery(this).prev().val('');
                 error();
                 jQuery('.notifyjs-corner').css('top',30);
             }

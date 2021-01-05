@@ -2,7 +2,7 @@
 /**
  * WooCommerce Product CSV importer
  *
- * @package WooCommerce/Import
+ * @package WooCommerce\Import
  * @version 3.1.0
  */
 
@@ -183,7 +183,7 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
 
 			// If we're not updating existing posts, we may need a placeholder product to map to.
 			if ( ! $this->params['update_existing'] ) {
-				$product = new WC_Product_Simple();
+				$product = wc_get_product_object( 'simple' );
 				$product->set_name( 'Import placeholder for ' . $id );
 				$product->set_status( 'importing' );
 				$product->add_meta_data( '_original_id', $id, true );
@@ -200,7 +200,7 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
 		}
 
 		try {
-			$product = new WC_Product_Simple();
+			$product = wc_get_product_object( 'simple' );
 			$product->set_name( 'Import placeholder for ' . $value );
 			$product->set_status( 'importing' );
 			$product->set_sku( $value );
@@ -254,7 +254,7 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
 				return $id_from_sku;
 			}
 
-			$product = new WC_Product_Simple();
+			$product = wc_get_product_object( 'simple' );
 			$product->set_name( 'Import placeholder for ' . $id );
 			$product->set_status( 'importing' );
 			$product->add_meta_data( '_original_id', $id, true );
@@ -400,21 +400,22 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
 			$total  = count( $_terms );
 
 			foreach ( $_terms as $index => $_term ) {
-				// Check if category exists. Parent must be empty string or null if doesn't exists.
-				$term = term_exists( $_term, 'product_cat', $parent );
-
-				if ( is_array( $term ) ) {
-					$term_id = $term['term_id'];
-					// Don't allow users without capabilities to create new categories.
-				} elseif ( ! current_user_can( 'manage_product_terms' ) ) {
+				// Don't allow users without capabilities to create new categories.
+				if ( ! current_user_can( 'manage_product_terms' ) ) {
 					break;
-				} else {
-					$term = wp_insert_term( $_term, 'product_cat', array( 'parent' => intval( $parent ) ) );
+				}
 
-					if ( is_wp_error( $term ) ) {
-						break; // We cannot continue if the term cannot be inserted.
+				$term = wp_insert_term( $_term, 'product_cat', array( 'parent' => intval( $parent ) ) );
+
+				if ( is_wp_error( $term ) ) {
+					if ( $term->get_error_code() === 'term_exists' ) {
+						// When term exists, error data should contain existing term id.
+						$term_id = $term->get_error_data();
+					} else {
+						break; // We cannot continue on any other error.
 					}
-
+				} else {
+					// New term.
 					$term_id = $term['term_id'];
 				}
 
@@ -592,7 +593,7 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
 	 * Just skip current field.
 	 *
 	 * By default is applied wc_clean() to all not listed fields
-	 * in self::get_formating_callback(), use this method to skip any formating.
+	 * in self::get_formatting_callback(), use this method to skip any formatting.
 	 *
 	 * @param string $value Field value.
 	 *
@@ -674,11 +675,22 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
 	}
 
 	/**
-	 * Get formatting callback.
+	 * Deprecated get formatting callback method.
 	 *
+	 * @deprecated 4.3.0
 	 * @return array
 	 */
 	protected function get_formating_callback() {
+		return $this->get_formatting_callback();
+	}
+
+	/**
+	 * Get formatting callback.
+	 *
+	 * @since 4.3.0
+	 * @return array
+	 */
+	protected function get_formatting_callback() {
 
 		/**
 		 * Columns not mentioned here will get parsed with 'wc_clean'.
@@ -692,10 +704,8 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
 			'date_on_sale_from' => array( $this, 'parse_date_field' ),
 			'date_on_sale_to'   => array( $this, 'parse_date_field' ),
 			'name'              => array( $this, 'parse_skip_field' ),
-            'subtitulo'         => array( $this, 'parse_skip_field' ),
 			'short_description' => array( $this, 'parse_description_field' ),
 			'description'       => array( $this, 'parse_description_field' ),
-            'alternativo_al_precio' => array( $this, 'parse_description_field' ),
 			'manage_stock'      => array( $this, 'parse_bool_field' ),
 			'low_stock_amount'  => array( $this, 'parse_stock_quantity_field' ),
 			'backorders'        => array( $this, 'parse_backorders_field' ),
@@ -814,7 +824,12 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
 				0  => 'private',
 				1  => 'publish',
 			);
-			$data['status'] = isset( $statuses[ $data['published'] ] ) ? $statuses[ $data['published'] ] : -1;
+			$data['status'] = isset( $statuses[ $data['published'] ] ) ? $statuses[ $data['published'] ] : 'draft';
+
+			// Fix draft status of variations.
+			if ( isset( $data['type'] ) && 'variation' === $data['type'] && -1 === $data['published'] ) {
+				$data['status'] = 'publish';
+			}
 
 			unset( $data['published'] );
 		}
@@ -937,7 +952,7 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
 	 * Map and format raw data to known fields.
 	 */
 	protected function set_parsed_data() {
-		$parse_functions = $this->get_formating_callback();
+		$parse_functions = $this->get_formatting_callback();
 		$mapped_keys     = $this->get_mapped_keys();
 		$use_mb          = function_exists( 'mb_convert_encoding' );
 
@@ -975,6 +990,12 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
 				$data[ $mapped_keys[ $id ] ] = call_user_func( $parse_functions[ $id ], $value );
 			}
 
+			/**
+			 * Filter product importer parsed data.
+			 *
+			 * @param array $parsed_data Parsed data.
+			 * @param WC_Product_Importer $importer Importer instance.
+			 */
 			$this->parsed_data[] = apply_filters( 'woocommerce_product_importer_parsed_data', $this->expand_data( $data ), $this );
 		}
 	}
@@ -1085,19 +1106,6 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
 
 			$result = $this->process_item( $parsed_data );
 
-			try{
-                if ( !is_wp_error( $result ) ) {
-                    if (isset($result['id']) && $result['id']) {
-                        $idData = $result['id'];
-                        $subt = (isset($parsed_data['subtitulo'])) ? $parsed_data['subtitulo'] : '';
-                        $this->setSubtitle($idData, $subt);
-                        $alt = (isset($parsed_data['alternativo_al_precio'])) ? $parsed_data['alternativo_al_precio'] : '';
-                        $this->setAlternativoAlPrecio($idData, $alt);
-                    }
-                }
-            }catch (Exception $e){
-            }
-
 			if ( is_wp_error( $result ) ) {
 				$result->add_data( array( 'row' => $this->get_row_id( $parsed_data ) ) );
 				$data['failed'][] = $result;
@@ -1117,50 +1125,4 @@ class WC_Product_CSV_Importer extends WC_Product_Importer {
 
 		return $data;
 	}
-
-	function setSubtitle($_productId, $_subtitle){
-        global $wpdb;
-        $meta_id = $wpdb->get_row("SELECT meta_id FROM $wpdb->postmeta WHERE (meta_key = 'subtitulo' AND post_id = '". $_productId ."')");
-        if($meta_id && $meta_id->meta_id){
-            $wpdb->query($wpdb->prepare("UPDATE $wpdb->postmeta SET meta_value='.$_subtitle.' WHERE meta_id='".$meta_id->meta_id."' "));
-        }else{
-
-            $subtitleID = $wpdb->get_row("SELECT post_name FROM $wpdb->posts WHERE (post_type = 'acf-field' AND post_excerpt = 'subtitulo')");
-            if($subtitleID && $subtitleID->post_name){
-                $wpdb->insert($wpdb->postmeta, array(
-                    'post_id' => $_productId,
-                    'meta_key' => '_subtitulo',
-                    'meta_value' => $subtitleID->post_name
-                ));
-                $wpdb->insert($wpdb->postmeta, array(
-                    'post_id' => $_productId,
-                    'meta_key' => 'subtitulo',
-                    'meta_value' => $_subtitle
-                ));
-            }
-        }
-    }
-
-    function setAlternativoAlPrecio($_productId, $_textoAlt){
-        global $wpdb;
-        $meta_id = $wpdb->get_row("SELECT meta_id FROM $wpdb->postmeta WHERE (meta_key = 'alternativo_al_precio' AND post_id = '". $_productId ."')");
-        if($meta_id && $meta_id->meta_id){
-            $wpdb->query($wpdb->prepare("UPDATE $wpdb->postmeta SET meta_value='.$_textoAlt.' WHERE meta_id='".$meta_id->meta_id."' "));
-        }else{
-
-            $subtitleID = $wpdb->get_row("SELECT post_name FROM $wpdb->posts WHERE (post_type = 'acf-field' AND post_excerpt = 'alternativo_al_precio')");
-            if($subtitleID && $subtitleID->post_name){
-                $wpdb->insert($wpdb->postmeta, array(
-                    'post_id' => $_productId,
-                    'meta_key' => '_alternativo_al_precio',
-                    'meta_value' => $subtitleID->post_name
-                ));
-                $wpdb->insert($wpdb->postmeta, array(
-                    'post_id' => $_productId,
-                    'meta_key' => 'alternativo_al_precio',
-                    'meta_value' => $_textoAlt
-                ));
-            }
-        }
-    }
 }

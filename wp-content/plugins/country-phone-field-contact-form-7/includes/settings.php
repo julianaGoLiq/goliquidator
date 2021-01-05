@@ -33,8 +33,9 @@
     ?>
         <div class="wrap full-width-layout np_cpf_settings_page">
 		    <h2><?php _e('Country and phone field settings', 'nb-cpf'); ?></h2>
+			<?php settings_errors(); ?>
             <?php $this->nb_cpf_settings_admin_tabs(); ?>
-            <?php if ( isset ( $_GET['tab'] ) && $_GET['tab'] == 'help' ) : ?>
+            <?php if ( isset ( $_GET['tab'] ) && esc_attr($_GET['tab']) == 'help' ) : ?>
             <h2><?php _e('Field settings', 'nb-cpf') ?></h2>
             <p>
                 <strong><?php _e( 'Default Country', 'nb-cpf' ); ?>:</strong>
@@ -75,7 +76,7 @@
 		);
 		$links = array();
 		if ( isset ( $_GET['tab'] ) ) :
-			$current = $_GET['tab'];
+			$current = esc_attr($_GET['tab']);
 		else:
 			$current = 'country';
 		endif;
@@ -92,15 +93,52 @@
 			echo $link;
 		echo '</h2>';
     }
+	
+	public function nb_cpf_field_sanitize($input){
+		// for enhanced security, create a new empty array
+		$valid_input = array();
+		foreach($input as $key => $input_val){
+			
+			// if it's not set, default to null!
+			if ($key == 'phone_nationalMode' || $key == 'phone_auto_select' || $key == 'country_auto_select') {
+				// Our checkbox value is either 0 or 1
+				$valid_input[$key] = ( $input[$key] == 1 ? 1 : 0 );
+				
+			} else {
+				$reg_exp = '/^([a-zA-Z]{2}+,)+$/';
+				//$input[$key] = sanitize_text_field(strip_tags(trim($input_val))); 
+				// register error
+				if($input[$key] != '' && ( ! preg_match($reg_exp,$input[$key].',') )) {
+					
+					add_settings_error(
+						'nb_cpf_settings_error', // setting title
+						'nb_cpf_text_field_error', // error ID
+						__('Countries code must two character length and comma separated.
+						Wrong Value: '.esc_attr($input[$key]),'nb-cpf'), // error message
+						'error' // type of message
+					);
+					//return false;
+				} else {
+					$input[$key] = sanitize_text_field(strip_tags(trim($input_val))); 
+					// need to add slashes still before sending to the database
+					$valid_input[$key] = addslashes($input[$key]);
+				}
+			}
+		}
+		//print_r($valid_input); exit;
+		return $valid_input;
+	}
     
     public function nb_cpf_settings_options(){
         
 		// register a new setting for "nb_cpf_settings" page
-		
-		register_setting('nb_cpf_settings', 'nb_cpf_options' );
+		$args = array(
+			'sanitize_callback' => array( $this, 'nb_cpf_field_sanitize' ),
+		);
+		register_setting('nb_cpf_settings', 'nb_cpf_options', $args );
 		
 		if ( isset ( $_GET['tab'] ) ) :
-			$current_tab = $_GET['tab'];
+			$current_tab = esc_attr($_GET['tab']);
 		else:
 			$current_tab = 'country';
         endif;
@@ -231,7 +269,7 @@
 	
 	public function nb_cpf_checkbox_fields_cb($args){ $options = get_option( 'nb_cpf_options' );
 	   ?>
-			<input id="<?php echo esc_attr( $args['label_for'] ); ?>" name="nb_cpf_options[<?php echo esc_attr( $args['label_for'] ); ?>]" type="checkbox"  class="<?php echo esc_attr( $args['class'] ); ?>" value="1" <?php isset( $options[ $args['label_for'] ] ) ? checked(1, $options[ $args['label_for'] ], true) : ''; ?>/> <label>Yes</label>
+			<input id="<?php echo esc_attr( $args['label_for'] ); ?>" name="nb_cpf_options[<?php echo esc_attr( $args['label_for'] ); ?>]" type="checkbox"  class="<?php echo esc_attr( $args['class'] ); ?>" value="1" <?php isset( $options[ $args['label_for'] ] ) ? checked(1, esc_attr($options[ $args['label_for'] ]), true) : ''; ?>/> <label>Yes</label>
 			
 			<br/>
 			<p><?php echo $args['description'] ?></p>
@@ -241,7 +279,7 @@
     public function nb_cpf_text_fields_cb($args){
         $options = get_option( 'nb_cpf_options' );
 	?>
-		<input id="<?php echo esc_attr( $args['label_for'] ); ?>" name="nb_cpf_options[<?php echo esc_attr( $args['label_for'] ); ?>]" type="text"  class="<?php echo esc_attr( $args['class'] ); ?>" value="<?php echo isset( $options[ $args['label_for'] ] ) ? $options[ $args['label_for'] ] : ''; ?>" />
+		<input id="<?php echo esc_attr( $args['label_for'] ); ?>" name="nb_cpf_options[<?php echo esc_attr( $args['label_for'] ); ?>]" type="text"  class="<?php echo esc_attr( $args['class'] ); ?>" value="<?php echo isset( $options[ $args['label_for'] ] ) ? esc_attr($options[ $args['label_for'] ]) : ''; ?>" />
 		
 	<?php 
     }
@@ -249,13 +287,16 @@
     public function nb_cpf_country_section_cb( $args ) {
 		$options = get_option( 'nb_cpf_options' );
 	?>
-		<input type="hidden" name="nb_cpf_options[phone_defaultCountry]" value="<?php echo isset( $options['phone_defaultCountry'] ) ? $options['phone_defaultCountry'] : ''; ?>" />
-		<input type="hidden" name="nb_cpf_options[phone_onlyCountries]" value="<?php echo isset( $options['phone_onlyCountries'] ) ? $options['phone_onlyCountries'] : ''; ?>" />
-		<input type="hidden" name="nb_cpf_options[phone_excludeCountries]" value="<?php echo isset( $options['phone_excludeCountries'] ) ? $options['phone_excludeCountries'] : ''; ?>" />
-		<input type="hidden" name="nb_cpf_options[phone_preferredCountries]" value="<?php echo isset( $options['phone_preferredCountries'] ) ? $options['phone_preferredCountries'] : ''; ?>" />
-		<input type="hidden" name="nb_cpf_options[phone_nationalMode]" value="<?php echo isset( $options['phone_nationalMode'] ) ? $options['phone_nationalMode'] : ''; ?>" />
-		<input type="hidden" name="nb_cpf_options[phone_auto_select]" value="<?php echo isset( $options['phone_auto_select'] ) ? $options['phone_auto_select'] : ''; ?>" />
-		<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Country dropdown field settings.', 'nb-cpf' ); ?></p>
+		<input type="hidden" name="nb_cpf_options[phone_defaultCountry]" value="<?php echo isset( $options['phone_defaultCountry'] ) ? esc_attr($options['phone_defaultCountry']) : ''; ?>" />
+		<input type="hidden" name="nb_cpf_options[phone_onlyCountries]" value="<?php echo isset( $options['phone_onlyCountries'] ) ? esc_attr($options['phone_onlyCountries']) : ''; ?>" />
+		<input type="hidden" name="nb_cpf_options[phone_excludeCountries]" value="<?php echo isset( $options['phone_excludeCountries'] ) ? esc_attr($options['phone_excludeCountries']) : ''; ?>" />
+		<input type="hidden" name="nb_cpf_options[phone_preferredCountries]" value="<?php echo isset( $options['phone_preferredCountries'] ) ? esc_attr($options['phone_preferredCountries']) : ''; ?>" />
+		<input type="hidden" name="nb_cpf_options[phone_nationalMode]" value="<?php echo isset( $options['phone_nationalMode'] ) ? esc_attr($options['phone_nationalMode']) : ''; ?>" />
+		<input type="hidden" name="nb_cpf_options[phone_auto_select]" value="<?php echo isset( $options['phone_auto_select'] ) ? esc_attr($options['phone_auto_select']) : ''; ?>" />
+		
+		<p id="<?php echo esc_attr( $args['id'] ); ?>">
+			<?php esc_html_e( 'Country dropdown field settings.', 'nb-cpf' ); ?>
+		</p>
 		
 	<?php
 	}
@@ -263,13 +304,15 @@
     public function nb_cpf_phone_section_cb( $args ){
         $options = get_option( 'nb_cpf_options' );
 	?>
-		<input type="hidden" name="nb_cpf_options[defaultCountry]" value="<?php echo isset( $options['defaultCountry'] ) ? $options['defaultCountry'] : ''; ?>" />
-		<input type="hidden" name="nb_cpf_options[onlyCountries]" value="<?php echo isset( $options['onlyCountries'] ) ? $options['onlyCountries'] : ''; ?>" />
-		<input type="hidden" name="nb_cpf_options[excludeCountries]" value="<?php echo isset( $options['excludeCountries'] ) ? $options['excludeCountries'] : ''; ?>" />
-		<input type="hidden" name="nb_cpf_options[preferredCountries]" value="<?php echo isset( $options['preferredCountries'] ) ? $options['preferredCountries'] : ''; ?>" />
-		<input type="hidden" name="nb_cpf_options[country_auto_select]" value="<?php echo isset( $options['country_auto_select'] ) ? $options['country_auto_select'] : ''; ?>" />
+		<input type="hidden" name="nb_cpf_options[defaultCountry]" value="<?php echo isset( $options['defaultCountry'] ) ? esc_attr($options['defaultCountry']) : ''; ?>" />
+		<input type="hidden" name="nb_cpf_options[onlyCountries]" value="<?php echo isset( $options['onlyCountries'] ) ? esc_attr($options['onlyCountries']) : ''; ?>" />
+		<input type="hidden" name="nb_cpf_options[excludeCountries]" value="<?php echo isset( $options['excludeCountries'] ) ? esc_attr($options['excludeCountries']) : ''; ?>" />
+		<input type="hidden" name="nb_cpf_options[preferredCountries]" value="<?php echo isset( $options['preferredCountries'] ) ? esc_attr($options['preferredCountries']) : ''; ?>" />
+		<input type="hidden" name="nb_cpf_options[country_auto_select]" value="<?php echo isset( $options['country_auto_select'] ) ? esc_attr($options['country_auto_select']) : ''; ?>" />
 		
-		<p id="<?php echo esc_attr( $args['id'] ); ?>"><?php esc_html_e( 'Phone field dropdown settings.', 'nb-cpf' ); ?></p>
+		<p id="<?php echo esc_attr( $args['id'] ); ?>">
+			<?php esc_html_e( 'Phone field dropdown settings.', 'nb-cpf' ); ?>
+		</p>
 		
 	<?php
     }

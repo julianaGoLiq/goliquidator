@@ -1,6 +1,18 @@
 <?php if ( ! defined( 'ABSPATH' ) ) {
 	die; } // Cannot access directly.
 
+/**
+ * Sanitize function for text field.
+ */
+if ( ! function_exists( 'spftestimonial_sanitize_text' ) ) {
+	function spftestimonial_sanitize_text( $value ) {
+
+		$safe_text = filter_var( $value, FILTER_SANITIZE_STRING );
+		return $safe_text;
+
+	}
+}
+
 //
 // Metabox of the testimonial shortcode generator.
 // Set a unique slug-like ID.
@@ -13,6 +25,7 @@ $prefix_shortcode_opts = 'sp_tpro_shortcode_options';
 SPFTESTIMONIAL::createMetabox(
 	$prefix_shortcode_opts, array(
 		'title'     => __( 'Shortcode Options', 'testimonial-free' ),
+		'class'     => 'spt-main-class',
 		'post_type' => 'sp_tfree_shortcodes',
 		// 'post_type' => 'sp_tpro_shortcodes',
 		'context'   => 'normal',
@@ -30,33 +43,35 @@ SPFTESTIMONIAL::createSection(
 
 			array(
 				'id'       => 'layout',
-				'type'     => 'select_f',
-				'title'    => __( 'Layout', 'testimonial-free' ),
+				'type'     => 'image_select',
+				'title'    => __( 'Layout Preset', 'testimonial-free' ),
 				'subtitle' => __( 'Select a layout to display the testimonials.', 'testimonial-free' ),
+				'class'    => 'tfree-layout-preset',
 				'options'  => array(
-					'slider'         => array(
-						'name'     => __( 'Slider', 'testimonial-free' ),
-						'pro_only' => false,
+					'slider'  => array(
+						'image' => plugin_dir_url( __FILE__ ) . 'framework/assets/images/layout/slider.png',
+						'name'  => __( 'Slider', 'testimonial-free' ),
+						'class'       => 'free-feature',
 					),
-					'grid'           => array(
-						'name'     => __( 'Grid (Pro)', 'testimonial-free' ),
-						'pro_only' => true,
+					'grid'    => array(
+						'image' => plugin_dir_url( __FILE__ ) . 'framework/assets/images/layout/grid.png',
+						'name'  => __( 'Grid', 'testimonial-free' ),
+						'class'       => 'pro-feature',
 					),
-					'masonry'        => array(
-						'name'     => __( 'Masonry (Pro)', 'testimonial-free' ),
-						'pro_only' => true,
+					'masonry' => array(
+						'image' => plugin_dir_url( __FILE__ ) . 'framework/assets/images/layout/masonry.png',
+						'name'  => __( 'Masonry', 'testimonial-free' ),
+						'class'       => 'pro-feature',
 					),
-					'list'           => array(
-						'name'     => __( 'List (Pro)', 'testimonial-free' ),
-						'pro_only' => true,
+					'list'    => array(
+						'image' => plugin_dir_url( __FILE__ ) . 'framework/assets/images/layout/list.png',
+						'name'  => __( 'List', 'testimonial-free' ),
+						'class'       => 'pro-feature',
 					),
-					'filter_grid'    => array(
-						'name'     => __( 'Filter-Grid (Pro)', 'testimonial-free' ),
-						'pro_only' => true,
-					),
-					'filter_masonry' => array(
-						'name'     => __( 'Filter-Masonry (Pro)', 'testimonial-free' ),
-						'pro_only' => true,
+					'filter'  => array(
+						'image' => plugin_dir_url( __FILE__ ) . 'framework/assets/images/layout/filter.png',
+						'name'  => __( 'Filter', 'testimonial-free' ),
+						'class'       => 'pro-feature',
 					),
 				),
 				'default'  => 'slider',
@@ -81,7 +96,7 @@ SPFTESTIMONIAL::createSection(
 			array(
 				'id'       => 'display_testimonials_from',
 				'type'     => 'select_f',
-				'title'    => __( 'Display Testimonials from', 'testimonial-free' ),
+				'title'    => __( 'Filter Testimonials', 'testimonial-free' ),
 				'subtitle' => __( 'Select an option to display the testimonials.', 'testimonial-free' ),
 				'options'  => array(
 					'latest'                => array(
@@ -89,11 +104,15 @@ SPFTESTIMONIAL::createSection(
 						'pro_only' => false,
 					),
 					'category'              => array(
-						'name'     => __( 'Category (Pro)', 'testimonial-free' ),
+						'name'     => __( 'Groups (Pro)', 'testimonial-free' ),
 						'pro_only' => true,
 					),
 					'specific_testimonials' => array(
-						'name'     => __( 'Specific Testimonials (Pro)', 'testimonial-free' ),
+						'name'     => __( 'Specific (Pro)', 'testimonial-free' ),
+						'pro_only' => true,
+					),
+					'exclude' => array(
+						'name'     => __( 'Exclude (Pro)', 'testimonial-free' ),
 						'pro_only' => true,
 					),
 				),
@@ -102,18 +121,31 @@ SPFTESTIMONIAL::createSection(
 			array(
 				'id'       => 'number_of_total_testimonials',
 				'type'     => 'spinner',
-				'title'    => __( 'Total Testimonials', 'testimonial-free' ),
-				'subtitle' => __( 'Number of total testimonials to display.', 'testimonial-free' ),
-				'default'  => '10',
+				'title'    => __( 'Limit', 'testimonial-free' ),
+				'subtitle' => __( 'Limit number of testimonials to show.', 'testimonial-free' ),
+				'default'  => '12',
 				'min'      => -1,
+			),
+			array(
+				'id'       => 'columns',
+				'type'     => 'column',
+				'title'    => __( 'Responsive Column(s)', 'testimonial-free' ),
+				'subtitle' => __( 'Set number of column(s) in different devices for responsive view.', 'testimonial-free' ),
+				'default'  => array(
+					'large_desktop' => '1',
+					'desktop'       => '1',
+					'laptop'        => '1',
+					'tablet'        => '1',
+					'mobile'        => '1',
+				),
 			),
 			array(
 				'id'       => 'testimonial_order_by',
 				'type'     => 'select',
-				'title'    => __( 'Order by', 'testimonial-free' ),
+				'title'    => __( 'Order By', 'testimonial-free' ),
 				'subtitle' => __( 'Select an order by option.', 'testimonial-free' ),
 				'options'  => array(
-					'ID'       => __( 'ID', 'testimonial-free' ),
+					'ID'       => __( 'Testimonial ID', 'testimonial-free' ),
 					'date'     => __( 'Date', 'testimonial-free' ),
 					'title'    => __( 'Title', 'testimonial-free' ),
 					'modified' => __( 'Modified', 'testimonial-free' ),
@@ -123,7 +155,7 @@ SPFTESTIMONIAL::createSection(
 			array(
 				'id'       => 'testimonial_order',
 				'type'     => 'select',
-				'title'    => __( 'Order', 'testimonial-free' ),
+				'title'    => __( 'Order Type', 'testimonial-free' ),
 				'subtitle' => __( 'Select an order option.', 'testimonial-free' ),
 				'options'  => array(
 					'ASC'  => __( 'Ascending', 'testimonial-free' ),
@@ -131,46 +163,7 @@ SPFTESTIMONIAL::createSection(
 				),
 				'default'  => 'DESC',
 			),
-			array(
-				'type'    => 'subheading',
-				'content' => __( 'Responsive Settings', 'testimonial-free' ),
-			),
-			array(
-				'id'       => 'number_of_testimonials',
-				'type'     => 'spinner',
-				'title'    => __( 'Testimonial Column(s)', 'testimonial-free' ),
-				'subtitle' => __( 'Set number of column(s) for the screen larger than 1280px.', 'testimonial-free' ),
-				'default'  => '1',
-			),
-			array(
-				'id'       => 'number_of_testimonials_desktop',
-				'type'     => 'spinner',
-				'title'    => __( 'Testimonial Column(s) on Desktop', 'testimonial-free' ),
-				'subtitle' => __( 'Set number of column on desktop for the screen smaller than 1280px.', 'testimonial-free' ),
-				'default'  => '1',
-			),
-			array(
-				'id'       => 'number_of_testimonials_small_desktop',
-				'type'     => 'spinner',
-				'title'    => __( 'Testimonial Column(s) on Small Desktop', 'testimonial-free' ),
-				'subtitle' => __( 'Set number of column on small desktop for the screen smaller than 980px.', 'testimonial-free' ),
-				'default'  => '1',
-			),
-			array(
-				'id'       => 'number_of_testimonials_tablet',
-				'type'     => 'spinner',
-				'title'    => __( 'Testimonial Column(s) on Tablet', 'testimonial-free' ),
-				'subtitle' => __( 'Set number of column on tablet for the screen smaller than 736px.', 'testimonial-free' ),
-				'default'  => '1',
-			),
-			array(
-				'id'       => 'number_of_testimonials_mobile',
-				'type'     => 'spinner',
-				'title'    => __( 'Testimonial Column(s) on Mobile', 'testimonial-free' ),
-				'subtitle' => __( 'Set number of column on mobile for the screen smaller than 480px.', 'testimonial-free' ),
-				'default'  => '1',
-			),
-
+			
 		),
 	)
 );
@@ -200,10 +193,10 @@ SPFTESTIMONIAL::createSection(
 				'id'         => 'slider_auto_play_speed',
 				'type'       => 'spinner',
 				'title'      => __( 'AutoPlay Speed', 'testimonial-free' ),
-				'subtitle'   => __( 'Set auto play speed.', 'testimonial-free' ),
-				'after'      => __( '(millisecond)', 'testimonial-free' ),
+				'subtitle'   => __( 'Set auto play speed in a millisecond. Default value 3000ms.', 'testimonial-free' ),
 				'default'    => '3000',
 				'min'        => 1,
+				'unit'       => __( 'ms', 'testimonial-free' ),
 				'dependency' => array(
 					'slider_auto_play',
 					'any',
@@ -214,8 +207,8 @@ SPFTESTIMONIAL::createSection(
 				'id'       => 'slider_scroll_speed',
 				'type'     => 'spinner',
 				'title'    => __( 'Pagination Speed', 'testimonial-free' ),
-				'subtitle' => __( 'Set pagination/slide scroll speed.', 'testimonial-free' ),
-				'after'    => __( '(millisecond)', 'testimonial-free' ),
+				'subtitle' => __( 'Set pagination speed in a millisecond. Default value 600ms.', 'testimonial-free' ),
+				'unit'     => __( 'ms', 'testimonial-free' ),
 				'default'  => '600',
 				'min'      => 1,
 			),
@@ -234,8 +227,19 @@ SPFTESTIMONIAL::createSection(
 				'default'  => true,
 			),
 			array(
+				'id'       => 'slider_direction',
+				'type'     => 'button_set',
+				'title'    => __( 'Direction', 'testimonial-free' ),
+				'subtitle' => __( 'Slider direction.', 'testimonial-free' ),
+				'options'  => array(
+					'ltr' => __( 'Right to Left', 'testimonial-free' ),
+					'rtl' => __( 'Left to Right', 'testimonial-free' ),
+				),
+				'default'  => 'ltr',
+			),
+			array(
 				'type'    => 'subheading',
-				'content' => __( 'Navigation Settings', 'testimonial-free' ),
+				'content' => __( 'Navigation', 'testimonial-free' ),
 			),
 			array(
 				'id'       => 'navigation',
@@ -250,11 +254,22 @@ SPFTESTIMONIAL::createSection(
 				'default'  => 'true',
 			),
 			array(
-				'id'         => 'navigation_arrow_color',
-				'type'       => 'color',
-				'title'      => __( 'Arrow Color', 'testimonial-free' ),
-				'subtitle'   => __( 'Set the navigation arrow color.', 'testimonial-free' ),
-				'default'    => '#444444',
+				'id'         => 'navigation_color',
+				'type'       => 'color_group',
+				'title'      => __( 'Navigation Color', 'testimonial-free' ),
+				'subtitle'   => __( 'Set the navigation color.', 'testimonial-free' ),
+				'options'    => array(
+					'color'            => __( 'Color', 'testimonial-free' ),
+					'hover-color'      => __( 'Hover Color', 'testimonial-free' ),
+					'background'       => __( 'Background', 'testimonial-free' ),
+					'hover-background' => __( 'Hover Background', 'testimonial-free' ),
+				),
+				'default'    => array(
+					'color'            => '#ffffff',
+					'hover-color'      => '#ffffff',
+					'background'       => '#777777',
+					'hover-background' => '#52b3d9',
+				),
 				'dependency' => array(
 					'navigation',
 					'any',
@@ -262,11 +277,18 @@ SPFTESTIMONIAL::createSection(
 				),
 			),
 			array(
-				'id'         => 'navigation_hover_arrow_color',
-				'type'       => 'color',
-				'title'      => __( 'Arrow Hover Color', 'testimonial-free' ),
-				'subtitle'   => __( 'Set the navigation arrow hover color.', 'testimonial-free' ),
-				'default'    => '#52b3d9',
+				'id'          => 'navigation_border',
+				'type'        => 'border',
+				'title'       => __( 'Navigation Border', 'testimonial-free' ),
+				'subtitle'    => __( 'Set the navigation border.', 'testimonial-free' ),
+				'all'         => true,
+				'hover_color' => true,
+				'default'     => array(
+					'all'         => '0',
+					'style'       => 'solid',
+					'color'       => '#777777',
+					'hover-color' => '#52b3d9',
+				),
 				'dependency' => array(
 					'navigation',
 					'any',
@@ -276,7 +298,7 @@ SPFTESTIMONIAL::createSection(
 
 			array(
 				'type'    => 'subheading',
-				'content' => __( 'Pagination Settings', 'testimonial-free' ),
+				'content' => __( 'Pagination', 'testimonial-free' ),
 			),
 			array(
 				'id'       => 'pagination',
@@ -291,23 +313,18 @@ SPFTESTIMONIAL::createSection(
 				'default'  => 'true',
 			),
 			array(
-				'id'         => 'pagination_color',
-				'type'       => 'color',
-				'title'      => __( 'Dots Color', 'testimonial-free' ),
-				'subtitle'   => __( 'Set the pagination dots color.', 'testimonial-free' ),
-				'default'    => '#cccccc',
-				'dependency' => array(
-					'pagination',
-					'any',
-					'true,hide_on_mobile',
+				'id'         => 'pagination_colors',
+				'type'       => 'color_group',
+				'title'      => __( 'Pagination Color', 'testimonial-free' ),
+				'subtitle'   => __( 'Set the pagination color.', 'testimonial-free' ),
+				'options'    => array(
+					'color'        => __( 'Color', 'testimonial-free' ),
+					'active-color' => __( 'Active Color', 'testimonial-free' ),
 				),
-			),
-			array(
-				'id'         => 'pagination_active_color',
-				'type'       => 'color',
-				'title'      => __( 'Active Color', 'testimonial-free' ),
-				'subtitle'   => __( 'Set the pagination active color.', 'testimonial-free' ),
-				'default'    => '#52b3d9',
+				'default'    => array(
+					'color'        => '#cccccc',
+					'active-color' => '#52b3d9',
+				),
 				'dependency' => array(
 					'pagination',
 					'any',
@@ -316,19 +333,19 @@ SPFTESTIMONIAL::createSection(
 			),
 			array(
 				'type'    => 'subheading',
-				'content' => __( 'Misc. Settings', 'testimonial-free' ),
+				'content' => __( 'Miscellaneous', 'testimonial-free' ),
 			),
 			array(
 				'id'       => 'adaptive_height',
 				'type'     => 'switcher',
-				'title'    => __( 'Adaptive Height', 'testimonial-free' ),
-				'subtitle' => __( 'On/Off adaptive height for the slider.', 'testimonial-free' ),
+				'title'    => __( 'Adaptive Slider Height', 'testimonial-free' ),
+				'subtitle' => __( 'Dynamically adjust slider height based on each slide\'s height.', 'testimonial-free' ),
 				'default'  => false,
 			),
 			array(
 				'id'       => 'slider_swipe',
 				'type'     => 'switcher',
-				'title'    => __( 'Swipe', 'testimonial-free' ),
+				'title'    => __( 'Touch Swipe', 'testimonial-free' ),
 				'subtitle' => __( 'On/Off swipe mode.', 'testimonial-free' ),
 				'default'  => true,
 			),
@@ -341,17 +358,12 @@ SPFTESTIMONIAL::createSection(
 				'dependency' => array( 'slider_swipe', '==', 'true' ),
 			),
 			array(
-				'id'       => 'rtl_mode',
-				'type'     => 'switcher',
-				'title'    => __( 'RTL', 'testimonial-free' ),
-				'subtitle' => __( 'On/Off right to left mode.', 'testimonial-free' ),
-				'default'  => false,
-			),
-			array(
-				'type'       => 'submessage',
-				'style'      => 'danger',
-				'content'    => __( 'To make the RTL Mode work, please select an rtl language in the dashboard e.g. Arabic, Hebrew.', 'testimonial-free' ),
-				'dependency' => array( 'rtl_mode', '==', 'true' ),
+				'id'         => 'swipe_to_slide',
+				'type'       => 'switcher',
+				'title'      => __( 'Swipe to Slide', 'testimonial-free' ),
+				'subtitle'   => __( 'On/Off swipe to slide.', 'testimonial-free' ),
+				'default'    => false,
+				'dependency' => array( 'slider_swipe', '==', 'true' ),
 			),
 
 		),
@@ -359,63 +371,78 @@ SPFTESTIMONIAL::createSection(
 );
 
 //
-// Stylization section.
+// Display Settings section.
 //
 SPFTESTIMONIAL::createSection(
 	$prefix_shortcode_opts, array(
-		'title'  => __( 'Stylization', 'testimonial-free' ),
-		'icon'   => 'fa fa-paint-brush',
+		'title'  => __( 'Display Settings', 'testimonial-free' ),
+		'icon'   => 'fa fa-th-large',
 		'fields' => array(
 
 			array(
 				'id'       => 'section_title',
 				'type'     => 'switcher',
 				'title'    => __( 'Section Title', 'testimonial-free' ),
-				'subtitle' => __( 'Show/Hide the shortcode title as testimonial section title e.g. What Our Customers Saying.', 'testimonial-free' ),
+				'subtitle' => __( 'Show/Hide the testimonial section title.', 'testimonial-free' ),
+				'text_on'    => __( 'Show', 'testimonial-free' ),
+				'text_off'   => __( 'Hide', 'testimonial-free' ),
+				'text_width' => 80,
 				'default'  => false,
+			),
+			array(
+				'type'    => 'subheading',
+				'content' => __( 'Testimonial Content', 'testimonial-free' ),
 			),
 			array(
 				'id'       => 'testimonial_title',
 				'type'     => 'switcher',
 				'title'    => __( 'Testimonial Title', 'testimonial-free' ),
 				'subtitle' => __( 'Show/Hide testimonial tagline or title.', 'testimonial-free' ),
+				'text_on'    => __( 'Show', 'testimonial-free' ),
+				'text_off'   => __( 'Hide', 'testimonial-free' ),
+				'text_width' => 80,
 				'default'  => true,
-			),
-			array(
-				'type'    => 'subheading',
-				'content' => __( 'Testimonial Content Settings', 'testimonial-free' ),
 			),
 			array(
 				'id'       => 'testimonial_text',
 				'type'     => 'switcher',
 				'title'    => __( 'Testimonial Content', 'testimonial-free' ),
 				'subtitle' => __( 'Show/Hide testimonial content.', 'testimonial-free' ),
+				'text_on'    => __( 'Show', 'testimonial-free' ),
+				'text_off'   => __( 'Hide', 'testimonial-free' ),
+				'text_width' => 80,
 				'default'  => true,
 			),
 			array(
 				'type'    => 'subheading',
-				'content' => __( 'Reviewer Information Settings', 'testimonial-free' ),
+				'content' => __( 'Reviewer Information', 'testimonial-free' ),
 			),
 			array(
 				'id'       => 'testimonial_client_name',
 				'type'     => 'switcher',
-				'title'    => __( 'Name', 'testimonial-free' ),
-				'subtitle' => __( 'Show/Hide reviewer name.', 'testimonial-free' ),
+				'title'    => __( 'Full Name', 'testimonial-free' ),
+				'subtitle' => __( 'Show/Hide reviewer full name.', 'testimonial-free' ),
+				'text_on'    => __( 'Show', 'testimonial-free' ),
+				'text_off'   => __( 'Hide', 'testimonial-free' ),
+				'text_width' => 80,
 				'default'  => true,
 			),
 			array(
 				'id'       => 'testimonial_client_rating',
 				'type'     => 'switcher',
-				'title'    => __( 'Star Rating', 'testimonial-free' ),
-				'subtitle' => __( 'Show/Hide star ratings.', 'testimonial-free' ),
+				'title'    => __( 'Rating', 'testimonial-free' ),
+				'subtitle' => __( 'Show/Hide rating.', 'testimonial-free' ),
+				'text_on'    => __( 'Show', 'testimonial-free' ),
+				'text_off'   => __( 'Hide', 'testimonial-free' ),
+				'text_width' => 80,
 				'default'  => true,
 			),
 			array(
 				'id'         => 'testimonial_client_rating_color',
 				'type'       => 'color',
-				'title'      => __( 'Star Rating Color', 'testimonial-free' ),
-				'subtitle'   => __( 'Set color for star rating.', 'testimonial-free' ),
-				'default'    => '#f3bb00',
+				'title'      => __( 'Rating Color', 'testimonial-free' ),
+				'subtitle'   => __( 'Set color for rating.', 'testimonial-free' ),
+				'default'    => '#ffb900',
 				'dependency' => array( 'testimonial_client_rating', '==', 'true' ),
 			),
 			array(
@@ -423,7 +450,67 @@ SPFTESTIMONIAL::createSection(
 				'type'     => 'switcher',
 				'title'    => __( 'Identity or Position', 'testimonial-free' ),
 				'subtitle' => __( 'Show/Hide identity or position.', 'testimonial-free' ),
+				'text_on'    => __( 'Show', 'testimonial-free' ),
+				'text_off'   => __( 'Hide', 'testimonial-free' ),
+				'text_width' => 80,
 				'default'  => true,
+			),
+
+		),
+	)
+);
+
+//
+// Image Settings section.
+//
+SPFTESTIMONIAL::createSection(
+	$prefix_shortcode_opts, array(
+		'title'  => __( 'Image Settings', 'testimonial-free' ),
+		'icon'   => 'fa fa-image',
+		'fields' => array(
+
+			array(
+				'id'         => 'client_image',
+				'type'       => 'switcher',
+				'title'      => __( 'Testimonial Image', 'testimonial-free' ),
+				'subtitle'   => __( 'Show/Hide testimonial image.', 'testimonial-free' ),
+				'text_on'    => __( 'Show', 'testimonial-free' ),
+				'text_off'   => __( 'Hide', 'testimonial-free' ),
+				'text_width' => 80,
+				'default'    => true,
+			),
+			array(
+				'id'         => 'image_sizes',
+				'type'       => 'image_sizes',
+				'title'      => __( 'Testimonial Image Size', 'testimonial-free' ),
+				'subtitle'   => __( 'Select which size image to show with your Testimonials.', 'testimonial-free' ),
+				'default'    => 'tf-client-image-size',
+				'dependency' => array(
+					'client_image',
+					'==',
+					'true',
+				),
+			),
+			array(
+				'id'         => 'image_custom_size',
+				'type'       => 'custom_size',
+				'class'       => 'disabled',
+				'title'      => __( 'Custom Size', 'testimonial-free' ),
+				'subtitle'   => __( 'Set a custom width and height of the image.', 'testimonial-free' ),
+				'default'    => array(
+					'width'  => '120',
+					'height' => '120',
+					'crop'   => 'hard-crop',
+					'unit'   => 'px',
+				),
+				'attributes' => array(
+					'min' => 0,
+				),
+				'dependency' => array(
+					'client_image|image_sizes',
+					'==|==',
+					'true|custom',
+				),
 			),
 
 		),
@@ -758,23 +845,6 @@ SPFTESTIMONIAL::createSection(
 );
 
 //
-// Upgrade to Pro section.
-//
-SPFTESTIMONIAL::createSection(
-	$prefix_shortcode_opts, array(
-		'title'  => __( 'Upgrade to Pro', 'testimonial-free' ),
-		'icon'   => 'fa fa-rocket',
-		'fields' => array(
-			array(
-				'type'    => 'upgrade',
-				'content'    => 'upgrade',
-			),
-
-		),
-	)
-);
-
-//
 // Metabox of the Testimonial.
 // Set a unique slug-like ID.
 //
@@ -786,6 +856,7 @@ $prefix_testimonial_opts = 'sp_tpro_meta_options';
 SPFTESTIMONIAL::createMetabox(
 	$prefix_testimonial_opts, array(
 		'title'     => __( 'Testimonial Options', 'testimonial-free' ),
+		'class'     => 'spt-main-class',
 		'post_type' => 'spt_testimonial',
 		'context'   => 'normal',
 	)
@@ -802,20 +873,19 @@ SPFTESTIMONIAL::createSection(
 			array(
 				'id'       => 'tpro_name',
 				'type'     => 'text',
-				'title'    => __( 'Name', 'testimonial-free' ),
-				'subtitle' => __( 'Type reviewer name here.', 'testimonial-free' ),
+				'title'    => __( 'Full Name', 'testimonial-free' ),
+				'sanitize' => 'spftestimonial_sanitize_text',
 			),
 			array(
 				'id'       => 'tpro_designation',
 				'type'     => 'text',
 				'title'    => __( 'Identity or Position', 'testimonial-free' ),
-				'subtitle' => __( 'Type reviewer identity or position here.', 'testimonial-free' ),
+				'sanitize' => 'spftestimonial_sanitize_text',
 			),
 			array(
 				'id'       => 'tpro_rating',
 				'type'     => 'rating',
-				'title'    => __( 'Rating Star', 'testimonial-free' ),
-				'subtitle' => __( 'Rating star along with testimonial.', 'testimonial-free' ),
+				'title'    => __( 'Rating', 'testimonial-free' ),
 				'options'  => array(
 					'five_star'  => __( '5 Stars', 'testimonial-free' ),
 					'four_star'  => __( '4 Stars', 'testimonial-free' ),
@@ -824,89 +894,7 @@ SPFTESTIMONIAL::createSection(
 					'one_star'   => __( '1 Star', 'testimonial-free' ),
 				),
 				'default'  => '',
-			),
-
-		),
-	)
-);
-
-//
-// Social Profiles section.
-//
-SPFTESTIMONIAL::createSection(
-	$prefix_testimonial_opts, array(
-		'title'  => __( 'Social Profiles', 'testimonial-free' ),
-		'fields' => array(
-			array(
-				'type'    => 'notice',
-				'style'   => 'normal',
-				'content' => __( 'The Social Profile options are available in the <a href="https://shapedplugin.com/plugin/testimonial-pro" target="_blank">Pro Version</a> only.', 'testimonial-free' ),
-			),
-			array(
-				'id'       => 'tpro_social_facebook_url',
-				'type'     => 'text_f',
-				'title'    => __( 'Facebook', 'testimonial-free' ),
-				'subtitle' => __( 'Type facebook URL here.', 'testimonial-free' ),
-			),
-			array(
-				'id'       => 'tpro_social_twitter_url',
-				'type'     => 'text_f',
-				'title'    => __( 'Twitter', 'testimonial-free' ),
-				'subtitle' => __( 'Type twitter URL here.', 'testimonial-free' ),
-			),
-			array(
-				'id'       => 'tpro_social_linked_in_url',
-				'type'     => 'text_f',
-				'title'    => __( 'LinkedIn', 'testimonial-free' ),
-				'subtitle' => __( 'Type linkedin URL here.', 'testimonial-free' ),
-			),
-			array(
-				'id'       => 'tpro_social_instagram_url',
-				'type'     => 'text_f',
-				'title'    => __( 'Instagram', 'testimonial-free' ),
-				'subtitle' => __( 'Type Instagram URL here.', 'testimonial-free' ),
-			),
-			array(
-				'id'       => 'tpro_social_youtube_url',
-				'type'     => 'text_f',
-				'title'    => __( 'YouTube', 'testimonial-free' ),
-				'subtitle' => __( 'Type youtube URL here.', 'testimonial-free' ),
-			),
-			array(
-				'id'       => 'tpro_social_pinterest_url',
-				'type'     => 'text_f',
-				'title'    => __( 'Pinterest', 'testimonial-free' ),
-				'subtitle' => __( 'Type pinterest URL here.', 'testimonial-free' ),
-			),
-			array(
-				'id'       => 'tpro_social_skype_url',
-				'type'     => 'text_f',
-				'title'    => __( 'Skype', 'testimonial-free' ),
-				'subtitle' => __( 'Type skype URL here.', 'testimonial-free' ),
-			),
-			array(
-				'id'       => 'tpro_social_stumble_upon_url',
-				'type'     => 'text_f',
-				'title'    => __( 'StumbleUpon', 'testimonial-free' ),
-				'subtitle' => __( 'Type stumbleupon URL here.', 'testimonial-free' ),
-			),
-			array(
-				'id'       => 'tpro_social_reddit_url',
-				'type'     => 'text_f',
-				'title'    => __( 'Reddit', 'testimonial-free' ),
-				'subtitle' => __( 'Type reddit URL here.', 'testimonial-free' ),
-			),
-			array(
-				'id'       => 'tpro_social_dribbble_url',
-				'type'     => 'text_f',
-				'title'    => __( 'Dribbble', 'testimonial-free' ),
-				'subtitle' => __( 'Type dribbble URL here.', 'testimonial-free' ),
-			),
-			array(
-				'id'       => 'tpro_social_snapchat_url',
-				'type'     => 'text_f',
-				'title'    => __( 'SnapChat', 'testimonial-free' ),
-				'subtitle' => __( 'Type snapchat URL here.', 'testimonial-free' ),
+				'sanitize' => 'spftestimonial_sanitize_text',
 			),
 
 		),

@@ -138,15 +138,19 @@ class PUM_Model_Popup extends PUM_Abstract_Model_Post {
 	 * @return array
 	 */
 	public function get_settings() {
-		// This hack is here to allow creating popups on the fly without saved meta.
-		$settings = isset( $this->settings ) ? $this->settings : $this->get_meta( 'popup_settings' );
+		if ( ! isset( $this->settings ) ) {
+			// This hack is here to allow creating popups on the fly without saved meta.
+			$settings = isset( $this->settings ) ? $this->settings : $this->get_meta( 'popup_settings' );
 
-		if ( ! is_array( $settings ) ) {
-			$settings = array();
+			if ( ! is_array( $settings ) ) {
+				$settings = array();
+			}
+
+			// Review: the above should be removed and replaced with a hooked filter here to supply defaults when $settings === false.
+			$this->settings = apply_filters( 'pum_popup_settings', $settings, $this->ID );
 		}
 
-		// Review: the above should be removed and replaced with a hooked filter here to supply defaults when $settings === false.
-		return apply_filters( 'pum_popup_settings', $settings, $this->ID );
+		return $this->settings;
 	}
 
 	/**
@@ -216,9 +220,15 @@ class PUM_Model_Popup extends PUM_Abstract_Model_Post {
 		foreach ( $settings as $key => $value ) {
 			$field = PUM_Admin_Popups::get_field( $key );
 
+			if ( false === $field && isset( $value ) ) {
+				// This is a value set programatically, not by a defined field. ex theme_slug.
+				$settings[ $key ] = $value;
+				continue;
+			}
+
 			if ( $field['private'] ) {
 				unset( $settings[ $key ] );
-			} elseif ( $field['type'] == 'checkbox' ) {
+			} elseif ( 'checkbox' === $field['type'] ) {
 				$settings[ $key ] = (bool) $value;
 			}
 		}
@@ -802,6 +812,39 @@ class PUM_Model_Popup extends PUM_Abstract_Model_Post {
 	}
 
 	/**
+	 * Retrieves the 'enabled' meta key and returns true if popup is enabled
+	 *
+	 * @since 1.12
+	 * @return bool True if enabled
+	 */
+	public function is_enabled() {
+		$enabled = $this->get_meta( 'enabled' );
+
+		// Post ID not valid.
+		if ( false === $enabled ) {
+			return false;
+		}
+
+		// If the key is missing...
+		if ( '' === $enabled ) {
+			// Set it to enabled.
+			$enabled = 1;
+			$this->update_meta( 'enabled', $enabled );
+		} else {
+			// Else, load it in.
+			$enabled = intval( $enabled );
+			if ( ! in_array( $enabled, array( 0, 1 ), true ) ) {
+				$enabled = 1;
+			}
+		}
+		if ( 1 === $enabled ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
 	 * Returns whether or not the popup is visible in the loop.
 	 *
 	 * @return bool
@@ -814,6 +857,11 @@ class PUM_Model_Popup extends PUM_Abstract_Model_Post {
 		if ( ! $this->ID ) {
 			return false;
 			// Published/private
+		}
+
+		// If popup is not enabled, this popup is not loadable.
+		if ( ! $this->is_enabled() ) {
+			return false;
 		}
 
 		$filters = array( 'php_only' => true );
@@ -945,7 +993,7 @@ class PUM_Model_Popup extends PUM_Abstract_Model_Post {
 		$current = $this->get_event_count( $event );
 		if ( ! $current ) {
 			$current = 0;
-		};
+		}
 		$current = $current + 1;
 
 		// Set the total count since creation.
@@ -1115,7 +1163,7 @@ class PUM_Model_Popup extends PUM_Abstract_Model_Post {
 	 * @param      $id
 	 * @param bool $force
 	 *
-	 * @return \PUM_Model_Popup
+	 * @return PUM_Model_Popup
 	 */
 	public static function instance( $id, $force = false ) {
 		return pum_get_popup( $id );

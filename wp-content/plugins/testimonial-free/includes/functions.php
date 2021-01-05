@@ -14,7 +14,7 @@ class SP_Testimonial_Free_Functions {
 	public function __construct() {
 		add_filter( 'post_updated_messages', array( $this, 'sp_tfree_change_default_post_update_message' ) );
 		add_filter( 'admin_footer_text', array( $this, 'admin_footer' ), 1, 2 );
-		add_action( 'admin_menu', array( $this, 'admin_menu' ) );
+		add_action( 'admin_menu', array( $this, 'admin_menu' ), 100 );
 		// Post thumbnails.
 		add_theme_support( 'post-thumbnails' );
 		add_image_size( 'tf-client-image-size', 120, 120, true );
@@ -281,7 +281,7 @@ class SP_Testimonial_Free_Functions {
 				</div>
 				<hr>
 				<div class="sp-tfree-join-community sp-tfree-text-center">
-					<h2>Join the <b>20000+</b> Happy Users Worldwide!</h2>
+					<h2>Join the <b>30000+</b> Happy Users Worldwide!</h2>
 					<a class="tfree-upgrade-btn" target="_blank" href="https://shapedplugin.com/plugin/testimonial-pro/">Get a license instantly</a>
 					<p>Every purchase comes with <b>7-day</b> money back guarantee and access to our incredibly Top-notch Support with lightening-fast response time and 100% satisfaction rate. One-Time payment, lifetime automatic update.</p>
 				</div>
@@ -293,8 +293,6 @@ class SP_Testimonial_Free_Functions {
 					<p><a href="https://shapedplugin.com/demo/testimonial-pro/" target="_blank" class="button
 					button-primary">Live Demo</a> <a href="https://shapedplugin.com/plugin/testimonial-pro/" target="_blank" class="button button-primary">Upgrade Now</a></p>
 				</div>
-			</div>
-
 			</div>
 		<?php
 	}
@@ -372,7 +370,7 @@ new SP_Testimonial_Free_Functions();
 // Polylang plugin support for multi language support.
 if ( class_exists( 'Polylang' ) ) {
 
-	add_filter( 'pll_get_post_types', 'sp_tfree_testimonial_polylang', 10, 2 );
+	add_filter( 'pll_get_post_types', 'sp_free_testimonial_polylang', 10, 2 );
 
 	function sp_free_testimonial_polylang( $post_types, $is_settings ) {
 		if ( $is_settings ) {

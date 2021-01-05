@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitd56ba48c31cd16567b66dd0f477c61cc
+class ComposerStaticInitb9765c31380d71381abf41c80af90ecf
 {
     public static $files = array (
         'ce89ac35a6c330c55f4710717db9ff78' => __DIR__ . '/..' . '/kriswallsmith/assetic/src/functions.php',
@@ -119,6 +119,7 @@ class ComposerStaticInitd56ba48c31cd16567b66dd0f477c61cc
     );
 
     public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'Psr\\Log\\AbstractLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/AbstractLogger.php',
         'Psr\\Log\\InvalidArgumentException' => __DIR__ . '/..' . '/psr/log/Psr/Log/InvalidArgumentException.php',
         'Psr\\Log\\LogLevel' => __DIR__ . '/..' . '/psr/log/Psr/Log/LogLevel.php',
@@ -127,7 +128,7 @@ class ComposerStaticInitd56ba48c31cd16567b66dd0f477c61cc
         'Psr\\Log\\LoggerInterface' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerInterface.php',
         'Psr\\Log\\LoggerTrait' => __DIR__ . '/..' . '/psr/log/Psr/Log/LoggerTrait.php',
         'Psr\\Log\\NullLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/NullLogger.php',
-        'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
+        'Psr\\Log\\Test\\DummyTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/DummyTest.php',
         'Psr\\Log\\Test\\LoggerInterfaceTest' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
         'Psr\\Log\\Test\\TestLogger' => __DIR__ . '/..' . '/psr/log/Psr/Log/Test/TestLogger.php',
         'Symfony\\Component\\EventDispatcher\\ContainerAwareEventDispatcher' => __DIR__ . '/..' . '/symfony/event-dispatcher/ContainerAwareEventDispatcher.php',
@@ -146,10 +147,10 @@ class ComposerStaticInitd56ba48c31cd16567b66dd0f477c61cc
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitd56ba48c31cd16567b66dd0f477c61cc::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitd56ba48c31cd16567b66dd0f477c61cc::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInitd56ba48c31cd16567b66dd0f477c61cc::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInitd56ba48c31cd16567b66dd0f477c61cc::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitb9765c31380d71381abf41c80af90ecf::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitb9765c31380d71381abf41c80af90ecf::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitb9765c31380d71381abf41c80af90ecf::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInitb9765c31380d71381abf41c80af90ecf::$classMap;
 
         }, null, ClassLoader::class);
     }

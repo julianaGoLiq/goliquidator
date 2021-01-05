@@ -3,7 +3,7 @@
   Plugin Name: Product Category Tree
   Plugin URI: https://awesometogi.com/product-category-tree-plugin-for-wordpress/
   Description: See your product categories in a tree structure and change their order via drag 'n' drop.
-  Version: 2.3
+  Version: 2.4
   Author: AWESOME TOGI
   Author URI: https://awesometogi.com
   Text Domain: wc-disable-categories

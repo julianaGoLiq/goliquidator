@@ -12,7 +12,7 @@
  * Plugin Name:     Testimonial
  * Plugin URI:      https://shapedplugin.com/plugin/testimonial-pro/
  * Description:     Most Customizable and Powerful Testimonials Showcase Plugin for WordPress that allows you to manage and display Testimonials or Reviews on any page or widget.
- * Version:         2.1.5
+ * Version:         2.2.7
  * Author:          ShapedPlugin
  * Author URI:      https://shapedplugin.com/
  * Text Domain:     testimonial-free
@@ -50,8 +50,8 @@ register_deactivation_hook( __FILE__, 'deactivate_testimonial' );
 
 require_once plugin_dir_path( __FILE__ ) . 'includes/class-testimonial-updates.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/views/notices/review.php';
-require_once plugin_dir_path( __FILE__ ) . 'admin/views/tp-metabox/classes/setup.class.php';
-//require_once plugin_dir_path( __FILE__ ) . 'admin/views/testimonial-settings.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/views/framework/classes/setup.class.php';
+require_once plugin_dir_path( __FILE__ ) . 'admin/views/testimonial-settings.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin/views/testimonial-metaboxs.php';
 
 if ( ! class_exists( 'SP_Testimonial_FREE' ) ) {
@@ -67,7 +67,7 @@ if ( ! class_exists( 'SP_Testimonial_FREE' ) ) {
 		 *
 		 * @var string
 		 */
-		public $version = '2.1.5';
+		public $version = '2.2.7';
 
 		/**
 		 * @var SP_TFREE_Testimonial $shortcode
@@ -384,7 +384,7 @@ if ( ! class_exists( 'SP_Testimonial_FREE' ) ) {
 					if ( isset( $testimonial_data['tpro_name'] ) ) {
 						$testimonial_client_name = $testimonial_data['tpro_name'];
 						if ( $testimonial_client_name !== '' ) {
-							echo $testimonial_client_name;
+							echo esc_html( $testimonial_client_name );
 						} else {
 							echo '<span aria-hidden="true">—</span>';
 						}

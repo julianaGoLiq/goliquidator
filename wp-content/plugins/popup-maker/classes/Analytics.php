@@ -9,21 +9,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Controls the basic analytics methods for Popup Maker
- *
  */
 class PUM_Analytics {
 
 	/**
-	 *
+	 * Initializes analytics endpoints and data
 	 */
 	public static function init() {
-		if ( pum_get_option( 'disable_analytics' ) || popmake_get_option( 'disable_popup_open_tracking' ) ) {
+		if ( ! self::analytics_enabled() ) {
 			return;
 		}
 
 		add_action( 'rest_api_init', array( __CLASS__, 'register_endpoints' ) );
 		add_action( 'wp_ajax_pum_analytics', array( __CLASS__, 'ajax_request' ) );
 		add_action( 'wp_ajax_nopriv_pum_analytics', array( __CLASS__, 'ajax_request' ) );
+		add_filter( 'pum_vars', array( __CLASS__, 'pum_vars' ) );
+	}
+
+	/**
+	 * @return bool
+	 */
+	public static function analytics_enabled() {
+		$disabled = pum_get_option( 'disable_analytics' ) || popmake_get_option( 'disable_popup_open_tracking' );
+
+		return (bool) apply_filters( 'pum_analytics_enabled', ! $disabled );
 	}
 
 	/**
@@ -32,24 +41,31 @@ class PUM_Analytics {
 	 * @return mixed
 	 */
 	public static function event_keys( $event ) {
-		$keys = array( $event, $event . 'ed' );
+		$keys = array( $event, rtrim( $event, 'e' ) . 'ed' );
 
-		switch ( $event ) {
-			case 'conversion':
-				$keys[1] = 'conversion';
-				break;
+		if ( 'conversion' === $event ) {
+			$keys[1] = 'conversion';
 		}
 
 		return apply_filters( 'pum_analytics_event_keys', $keys, $event );
 	}
 
 	/**
-	 * @param $args
+	 * Track an event.
+	 *
+	 * This is called by various methods including the ajax & rest api requests.
+	 *
+	 * Can be used externally such as after purchase tracking.
+	 *
+	 * @param array $args
 	 */
-	public static function track( $args ) {
+	public static function track( $args = array() ) {
 		if ( empty ( $args['pid'] ) || $args['pid'] <= 0 ) {
 			return;
 		}
+
+//		$uuid = isset( $_COOKIE['__pum'] ) ? sanitize_text_field( $_COOKIE['__pum'] ) : false;
+//		$session = $uuid && isset( $_COOKIE[ $uuid ] ) ? PUM_Utils_Array::safe_json_decode( $_COOKIE[ $uuid ] ) : false;
 
 		$event = sanitize_text_field( $args['event'] );
 
@@ -65,10 +81,13 @@ class PUM_Analytics {
 			do_action( 'pum_analytics_' . $event, $popup->ID, $args );
 		}
 
+		do_action( 'pum_analytics_event', $args );
 	}
 
 	/**
+	 * Process ajax requests.
 	 *
+	 * Only used when WP-JSON Restful API is not available.
 	 */
 	public static function ajax_request() {
 
@@ -125,16 +144,14 @@ class PUM_Analytics {
 	}
 
 	/**
-	 *
+	 * Registers the analytics endpoints
 	 */
 	public static function register_endpoints() {
-		$version   = 1;
-		$namespace = 'pum/v' . $version;
-
-		register_rest_route( $namespace, 'analytics', array(
-			'methods'  => 'GET',
-			'callback' => array( __CLASS__, 'analytics_endpoint' ),
-			'args'     => array(
+		register_rest_route( self::get_analytics_namespace(), self::get_analytics_route(), apply_filters( 'pum_analytics_rest_route_args', array(
+			'methods'             => 'GET',
+			'callback'            => array( __CLASS__, 'analytics_endpoint' ),
+			'permission_callback' => '__return_true',
+			'args'                => array(
 				'event' => array(
 					'required'    => true,
 					'description' => __( 'Event Type', 'popup-maker' ),
@@ -148,7 +165,76 @@ class PUM_Analytics {
 					'sanitize_callback'   => 'absint',
 				),
 			),
-		) );
+		) ) );
+	}
+
+	/**
+	 * Adds our analytics endpoint to pum_vars
+	 *
+	 * @param array $vars The current pum_vars.
+	 * @return array The updates pum_vars
+	 */
+	public static function pum_vars( $vars = array() ) {
+		$vars['analytics_route'] = self::get_analytics_route();
+		if ( function_exists( 'rest_url' ) ) {
+			$vars['analytics_api'] = esc_url_raw( rest_url( self::get_analytics_namespace() ) );
+		} else {
+			$vars['analytics_api'] = false;
+		}
+		return $vars;
+	}
+
+	/**
+	 * Gets the analytics namespace
+	 *
+	 * If bypass adblockers is enabled, will return random or custom string. If not, returns 'pum/v1'.
+	 *
+	 * @return string The analytics namespce
+	 * @since 1.13.0
+	 */
+	public static function get_analytics_namespace() {
+		$version   = 1;
+		$namespace = self::customize_endpoint_value( 'pum' );
+		return "$namespace/v$version";
+	}
+
+	/**
+	 * Gets the analytics route
+	 *
+	 * If bypass adblockers is enabled, will return random or custom string. If not, returns 'analytics'.
+	 *
+	 * @return string The analytics route
+	 * @since 1.13.0
+	 */
+	public static function get_analytics_route() {
+		$route = 'analytics';
+		return self::customize_endpoint_value( $route );
+	}
+
+	/**
+	 * Customizes the endpoint value given to it
+	 *
+	 * If bypass adblockers is enabled, will return random or custom string. If not, returns the value given to it.
+	 *
+	 * @param string $value The value to, potentially, customize.
+	 * @return string
+	 * @since 1.13.0
+	 */
+	public static function customize_endpoint_value( $value = '' ) {
+		$bypass_adblockers = pum_get_option( 'bypass_adblockers', false );
+		if ( true === $bypass_adblockers || 1 === intval( $bypass_adblockers ) ) {
+			switch ( pum_get_option( 'adblock_bypass_url_method', 'random' ) ) {
+				case 'custom':
+					$value = preg_replace( '/[^a-z0-9]+/', '-', pum_get_option( 'adblock_bypass_custom_filename', $value ) );
+					break;
+				case 'random':
+				default:
+					$site_url = get_site_url();
+					$value    = md5( $site_url . $value );
+					break;
+			}
+		}
+		return $value;
 	}
 
 	/**

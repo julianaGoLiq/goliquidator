@@ -74,7 +74,11 @@ if (!function_exists('wcdc_fun_togi_woo_categories')) {
     <div class="wrap nosubsub ace_cat_start_top">
         <h2 class="dashicons-before dashicons-networking"><?php _e('Product Category Tree', 'wc-disable-categories'); ?></h2>
         <div id="col-container">
-
+            <p>
+                <?php
+                _e('<p style="color:red">Note: You can use this category tree in dynamic menu pro for listing in front. </p>', 'wc-disable-categories'); 
+                ?>
+            </p>
             <div id="col-right">
                 <div class="col-wrap">
                     <div class="ace_expand_col">

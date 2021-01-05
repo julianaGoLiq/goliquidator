@@ -17,7 +17,11 @@ class PUM_Newsletters {
 	public static $disabled = false;
 
 	public static function init() {
-		add_action( 'plugins_loaded', array( __CLASS__, 'delayed_init' ), - 100 );
+		if ( doing_action( 'plugins_loaded' ) || ! did_action( 'plugins_loaded' ) ) {
+			add_action( 'plugins_loaded', array( __CLASS__, 'delayed_init' ), 11 );
+		} else {
+			self::delayed_init();
+		}
 	}
 
 	public static function delayed_init() {
@@ -185,8 +189,6 @@ class PUM_Newsletters {
 			'consent'      => 'no',
 			'consent_args' => '',
 		) );
-
-		$data['values'] = maybe_serialize( $values );
 
 		$subscriber_id = PUM_DB_Subscribers::instance()->insert( $data );
 

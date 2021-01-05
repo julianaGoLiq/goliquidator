@@ -33,6 +33,7 @@ class Testimonial_Updates {
 	 */
 	private static $updates = [
 		'2.1.5' => 'updates/update-2.1.5.php',
+		'2.2.5' => 'updates/update-2.2.5.php',
 	];
 
 	/**
@@ -57,8 +58,8 @@ class Testimonial_Updates {
 		$installed_version = get_option( 'testimonial_version' );
 
 		if ( false === $installed_version ) {
-			update_option( 'testimonial_version', '2.1.4' );
-			update_option( 'testimonial_db_version', '2.1.4' );
+			update_option( 'testimonial_version', SP_TFREE_VERSION );
+			update_option( 'testimonial_db_version', SP_TFREE_VERSION );
 		}
 
 		if ( version_compare( $installed_version, SP_TFREE_VERSION, '<' ) ) {

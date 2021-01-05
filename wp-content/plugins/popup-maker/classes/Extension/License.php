@@ -38,11 +38,12 @@ class PUM_Extension_License {
 	 * Class constructor
 	 *
 	 * @param string $_file
-	 * @param string $_item
+	 * @param string $_item_name
 	 * @param string $_version
 	 * @param string $_author
 	 * @param string $_optname
 	 * @param string $_api_url
+	 * @param int    $_item_id
 	 */
 	function __construct( $_file, $_item_name, $_version, $_author, $_optname = null, $_api_url = null, $_item_id = null ) {
 		$this->file      = $_file;
@@ -224,6 +225,7 @@ class PUM_Extension_License {
 			'edd_action' => 'activate_license',
 			'license'    => $license,
 			'item_name'  => urlencode( $this->item_name ),
+			'item_id'    => $this->item_id,
 			'url'        => home_url(),
 		);
 
@@ -344,37 +346,56 @@ class PUM_Extension_License {
 
 	}
 
+	/**
+	 * Adds an alert to the Popup Maker notification area when the license is invalid, expired, or empty
+	 *
+	 * @param array $alerts The existing alerts from the pum_alert_list filter
+	 * @return array Our modified array of alerts
+	 */
 	public function alerts( $alerts = array() ) {
 
 		static $showed_invalid_message;
 
-		// If no license, user can't manage it, or we already showed this alert abort.
-		if ( empty( $this->license ) || ! current_user_can( 'manage_options' ) || $showed_invalid_message ) {
+		// If user can't manage it, or we already showed this alert abort.
+		if (  ! current_user_can( 'manage_options' ) || $showed_invalid_message ) {
 			return $alerts;
 		}
 
 		// If this alert is already in the list of alerts, abort.
 		foreach ( $alerts as $alert ) {
-			if ( $alert['code'] === 'license_not_valid' ) {
+			if ( 'license_not_valid' === $alert['code'] ) {
 				return $alerts;
 			}
 		}
 
-		$license = get_option( $this->item_shortname . '_license_active' );
+		// If this license key is not empty, check if it's valid.
+		if ( ! empty( $this->license ) ) {
+			$license = get_option( $this->item_shortname . '_license_active' );
 
-		if ( ! is_object( $license ) || 'valid' === $license->license ) {
-			return $alerts;
+			if ( ! is_object( $license ) || 'valid' === $license->license ) {
+				return $alerts;
+			}
 		}
 
 		$showed_invalid_message = true;
 
-		$alerts[] = array(
-			'code'        => 'license_not_valid',
-			'message'     => sprintf( __( 'You have invalid or expired license keys for Popup Maker. Please go to the %sLicenses page%s to correct this issue.', 'popup-maker' ), '<a href="' . admin_url( 'edit.php?post_type=popup&page=pum-settings&tab=licenses' ) . '">', '</a>' ),
-			'type'        => 'error',
-			'dismissible' => '4 weeks',
-			'priority'    => 0,
-		);
+		if ( empty( $this->license ) ) {
+			$alerts[] = array(
+				'code'        => 'license_not_valid',
+				'message'     => sprintf( __( 'One or more of your extensions are missing license keys. You will not be able to receive updates until the extension has a valid license key entered. Please go to the %sLicenses page%s to add your license keys.', 'popup-maker' ), '<a href="' . admin_url( 'edit.php?post_type=popup&page=pum-settings&tab=licenses' ) . '">', '</a>' ),
+				'type'        => 'error',
+				'dismissible' => '4 weeks',
+				'priority'    => 0,
+			);
+		} else {
+			$alerts[] = array(
+				'code'        => 'license_not_valid',
+				'message'     => sprintf( __( 'You have invalid or expired license keys for Popup Maker. Please go to the %sLicenses page%s to correct this issue.', 'popup-maker' ), '<a href="' . admin_url( 'edit.php?post_type=popup&page=pum-settings&tab=licenses' ) . '">', '</a>' ),
+				'type'        => 'error',
+				'dismissible' => '4 weeks',
+				'priority'    => 0,
+			);
+		}
 
 		return $alerts;
 	}

@@ -95,7 +95,7 @@ function nbcpf_countrytext_validation_filter( $result, $tag ) {
 	$type = $tag->type;
 	$name = $tag->name;
 
-	$value = isset( $_POST[$name] ) ? (string) $_POST[$name] : '';
+	$value = isset( $_POST[$name] ) ? (string) wp_unslash($_POST[$name]) : '';
 
 	if ( $tag->is_required() && '' == $value ) {
 		$result->invalidate( $tag, wpcf7_get_message( 'invalid_required' ) );

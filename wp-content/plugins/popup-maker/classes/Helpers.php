@@ -53,6 +53,93 @@ class PUM_Helpers {
 		return $shortcodes;
 	}
 
+	/**
+	 * Gets the directory caching should be stored in.
+	 *
+	 * Accounts for various adblock bypass options.
+	 *
+	 * @return bool|string
+	 */
+	public static function get_cache_dir_url() {
+		$upload_dir = self::get_upload_dir_url();
+		if ( false === $upload_dir ) {
+			return false;
+		}
+
+		if ( ! pum_get_option( 'bypass_adblockers', false ) ) {
+			return trailingslashit( $upload_dir ) . 'pum';
+		}
+
+		return $upload_dir;
+	}
+
+	/**
+	 * Gets the uploads directory path
+	 *
+	 * @since 1.10
+	 * @param string $path A path to append to end of upload directory URL.
+	 * @return bool|string The uploads directory path or false on failure
+	 */
+	public static function get_upload_dir_path( $path = '' ) {
+		$upload_dir = self::get_upload_dir();
+		if ( false !== $upload_dir && isset( $upload_dir['basedir'] ) ) {
+			$dir = $upload_dir['basedir'];
+			if ( ! empty( $path ) ) {
+				$dir = trailingslashit( $dir ) . $path;
+			}
+			return $dir;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Gets the uploads directory URL
+	 *
+	 * @since 1.10
+	 * @param string $path A path to append to end of upload directory URL.
+	 * @return bool|string The uploads directory URL or false on failure
+	 */
+	public static function get_upload_dir_url( $path = '' ) {
+		$upload_dir = self::get_upload_dir();
+		if ( false !== $upload_dir && isset( $upload_dir['baseurl'] ) ) {
+			$url = preg_replace( '/^https?:/', '', $upload_dir['baseurl'] );
+			if ( null === $url ) {
+				return false;
+			}
+			if ( ! empty( $path ) ) {
+				$url = trailingslashit( $url ) . $path;
+			}
+			return $url;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Gets the Uploads directory
+	 *
+	 * @since 1.10
+	 * @return bool|array An associated array with baseurl and basedir or false on failure
+	 */
+	public static function get_upload_dir() {
+		if ( defined( 'IS_WPCOM' ) && IS_WPCOM ) {
+			$wp_upload_dir = wp_get_upload_dir();
+		} else {
+			$wp_upload_dir = wp_upload_dir();
+		}
+
+		if ( isset( $wp_upload_dir['error'] ) && false !== $wp_upload_dir['error'] ) {
+			PUM_Utils_Logging::instance()->log( sprintf( 'Getting uploads directory failed. Error given: %s', esc_html( $wp_upload_dir['error'] ) ) );
+			return false;
+		} else {
+			return $wp_upload_dir;
+		}
+	}
+
+	/**
+	 * @deprecated Use get_upload_dir_url instead.
+	 */
 	public static function upload_dir_url( $path = '' ) {
 		$upload_dir = wp_upload_dir();
 		$upload_dir = $upload_dir['baseurl'];
@@ -68,13 +155,13 @@ class PUM_Helpers {
 	/**
 	 * Sort array by priority value
 	 *
-	 * @deprecated 1.7.20
-	 * @see        PUM_Utils_Array::sort_by_priority instead.
-	 *
 	 * @param $a
 	 * @param $b
 	 *
 	 * @return int
+	 * @see        PUM_Utils_Array::sort_by_priority instead.
+	 *
+	 * @deprecated 1.7.20
 	 */
 	public static function sort_by_priority( $a, $b ) {
 		return PUM_Utils_Array::sort_by_priority( $a, $b );
@@ -84,14 +171,14 @@ class PUM_Helpers {
 	/**
 	 * Sort nested arrays with various options.
 	 *
+	 * @param array $array
+	 * @param string $type
+	 * @param bool $reverse
+	 *
+	 * @return array
 	 * @deprecated 1.7.20
 	 * @see        PUM_Utils_Array::sort instead.
 	 *
-	 * @param array  $array
-	 * @param string $type
-	 * @param bool   $reverse
-	 *
-	 * @return array
 	 */
 	public static function sort_array( $array = array(), $type = 'key', $reverse = false ) {
 		return PUM_Utils_Array::sort( $array, $type, $reverse );
@@ -180,6 +267,47 @@ class PUM_Helpers {
 			$results = array(
 				'items'       => $terms,
 				'total_count' => $include_total ? wp_count_terms( $taxonomies, $total_args ) : null,
+			);
+
+			$queries[ $key ] = $results;
+		} else {
+			$results = $queries[ $key ];
+		}
+
+		return ! $include_total ? $results['items'] : $results;
+	}
+
+
+	/**
+	 * @param array $args
+	 * @param bool $include_total
+	 *
+	 * @return array|mixed
+	 */
+	public static function user_selectlist_query( $args = array(), $include_total = false ) {
+
+		$args = wp_parse_args( $args, array(
+			'role'        => null,
+			'count_total' => ! $include_total ? true : false,
+		) );
+
+		// Query Caching.
+		static $queries = array();
+
+		$key = md5( serialize( $args ) );
+
+		if ( ! isset( $queries[ $key ] ) ) {
+			$query = new WP_User_Query( $args );
+
+			$users = array();
+			foreach ( $query->get_results() as $user ) {
+				/** @var WP_User $user */
+				$users[ $user->ID ] = $user->display_name;
+			}
+
+			$results = array(
+				'items'       => $users,
+				'total_count' => $query->get_total(),
 			);
 
 			$queries[ $key ] = $results;

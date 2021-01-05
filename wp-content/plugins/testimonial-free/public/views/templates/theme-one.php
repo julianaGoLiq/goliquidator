@@ -3,17 +3,12 @@
  * Theme One
  */
 
-$outline .= '<div class="sp-testimonial-free-item" itemscope itemtype="http://schema.org/Review">';
-
+$outline .= '<div class="sp-testimonial-free-item">';
 $outline .= '<div class="sp-testimonial-free">';
 
-$outline .= '<div itemprop="itemReviewed" itemscope itemtype="http://schema.org/Thing">
-							<meta itemprop="name" content="Testimonials">
-						</div>';
-
-if ( has_post_thumbnail( $post_query->post->ID ) ) {
-	$outline .= '<div class="sp-tfree-client-image" itemprop="image">';
-	$outline .= get_the_post_thumbnail( $post_query->post->ID, 'tf-client-image-size', array( 'class' => 'tfree-client-image' ) );
+if ( $client_image && has_post_thumbnail( $post_query->post->ID ) ) {
+	$outline .= '<div class="sp-tfree-client-image">';
+	$outline .= get_the_post_thumbnail( $post_query->post->ID, $image_sizes, array( 'class' => 'tfree-client-image' ) );
 	$outline .= '</div>';
 }
 
@@ -22,16 +17,13 @@ if ( $testimonial_title && ! empty( get_the_title() ) ) {
 }
 
 if ( $testimonial_text && ! empty( get_the_content() ) ) {
-	$outline .= '<div class="tfree-client-testimonial" itemprop="reviewBody">';
+	$outline .= '<div class="tfree-client-testimonial">';
 	$outline .= '<p class="tfree-testimonial-content">' . apply_filters( 'the_content', get_the_content() ) . '</p>';
 	$outline .= '</div>';
 }
 
 if ( $reviewer_name && ! empty( $tfree_name ) ) {
-	$outline .= '<div itemprop="author" itemscope itemtype="http://schema.org/Person">';
-	$outline .= '<meta itemprop="name" content="' . $tfree_name . '">';
-	$outline .= '<h2 class="tfree-client-name">' . $tfree_name . '</h2>';
-	$outline .= '</div>';
+	$outline .= '<h4 class="tfree-client-name">' . $tfree_name . '</h2>';
 }
 
 if ( $star_rating && ! empty( $tfree_rating_star ) ) {
@@ -59,8 +51,7 @@ if ( $star_rating && ! empty( $tfree_rating_star ) ) {
 			break;
 	}
 
-	$outline .= '<div class="tfree-client-rating" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">';
-	$outline .= '<meta itemprop="worstRating" content="1"><meta itemprop="ratingValue" content="' . $rating_value . '"><meta itemprop="bestRating" content="5">';
+	$outline .= '<div class="tfree-client-rating">';
 	$outline .= $star_rating_data;
 	$outline .= '</div>';
 }
@@ -72,5 +63,4 @@ if ( $reviewer_position && ! empty( $tfree_designation ) ) {
 }
 
 $outline .= '</div>'; // sp-testimonial-free.
-
 $outline .= '</div>'; // sp-testimonial-free-item.

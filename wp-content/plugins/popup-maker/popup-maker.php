@@ -3,7 +3,7 @@
  * Plugin Name:  Popup Maker
  * Plugin URI:   https://wppopupmaker.com/?utm_campaign=PluginInfo&utm_source=plugin-header&utm_medium=plugin-uri
  * Description:  Easily create & style popups with any content. Theme editor to quickly style your popups. Add forms, social media boxes, videos & more.
- * Version:      1.8.14
+ * Version:      1.13.1
  * Author:       Popup Maker
  * Author URI:   https://wppopupmaker.com/?utm_campaign=PluginInfo&utm_source=plugin-header&utm_medium=author-uri
  * License:      GPL2 or later
@@ -13,10 +13,10 @@
  *
  * @package     POPMAKE
  * @author      Daniel Iser
- * @copyright   Copyright (c) 2019, Code Atlantic LLC
+ * @copyright   Copyright (c) 2020, Code Atlantic LLC
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -93,7 +93,7 @@ class Popup_Maker {
 	/**
 	 * @var string Plugin Version
 	 */
-	public static $VER = '1.8.14';
+	public static $VER = '1.13.1';
 
 	/**
 	 * @var int DB Version
@@ -108,12 +108,12 @@ class Popup_Maker {
 	/**
 	 * @var string
 	 */
-	public static $MIN_PHP_VER = '5.2.17';
+	public static $MIN_PHP_VER = '5.6';
 
 	/**
 	 * @var string
 	 */
-	public static $MIN_WP_VER = '3.6';
+	public static $MIN_WP_VER = '4.9';
 
 	/**
 	 * @var string Plugin URL
@@ -326,25 +326,9 @@ class Popup_Maker {
 		PUM_Shortcode_Popup::init();
 		PUM_Shortcode_PopupTrigger::init();
 		PUM_Shortcode_PopupClose::init();
+		PUM_Shortcode_PopupCookie::init();
 
-		/**
-		 * Here we check for previous FS optin.
-		 * If no test has been performed we initialize Freemius one last time to check optin status.
-		 */
-		$has_opted_in = get_option( 'pum_previously_opted_using_freemius' );
-
-		if ( false === $has_opted_in ) {
-			PUM_Freemius::instance();
-			update_option( 'pum_previously_opted_using_freemius', PUM_Freemius::instance()->fs()->is_registered() ? 1 : 0 );
-		} else if ( 1 === $has_opted_in ) {
-			/**
-			 * The user has previously opted via Freemius. Lets show custom messages in the new optin requests.
-			 */
-		} else {
-			/**
-			 * The user never opted via Freemius. Show default optin request.
-			 */
-		}
+		PUM_Telemetry::init();
 	}
 
 	/**
@@ -359,21 +343,46 @@ class Popup_Maker {
 }
 
 /**
- * Initialize the plugin.
+ * The main function responsible for returning the one true Popup_Maker
+ * Instance to functions everywhere.
+ *
+ * Use this function like you would a global variable, except without needing
+ * to declare the global.
+ *
+ * @return Popup_Maker
+ * @since      1.8.0
+ *
  */
-Popup_Maker::instance();
+function pum() {
+	return Popup_Maker::instance();
+}
 
 /**
- * The code that runs during plugin activation.
- * This action is documented in classes/Activator.php
+ * Initialize Popup Maker if requirements are met.
  */
-register_activation_hook( __FILE__, array( 'PUM_Activator', 'activate' ) );
+function pum_init() {
+	if ( ! PUM_Install::meets_activation_requirements() ) {
+		require_once 'includes/failsafes.php';
+		add_action( 'admin_notices', array( 'PUM_Install', 'activation_failure_admin_notice' ) );
+		return;
+	}
 
-/**
- * The code that runs during plugin deactivation.
- * This action is documented in classes/Deactivator.php
- */
-register_deactivation_hook( __FILE__, array( 'PUM_Deactivator', 'deactivate' ) );
+	// Get Popup Maker
+	pum();
+
+	add_action( 'plugins_loaded', 'popmake_initialize' );
+}
+
+// Get Popup Maker running
+add_action( 'plugins_loaded', 'pum_init', 9 );
+
+// Ensure plugin & environment compatibility.
+register_activation_hook( __FILE__, array( 'PUM_Install', 'activation_check' ) );
+
+// Register activation, deactivation & uninstall hooks.
+register_activation_hook( __FILE__, array( 'PUM_Install', 'activate_plugin' ) );
+register_deactivation_hook( __FILE__, array( 'PUM_Install', 'deactivate_plugin' ) );
+register_uninstall_hook( __FILE__, array( 'PUM_Install', 'uninstall_plugin' ) );
 
 /**
  * @deprecated 1.7.0
@@ -387,8 +396,6 @@ function popmake_initialize() {
 	do_action( 'popmake_initialize' );
 }
 
-add_action( 'plugins_loaded', 'popmake_initialize' );
-
 /**
  * The main function responsible for returning the one true Popup_Maker
  * Instance to functions everywhere.
@@ -398,26 +405,16 @@ add_action( 'plugins_loaded', 'popmake_initialize' );
  *
  * Example: <?php $popmake = PopMake(); ?>
  *
- * @since      1.0
+ * @return object The one true Popup_Maker Instance
  * @deprecated 1.7.0
  *
- * @return object The one true Popup_Maker Instance
+ * @since      1.0
  */
 function PopMake() {
 	return Popup_Maker::instance();
 }
 
 /**
- * The main function responsible for returning the one true Popup_Maker
- * Instance to functions everywhere.
- *
- * Use this function like you would a global variable, except without needing
- * to declare the global.
- *
- * @since      1.8.0
- *
- * @return Popup_Maker
+ * This is currently here until we reorganize the plugin file structure to handle package loading & composer autoloading with failure notices.
  */
-function pum() {
-	return Popup_Maker::instance();
-}
+require_once( plugin_dir_path( __FILE__ ) . '/packages/action-scheduler/action-scheduler.php' );

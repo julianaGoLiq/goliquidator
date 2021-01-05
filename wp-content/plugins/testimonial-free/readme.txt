@@ -3,7 +3,7 @@ Contributors: shapedplugin
 Donate link: http://shapedplugin.com/donate
 Tags: testimonial, testimonials, testimonial showcase, testimonials showcase, testimonial slider, testimonials slider, testimonial carousel, testimonial front-end submission form, testimonials widget, easy testimonial, testimonial rotator, random testimonials, custom testimonial, collect testimonials, social proof, simple testimonial plugin, best testimonials showcase plugin, free testimonial, customers reviews
 Requires at least: 4.0
-Tested up to: 5.3.1
+Tested up to: 5.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -198,6 +198,49 @@ Thank you!
 
 
 == Changelog ==
+
+= 2.2.7 - Oct 07, 2020 =
+* Fix: Responsive column(s) issue.
+
+= 2.2.6 - Oct 06, 2020 =
+* Fix: Testimonial image hide issue.
+
+= 2.2.5 - Oct 03, 2020 =
+* New: Swipe to slide option.
+* New: Slider direction option.
+* New: Testimonial image show/hide option.
+* New: Testimonial image size option.
+* Improved: Admin scripts loading scope.
+
+= 2.2.4 - Sep 22, 2020 =
+* Fix: Schema markup issue.
+
+= 2.2.3 - Aug 24, 2020 =
+* Fix: WordPress 5.5 compatible issue.
+
+= 2.2.2 - Jun 23, 2020 =
+* Fix: Polylang compatibility issue.
+
+= 2.2.1 - May 02, 2020 =
+* Fix: Undefined variable notices issue.
+
+= 2.2 - Mar 25, 2020 =
+* Fix: Security issue. (This vulnerability was discovered by Vishnupriya Ilango of Fortinet's FortiGuard Labs.)
+
+= 2.1.7 - Feb 26, 2020 =
+* New: Settings page added.
+* New: Custom CSS option.
+* New: Schema markup enable/disable option.
+* Fix: Schema markup issue on Google search console.
+* Improved: Client name HTML tag.
+
+= 2.1.6 - Jan 10, 2020 =
+* Fix: Pause on hover on/off issue.
+* Fix: Slider infinite on/off issue.
+* Fix: Slider adaptive height on/off issue.
+* Fix: Slider swipe on/off issue.
+* Fix: Slider draggable on/off issue.
+* Fix: RTL mode on/off issue.
 
 = 2.1.5 - Dec 17, 2019 =
 * Improved: Dashboard UI.

@@ -2,10 +2,10 @@
 Contributors: arjunthakur, efficientninja
 Tags: duplicate post, duplicate page, clone page, clone post, duplicate custom posts, clone custom post, wordpress page duplicator, wordpress post duplicator, page duplicate, clone page and post,  wp post clone.
 Requires at least: 3.5
-Tested up to: 5.2.4
+Tested up to: 5.5
 Requires PHP: 5.2.4
-Stable tag: 2.5.5
-Version: 2.5.5
+Stable tag: 2.6.3
+Version: 2.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -26,6 +26,9 @@ Duplicate page and post doesn't have a lot of features that other plugins have, 
 * Option to add custom text for duplicate link button.
 * Option to select Duplicate Posts Status.
 * Option to Redirect after click on Duplicate.
+
+= Like the plugin? =
+<a href="https://wordpress.org/support/plugin/duplicate-wp-page-post/reviews/?rate=5#new-post">Please Vote</a>, Your votes really make a difference! Thanks.
 
 == Installation ==
 

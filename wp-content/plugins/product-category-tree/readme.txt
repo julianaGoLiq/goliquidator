@@ -2,7 +2,7 @@
 Contributors: TOGI Data ApS
 Tags: Product category, product categories, category tree, deactivate product categories, deactivate categories, sort product categories, product category tree, product categories tree
 Requires at least: 4.1
-Tested up to: 4.9.7
+Tested up to: 5.4
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -78,4 +78,5 @@ We have even added a drag ‘n’ drop functionality that makes it easy for you 
 * Quick edit updated and done with Ajax
 * Add new feature, only admin and Shop manager can manage plugin
 
-
+= 2.4 =
+* Tested and updated with latest version of Wordpress and Woocommerce

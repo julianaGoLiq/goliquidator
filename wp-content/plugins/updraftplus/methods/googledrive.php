@@ -84,6 +84,18 @@ class UpdraftPlus_BackupModule_googledrive extends UpdraftPlus_BackupModule {
 	}
 
 	/**
+	 * Check whether options have been set up by the user, or not
+	 *
+	 * @param Array $opts - the potential options
+	 *
+	 * @return Boolean
+	 */
+	public function options_exist($opts) {
+		if (is_array($opts) && (!empty($opts['user_id']) || !empty($opts['token']))) return true;
+		return false;
+	}
+
+	/**
 	 * Get the Google folder ID for the root of the drive
 	 *
 	 * @return String|Integer
@@ -640,7 +652,7 @@ class UpdraftPlus_BackupModule_googledrive extends UpdraftPlus_BackupModule {
 				if ($filesize > $available_quota) {
 					$already_failed = true;
 					$this->log("File upload expected to fail: file ($file_name) size is $filesize b, whereas available quota is only $available_quota b");
-					$this->log(sprintf(__("Account full: your %s account has only %d bytes left, but the file to be uploaded is %d bytes", 'updraftplus'), __('Google Drive', 'updraftplus'), $available_quota, $filesize), +'error');
+					$this->log(sprintf(__("Account full: your %s account has only %d bytes left, but the file to be uploaded is %d bytes", 'updraftplus'), __('Google Drive', 'updraftplus'), $available_quota, $filesize), 'error');
 				}
 			}
 
@@ -793,7 +805,7 @@ class UpdraftPlus_BackupModule_googledrive extends UpdraftPlus_BackupModule {
 			if (in_array('google_api_php_client_autoload', $spl)) spl_autoload_unregister('google_api_php_client_autoload');
 		}
 
-		if ((!class_exists('Google_Config') || !class_exists('Google_Client') || !class_exists('Google_Service_Drive') || !class_exists('Google_Http_Request')) && !function_exists('google_api_php_client_autoload_updraftplus')) {
+		if ((!class_exists('UDP_Google_Config') || !class_exists('UDP_Google_Client') || !class_exists('Google_Service_Drive') || !class_exists('Google_Http_Request')) && !function_exists('google_api_php_client_autoload_updraftplus')) {
 			include_once(UPDRAFTPLUS_DIR.'/includes/Google/autoload.php');
 		}
 
@@ -801,7 +813,7 @@ class UpdraftPlus_BackupModule_googledrive extends UpdraftPlus_BackupModule {
 			include_once(UPDRAFTPLUS_DIR.'/includes/google-extensions.php');
 		}
 
-		$config = new Google_Config();
+		$config = new UDP_Google_Config();
 		$config->setClassConfig('Google_IO_Abstract', 'request_timeout_seconds', 60);
 		// In our testing, $storage->about->get() fails if gzip is not disabled when using the stream wrapper
 		if (!function_exists('curl_version') || !function_exists('curl_exec') || (defined('UPDRAFTPLUS_GOOGLEDRIVE_DISABLEGZIP') && UPDRAFTPLUS_GOOGLEDRIVE_DISABLEGZIP)) {
@@ -816,7 +828,7 @@ class UpdraftPlus_BackupModule_googledrive extends UpdraftPlus_BackupModule {
 			$client_secret = '';
 		}
 
-		$client = new Google_Client($config);
+		$client = new UDP_Google_Client($config);
 		$client->setClientId($client_id);
 		$client->setClientSecret($client_secret);
 		// $client->setUseObjects(true);
@@ -1007,6 +1019,14 @@ class UpdraftPlus_BackupModule_googledrive extends UpdraftPlus_BackupModule {
 		return $result;
 	}
 
+	/**
+	 * Delete a single file from the service using GoogleDrive API
+	 *
+	 * @param Array|String $files    - array of file names to delete
+	 * @param Array        $data     - unused here
+	 * @param Array        $sizeinfo - unused here
+	 * @return Boolean|String - either a boolean true or an error code string
+	 */
 	public function delete($files, $data = null, $sizeinfo = array()) {// phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.Found
 
 		if (is_string($files)) $files = array($files);
@@ -1014,7 +1034,7 @@ class UpdraftPlus_BackupModule_googledrive extends UpdraftPlus_BackupModule {
 		$storage = $this->bootstrap();
 		if (is_wp_error($storage)) {
 			$this->log("delete: failed due to storage error: ".$storage->get_error_code()." (".$storage->get_error_message().")");
-			return false;
+			return 'service_unavailable';
 		}
 			
 		if (false == $storage) return $storage;
@@ -1026,7 +1046,7 @@ class UpdraftPlus_BackupModule_googledrive extends UpdraftPlus_BackupModule {
 			$sub_items = $this->get_subitems($parent_id, 'file');
 		} catch (Exception $e) {
 			$this->log("delete: failed to access parent folder: ".$e->getMessage().' (line: '.$e->getLine().', file: '.$e->getFile().')');
-			return false;
+			return 'container_access_error';
 		}
 
 		$ret = true;
@@ -1044,7 +1064,7 @@ class UpdraftPlus_BackupModule_googledrive extends UpdraftPlus_BackupModule {
 				}
 			} catch (Exception $e) {
 				$this->log("delete: exception: ".$e->getMessage().' (line: '.$e->getLine().', file: '.$e->getFile().')');
-				$ret = false;
+				$ret = 'file_delete_error';
 				continue;
 			}
 		}

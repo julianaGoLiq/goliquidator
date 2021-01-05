@@ -25,7 +25,7 @@ function grw_place($rating, $place, $place_img, $reviews, $dark_theme, $hide_bas
     <?php
 }
 
-function grw_place_reviews($place, $reviews, $place_id, $text_size, $pagination, $reduce_avatars_size, $open_link, $nofollow_link, $lazy_load_img, $def_reviews_link) {
+function grw_place_reviews($place, $reviews, $place_id, $text_size, $pagination, $reduce_avatars_size, $open_link, $nofollow_link, $lazy_load_img, $def_reviews_link, $is_admin = false) {
     ?>
     <div class="wp-google-reviews">
     <?php
@@ -37,18 +37,20 @@ function grw_place_reviews($place, $reviews, $place_id, $text_size, $pagination,
                 $hr = true;
             }
         ?>
-        <div class="wp-google-review<?php if ($hr) { ?> wp-google-hide<?php } ?>">
+        <div class="wp-google-review<?php if ($hr) { echo ' wp-google-hide'; } if ($is_admin && $review->hide != '') { echo ' wp-review-hidden'; } ?>">
             <div class="wp-google-left">
                 <?php
+                $default_avatar = GRW_GOOGLE_AVATAR;
                 if (strlen($review->profile_photo_url) > 0) {
                     $profile_photo_url = $review->profile_photo_url;
                 } else {
-                    $profile_photo_url = GRW_GOOGLE_AVATAR;
+                    $profile_photo_url = $default_avatar;
                 }
                 if ($reduce_avatars_size) {
                     $profile_photo_url = str_replace('s128', 's50', $profile_photo_url);
+                    $default_avatar = str_replace('s128', 's50', $default_avatar);
                 }
-                grw_image($profile_photo_url, $review->author_name, $lazy_load_img, GRW_GOOGLE_AVATAR);
+                grw_image($profile_photo_url, $review->author_name, $lazy_load_img, $default_avatar);
                 ?>
             </div>
             <div class="wp-google-right">
@@ -69,6 +71,9 @@ function grw_place_reviews($place, $reviews, $place_id, $text_size, $pagination,
                     <span class="wp-google-stars"><?php echo grw_stars($review->rating); ?></span>
                     <span class="wp-google-text"><?php echo grw_trim_text($review->text, $text_size); ?></span>
                 </div>
+                <?php if ($is_admin) {
+                    echo '<a href="#" class="wp-review-hide" data-id=' . $review->id . '>' . ($review->hide == '' ? 'Hide' : 'Show') . ' review</a>';
+                } ?>
             </div>
         </div>
         <?php
@@ -133,7 +138,7 @@ function grw_trim_text($text, $size) {
 }
 
 function grw_anchor($url, $class, $text, $open_link, $nofollow_link) {
-    ?><a href="<?php echo $url; ?>" class="<?php echo $class; ?>" <?php if ($open_link) { ?>target="_blank"<?php } ?> rel="<?php if ($nofollow_link) { ?>nofollow <?php } ?>noopener"><?php echo $text; ?></a><?php
+    echo '<a href="' . $url . '"' . ($class ? ' class="' . $class . '"' : '') . ($open_link ? ' target="_blank"' : '') . ' rel="' . ($nofollow_link ? 'nofollow ' : '') . 'noopener">' . $text . '</a>';
 }
 
 function grw_image($src, $alt, $lazy, $def_ava = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', $atts = '') {
