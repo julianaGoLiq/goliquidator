@@ -2,7 +2,7 @@
 Contributors: ninjateam
 Tags: notification bar, sticky header, sticky banner, fixed header, top bar, notification plugin, notice, alert, alert bar, simple banner, notifications
 Requires at least: 4.0
-Requires PHP: 5.3
+Requires PHP: 5.3.1
 Tested up to: 5.5
 Stable tag: 4.1.19
 License: GPL-2.0+
@@ -10,13 +10,13 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.txt
 
 
 == Description ==
-**Custom notification bar for alert, promo code, marketing campaign, top banner**
+**Customizer for sticky header, notification bar, alert, promo code, marketing campaign, top banner**
 
-This plugin adds a **top notification bar** to indicate significant announcements on your website. It's easy for you to set it as absolute or as sticky to be visible when scrolling. The **dismiss** button can be disabled, closed permanently, or toggled so that your visitors can easily find it again.
+This plugin adds a **top notification bar** to indicate significant announcements on your website. It's easy for you to set it as a sticky header to be visible when scrolling. The **Dismiss** button can be disabled, closed permanently, or toggled so that your visitors can easily find it again.
 
 **Instant Live Preview** mode helps you see how every setting affects the notification bar before you publish it.
 
-This is a great top bar for all preferential notices you might need in the incoming holidays, COVID-19 updates and year-end events.
+This is a great top bar for all preferential notices you might need in the incoming holidays, COVID-19 updates and events of all kinds.
 
 
 ###⚡️ FEATURES
@@ -57,7 +57,7 @@ You can always reach us at [Ninja Team Support Center](http://ninjateam.org/supp
 
 ###♥️ Like this Top Bar Alert Plugin?
 - Rate us 5⭐ stars on [WordPress.org](https://wordpress.org/support/plugin/notibar/reviews/?filter=5#new-post)
-- Check out other cool [Marketing Toolkit on CodeCanyon](https://codecanyon.net/collections/7097461-facebook-marketing-tools?irgwc=1&clickid=V%3A0xMNS3sxyORfPwUx0Mo3QWUkiSVH2RY3UNU00&iradid=275988&irpid=418490&iradtype=ONLINE_TRACKING_LINK&irmptype=mediapartner&mp_value1=&utm_campaign=af_impact_radius_418490&utm_medium=affiliate&utm_source=impact_radius)
+- Check out our [Marketing Toolkit on CodeCanyon](https://codecanyon.net/collections/7097461-facebook-marketing-tools?irgwc=1&clickid=V%3A0xMNS3sxyORfPwUx0Mo3QWUkiSVH2RY3UNU00&iradid=275988&irpid=418490&iradtype=ONLINE_TRACKING_LINK&irmptype=mediapartner&mp_value1=&utm_campaign=af_impact_radius_418490&utm_medium=affiliate&utm_source=impact_radius)
 
 == Frequently Asked Questions ==
 
@@ -79,6 +79,9 @@ Yes! You can certainly use it on your own websites as well as your clients'.
 
 Absolutely! Notibar doesn't collect or store any personal information. So rest assured.
 
+= Is Notibar free? =
+Yes, it's completely free of charge. Notibar comes with all features that you can find in the description above.
+
 
 == Installation ==
 1. Upload the entire plugin folder to the '/wp-content/plugins/' directory.
@@ -93,6 +96,24 @@ Upon activation, you will see a new **Notification Bar** menu. Simply click to c
 
 
 == Changelog ==
+
+= 1.9.1 =
+- Improved: Compatible with WordPress 5.6
+
+= 1.9 =
+- Added: Support Enfold theme
+- Added: Support Nayma theme
+- Added: Support Essentials theme
+- Fixed: Creates a random white space at the footer when close  notibar
+- Improved: CSS
+
+= 1.8 =
+- Added: Support WPML and Polylang
+- Added: Button text color option
+
+= 1.7 =
+Improved: Width for Notibar
+Fixed: Some small bugs
 
 = 1.6 =
 Fixed: Bar shows again after closed on mobile

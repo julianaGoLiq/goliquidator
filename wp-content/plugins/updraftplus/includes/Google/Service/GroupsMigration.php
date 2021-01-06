@@ -28,7 +28,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_GroupsMigration extends Google_Service
+class Google_Service_GroupsMigration extends UDP_Google_Service
 {
   /** Manage messages in groups on your domain. */
   const APPS_GROUPS_MIGRATION =
@@ -42,7 +42,7 @@ class Google_Service_GroupsMigration extends Google_Service
    *
    * @param Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(UDP_Google_Client $client)
   {
     parent::__construct($client);
     $this->servicePath = 'groups/v1/groups/';

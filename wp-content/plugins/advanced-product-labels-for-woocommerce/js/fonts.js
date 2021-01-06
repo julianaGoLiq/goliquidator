@@ -12,6 +12,6 @@
             }
 
             $(this).css('font-family', fontFamily );
-        }).change();
+        }).trigger('change');
     });
 })(jQuery);

@@ -3,7 +3,7 @@ Contributors: shapedplugin
 Donate link: http://shapedplugin.com/donate
 Tags: testimonial, testimonials, testimonial showcase, testimonials showcase, testimonial slider, testimonials slider, testimonial carousel, testimonial front-end submission form, testimonials widget, easy testimonial, testimonial rotator, random testimonials, custom testimonial, collect testimonials, social proof, simple testimonial plugin, best testimonials showcase plugin, free testimonial, customers reviews
 Requires at least: 4.0
-Tested up to: 5.5.1
+Tested up to: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -198,6 +198,10 @@ Thank you!
 
 
 == Changelog ==
+
+= 2.2.8 - Dec 15, 2020 =
+* Fix: Slider navigation style issue.
+* Fix: WordPress 5.6 compatible issue.
 
 = 2.2.7 - Oct 07, 2020 =
 * Fix: Responsive column(s) issue.

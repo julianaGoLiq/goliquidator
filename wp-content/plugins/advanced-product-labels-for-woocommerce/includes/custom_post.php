@@ -5,6 +5,7 @@ class BeRocket_conditions_advanced_labels extends BeRocket_conditions {
 class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
     public $hook_name = 'berocket_advanced_label_editor';
     public $conditions, $templates, $templates_hide, $templates_rotate = array();
+    public static $base_color = '#f16543';
     protected static $instance;
     public $post_type_parameters = array(
         'sortable' => true,
@@ -14,10 +15,34 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
         $this->templates_hide = array(
             'css' => array(
                 1 => array('img_title'),
-                2 => array('img_title'),
+                2 => array( 
+                    'img_title',
+                    'image_height',
+                    'image_width',
+                 ),
                 3 => array('img_title'),
-                4 => array('img_title', 'image'),
-                5 => array('img_title', 'image'),
+                4 => array('img_title'),
+                5 => array( 
+                    'img_title',
+                    'image_height',
+                    'image_width',
+                ),
+                19 => array( 
+                    'img_title', 
+                    'image_height',
+                    'image_width',
+                ),
+                20 => array(
+                    'img_title', 
+                ),
+                23 => array(
+                    'border_color',
+                    'border_radius',
+                    'border_width',
+                    'image_height',
+                    'image_width',
+                    'img_title', 
+                ),
             ),
             'image' => array(
                 1000 => array(
@@ -45,60 +70,108 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
             ),
         );
         $this->templates = array(
-            "css" => array(
+            'css' => array(
                 1 => array(
+                    'border_radius' => '3',
                     'image_height'  => '35',
                     'image_width'   => '60',
-                    'line_height'   => '35',
-                    'border_radius'  => '3',
                 ),
                 2 => array(
+                    'border_radius' => '0',
                     'image_height'  => '50',
                     'image_width'   => '50',
-                    'line_height'   => '50',
-                    'border_radius' => '0',
-                    'span_custom_css' => array(
-                        'box-sizing' => 'content-box'
-                    ),
                 ),
                 3 => array(
+                    'border_radius' => '0',
                     'image_height'  => '35',
                     'image_width'   => '60',
-                    'line_height'   => '35',
-                    'border_radius' => '0',
-                    'span_custom_css' => array(
-                        'box-sizing' => 'content-box'
-                    ),
                 ),
                 4 => array(
-                    'image_height'  => '35',
-                    'image_width'   => '60',
-                    'line_height'   => '35',
-                    'border_radius' => '50',
+                    'border_radius'       => '50',
                     'border_radius_units' => '%',
-                    'span_custom_css' => array(
-                        'box-sizing' => 'content-box',
-                    ),
+                    'image_height'        => '35',
+                    'image_width'         => '60',
                 ),
                 5 => array(
-                    'image_height'  => '50',
-                    'image_width'   => '50',
-                    'line_height'   => '50',
-                    'border_radius' => '50',
+                    'border_radius'       => '50',
                     'border_radius_units' => '%',
+                    'image_height'        => '50',
+                    'image_width'         => '50',
+                ),
+                19 => array(
+                    'border_color'        => self::$base_color,
+                    'border_radius'       => '50',
+                    'border_radius_units' => '%',
+                    'border_width'        => '1',
+                    'image_height'        => '58',
+                    'image_width'         => '58',
+                    'left_margin'         => '-15',
+                    'top_margin'          => '-15',
+                    'right_margin'        => '-15',
+                    'padding_horizontal'  => '-15',
+                    'padding_top'         => '-15',
                     'span_custom_css' => array(
-                        'box-sizing' => 'content-box',
+                        'background' => 'transparent !important',
+                    ),
+                    'i4_custom_css' => array( //span i.template-i-before
+                        'border-radius' => '50%',
+                        'height' => '50px',
+                        'width' => '50px',
+                        'left' => '50%',
+                        'top' => '50%',
+                        'transform' => 'translateX(-50%) translateY(-50%)',
+                        '-moz-transform' => 'translateX(-50%) translateY(-50%)',
+                        '-ms-transform' => 'translateX(-50%) translateY(-50%)',
+                        '-webkit-transform' => 'translateX(-50%) translateY(-50%)',
+                        '-o-transform' => 'translateX(-50%) translateY(-50%)',
+                    ),
+                ),
+                20 => array(
+                    'border_color'        => '#FFFFFF',
+                    'border_radius'       => '50',
+                    'border_radius_units' => '%',
+                    'border_width'        => '4',
+                    'image_height'        => '70',
+                    'image_width'         => '70',
+                    'left_margin'         => '-15',
+                    'right_margin'        => '-15',
+                    'top_margin'          => '-15',
+                    'padding_horizontal'  => '-15',
+                    'padding_top'         => '-15',
+                ),
+                23 => array(
+                    'image_height'       => '40',
+                    'image_width'        => '120',
+                    'left_margin'        => '10',
+                    'right_margin'       => '10',
+                    'top_margin'         => '10',
+                    'padding_horizontal' => '10',
+                    'padding_top'        => '10',
+                    'text'               => 'FLASH SALE',
+                    'span_custom_css' => array(
+                        'background' => 'transparent !important',
+                    ),
+                    'i4_custom_css' => array( //span i.template-i-before
+                        'clip-path' => 'polygon(100% 0%, 100% 100%, 15% 100%, 0% 50%, 15% 0%)',
+                        '-webkit-clip-path' => 'polygon(100% 0%, 100% 100%, 15% 100%, 0% 50%, 15% 0%)',
+                        'height'            => '100%',
+                        'width'             => '100%',
+                    ),
+                    'b_custom_css' => array(
+                        'padding-left'  => '10%',
                     ),
                 ),
             ),
             "image" => array(
                 1000 => array(
-                    'image_height'  => '80',
-                    'image_width'   => '80',
-                    'line_height'   => '0',
-                    'border_radius' => '0',
-                    'right_margin'  => '0',
-                    'top_margin'    => '0',
+                    'border_radius'      => '0',
+                    'image_height'       => '80',
+                    'image_width'        => '80',
+                    'line_height'        => '0',
+                    'right_margin'       => '0',
+                    'top_margin'         => '0',
+                    'padding_horizontal' => '0',
+                    'padding_top'        => '0',
                     'div_custom_class' => 'berocket-label-user-image',
                     'span_custom_css' => array(
                         'background-color' => 'transparent!important',
@@ -122,8 +195,52 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
             ),
         );
 
+        $this->templates_rotate = array(
+            // 'css-14' => array(
+            //     'elements' => array(
+            //         'span_custom_css' => array(
+            //             'transform: scaleX(-1);',
+            //             '-moz-transform: scaleX(-1);',
+            //             '-ms-transform: scaleX(-1);',
+            //             '-o-transform: scaleX(-1);',
+            //             '-webkit-transform: scaleX(-1);',
+            //         ),
+            //         'b_custom_css' => array(
+            //             'left: 10%;',
+            //             'right: 0;',
+            //             'top: 43%;',
+            //             'width: auto;',
+            //             'transform: translateY(-50%) scaleX(-1);',
+            //             '-moz-transform: translateY(-50%) scaleX(-1);',
+            //             '-ms-transform: translateY(-50%) scaleX(-1);',
+            //             '-o-transform: translateY(-50%) scaleX(-1);',
+            //             '-webkit-transform: translateY(-50%) scaleX(-1);',
+            //         ),
+            //     ),
+            // ),
+            'css-23' => array(
+                'elements' => array(
+                    'span_custom_css' => array(
+                        'transform: scaleX(-1);',
+                        '-moz-transform: scaleX(-1);',
+                        '-ms-transform: scaleX(-1);',
+                        '-o-transform: scaleX(-1);',
+                        '-webkit-transform: scaleX(-1);',
+                    ),
+                    'b_custom_css' => array(
+                        'padding-left: 0;',
+                        'padding-right: 10%;',
+                        'transform: scaleX(-1);',
+                        '-moz-transform: scaleX(-1);',
+                        '-ms-transform: scaleX(-1);',
+                        '-o-transform: scaleX(-1);',
+                        '-webkit-transform: scaleX(-1);',
+                    ),
+                ),
+            ),
+        );
         $this->templates_rotate = apply_filters( "berocket_labels_templates_rotate", $this->templates_rotate );
-        
+
         add_action('products_label_framework_construct', array($this, 'init_conditions'));
         $this->post_name = 'br_labels';
         $this->post_settings = array(
@@ -156,85 +273,32 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
             'query_var'           => false,
             'supports'            => array( 'title' ),
             'show_in_nav_menus'   => false,
+            'show_in_nav_menus'   => false,
         );
-        $this->default_settings = array(
-            'label_from_post'          => '',
-            'better_position'          => '',
-            'content_type'             => 'text',
-            'text'                     => 'Label',
-            'text_before'              => '',
-            'text_before_nl'           => '',
-            'text_after'               => '',
-            'text_after_nl'            => '',
-            'image'                    => '',
-            'img_title'                => '',
-            'type'                     => 'label',
-            'padding_top'              => -10,
-            'padding_horizontal'       => -10,
-            'border_radius'            => '3',
-            'border_width'             => '0',
-            'border_color'             => 'ffffff',
-            'image_height'             => '',
-            'image_width'              => '',
-            'color_use'                => '1',
-            'content_type'             => 'text',
-            'color'                    => 'f16543',
-            'font_color'               => 'ffffff',
-            'font_size'                => '14',
-            'line_height'              => '',
-            'position'                 => 'left',
-            'zindex'                   => '90',
-            'data'                     => array(),
-            'tooltip_content'          => '',
-            'tooltip_image'            => '',
-            'tooltip_theme'            => 'dark',
-            'tooltip_position'         => 'top',
-            'tooltip_open_delay'       => '0',
-            'tooltip_close_delay'      => '0',
-            'tooltip_open_on'          => 'click',
-            'tooltip_close_on_click'   => '0',
-            'tooltip_use_arrow'        => '0',
-            'tooltip_max_width'        => '300',
-            'template'                 => '',
-            'div_custom_class'         => '',
-            'div_custom_css'           => '',
-            'span_custom_class'        => '',
-            'span_custom_css'          => '',
-            'b_custom_class'           => '',
-            'b_custom_css'             => '',
-            'i1_custom_class'          => '',
-            'i1_custom_css'            => '',
-            'i2_custom_class'          => '',
-            'i2_custom_css'            => '',
-            'i3_custom_class'          => '',
-            'i3_custom_css'            => '',
-            'i4_custom_class'          => '',
-            'i4_custom_css'            => '',
-            'discount_minus'           => '',
-            'border_radius_units'      => 'px',
-            'padding_units'            => 'px',
-            'padding_top_units'        => 'px',
-            'padding_horizontal_units' => 'px',
-            'margin_units'             => 'px',
-            'line_height_units'        => 'px',
-            'image_height_units'       => 'px',
-            'image_width_units'        => 'px',
-            'font_size_units'          => 'px',
-        );
+
         $this->add_meta_box('conditions', __( 'Conditions', 'BeRocket_products_label_domain' ));
         $this->add_meta_box('settings', __( 'Advanced Labels Settings', 'BeRocket_products_label_domain' ));
         $this->add_meta_box('description', __( 'Description', 'BeRocket_products_label_domain' ), false, 'side');
         $this->add_meta_box('preview', __( 'Preview', 'BeRocket_products_label_domain' ), false, 'side');
+        
         add_filter('brfr_berocket_advanced_label_editor_custom_css_explanation', array(__CLASS__, 'section_custom_css_explanation'), 10, 4);
         add_filter('brfr_berocket_advanced_label_editor_templates', array($this, 'section_templates'), 10, 4);
-        add_filter( 'berocket_label_adjust_rotation', array( $this, 'adjust_rotation' ), 1, 1 );
-        add_filter( 'berocket_label_select_untis', array( $this, 'select_untis' ), 1, 1 );
-        add_action( 'pre_get_posts', array($this, 'sortable_get_posts'), 15 );
+        add_filter( 'berocket_label_adjust_options', array( $this, 'adjust_options' ), 1, 2 );
+        add_filter( 'berocket_label_custom_get_options', array( $this, 'get_custom_options' ), 10, 2 );
 
         parent::__construct();
     }
 
-    public function adjust_rotation( $br_label ) {
+    public function add_class( $templates, $element, $prefix ) {
+        foreach ( $templates as $template_type => $template_group ) {
+            foreach ( $template_group as $key => $template ) {
+                $templates[$template_type][$key][$element] = "$prefix-$template_type $prefix-$template_type-$key";
+            }
+        }
+        return $templates;
+    }
+
+    public function adjust_options( $br_label, $label_id = false ) {
 
         if ( $br_label['position'] != 'left' || empty( $br_label['template'] ) ) {
             return $br_label;
@@ -258,14 +322,6 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
         }
         $br_label['b_custom_class'] .= ' rotated'; 
         return $br_label;
-    }
-
-    public function sortable_get_posts( $query ){
-        global $pagenow;
-        if( 'edit.php' == $pagenow && isset( $_GET['post_type'] ) && $_GET['post_type'] == $this->post_name ){
-            $query->set( 'meta_key', 'berocket_post_order' );
-            $query->set( 'orderby', array( 'berocket_post_order' => 'ASC', 'ID' => 'ASC' ) );
-        }
     }
 
     public function init_conditions() {
@@ -292,15 +348,15 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
     }
     public function description($post) {
         ?>
-        <p><?php _e('A label without any condition will be displayed on all products', 'BeRocket_products_label_domain'); ?></p>
-        <p><?php _e('Connection between conditions can be AND and OR.', 'BeRocket_products_label_domain'); ?></p>
+        <p><?php _e('Label without any condition will be displayed on all products', 'BeRocket_products_label_domain'); ?></p>
+        <p><?php _e('Connection between condition can be AND and OR', 'BeRocket_products_label_domain'); ?></p>
         <p>
             <strong><?php _e('AND', 'BeRocket_products_label_domain'); ?></strong> 
-            <?php _e('is used between conditions within one section', 'BeRocket_products_label_domain'); ?>
+            <?php _e('uses between condition in one section', 'BeRocket_products_label_domain'); ?>
         </p>
         <p>
             <strong><?php _e('OR', 'BeRocket_products_label_domain'); ?></strong> 
-            <?php _e('is used between different sections with conditions', 'BeRocket_products_label_domain'); ?>
+            <?php _e('uses between different sections with conditions', 'BeRocket_products_label_domain'); ?>
         </p>
         <?php
     }
@@ -308,7 +364,7 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
         wp_enqueue_style( 'berocket_framework_tippy' );
         wp_enqueue_script( 'berocket_framework_tippy' );
         wp_enqueue_style( 'berocket_tippy' );
-        wp_enqueue_script( 'berocket_tippy' );
+        wp_enqueue_script( 'berocket_tippy');
         ?>
         <div class="berocket_label_preview_wrap">
             <div class="berocket_label_preview berocket_product_image_wrap">
@@ -339,153 +395,121 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
                 display: block;
                 width: 200px;
             }
+            #poststuff .berocket_label_preview_wrap h2.berocket_product_in_title_wrap {
+                padding-left: 0;
+                padding-right: 0;
+                padding-top: 0;
+                margin-top: 10px;
+                line-height: 1.2;
+            }
             .postbox#preview {
                 overflow:hidden;
             }
         </style>
         <?php
     }
-    public function get_default_template_settings($template = true) {
-        $default_settings = array();
-        $default_names = array(
-            'type',
-            'padding_top',
-            'padding_horizontal',
-            'border_radius',
-            'border_width',
-            'image_height',
-            'image_width',
-            'size_multiplier',
-            'img_title',
-            'color_use',
-            'font_size',
-            'line_height',
-            'position',
-            'rotate',
-            'zindex',
-            'div_custom_class',
-            'div_custom_css',
-            'span_custom_class',
-            'span_custom_css',
-            'b_custom_class',
-            'b_custom_css',
-            'i1_custom_class',
-            'i1_custom_css',
-            'i2_custom_class',
-            'i2_custom_css',
-            'i3_custom_class',
-            'i3_custom_css',
-            'i4_custom_class',
-            'i4_custom_css',
-            'top_margin',
-            'right_margin',
-            'top_padding',
-            'right_padding',
-            'bottom_padding',
-            'left_padding',
-            'border_radius_units',
-            'padding_units',
-            'padding_top_units',
-            'padding_horizontal_units',
-            'margin_units',
-            'line_height_units',
-            'image_height_units',
-            'image_width_units',
-            'font_size_units',
-            'text_before',
-            'text_before_nl',
-            'text_after',
-            'text_after_nl',
+
+    public function get_default_template_settings( $template = true ) {
+        $base_options = apply_filters( 'berocket_labels_get_base_options', false );
+        $default_settings = array(
+            'bottom_padding' => 0,
+            'left_padding'   => 0,
+            'right_padding'  => 0,
+            'top_padding'    => 0,
+
+            'bottom_margin'  => -10,
+            'left_margin'    => -10,
+            'right_margin'   => -10,
+            'top_margin'     => -10,
+
+            'padding_horizontal' => -10,
+            'padding_top'        => -10,
+
+            'better_position'        => 1,
+            'border_radius'          => 3,
+            'color'                  => self::$base_color,
+            'color_use'              => 1,
+            'content_type'           => 'text',
+            'data'                   => array(),
+            'discount_minus'         => '',
+            'font_color'             => '#ffffff',
+            'font_family'            => $base_options['font_family'],
+            'font_size'              => 14,
+            'image'                  => '',
+            'image_height'           => '35',
+            'image_width'            => '60',
+            'img_title'              => '',
+            'label_from_post'        => '',
+            'line_height'            => 1.2,
+            'line_height_units'      => 'em',
+            'position'               => 'right',
+            'text'                   => 'SALE',
+            'text_after'             => '',
+            'text_after_nl'          => '',
+            'text_before'            => '',
+            'text_before_nl'         => '',
+            'template'               => '',
+            'tooltip_close_delay'    => '0',
+            'tooltip_close_on_click' => '0',
+            'tooltip_content'        => '',
+            'tooltip_max_width'      => '300',
+            'tooltip_open_delay'     => '0',
+            'tooltip_open_on'        => 'click',
+            'tooltip_position'       => 'top',
+            'tooltip_theme'          => 'dark',
+            'tooltip_use_arrow'      => '0',
+            'type'                   => 'image',
+            'zindex'                 => '500',
+
+            'border_radius_units'      => 'px',
+            'font_size_units'          => 'px',
+            'image_height_units'       => 'px',
+            'image_width_units'        => 'px',
+            // 'line_height_units'        => 'px',
+            'margin_units'             => 'px',
+            'padding_units'            => 'px',
+            'padding_top_units'        => 'px',
+            'padding_horizontal_units' => 'px',
         );
-        foreach($this->default_settings as $settings_name => $settings_val) {
-            if( in_array($settings_name, $default_names) ) {
-                $default_settings[$settings_name] = $settings_val;
-            }
-        }
+
+        if ( $template ) {
+            $default_settings['type'] = 'label';
+            $default_settings['position'] = 'left';
+        } 
+        $default_settings += $this->get_default_template_settings_custom_css_and_class();
 
         $default_settings = apply_filters( 'berocket_custom_post_br_labels_default_settings', $default_settings );
-
-        $BeRocket_products_label = BeRocket_products_label::getInstance();
-        $base_options = $BeRocket_products_label->get_option();
-        if( $template ) {
-            $template_defaults = array(
-                'bottom_padding'    => '0',
-                'left_padding'      => '0',
-                'right_padding'     => '0',
-                'top_padding'       => '0',
-
-                'bottom_margin'     => 0,
-                'left_margin'       => -10,
-                'right_margin'      => -10,
-                'top_margin'        => -10,
-
-                'background_color'         => '#4fd1cd',
-                'border_color'             => '#FFFFFF',
-                'better_position'          => 1,
-                'border_radius'            => 3,
-                'border_width'             => '',
-                'content_type'             => 'text',
-                'font_color'               => '#FFFFFF',
-                'font_family'              => $base_options['font_family'],
-                'font_size'                => 14,
-                'image'                    => '',
-                'image_height'             => '',
-                'image_width'              => '',
-                'line_height'              => 14,
-                'padding_horizontal'       => -10,
-                'padding_top'              => -10,
-                'position'                 => 'right',
-                'rotate'                   => '0deg',
-                'size_multiplier'          => 1,
-                'text_before'              => '',
-                'text_before_nl'           => '',
-                'text_after'               => '',
-                'text_after_nl'            => '',
-                'text'                     => 'SALE',
-                'type'                     => 'image',
-
-                'border_radius_units'      => 'px',
-                'font_size_units'          => 'px',
-                'image_height_units'       => 'px',
-                'image_width_units'        => 'px',
-                'line_height_units'        => 'px',
-                'margin_units'             => 'px',
-                'padding_horizontal_units' => 'px',
-                'padding_top_units'        => 'px',
-                'padding_units'            => 'px',
-
-            );
-            foreach($template_defaults as $settings_name => $settings_val) {
-                $default_settings[$settings_name] = $settings_val;
-            }
-        } else {
-            $label_defaults = array(
-                'div_custom_class' => '',
-                'div_custom_css' => '',
-                'span_custom_class' => '',
-                'span_custom_css' => '',
-                'b_custom_class' => '',
-                'b_custom_css' => '',
-                'i1_custom_class' => '',
-                'i1_custom_css' => '',
-                'i2_custom_class' => '',
-                'i2_custom_css' => '',
-                'i3_custom_class' => '',
-                'i3_custom_css' => '',
-                'i4_custom_class' => '',
-                'i4_custom_css' => '',
-            );
-            foreach($label_defaults as $settings_name => $settings_val) {
-                $default_settings[$settings_name] = $settings_val;
-            }
-        }
-
         return $default_settings;
     }
+
+    public function get_default_template_settings_custom_css_and_class() {
+        return array(
+            'div_custom_class'  => '',
+            'div_custom_css'    => '',
+            'span_custom_class' => '',
+            'span_custom_css'   => 'color: white;display: flex;position: relative;right: 0;text-align: center;',
+            'b_custom_class'    => '',
+            'b_custom_css'      => '',
+            'i1_custom_class'   => '',
+            'i1_custom_css'     => 'display: block;height: 0;position: absolute;width: 0;',
+            'i2_custom_class'   => '',
+            'i2_custom_css'     => 'background-color: transparent;display: block;line-height: 30px;position: absolute;z-index: 99;',
+            'i3_custom_class'   => '',
+            'i3_custom_css'     => 'display: block;height: 0;position: absolute;width: 0;',
+            'i4_custom_class'   => '',
+            'i4_custom_css'     => 'display: block;height: 0;position: absolute;width: 0;',
+        );
+    }
+
     public function settings($post) {
+        include_once('libraries/googlefonts.php');
         $BeRocket_products_label = BeRocket_products_label::getInstance();
         $BeRocket_products_label->load_admin_edit_scripts();
-        $options = $this->get_option( $post->ID );
+        $options = $BeRocket_products_label->recursive_array_set( $this->get_default_template_settings(), $this->get_option( $post->ID ) );
+
+        if ( ! isset( $options['span_custom_css'] ) ) {
+            $options += $this->get_default_template_settings_custom_css_and_class();
+        }
 
         echo '<div class="br_framework_settings br_alabel_settings">';
 
@@ -587,7 +611,7 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
                         "selected" => false
                     ),
                 ),
-                'Style'     => array(
+                'Style' => array(
                     'color_use' => array(
                         "type"     => "checkbox",
                         "label"    => __('Use background color', 'BeRocket_products_label_domain'),
@@ -613,18 +637,18 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
                         "extra"    => " data-for='.br_alabel > span' data-style='color' data-ext=''",
                         "value"    => $options['font_color'],
                     ),
-                    'font' => $BeRocket_products_label->select_fonts( false ),
+                    'font' => berocket_labels_googlefonts::select_fonts(),
                     'font_size' => array(
                         "label"    => __('Font size', 'BeRocket_products_label_domain'),
                         "items" => array(
                             array(
                                 "type"     => "number",
                                 "name"     => "font_size",
-                                "extra"    => ' min="0" max="500" data-for=".br_alabel>span" data-style="font-size" data-ext="px" data-default="' . $this->default_settings['font_size'] . '"',
+                                "extra"    => ' min="0" max="500" data-for=".br_alabel>span" data-style="font-size" data-ext="px" data-default="' . $options['font_size'] . '"',
                                 "class"    => 'br_js_change',
                                 "value"    => $options['font_size'],
                             ),
-                            apply_filters( 'berocket_label_select_untis', 'font_size' ),
+                            brapl_select_units( 'font_size', $options['font_size_units'] ),
                         ),
                     ),
                     'line_height' => array(
@@ -634,10 +658,10 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
                                 "type"     => "number",
                                 "name"     => "line_height",
                                 "class"    => "br_js_change",
-                                "extra"    => ' min="0" max="400" data-for=".br_alabel > span" data-style="line-height" data-ext="px" data-default="' . $options['line_height'] . '"',
+                                "extra"    => " min='0' max='400' step='0.1' data-for='.br_alabel > span' data-style='line-height' data-ext='{$options['line_height_units']}' data-default='{$options['line_height']}'",
                                 "value"    => $options['line_height'],
                             ),
-                            apply_filters( 'berocket_label_select_untis', 'line_height' ),
+                            brapl_select_units( 'line_height', $options['line_height_units'] ),
                         ),
                     ),
                     'image_height' => array(
@@ -647,10 +671,10 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
                                 "type"     => "number",
                                 "name"     => "image_height",
                                 "class"    => "br_js_change",
-                                "extra"    => ' data-for=".br_alabel > span" data-style="height" data-ext="px"',
+                                "extra"    => ' data-for=".br_alabel > span" data-style="height" data-ext="px" data-default="' . $options['image_height'] . '"',
                                 "value"    => $options['image_height'],
                             ),
-                            apply_filters( 'berocket_label_select_untis', 'image_height' ),
+                            brapl_select_units( 'image_height', $options['image_height_units'] ),
                         ),
                     ),
                     'image_width' => array(
@@ -660,10 +684,10 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
                                 "type"     => "number",
                                 "name"     => "image_width",
                                 "class"    => "br_js_change",
-                                "extra"    => ' data-for=".br_alabel > span" data-style="width" data-ext="px"',
+                                "extra"    => ' data-for=".br_alabel > span" data-style="width" data-ext="px" data-default="' . $options['image_width'] . '"',
                                 "value"    => $options['image_width'],
                             ),
-                            apply_filters( 'berocket_label_select_untis', 'image_width' ),
+                            brapl_select_units( 'image_width', $options['image_width_units'] ),
                         ),
                     ),
                     'border_radius' => array(
@@ -676,7 +700,7 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
                                 "extra"    => " data-for='.br_alabel > span' data-style='border-radius' data-ext='{$options['border_radius_units']}'",
                                 "value"    => '10',
                             ),
-                            apply_filters( 'berocket_label_select_untis', 'border_radius' ),
+                            brapl_select_units( 'border_radius', $options['border_radius_units'] ),
                         ),
                     ),
                 ),
@@ -702,7 +726,7 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
                                 "extra" => " data-for='.br_alabel' data-style='top' data-ext='{$options['padding_top_units']}' data-default='{$options['padding_horizontal']}'",
                                 "value" => $options['padding_top'],
                             ),
-                            apply_filters( 'berocket_label_select_untis', 'padding_top' ),
+                            brapl_select_units( 'padding_top', $options['padding_top_units'] ),
                         ),
                     ),
                     'padding_horizontal' => array(
@@ -715,7 +739,7 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
                                 "extra" => " data-for='.br_alabel' data-from='.pos_label' data-ext='{$options['padding_horizontal_units']}' data-default='{$options['padding_horizontal']}'",
                                 "value" => $options['padding_horizontal'],
                             ),
-                            apply_filters( 'berocket_label_select_untis', 'padding_horizontal' ),
+                            brapl_select_units( 'padding_horizontal', $options['padding_horizontal_units'] ),
                         ),
                     ),
                     'position' => array(
@@ -815,6 +839,7 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
                         "name"     => "tooltip_max_width",
                         "extra"    => 'min="0"',
                         "value"    => $options['tooltip_max_width'],
+                        "label_for"=> "px"
                     ),
                 ),
                 'Custom CSS' => array(
@@ -927,6 +952,10 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
         <?php
     }
     public function section_templates( $html, $item, $options ) {
+        // if ( empty( $options['template'] ) ) {
+        //     $default_settings = $this->get_default_template_settings();
+        //     $options['template'] = $default_settings['template'];
+        // }
         $html = "<tr><th>
                     <div class='br_settings_vtab" . ( ( strpos( $options['template'], 'css' ) !== false || empty($options['template']) ) ? ' active' : '' ) . "' data-tab='css-templates'>" . __('CSS Templates', 'BeRocket_products_label_domain') . "</div>
                     <div class='br_settings_vtab" . ( ( strpos( $options['template'], 'image' ) !== false ) ? ' active' : '' ) . "' data-tab='image-templates'>" . __('Image Templates', 'BeRocket_products_label_domain') . "</div>
@@ -939,18 +968,17 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
         return $html;
     }
     public static function section_custom_css_explanation($html, $item, $options, $name) {
-        $html .= '<tr><td colspan="2">' . __( 'This section is intended for advanced users and developers only. Please do not use it if you do not know how it works.', 'BeRocket_products_label_domain' ) 
-            . '<br/>' . __( 'Label’s HTML:', 'BeRocket_products_label_domain' ) . 
-            '<br/>&lt;div&gt;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;i&gt;&lt;/i&gt;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;i&gt;&lt;/i&gt;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;i&gt;&lt;/i&gt;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;i&gt;&lt;/i&gt;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;b&gt;' 
-            . __( 'TEXT OF LABEL', 'BeRocket_products_label_domain' ) . '&lt;/b&gt;<br>
-            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/span&gt;<br>
-            &lt;/div&gt;</td></tr>';
+        $html .= '<tr><td colspan="2">' . __( 'It is settings for advanced users. Please do not use it if you don\'t know how it work.<br/ > This options is provided for designer and programmers.<br />How labels looks in HTML<br />'. 'BeRocket_products_label_domain' ) . 
+        '&lt;div&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;span&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;i&gt;&lt;/i&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;i&gt;&lt;/i&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;i&gt;&lt;/i&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;i&gt;&lt;/i&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;b&gt;' 
+        . __( 'TEXT OF LABEL', 'BeRocket_products_label_domain' ) . '&lt;/b&gt;<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;&lt;/span&gt;<br>
+        &lt;/div&gt;</td></tr>';
         return $html;
     }
     public function get_option( $post_id ) {
@@ -968,6 +996,10 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
         return $options;
     }
 
+    public function get_custom_options( $options, $post_id ) {
+        return $options + $this->get_option( $post_id );
+    }
+
     public function wc_save_check($post_id, $post) {
         if ( $this->post_name != $post->post_type && $post->post_type != 'product' ) {
             return false;
@@ -975,7 +1007,7 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
         $current_settings = get_post_meta( $post_id, $this->post_name, true );
 
         if( empty($current_settings) ) {
-            update_post_meta( $post_id, $this->post_name, $this->default_settings );
+            update_post_meta( $post_id, $this->post_name, $this->get_default_template_settings() );
         }
 
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
@@ -1001,7 +1033,7 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
     public function wc_save_product_without_check( $post_id, $post ) {
         if( isset($_POST[$this->post_name]) && is_array($_POST[$this->post_name]) ) {
             $BeRocket_products_label = BeRocket_products_label::getInstance();
-            $_POST[$this->post_name] = $BeRocket_products_label->recursive_array_set($this->default_settings, $_POST[$this->post_name]);
+            $_POST[$this->post_name] = $BeRocket_products_label->recursive_array_set($this->get_default_template_settings(), $_POST[$this->post_name]);
         }
         parent::wc_save_product_without_check($post_id, $post);
     }
@@ -1049,49 +1081,52 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
         $i = 1;
         $html = '';
         $default_template_custom_css = array(
-            'div_custom_css'    => array(),
-            'span_custom_css'   => array(
-                'position'          => 'relative',
-                'display'           => 'block',
-                'color'             => 'white',
-                'text-align'        => 'center',
-                'right'             => '0',
+            'div_custom_css'  => array(),
+            'span_custom_css' => array(
+                'color'      => 'white',
+                'display'    => 'flex',
+                'position'   => 'relative',
+                'right'      => '0',
+                'text-align' => 'center',
             ),
-            'b_custom_css'      => array(
-                'position'          => 'relative',
-                'z-index'           => '100',
-                'text-align'        => 'center',
-                'color'             => 'inherit',
+            'b_custom_css' => array(
+                // 'left'       => '0',
+                // 'right'      => '0',
+                // 'overflow'   => 'hidden',
+                // 'position'   => 'absolute',
+                'text-align' => 'center',
+                'z-index'    => '100',
             ),
-            'i1_custom_css'     => array(
-                'position'          => 'absolute',
-                'display'           => 'block',
-                'width'             => '0',
-                'height'            => '0',
+            'i1_custom_css' => array(
+                'display'  => 'block',
+                'height'   => '0',
+                'position' => 'absolute',
+                'width'    => '0',
             ),
-            'i2_custom_css'     => array(
-                'display'           => 'block',
-                'position'          => 'absolute',
-                'line-height'       => '30px',
-                'z-index'           => '99',
-                'background-color'  => 'transparent',
+            'i2_custom_css' => array(
+                'background-color' => 'transparent',
+                'display'          => 'block',
+                'line-height'      => '30px',
+                'position'         => 'absolute',
+                'z-index'          => '99',
             ),
-            'i3_custom_css'     => array(
-                'position'          => 'absolute',
-                'display'           => 'block',
-                'width'             => '0',
-                'height'            => '0',
+            'i3_custom_css' => array(
+                'display'  => 'block',
+                'height'   => '0',
+                'position' => 'absolute',
+                'width'    => '0',
             ),
-            'i4_custom_css'     => array(
-                'position'          => 'absolute',
-                'display'           => 'block',
-                'width'             => '0',
-                'height'            => '0',
+            'i4_custom_css' => array(
+                'display'  => 'block',
+                'height'   => '0',
+                'position' => 'absolute',
+                'width'    => '0',
             )
         );
 
-        $templates_hide = apply_filters( "berocket_labels_templates_hide", $this->templates_hide );
-        $templates      = apply_filters( "berocket_labels_templates", $this->templates );
+        $templates_hide  = apply_filters( "berocket_labels_templates_hide", $this->templates_hide );
+        $templates = apply_filters( "berocket_labels_templates", $this->templates );
+        $templates = $this->add_class( $templates, 'b_custom_class', 'br-labels' );
 
         foreach ( $templates as $type => $template ) {
             $k = 1;
@@ -1104,7 +1139,6 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
                 foreach ( $template as $template_value => $template_styles ) {
 
                     $template_hide = ( isset($templates_hide[$type][$template_value]) ? $templates_hide[$type][$template_value] : array() );
-
                     foreach($default_template_custom_css as $template_style_name => $template_style_value) {
                         if( isset($template_styles[$template_style_name]) ) {
                             $template_style_value = array_merge($template_style_value, $template_styles[$template_style_name]);
@@ -1174,24 +1208,5 @@ class BeRocket_advanced_labels_custom_post extends BeRocket_custom_post_class {
         }
 
         return $html;
-    }
-
-    public function select_untis( $property ) {
-        global $post;
-        $options = $this->get_option( $post->ID );
-        $property_units = "{$property}_units";
-
-        return array(
-            "type"    => "selectbox",
-            "options" => array(
-                array( 'value' => 'px', 'text' => 'px' ),
-                array( 'value' => 'em', 'text' => 'em' ),
-                array( 'value' => '%', 'text' => '%' ),
-            ),
-            "extra"   => ' data-default="px"',
-            "name"    => $property_units,
-            "class"   => "berocket_label_units",
-            "value"   => $options[$property_units],
-        );
     }
 }

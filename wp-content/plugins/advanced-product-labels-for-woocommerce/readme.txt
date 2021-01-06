@@ -4,8 +4,8 @@ Contributors: dholovnia, berocket
 Donate link: https://berocket.com/product/woocommerce-advanced-product-labels?utm_source=wordpress_org&utm_medium=donate&utm_campaign=products_label
 Tags: labels, tag, mark, product labels, product tags, product marks, product sign, new product label, sale product label, new product badge, sale product badge, advanced product labels, woocommerce labels, woocommerce product labels, woocommerce tags, woocommerce marks, woo labels, woo product labels, wc labels, wc product labels, marked produc, add more labels, add more tags, custom product labels, custom product tags, custom product marks, custom labels, custom product badges, custom badges, per product type, per product label, single product label, single product page label, shop page label, shop page badges, change button label, change label, button label, simple label, variable product label, grouped product label, external product label, berocket, berocket advanced product labels for woocommerce
 Requires at least: 5.0
-Tested up to: 5.5
-Stable tag: 1.1.19
+Tested up to: 5.6
+Stable tag: 1.2.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,8 +33,9 @@ Creating labels has come really easy and fast with the Advanced Product Labels p
 
 
 = Additional Features in Paid Plugin: =
-&#9989; 25+ CSS and Image templates
+&#9989; 30 CSS templates
 &#9989; 12 Advanced templates
+&#9989; 14 Image templates
 &#9989; Label size multiplier for scaling complex labels
 &#9989; Addon Advanced Content: links for labels
 &#9989; Opacity for labels
@@ -45,6 +46,10 @@ Creating labels has come really easy and fast with the Advanced Product Labels p
 &#9989; Label by: product age, stock quantity, sale price
 &#9989; Custom image and time left for discount type of label
 &#9989; Custom label border and font size
+&#9989; Gradient and Shadow
+&#9989; Size Multiplier
+&#9989; Discount Timers
+&#9989; In-title label
 &#9989; Labels can be rotated from -90deg to 90deg
 &#9989; Labels can be added to products with specific attribute values
 
@@ -137,6 +142,24 @@ You can try this plugin's admin side [here](https://berocket.com/product/woocomm
 ---
 
 == Changelog ==
+
+= 1.2.0.3 =
+* Fix - Issue with product edit page
+
+= 1.2.0.2 =
+* Enhancement - Compatibility version: PHP 8 and WooCommerce 4.9
+* Fix - Position center is not working
+* Fix - No google fonts after AJAX loading
+
+= 1.2.0.1 =
+* Fix - Issue with product edit page
+
+= 1.2 =
+* Enhancement - New add-on: Labels for Variations. Display label only for selected variations
+* Enhancement - Images for background for more templates
+* Fix - Use default theme font by default
+* Fix - Attributes label issue
+* Fix - Other issues
 
 = 1.1.19 =
 * Fix - Labels Backorder stock status did not worked correctly. When condition was In Stock products with status On Backorder were shown.

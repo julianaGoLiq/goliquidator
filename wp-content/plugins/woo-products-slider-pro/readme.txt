@@ -2,7 +2,7 @@
 Contributors: sajjad67
 Tags: best selling products, best selling products slider, slick slider, best selling products by category, shortcode, template code, featured product, featured product slider, Featured product by category, autoplay slider, best product slider, best product slider for woo shop, carousel, clean woo product slider, multiple product slider, product carousel,  product content slider, product contents carousel, product slider, product slider carousel for woo, products slider,  responsive product slider, responsive product carousel, slider, smooth product slider woo product slider,  advance slider, woo best selling products, woo category slider, latest products, most selling products, product carousel slider, recent product carousel, recent product slider, free,premium,pro
 Requires at least: 3.1
-Tested up to: 5.3
+Tested up to: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -109,6 +109,7 @@ slider_cls="products" (This parameter target the wooCommerce default class for p
 6. WooCommerce Top Rated Products in carousel view
 7. WooCommerce Most Recent Products in carousel view
 == Changelog ==
-
+= 1.0.1 =
+* Minor Update.. tested for latest wp compatibility..
 = 1.0 =
 * Initial release.

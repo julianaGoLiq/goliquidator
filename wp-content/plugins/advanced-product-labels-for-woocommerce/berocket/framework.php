@@ -35,7 +35,7 @@ if( ! class_exists( 'BeRocket_Framework' ) ) {
     include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
     load_plugin_textdomain('BeRocket_domain', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/');
     class BeRocket_Framework {
-        public static $framework_version = '2.6.0.4';
+        public static $framework_version = '2.6.0.5';
         public static $settings_name = '';
         public $addons;
         public $libraries;
@@ -437,7 +437,7 @@ if( ! class_exists( 'BeRocket_Framework' ) ) {
                 'berocket_framework_admin',
                 plugins_url( 'assets/js/admin.js', __FILE__ ),
                 array( 'jquery' ),
-                $this->cc->info[ 'version' ]
+                BeRocket_Framework::$framework_version
             );
             wp_localize_script(
                 'berocket_framework_admin',
@@ -452,25 +452,28 @@ if( ! class_exists( 'BeRocket_Framework' ) ) {
                 'berocket_framework_admin_style',
                 plugins_url( 'assets/css/admin.css', __FILE__ ),
                 "",
-                $this->cc->info[ 'version' ]
+                BeRocket_Framework::$framework_version
             );
 
             wp_register_style(
                 'berocket_framework_global_admin_style',
                 plugins_url( 'assets/css/global-admin.css', __FILE__ ),
                 "",
-                $this->cc->info[ 'version' ]
+                BeRocket_Framework::$framework_version
             );
 
             wp_register_script(
                 'berocket_widget-colorpicker',
                 plugins_url( 'assets/js/colpick.js', __FILE__ ),
-                array( 'jquery' )
+                array( 'jquery' ),
+                BeRocket_Framework::$framework_version
             );
 
             wp_register_style(
                 'berocket_widget-colorpicker-style',
-                plugins_url( 'assets/css/colpick.css', __FILE__ )
+                plugins_url( 'assets/css/colpick.css', __FILE__ ),
+                "",
+                BeRocket_Framework::$framework_version
             );
 
             wp_register_style(
@@ -801,6 +804,7 @@ if( ! class_exists( 'BeRocket_Framework' ) ) {
                         $meta_data = '?utm_source=free_plugin&utm_medium=settings&utm_campaign='.$this->info['plugin_name'];
                     }
                     echo "
+						<style>.notice:not(.berocket_admin_notice){display:none!important;}</style>
                         <header>
                             <div class='br_logo_white'>
                                 <a href='https://berocket.com/products/{$meta_data}' title='BeRocket' target='_blank'><img src='" . ( plugins_url( 'assets/images/br_logo_white.webp', __FILE__ ) ) . "' /></a>

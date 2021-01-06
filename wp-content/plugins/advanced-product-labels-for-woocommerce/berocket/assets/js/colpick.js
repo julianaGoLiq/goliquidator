@@ -5,7 +5,18 @@ Copyright 2013 Jose Vargas. Licensed under GPL license. Based on Stefan Petre's 
 For usage and examples: colpick.com/plugin
  */
 
-(function ($) {
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define(['jquery'], factory);
+    } else if (typeof exports === 'object') {
+        // Node/CommonJS
+        factory(require('jquery'));
+    } else {
+        // Browser globals
+        factory(jQuery);
+    }
+}(function ($) {
 	var colpick = function () {
 		var
 			tpl = '<div class="colpick"><div class="colpick_color"><div class="colpick_color_overlay1"><div class="colpick_color_overlay2"><div class="colpick_selector_outer"><div class="colpick_selector_inner"></div></div></div></div></div><div class="colpick_hue"><div class="colpick_hue_arrs"><div class="colpick_hue_larr"></div><div class="colpick_hue_rarr"></div></div></div><div class="colpick_new_color"></div><div class="colpick_current_color"></div><div class="colpick_hex_field"><div class="colpick_field_letter">#</div><input type="text" maxlength="6" size="6" /></div><div class="colpick_rgb_r colpick_field"><div class="colpick_field_letter">R</div><input type="text" maxlength="3" size="3" /><div class="colpick_field_arrs"><div class="colpick_field_uarr"></div><div class="colpick_field_darr"></div></div></div><div class="colpick_rgb_g colpick_field"><div class="colpick_field_letter">G</div><input type="text" maxlength="3" size="3" /><div class="colpick_field_arrs"><div class="colpick_field_uarr"></div><div class="colpick_field_darr"></div></div></div><div class="colpick_rgb_b colpick_field"><div class="colpick_field_letter">B</div><input type="text" maxlength="3" size="3" /><div class="colpick_field_arrs"><div class="colpick_field_uarr"></div><div class="colpick_field_darr"></div></div></div><div class="colpick_hsb_h colpick_field"><div class="colpick_field_letter">H</div><input type="text" maxlength="3" size="3" /><div class="colpick_field_arrs"><div class="colpick_field_uarr"></div><div class="colpick_field_darr"></div></div></div><div class="colpick_hsb_s colpick_field"><div class="colpick_field_letter">S</div><input type="text" maxlength="3" size="3" /><div class="colpick_field_arrs"><div class="colpick_field_uarr"></div><div class="colpick_field_darr"></div></div></div><div class="colpick_hsb_b colpick_field"><div class="colpick_field_letter">B</div><input type="text" maxlength="3" size="3" /><div class="colpick_field_arrs"><div class="colpick_field_uarr"></div><div class="colpick_field_darr"></div></div></div><div class="colpick_submit"></div></div>',
@@ -23,7 +34,8 @@ For usage and examples: colpick.com/plugin
 				layout: 'full',
 				submit: 1,
 				submitText: 'OK',
-				height: 156
+				height: 156,
+                polyfill: false
 			},
 			//Fill the inputs of the plugin
 			fillRGBFields = function  (hsb, cal) {
@@ -101,7 +113,7 @@ For usage and examples: colpick.com/plugin
 			//Increment/decrement arrows functions
 			downIncrement = function (ev) {
 				ev.preventDefault ? ev.preventDefault() : ev.returnValue = false;
-				var field = $(this).parent().find('input').focus();
+				var field = $(this).parent().find('input').trigger('focus');
 				var current = {
 					el: $(this).parent().addClass('colpick_slider'),
 					max: this.parentNode.className.indexOf('_hsb_h') > 0 ? 360 : (this.parentNode.className.indexOf('_hsb') > 0 ? 100 : 255),
@@ -110,8 +122,8 @@ For usage and examples: colpick.com/plugin
 					val: parseInt(field.val(), 10),
 					preview: $(this).parent().parent().data('colpick').livePreview
 				};
-				$(document).mouseup(current, upIncrement);
-				$(document).mousemove(current, moveIncrement);
+				$(document).on('mouseup', current, upIncrement);
+				$(document).on('mousemove', current, moveIncrement);
 			},
 			moveIncrement = function (ev) {
 				ev.data.field.val(Math.max(0, Math.min(ev.data.max, parseInt(ev.data.val - ev.pageY + ev.data.y, 10))));
@@ -122,7 +134,7 @@ For usage and examples: colpick.com/plugin
 			},
 			upIncrement = function (ev) {
 				change.apply(ev.data.field.get(0), [true]);
-				ev.data.el.removeClass('colpick_slider').find('input').focus();
+				ev.data.el.removeClass('colpick_slider').find('input').trigger('focus');
 				$(document).off('mouseup', upIncrement);
 				$(document).off('mousemove', moveIncrement);
 				return false;
@@ -175,9 +187,9 @@ For usage and examples: colpick.com/plugin
 				$(document).on('mouseup touchend',current,upSelector);
 				$(document).on('mousemove touchmove',current,moveSelector);
 
-				var payeX,pageY;
+				var pageX,pageY;
 				if(ev.type == 'touchstart') {
-					pageX = ev.originalEvent.changedTouches[0].pageX,
+					pageX = ev.originalEvent.changedTouches[0].pageX;
 					pageY = ev.originalEvent.changedTouches[0].pageY;
 				} else {
 					pageX = ev.pageX;
@@ -194,9 +206,9 @@ For usage and examples: colpick.com/plugin
 				return false;
 			},
 			moveSelector = function (ev) {
-				var payeX,pageY;
+				var pageX,pageY;
 				if(ev.type == 'touchmove') {
-					pageX = ev.originalEvent.changedTouches[0].pageX,
+					pageX = ev.originalEvent.changedTouches[0].pageX;
 					pageY = ev.originalEvent.changedTouches[0].pageY;
 				} else {
 					pageX = ev.pageX;
@@ -229,29 +241,41 @@ For usage and examples: colpick.com/plugin
 			},
 			//Show/hide the color picker
 			show = function (ev) {
-				// Prevent the trigger of any direct parent
-				ev.stopPropagation();
+				if(ev) {
+					 // Prevent the trigger of any direct parent
+					ev.stopPropagation();
+				}
 				var cal = $('#' + $(this).data('colpickId'));
+                if (ev && !cal.data('colpick').polyfill) {
+                    ev.preventDefault();
+                }
 				cal.data('colpick').onBeforeShow.apply(this, [cal.get(0)]);
-				var pos = $(this).offset();
+				var pos = $(this).position();
 				var top = pos.top + this.offsetHeight;
-				var left = pos.left;
+				var left = pos.left + $(this).outerWidth(true) / 2;
 				var viewPort = getViewport();
 				var calW = cal.width();
-				if (left + calW > viewPort.l + viewPort.w) {
+				if (left + calW > (viewPort.l + viewPort.w) / 2) {
 					left -= calW;
 				}
+                if( left < 0 ) {
+                    left = 0;
+                }
 				cal.css({left: left + 'px', top: top + 'px'});
 				if (cal.data('colpick').onShow.apply(this, [cal.get(0)]) != false) {
 					cal.show();
 				}
 				//Hide when user clicks outside
-				$('html').mousedown({cal:cal}, hide);
-				cal.mousedown(function(ev){ev.stopPropagation();})
+				$('html').on('mousedown', {cal:cal}, hide);
+				cal.on('mousedown', function(ev){ev.stopPropagation();})
 			},
 			hide = function (ev) {
-				if (ev.data.cal.data('colpick').onHide.apply(this, [ev.data.cal.get(0)]) != false) {
-					ev.data.cal.hide();
+                var cal = $('#' + $(this).data('colpickId'));
+                if (ev) {
+                    cal = ev.data.cal;
+                }
+				if (cal.data('colpick').onHide.apply(this, [cal.get(0)]) != false) {
+					cal.hide();
 				}
 				$('html').off('mousedown', hide);
 			},
@@ -279,16 +303,32 @@ For usage and examples: colpick.com/plugin
 			},
 			fixHex = function (hex) {
 				var len = 6 - hex.length;
-				if (len > 0) {
-					var o = [];
-					for (var i=0; i<len; i++) {
-						o.push('0');
+				if (len == 3) {
+					var e = [];
+					for (var j = 0; j < len; j++) {
+						e.push(hex[j]);
+						e.push(hex[j]);
 					}
-					o.push(hex);
-					hex = o.join('');
+					hex = e.join('');
+				} else {
+					if (len > 0) {
+						var o = [];
+						for (var i = 0; i < len; i++) {
+							o.push('0');
+						}
+						o.push(hex);
+						hex = o.join('');
+					}
 				}
 				return hex;
 			},
+			getUniqueID = (function () {
+				var cnt = 0;
+				return function () {
+					cnt += 1;
+					return cnt;
+				};
+			})(),
 			restoreOriginal = function () {
 				var cal = $(this).parent();
 				var col = cal.data('colpick').origColor;
@@ -320,8 +360,22 @@ For usage and examples: colpick.com/plugin
 					if (!$(this).data('colpickId')) {
 						var options = $.extend({}, opt);
 						options.origColor = opt.color;
+                        
+                        // Set polyfill
+                        if (typeof opt.polyfill == 'function') {
+                            options.polyfill = opt.polyfill(this);
+                        }
+                        
+                        //Input field operations
+                        options.input = $(this).is('input');
+                        
+                        //Polyfill fixes
+                        if (options.polyfill && options.input && this.type === "color") {
+                            return;
+                        }
+                        
 						//Generate and assign a random ID
-						var id = 'collorpicker_' + parseInt(Math.random() * 1000);
+						var id = 'colorpicker_' + getUniqueID();
 						$(this).data('colpickId', id);
 						//Set the tpl's ID and get the HTML
 						var cal = $(tpl).attr('id', id);
@@ -332,17 +386,17 @@ For usage and examples: colpick.com/plugin
 							cal.addClass('colpick_'+options.colorScheme);
 						}
 						//Setup submit button
-						cal.find('div.colpick_submit').html(options.submitText).click(clickSubmit);
+						cal.find('div.colpick_submit').html(options.submitText).on('click', clickSubmit);
 						//Setup input fields
-						options.fields = cal.find('input').change(change).blur(blur).focus(focus);
-						cal.find('div.colpick_field_arrs').mousedown(downIncrement).end().find('div.colpick_current_color').click(restoreOriginal);
+						options.fields = cal.find('input').on('change', change).on('blur', blur).on('focus', focus);
+						cal.find('div.colpick_field_arrs').on('mousedown', downIncrement).end().find('div.colpick_current_color').on('click', restoreOriginal);
 						//Setup hue selector
 						options.selector = cal.find('div.colpick_color').on('mousedown touchstart',downSelector);
 						options.selectorIndic = options.selector.find('div.colpick_selector_outer');
 						//Store parts of the plugin
 						options.el = this;
 						options.hue = cal.find('div.colpick_hue_arrs');
-						huebar = options.hue.parent();
+						var huebar = options.hue.parent();
 						//Paint the hue bar
 						var UA = navigator.userAgent.toLowerCase();
 						var isIE = navigator.appName === 'Microsoft Internet Explorer';
@@ -356,7 +410,7 @@ For usage and examples: colpick.com/plugin
 								huebar.append(div);
 							}
 						} else {
-							stopList = stops.join(',');
+							var stopList = stops.join(',');
 							huebar.attr('style','background:-webkit-linear-gradient(top,'+stopList+'); background: -o-linear-gradient(top,'+stopList+'); background: -ms-linear-gradient(top,'+stopList+'); background:-moz-linear-gradient(top,'+stopList+'); -webkit-linear-gradient(top,'+stopList+'); background:linear-gradient(to bottom,'+stopList+'); ');
 						}
 						cal.find('div.colpick_hue').on('mousedown touchstart',downHue);
@@ -379,7 +433,7 @@ For usage and examples: colpick.com/plugin
 								display: 'block'
 							});
 						} else {
-							cal.appendTo(document.body);
+							cal.appendTo($(this).parent());
 							$(this).on(options.showEvent, show);
 							cal.css({
 								position:'absolute'
@@ -400,46 +454,50 @@ For usage and examples: colpick.com/plugin
 			hidePicker: function() {
 				return this.each( function () {
 					if ($(this).data('colpickId')) {
-						$('#' + $(this).data('colpickId')).hide();
+                        hide.apply(this);
 					}
 				});
 			},
 			//Sets a color as new and current (default)
 			setColor: function(col, setCurrent) {
-				setCurrent = (typeof setCurrent === "undefined") ? 1 : setCurrent;
-				if (typeof col == 'string') {
-					col = hexToHsb(col);
-				} else if (col.r != undefined && col.g != undefined && col.b != undefined) {
-					col = rgbToHsb(col);
-				} else if (col.h != undefined && col.s != undefined && col.b != undefined) {
-					col = fixHSB(col);
-				} else {
-					return this;
-				}
-				return this.each(function(){
-					if ($(this).data('colpickId')) {
-						var cal = $('#' + $(this).data('colpickId'));
-						cal.data('colpick').color = col;
-						cal.data('colpick').origColor = col;
-						fillRGBFields(col, cal.get(0));
-						fillHSBFields(col, cal.get(0));
-						fillHexFields(col, cal.get(0));
-						setHue(col, cal.get(0));
-						setSelector(col, cal.get(0));
-						
-						setNewColor(col, cal.get(0));
-						cal.data('colpick').onChange.apply(cal.parent(), [col, hsbToHex(col), hsbToRgb(col), cal.data('colpick').el, 1]);
-						if(setCurrent) {
-							setCurrentColor(col, cal.get(0));
-						}
+				if (col != undefined) {
+					setCurrent = (typeof setCurrent === "undefined") ? 1 : setCurrent;
+					if (typeof col == 'string') {
+						col = hexToHsb(col);
+					} else if (col.r != undefined && col.g != undefined && col.b != undefined) {
+						col = rgbToHsb(col);
+					} else if (col.h != undefined && col.s != undefined && col.b != undefined) {
+						col = fixHSB(col);
+					} else {
+						return this;
 					}
-				});
+					return this.each(function(){
+						if ($(this).data('colpickId')) {
+							var cal = $('#' + $(this).data('colpickId'));
+							cal.data('colpick').color = col;
+							cal.data('colpick').origColor = col;
+							fillRGBFields(col, cal.get(0));
+							fillHSBFields(col, cal.get(0));
+							fillHexFields(col, cal.get(0));
+							setHue(col, cal.get(0));
+							setSelector(col, cal.get(0));
+							setNewColor(col, cal.get(0));
+							cal.data('colpick').onChange.apply(cal.parent(), [col, hsbToHex(col), hsbToRgb(col), cal.data('colpick').el, 1]);
+							if(setCurrent) {
+								setCurrentColor(col, cal.get(0));
+							}
+						}
+					});
+				}
+			},
+			destroy: function(col, setCurrent) {
+				$('#' + $(this).data('colpickId')).remove();
 			}
 		};
 	}();
 	//Color space convertions
 	var hexToRgb = function (hex) {
-		var hex = parseInt(((hex.indexOf('#') > -1) ? hex.substring(1) : hex), 16);
+		hex = parseInt(((hex.indexOf('#') > -1) ? hex.substring(1) : hex), 16);
 		return {r: hex >> 16, g: (hex & 0x00FF00) >> 8, b: (hex & 0x0000FF)};
 	};
 	var hexToHsb = function (hex) {
@@ -505,7 +563,8 @@ For usage and examples: colpick.com/plugin
 		colpick: colpick.init,
 		colpickHide: colpick.hidePicker,
 		colpickShow: colpick.showPicker,
-		colpickSetColor: colpick.setColor
+		colpickSetColor: colpick.setColor,
+		colpickDestroy: colpick.destroy
 	});
 	$.extend({
 		colpick:{ 
@@ -517,4 +576,4 @@ For usage and examples: colpick.com/plugin
 			hexToRgb: hexToRgb
 		}
 	});
-})(jQuery);
+}));

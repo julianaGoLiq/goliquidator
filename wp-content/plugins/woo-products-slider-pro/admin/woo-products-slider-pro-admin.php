@@ -21,7 +21,6 @@ add_action('admin_menu', 'woopspro_register_shortcode_generator_page');
 function woopspro_register_shortcode_generator_page() {
 
 	add_submenu_page( 'edit.php?post_type=product', __('Products Slider Pro', 'woopspro'), __('Products Slider Pro', 'woopspro'), 'manage_options', 'woopspro-products-slider', 'woopspro_slider_shortcode_generator_page' );
-
 }
 
 /**
@@ -50,5 +49,4 @@ function woopspro_slider_shortcode_generator_page() {
 		woopspro_include_template( 'shortcode-column', array( 'id' => 'on_sale_products', 'title' => 'ON Sale Products Slider Shortcode', 'shortcode' => 'woopspro_on_sale_products_slider' ) );
 
 	woopspro_include_template( 'footer' );
-
 }

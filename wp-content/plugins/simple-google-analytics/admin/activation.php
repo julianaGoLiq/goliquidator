@@ -5,7 +5,7 @@
  *
  * @author        Alex Kovalev <alex.kovalevv@gmail.com>, Github: https://github.com/alexkovalevv
  * @copyright (c) 09.09.2017, Webcraftic
- * @see           Factory420_Activator
+ * @see           Factory439_Activator
  * @version       1.0
  */
 
@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-class WGA_Activation extends Wbcr_Factory420_Activator {
+class WGA_Activation extends Wbcr_Factory439_Activator {
 
 	/**
 	 * Runs activation actions.

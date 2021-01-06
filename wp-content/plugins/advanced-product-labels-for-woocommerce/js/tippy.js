@@ -27,10 +27,21 @@ function berocket_regenerate_tooltip() {
             br_tooltip_number++;
         }
     });
-    jQuery('.br_alabel > span[data-tippy-trigger="click"]').on('click', function(event) {
-        event.preventDefault();	
-        event.stopImmediatePropagation();
+
+    jQuery('.br_alabel > span[data-tippy-trigger="click"]').on('click', function(e) {
+        e.preventDefault();	
+        e.stopImmediatePropagation();
+        e.stopPropagation();
+    });
+
+    jQuery(document).on('mousedown', '.br_alabel [data-tippy-trigger="click"]', function(e){
+        e.stopPropagation();
+        e.preventDefault();
     });
 }
-berocket_regenerate_tooltip();
-jQuery(document).on('load berocket_ajax_products_loaded berocket_ajax_products_infinite_loaded', berocket_regenerate_tooltip);
+
+(function ($){
+    $(document).ready( berocket_regenerate_tooltip );
+    $(document).on('berocket_ajax_products_loaded berocket_ajax_products_infinite_loaded', berocket_regenerate_tooltip);
+})(jQuery);
+

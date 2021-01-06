@@ -2,8 +2,8 @@
 /**
  * Update version.
  */
-update_option( 'testimonial_version', SP_TFREE_VERSION );
-update_option( 'testimonial_db_version', SP_TFREE_VERSION );
+update_option( 'testimonial_version', '2.2.5' );
+update_option( 'testimonial_db_version', '2.2.5' );
 
 /**
  * Shortcode query for id.

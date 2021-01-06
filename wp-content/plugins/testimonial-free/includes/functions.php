@@ -281,9 +281,9 @@ class SP_Testimonial_Free_Functions {
 				</div>
 				<hr>
 				<div class="sp-tfree-join-community sp-tfree-text-center">
-					<h2>Join the <b>30000+</b> Happy Users Worldwide!</h2>
+					<h2>Join the <b>40000+</b> Happy Users Worldwide!</h2>
 					<a class="tfree-upgrade-btn" target="_blank" href="https://shapedplugin.com/plugin/testimonial-pro/">Get a license instantly</a>
-					<p>Every purchase comes with <b>7-day</b> money back guarantee and access to our incredibly Top-notch Support with lightening-fast response time and 100% satisfaction rate. One-Time payment, lifetime automatic update.</p>
+					<p>Every purchase comes with <b>14-days</b> money back guarantee and access to our incredibly Top-notch Support with lightening-fast response time and 100% satisfaction rate.</p>
 				</div>
 				<br>
 				<br>
@@ -337,7 +337,7 @@ This video playlist will help you get started with the plugin.', 'testimonial-fr
 						<i class="sp-tfree-font-icon fa fa-file-text"></i>
 						<h3>Looking for Documentation?</h3>
 						<p>We have detailed documentation on every aspects of Testimonial.</p>
-						<a href="https://shapedplugin.com/docs/docs/testimonial/" target="_blank" class="button button-primary">Documentation</a>
+						<a href="https://shapedplugin.com/docs/docs/testimonial/overview/" target="_blank" class="button button-primary">Documentation</a>
 					</div>
 				</div>
 				<div class="col">

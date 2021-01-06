@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @since 1.0.0
  */
-class Wbcr_Factory420_ScriptList extends Wbcr_Factory420_AssetsList {
+class Wbcr_Factory439_ScriptList extends Wbcr_Factory439_AssetsList {
 
 	public $localize_data = [];
 	public $use_ajax = false;
@@ -147,9 +147,9 @@ class Wbcr_Factory420_ScriptList extends Wbcr_Factory420_AssetsList {
 	 * Регистрирует глобальную JS переменную с пользовательскими данными
 	 *
 	 * @param string $varname
-	 * @param string $data
+	 * @param array $data
 	 *
-	 * @return Wbcr_Factory420_ScriptList $this
+	 * @return Wbcr_Factory439_ScriptList $this
 	 */
 	public function localize( $varname, $data ) {
 		$bindTo = count( $this->all ) == 0 ? null : end( $this->all );
@@ -158,7 +158,8 @@ class Wbcr_Factory420_ScriptList extends Wbcr_Factory420_AssetsList {
 			return $this;
 		}
 
-		$this->localize_data[ $bindTo ] = [ $varname, $data ];
+		$handle  = ! empty( $bindTo['handle'] ) ? $bindTo['handle'] : $bindTo['file_url'];
+		$this->localize_data[ $handle ] = [ $varname, $data ];
 
 		return $this;
 	}

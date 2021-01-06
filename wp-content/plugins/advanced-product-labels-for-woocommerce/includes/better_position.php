@@ -18,7 +18,7 @@ class BeRocket_products_label_better_position extends BeRocket_plugin_variations
         add_filter('brfr_data_berocket_advanced_label_editor', array(__CLASS__, 'berocket_advanced_label_editor'), 30);
         add_filter('berocket_apl_label_show_div_class', array(__CLASS__, 'label_show_div_class'), 30, 3);
         add_filter('berocket_apl_label_show_label_style', array(__CLASS__, 'label_show_label_style'), 30, 3);
-        add_action( 'berocket_apl_wc_save_product', array( __CLASS__, 'wc_save_label_fix'), 30 );
+        add_action('berocket_apl_wc_save_product', array( __CLASS__, 'wc_save_label_fix'), 30 );
         add_filter('brfr_data_products_label', array(__CLASS__, 'data_products_label'), 30);
         $types = array('image', 'label');
         $positions = array('left', 'right', 'center');
@@ -39,19 +39,20 @@ class BeRocket_products_label_better_position extends BeRocket_plugin_variations
     }
 
     public static function custom_post_default_settings($default_settings) {
-        global $pagenow;
-        $default_settings['better_position'] = '1';
-        $default_settings['top_margin'] = '-10';
-        $default_settings['right_margin'] = '-10';
-        $default_settings['bottom_margin'] = '-10';
-        $default_settings['left_margin'] = '-10';
-        $default_settings['top_padding'] = '15';
-        $default_settings['right_padding'] = '15';
-        $default_settings['bottom_padding'] = '15';
-        $default_settings['left_padding'] = '15';
-        $default_settings['padding_units'] = 'px';
-        $default_settings['margin_units'] = 'px';
-        $default_settings['line'] = '1';
+        $default_settings += array( 
+            'better_position' => 1,
+            'bottom_margin'   => 0,
+            'left_margin'     => -10,
+            'right_margin'    => -10,
+            'top_margin'      => -10,
+            'margin_units'    => 'px',
+            'bottom_padding'  => 15,
+            'left_padding'    => 15,
+            'right_padding'   => 15,
+            'top_padding'     => 15,
+            'padding_units'   => 'px',
+            'line'            => 1,
+        );
         return $default_settings;
     }
 
@@ -78,7 +79,7 @@ class BeRocket_products_label_better_position extends BeRocket_plugin_variations
             $html .= '</select>';
             $html .= '<div class="lines_hide_type_ lines_hide_type_limited_height">';
             $html .= '<table>';
-            $html .= '<tr><th>' . __('Max height', 'BeRocket_products_label_domain') . '</th><td><input type="number" min="0" value="' . br_get_value_from_array($options, array('lines', $i, 'max-height'), '') . '" name="' . $name . '[lines][' . $i . '][max-height]"></td></tr>';
+            $html .= '<tr><th>' . __('Max height', 'BeRocket_products_label_domain') . '</th><td><input type="number" min="0" value="' . br_get_value_from_array($options, array('lines', $i, 'max-height'), '') . '" name="' . $name . '[lines][' . $i . '][max-height]"><span class="br_label_for">px</span></td></tr>';
             $html .= '</table>';
             $html .= '</div>';
             $html .= '<div class="lines_hide_type_ lines_hide_type_limited_count">';
@@ -192,97 +193,95 @@ class BeRocket_products_label_better_position extends BeRocket_plugin_variations
             $data['Position'],
             'position',
             array(
-                'line'     => array(
-                    "type"     => "selectbox",
-                    "options"  => $line_options,
-                    "label"    => __('Position Line', 'BeRocket_products_label_domain'),
-                    "name"     => "line",
-                    "class"    => "berocket_label_better_position_show",
-                    "value"    => '1',
+                'line' => array(
+                    "type"    => "selectbox",
+                    "options" => $line_options,
+                    "label"   => __('Position Line', 'BeRocket_products_label_domain'),
+                    "name"    => "line",
+                    "class"   => "berocket_label_better_position_show",
+                    "value"   => '1',
                 ),
                 'paddings' => array(
-                    "label"    => __('Paddings', 'BeRocket_products_label_domain'),
+                    "label" => __('Paddings', 'BeRocket_products_label_domain'),
                     "items" => array(
                         array(
-                            "type"          => "number",
-                            "name"          => "top_padding",
-                            "value"         => "0",
-                            "extra"         => 'data-for=".br_alabel>span" data-style="padding-top" data-ext="px"',
-                            "class"         => "berocket-label-margin-paddings-block berocket_label_better_position_show br_js_change",
-                            "label_be_for"  => __('Top', 'BeRocket_products_label_domain')
+                            "type"  => "number",
+                            "name"  => "top_padding",
+                            "value" => $default_settings['top_padding'],
+                            "extra" => 'data-for=".br_alabel>span" data-style="padding-top" data-ext="px"',
+                            "class" => "berocket-label-margin-paddings-block berocket_label_better_position_show br_js_change",
+                            "label_be_for" => __('Top', 'BeRocket_products_label_domain')
                         ),
                         array(
-                            "type"          => "number",
-                            "name"          => "right_padding",
-                            "value"         => "0",
-                            "extra"         => 'data-for=".br_alabel>span" data-style="padding-right" data-ext="px"',
-                            "class"         => "berocket-label-margin-paddings-block berocket_label_better_position_show br_js_change",
-                            "label_be_for"  => __('Right', 'BeRocket_products_label_domain')
+                            "type"  => "number",
+                            "name"  => "right_padding",
+                            "value" => $default_settings['right_padding'],
+                            "extra" => 'data-for=".br_alabel>span" data-style="padding-right" data-ext="px"',
+                            "class" => "berocket-label-margin-paddings-block berocket_label_better_position_show br_js_change",
+                            "label_be_for" => __('Right', 'BeRocket_products_label_domain')
                         ),
                         array(
-                            "type"          => "number",
-                            "name"          => "bottom_padding",
-                            "value"         => "0",
-                            "extra"         => 'data-for=".br_alabel>span" data-style="padding-bottom" data-ext="px"',
-                            "class"         => "berocket-label-margin-paddings-block berocket_label_better_position_show br_js_change",
-                            "label_be_for"  => __('Bottom', 'BeRocket_products_label_domain')
+                            "type"  => "number",
+                            "name"  => "bottom_padding",
+                            "value" => $default_settings['bottom_padding'],
+                            "extra" => 'data-for=".br_alabel>span" data-style="padding-bottom" data-ext="px"',
+                            "class" => "berocket-label-margin-paddings-block berocket_label_better_position_show br_js_change",
+                            "label_be_for" => __('Bottom', 'BeRocket_products_label_domain')
                         ),
                         array(
-                            "type"          => "number",
-                            "name"          => "left_padding",
-                            "value"         => "0",
-                            "extra"         => 'data-for=".br_alabel>span" data-style="padding-left" data-ext="px"',
-                            "class"         => "berocket-label-margin-paddings-block berocket_label_better_position_show br_js_change",
-                            "label_be_for"  => __('Left', 'BeRocket_products_label_domain')
+                            "type"  => "number",
+                            "name"  => "left_padding",
+                            "value" => $default_settings['left_padding'],
+                            "extra" => 'data-for=".br_alabel>span" data-style="padding-left" data-ext="px"',
+                            "class" => "berocket-label-margin-paddings-block berocket_label_better_position_show br_js_change",
+                            "label_be_for" => __('Left', 'BeRocket_products_label_domain')
                         ),
-                        apply_filters( 'berocket_label_select_untis', 'padding' ),
+                        brapl_select_units( 'padding', $default_settings['padding_units'] ),
                     )
                 ),
                 'margin' => array(
-                    "label"    => __('Margin', 'BeRocket_products_label_domain'),
+                    "label" => __('Margin', 'BeRocket_products_label_domain'),
                     "items" => array(
                         array(
-                            "type"          => "number",
-                            "name"          => "top_margin",
-                            "value"         => $default_settings['top_margin'],
-                            "extra"         => 'data-for=".br_alabel>span" data-style="margin-top" data-ext="px" data-default="' . $default_settings['top_margin'] . '"',
-                            "class"         => "berocket-label-margin-paddings-block berocket_label_better_position_show br_js_change",
-                            "label_be_for"  => __('Top', 'BeRocket_products_label_domain')
+                            "type"  => "number",
+                            "name"  => "top_margin",
+                            "value" => $default_settings['top_margin'],
+                            "extra" => 'data-for=".br_alabel>span" data-style="margin-top" data-ext="px" data-default="' . $default_settings['top_margin'] . '"',
+                            "class" => "berocket-label-margin-paddings-block berocket_label_better_position_show br_js_change",
+                            "label_be_for"  => __('Top', 'BeRocket_products_label_domain'),
                         ),
                         array(
-                            "type"          => "number",
-                            "name"          => "right_margin",
-                            "value"         => $default_settings['right_margin'],
-                            "extra"         => 'data-for=".br_alabel>span" data-style="margin-right" data-ext="px" data-default="' . $default_settings['right_margin'] . '"',
-                            "class"         => "berocket-label-margin-paddings-block berocket_label_better_position_show br_js_change",
-                            "label_be_for"  => __('Right', 'BeRocket_products_label_domain')
+                            "type"  => "number",
+                            "name"  => "right_margin",
+                            "value" => $default_settings['right_margin'],
+                            "extra" => 'data-for=".br_alabel>span" data-style="margin-right" data-ext="px" data-default="' . $default_settings['right_margin'] . '"',
+                            "class" => "berocket-label-margin-paddings-block berocket_label_better_position_show br_js_change",
+                            "label_be_for" => __('Right', 'BeRocket_products_label_domain')
                         ),
                         array(
-                            "type"          => "number",
-                            "name"          => "bottom_margin",
-                            "value"         => $default_settings['bottom_margin'],
-                            "extra"         => 'data-for=".br_alabel>span" data-style="margin-bottom" data-ext="px" data-default="' . $default_settings['bottom_margin'] . '"',
-                            "class"         => "berocket-label-margin-paddings-block berocket_label_better_position_show br_js_change",
-                            "label_be_for"  => __('Bottom', 'BeRocket_products_label_domain')
+                            "type"  => "number",
+                            "name"  => "bottom_margin",
+                            "value" => $default_settings['bottom_margin'],
+                            "extra" => 'data-for=".br_alabel>span" data-style="margin-bottom" data-ext="px" data-default="' . $default_settings['bottom_margin'] . '"',
+                            "class" => "berocket-label-margin-paddings-block berocket_label_better_position_show br_js_change",
+                            "label_be_for" => __('Bottom', 'BeRocket_products_label_domain')
                         ),
                         array(
-                            "type"          => "number",
-                            "name"          => "left_margin",
-                            "value"         => $default_settings['left_margin'],
-                            "extra"         => 'data-for=".br_alabel>span" data-style="margin-left" data-ext="px" data-default="' . $default_settings['left_margin'] . '"',
-                            "class"         => "berocket-label-margin-paddings-block berocket_label_better_position_show br_js_change",
-                            "label_be_for"  => __('Left', 'BeRocket_products_label_domain')
+                            "type"  => "number",
+                            "name"  => "left_margin",
+                            "value" => $default_settings['left_margin'],
+                            "extra" => 'data-for=".br_alabel>span" data-style="margin-left" data-ext="px" data-default="' . $default_settings['left_margin'] . '"',
+                            "class" => "berocket-label-margin-paddings-block berocket_label_better_position_show br_js_change",
+                            "label_be_for" => __('Left', 'BeRocket_products_label_domain')
                         ),
-                        apply_filters( 'berocket_label_select_untis', 'margin' ),
+                        brapl_select_units( 'margin', $default_settings['margin_units'] ),
                     )
                 ),
             )
         );
-
-        if ( has_filter( 'berocket_label_scale_option' ) ) {
-            array_unshift( $data['Position']['margin']['items'], apply_filters( 'berocket_label_scale_option', 'margin' ) );
-        }
-
+        
+        $data['Position'] = apply_filters( 'berocket_label_scale_option', $data['Position'], array( 'margin' ) );
+        
         return $data;
     }
 
@@ -429,8 +428,12 @@ class BeRocket_products_label_better_position extends BeRocket_plugin_variations
         $label_style .= self::set_indentation( 'padding', 'top', $br_label );
         $label_style .= self::set_indentation( 'padding', 'bottom', $br_label );
 
-        $label_style .= self::set_indentation( 'margin', 'left', $br_label );
-        $label_style .= self::set_indentation( 'margin', 'right', $br_label );
+        if ( $br_label['position'] == 'center' ) {
+            $label_style .= 'margin-left: auto; margin-right: auto;';
+        } else {
+            $label_style .= self::set_indentation( 'margin', 'left', $br_label );
+            $label_style .= self::set_indentation( 'margin', 'right', $br_label );
+        }
         $label_style .= self::set_indentation( 'margin', 'top', $br_label );
         $label_style .= self::set_indentation( 'margin', 'bottom', $br_label );
 
@@ -572,11 +575,11 @@ class BeRocket_products_label_better_position extends BeRocket_plugin_variations
                 if( $type == 'color' ) {
                     $function = 'br_color_picker';
                     $default = 'ffffff';
-                    $html .= '<td>' . $function('tax_color_set[' . $term->term_id . ']', br_get_value_from_array($meta, 0), $default, array('extra' => 'data-term_id="'.$term->term_id.'" data-term_name="'.$term->name.'"')) . '</td>';
+                    $html .= '<td>' . $function('tax_color_set[' . $term->term_id . ']', br_get_value_from_array($meta, 0), $default, array('extra' => "data-term_id='".$term->term_id."' data-term_name='".$term->name."'")) . '</td>';
                 } else {
                     $function = 'br_fontawesome_image';
                     $default = '';
-                    $html .= '<td>' . $function('tax_color_set[' . $term->term_id . ']', br_get_value_from_array($meta, 0), array('extra' => 'data-term_id="'.$term->term_id.'" data-term_name="'.$term->name.'"')) . '</td>';
+                    $html .= '<td>' . $function('tax_color_set[' . $term->term_id . ']', br_get_value_from_array($meta, 0), array('extra' => "data-term_id='".$term->term_id."' data-term_name='".$term->name."'")) . '</td>';
                 }
                 $html .= '</tr>';
             }

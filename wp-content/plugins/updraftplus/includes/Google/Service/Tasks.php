@@ -28,7 +28,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Tasks extends Google_Service
+class Google_Service_Tasks extends UDP_Google_Service
 {
   /** Manage your tasks. */
   const TASKS =
@@ -46,7 +46,7 @@ class Google_Service_Tasks extends Google_Service
    *
    * @param Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(UDP_Google_Client $client)
   {
     parent::__construct($client);
     $this->servicePath = 'tasks/v1/';

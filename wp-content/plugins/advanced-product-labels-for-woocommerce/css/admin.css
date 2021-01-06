@@ -110,7 +110,7 @@
 .br_framework_settings .br_template_select li label > span span {
     position: absolute;
     display: block;
-    background-color: #4fd1cd;
+    background-color: #f16543;
     color: white;
     text-align: center;
     right: 0;
@@ -126,7 +126,7 @@
     z-index: 100;
 }
 .br_framework_settings .br_template_select li label > span span i {
-    background-color: #4fd1cd;
+    background-color: #f16543;
     display: block;
     position: absolute;
 }
@@ -176,67 +176,74 @@
     top: 0;
 }
 
-.br_framework_settings .br_template_select li label.css-6 > span span b,
-.br_framework_settings .br_template_select li label.css-6 > span span i,
-.br_framework_settings .br_template_select li label.css-7 > span span b,
-.br_framework_settings .br_template_select li label.css-7 > span span i,
-.br_framework_settings .br_template_select li label.css-8 > span span b,
-.br_framework_settings .br_template_select li label.css-8 > span span i,
-.br_framework_settings .br_template_select li label.css-9 > span span b,
-.br_framework_settings .br_template_select li label.css-9 > span span i,
-.br_framework_settings .br_template_select li label.css-10 > span span b,
-.br_framework_settings .br_template_select li label.css-10 > span span i,
-.br_framework_settings .br_template_select li label.css-11 > span span b,
-.br_framework_settings .br_template_select li label.css-11 > span span i,
-.br_framework_settings .br_template_select li label.css-12 > span span b,
-.br_framework_settings .br_template_select li label.css-12 > span span i,
-.br_framework_settings .br_template_select li label.css-13 > span span b,
-.br_framework_settings .br_template_select li label.css-13 > span span i,
-.br_framework_settings .br_template_select li label.css-14 > span span b,
-.br_framework_settings .br_template_select li label.css-15 > span span b {
+.br_framework_settings .br_template_select li label > span span b,
+.br_framework_settings .br_template_select li label > span span i {
     display: none;
+}
+
+.br_framework_settings .br_template_select li label.css-1 > span span b,
+.br_framework_settings .br_template_select li label.css-1 > span span i,
+.br_framework_settings .br_template_select li label.css-2 > span span b,
+.br_framework_settings .br_template_select li label.css-2 > span span i,
+.br_framework_settings .br_template_select li label.css-3 > span span b,
+.br_framework_settings .br_template_select li label.css-3 > span span i,
+.br_framework_settings .br_template_select li label.css-4 > span span b,
+.br_framework_settings .br_template_select li label.css-4 > span span i,
+.br_framework_settings .br_template_select li label.css-5 > span span b,
+.br_framework_settings .br_template_select li label.css-5 > span span i,
+.br_framework_settings .br_template_select li label.css-16 > span span b,
+.br_framework_settings .br_template_select li label.css-16 > span span i {
+    display: block;
 }
 
 .br_framework_settings .br_template_select li label.css-6 > span span,
 .br_framework_settings .br_template_select li label.css-7 > span span,
-.br_framework_settings .br_template_select li label.css-8 > span span,
 .br_framework_settings .br_template_select li label.css-9 > span span,
-.br_framework_settings .br_template_select li label.css-10 > span span,
-.br_framework_settings .br_template_select li label.css-11 > span span {
-    height: 74px;
-    width: 66px;
+.br_framework_settings .br_template_select li label.css-10 > span span {
+    height: 55px;
+    width: 55px;
     top: -6px;
     right: -6px;
-}
-
-.br_framework_settings .br_template_select li label.css-14 > span span {
-    top: 0;
-    right: 0;
 }
 
 .br_framework_settings .berocket_alabel_id_demo li label.css-14 > span span b {
     width: 96px;
 }
 
-.br_framework_settings .br_template_select li label.css-15 > span span {
-    height: 35px;
-    width: 35px;
-    top: 13px;
-    right: 13px;
-}
-
 .br_framework_settings .br_template_select li label.css-16 > span span {
     background: transparent;
-    border-bottom: 2px solid #4fd1cd;
+    border-bottom: 2px solid #f16543;
     padding-bottom: 3px;
     right: 13px;
     top: 13px;
 }
 
+.br_framework_settings .br_template_select li label.css-19 > span span {
+    background: transparent url('../images/templates/preview/css-19.png') no-repeat right top/contain;
+    height: 50px;
+    width: 50px;
+    top: -6px;
+    right: -6px;
+}
+
+.br_framework_settings .br_template_select li label.css-20 > span span {
+    background: transparent url('../images/templates/preview/css-20.png') no-repeat right top/contain;
+    height: 60px;
+    width: 60px;
+    top: -3px;
+    right: -3px;
+}
+
+.br_framework_settings .br_template_select li label.css-23 > span span {
+    background: transparent url('../images/templates/preview/css-23.png') no-repeat right top/contain;
+    height: 25px;
+    width: 69px;
+    top: 15px;
+    right: 15px;
+}
+
 .br_framework_settings .br_template_select li label.css-6 > span span {
     background: transparent url('../images/templates/preview/css-6.png') no-repeat right top/contain;
-    height: 65px;
-    width: 65px;
 }
 
 .br_framework_settings .br_template_select li label.css-7 > span span {
@@ -245,8 +252,68 @@
     right: -8px;
 }
 
+.br_framework_settings .br_template_select li label.css-24 > span span {
+    background: transparent url('../images/templates/preview/css-24.png') no-repeat right top/contain;
+    height: 55px;
+    width: 55px;
+    top: 13px;
+    right: 14px;
+}
+
+.br_framework_settings .br_template_select li label.css-25 > span span {
+    background: transparent url('../images/templates/preview/css-25.png') no-repeat right top/contain;
+    height: 55px;
+    width: 55px;
+    top: 12px;
+    right: 12px;
+}
+
+.br_framework_settings .br_template_select li label.css-26 > span span {
+    background: transparent url('../images/templates/preview/css-26.png') no-repeat right top/contain;
+    height: 45px;
+    width: 45px;
+    top: 12px;
+    right: 12px;
+}
+
 .br_framework_settings .br_template_select li label.css-8 > span span {
     background: transparent url('../images/templates/preview/css-8.png') no-repeat right top/contain;
+    height: 44px;
+    width: 55px;
+    top: 0px;
+    right: 0;
+}
+
+.br_framework_settings .br_template_select li label.css-28 > span span {
+    background: transparent url('../images/templates/preview/css-28.png') no-repeat left top/contain;
+    height: 50px;
+    width: 50px;
+    top: 2px;
+    left: 16px;
+}
+
+.br_framework_settings .br_template_select li label.css-29 > span span {
+    background: transparent url('../images/templates/preview/css-29.png') no-repeat left top/contain;
+    height: 40px;
+    width: 40px;
+    top: 13px;
+    left: 13px;
+}
+
+.br_framework_settings .br_template_select li label.css-17 > span span {
+    background: transparent url('../images/templates/preview/css-17.png') no-repeat right top/contain;
+    height: 80px;
+    width: 30px;
+    top: 9px;
+    right: 15px;
+}
+
+.br_framework_settings .br_template_select li label.css-18 > span span {
+    background: transparent url('../images/templates/preview/css-18.png') no-repeat left top/contain;
+    height: 40px;
+    width: 90px;
+    top: 14px;
+    left: 14px;
 }
 
 .br_framework_settings .br_template_select li label.css-9 > span span {
@@ -259,32 +326,76 @@
     right: -9px;
 }
 
+.br_framework_settings .br_template_select li label.css-21 > span span {
+    background: transparent url('../images/templates/preview/css-21.png') no-repeat right top/contain;
+    height: 50px;
+    width: 50px;
+    top: 13px;
+    right: 13px;
+}
+
+.br_framework_settings .br_template_select li label.css-22 > span span {
+    background: transparent url('../images/templates/preview/css-22.png') no-repeat right top/contain;
+    height: 50px;
+    width: 50px;
+    top: 13px;
+    right: 13px;
+}
+
 .br_framework_settings .br_template_select li label.css-11 > span span {
     background: transparent url('../images/templates/preview/css-11.png') no-repeat right top/contain;
+    height: 55px;
+    width: 55px;
+    top: 7px;
+    right: 7px;
 }
 
 .br_framework_settings .br_template_select li label.css-12 > span span {
+    background: transparent url('../images/templates/preview/css-12.png') no-repeat top right/contain;
     height: 68px;
     width: 60px;
-    background: transparent url('../images/templates/preview/css-12.png') no-repeat top right/contain;
+    top: 4px;
+    right: 4px;
 }
 
 .br_framework_settings .br_template_select li label.css-13 > span span {
+    background: transparent url('../images/templates/preview/css-13.png') no-repeat top right/contain;
     height: 69px;
     width: 68px;
-    background: transparent url('../images/templates/preview/css-13.png') no-repeat top right/contain;
+    top: 7px;
+    right: 7px;
 }
 
 .br_framework_settings .br_template_select li label.css-14 > span span {
-    height: 68px;
-    width: 100px;
     background: transparent url('../images/templates/preview/css-14.png') no-repeat 0 0 /cover;
+    height: 25px;
+    width: 79px;
+    top: 15px;
+    right: 5px;
+}
+
+.br_framework_settings .br_template_select li label.css-27 > span span {
+    background: transparent url('../images/templates/preview/css-27.png') no-repeat 0 0 /cover;
+    height: 20px;
+    width: 90px;
+    top: 13px;
+    right: 11px;
 }
 
 .br_framework_settings .br_template_select li label.css-15 > span span {
-    height: 68px;
-    width: 68px;
-    background: transparent url('../images/templates/preview/css-15.png') no-repeat 13px -13px/contain;
+    background: transparent url('../images/templates/preview/css-15.png') no-repeat 0 0/contain;
+    height: 35px;
+    width: 35px;
+    top: 13px;
+    right: 13px;
+}
+
+.br_framework_settings .br_template_select li label.css-30 > span span {
+    background: transparent url('../images/templates/preview/css-30.png') no-repeat top right/contain;
+    height: 30px;
+    width: 60px;
+    top: 0;
+    right: 0;
 }
 
 
@@ -357,7 +468,7 @@
     width: 90px;
 }
 
-.br_framework_settings .br_template_select li label.advanced-1 > span span b,
+/*.br_framework_settings .br_template_select li label.advanced-1 > span span b,
 .br_framework_settings .br_template_select li label.advanced-2 > span span b,
 .br_framework_settings .br_template_select li label.advanced-3 > span span b,
 .br_framework_settings .br_template_select li label.advanced-4 > span span b,
@@ -370,22 +481,22 @@
 .br_framework_settings .br_template_select li label.advanced-11 > span span b,
 .br_framework_settings .br_template_select li label.advanced-12 > span span b {
     display: none;
-}
+}*/
 
 .br_framework_settings .br_template_select li label.advanced-1 > span span {
     background: transparent url('../images/templates/preview/advanced-1.png') no-repeat right top/contain;
-    height: 40px;
+    height: 50px;
     right: 4px;
     top: 14px;
-    width: 50px;
+    width: 60px;
 }
 
 .br_framework_settings .br_template_select li label.advanced-2 > span span {
     background: transparent url('../images/templates/preview/advanced-2.png') no-repeat right top/contain;
-    height: 40px;
+    height: 50px;
     right: 5px;
     top: 14px;
-    width: 50px;
+    width: 70px;
 }
 
 .br_framework_settings .br_template_select li label.advanced-3 > span span {
@@ -398,41 +509,41 @@
 
 .br_framework_settings .br_template_select li label.advanced-4 > span span {
     background: transparent url('../images/templates/preview/advanced-4.png') no-repeat right top/contain;
-    height: 40px;
+    height: 50px;
     right: 12px;
     top: 8px;
-    width: 40px;
+    width: 60px;
 }
 
 .br_framework_settings .br_template_select li label.advanced-5 > span span {
     background: transparent url('../images/templates/preview/advanced-5.png') no-repeat right top/contain;
-    height: 40px;
+    height: 50px;
     right: 12px;
     top: 8px;
-    width: 40px;
+    width: 60px;
 }
 
 .br_framework_settings .br_template_select li label.advanced-6 > span span {
     background: transparent url('../images/templates/preview/advanced-6.png') no-repeat right top/contain;
-    height: 40px;
+    height: 60px;
     right: 12px;
     top: 8px;
-    width: 40px;
+    width: 60px;
 }
 
 .br_framework_settings .br_template_select li label.advanced-7 > span span {
     background: transparent url('../images/templates/preview/advanced-7.png') no-repeat right top/contain;
-    height: 55px;
-    right: 14px;
+    height: 60px;
+    right: 13px;
     top: 14px;
-    width: 55px;
+    width: 50px;
 }
 
 .br_framework_settings .br_template_select li label.advanced-8 > span span {
     background: transparent url('../images/templates/preview/advanced-8.png') no-repeat right top/contain;
     height: 60px;
-    right: 14px;
-    top: 15px;
+    right: 13px;
+    top: 14px;
     width: 55px;
 }
 
@@ -457,7 +568,7 @@
     height: 65px;
     left: 5px;
     top: 3px;
-    width: 60px;
+    width: 70px;
 }
 
 .br_framework_settings .br_template_select li label.advanced-12 > span span {
@@ -482,7 +593,7 @@
 .br_framework_settings .br_template_select li label > span span {
     position: absolute;
     display: block;
-    background-color: #4fd1cd;
+    background-color: #f16543;
     color: white;
     text-align: center;
     right: 0;
@@ -498,7 +609,7 @@
     z-index: 100;
 }
 .br_framework_settings .br_template_select li label > span span i {
-    background-color: #4fd1cd;
+    background-color: #f16543;
     display: block;
     position: absolute;
 }
@@ -576,7 +687,7 @@ section.premium-only {
 section.premium-only:after {
     content: "\f023";
     font-size: 24px;
-    color: #f16543;
+    color: #4fd1cd;
     font-weight: 900;
     font-family: "Font Awesome 5 Free";
     font-style: normal;
@@ -624,6 +735,10 @@ section.premium-only a span i {
     display: none !important;
 }
 
+.br_framework_settings .berocket_framework_menu_tooltip textarea{
+    min-height: 100px;
+}
+
 .berocket_tooltip_image {
     max-height: 100%;
     max-width: 100%;
@@ -651,10 +766,118 @@ section.premium-only a span i {
 }
 
 .br_range {
-    width: 300px;
+    width: 295px;
+}
+
+.br_switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.br_switch input {
+    display:none;
+}
+
+.br_slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #2196F3;
+    border-radius: 34px;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.br_slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    border-radius: 50%;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:focus + .br_slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .br_slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+.br_gradient_button {
+    background: #009688;
+    color: white;
+    margin: 0 0 0 10px;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    text-shadow: none;
+    border: 0 none;
+    min-width: 120px;
+    -moz-user-select: none;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    outline: 0 none;
+    padding: 8px 32px;
+    text-align: center;
+    transition: box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) 0s, background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) 0s;
+    white-space: nowrap;
+}
+
+.br_gradient_button:hover {
+    background: #00beb0;
 }
 
 .br_label_be_for {
     margin-right: 3px;
 }
 
+.brapl_line_setup_wrap .brapl_select_line_setup_id {
+    float: left;
+    margin-right: 5px;
+}
+.brapl_line_setup_wrap .lines_setup table {
+    min-width: 360px;
+}
+.brapl_line_setup_wrap .lines_setup table th{
+    width: 50%;
+    text-align: left;
+}
+
+.br_framework_settings .framework-form-table tbody td .br_line_delimiter {
+    display: none;
+}
+
+.br_framework_settings .framework-form-table tbody td label {
+    margin-right: 10px;
+}
+
+.br_framework_settings .framework-form-table tbody td label.br_switch {
+    margin-left: 10px;
+    margin-right: 0;
+}
+
+.br_framework_settings .framework-form-table tbody td .br_template_select li label {
+    margin-right: 0;
+}
+
+.br_hidden_option {
+    display: none;
+}
+
+.post-type-br_labels .berocket_color .colpick {
+    top: auto !important;
+    left: auto !important;
+}

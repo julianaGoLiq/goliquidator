@@ -4,10 +4,10 @@
  * Plugin URI: https://wordpress.org/plugins/woo-products-slider-pro/
  * Description: Display Woocommerce Products in a Carousel. Show Top Rated, Best Selling, ON Sale, Featured Products With Category Filter.
  * Author: Sajjad Hossain Sagor
- * Text Domain: woopspro
+ * Text Domain: woo-products-slider-pro
  * Domain Path: /languages/
  * WC tested up to: 3.5.2
- * Version: 1.0
+ * Version: 1.0.1
  * Author URI: https://sajjadhsagor.com/
  * License: GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -98,7 +98,7 @@ function woopspro_load_plugin() {
 		 * @since 1.0.0
 		 */
 		function woopspro_load_textdomain() {
-			load_plugin_textdomain( 'woopspro', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
+			load_plugin_textdomain( 'woo-products-slider-pro', false, dirname( plugin_basename(__FILE__) ) . '/languages/' );
 		}
 
 		// Action to load plugin text domain

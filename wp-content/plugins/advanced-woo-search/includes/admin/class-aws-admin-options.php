@@ -259,18 +259,6 @@ if ( ! class_exists( 'AWS_Admin_Options' ) ) :
             );
 
             $options['general'][] = array(
-                "name"  => __( "Show out-of-stock", "advanced-woo-search" ),
-                "desc"  => __( "Show out-of-stock products in search", "advanced-woo-search" ),
-                "id"    => "outofstock",
-                "value" => 'true',
-                "type"  => "radio",
-                'choices' => array(
-                    'true'  => __( 'Show', 'advanced-woo-search' ),
-                    'false'  => __( 'Hide', 'advanced-woo-search' ),
-                )
-            );
-
-            $options['general'][] = array(
                 "name"  => __( "Stop words list", "advanced-woo-search" ),
                 "desc"  => __( "Comma separated list of words that will be excluded from search.", "advanced-woo-search" ) . '<br>' . __( "Re-index required on change.", "advanced-woo-search" ),
                 "id"    => "stopwords",
@@ -454,6 +442,18 @@ if ( ! class_exists( 'AWS_Admin_Options' ) ) :
             );
 
             $options['results'][] = array(
+                "name"  => __( "Show out-of-stock", "advanced-woo-search" ),
+                "desc"  => __( "Show out-of-stock products in search", "advanced-woo-search" ),
+                "id"    => "outofstock",
+                "value" => 'true',
+                "type"  => "radio",
+                'choices' => array(
+                    'true'  => __( 'Show', 'advanced-woo-search' ),
+                    'false'  => __( 'Hide', 'advanced-woo-search' ),
+                )
+            );
+
+            $options['results'][] = array(
                 "name"    => __( "View", "advanced-woo-search" ),
                 "type"    => "heading"
             );
@@ -565,6 +565,13 @@ if ( ! class_exists( 'AWS_Admin_Options' ) ) :
                     'false' => __( 'Off', 'advanced-woo-search' ),
                 )
             );
+
+            /**
+             * Filter admin page options
+             * @since 2.15
+             * @param array $options Array of options
+             */
+            $options = apply_filters( 'aws_admin_page_options', $options );
 
             return $options;
 

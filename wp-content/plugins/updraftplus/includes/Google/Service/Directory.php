@@ -30,7 +30,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Directory extends Google_Service
+class Google_Service_Directory extends UDP_Google_Service
 {
   /** View and manage your Chrome OS devices' metadata. */
   const ADMIN_DIRECTORY_DEVICE_CHROMEOS =
@@ -112,7 +112,7 @@ class Google_Service_Directory extends Google_Service
    *
    * @param Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(UDP_Google_Client $client)
   {
     parent::__construct($client);
     $this->servicePath = 'admin/directory/v1/';

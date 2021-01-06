@@ -53,13 +53,19 @@ class AWS_Admin {
 
         add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ) );
 
+        add_action( 'admin_notices', array( $this, 'display_welcome_header' ), 1 );
+
+        add_filter( 'submenu_file', array( $this, 'submenu_file' ), 10, 2 );
+
     }
 
     /**
      * Add options page
      */
     public function add_admin_page() {
-        add_menu_page( esc_html__( 'Adv. Woo Search', 'advanced-woo-search' ), esc_html__( 'Adv. Woo Search', 'advanced-woo-search' ), 'manage_options', 'aws-options', array( &$this, 'display_admin_page' ), 'dashicons-search' );
+        add_menu_page( esc_html__( 'Adv. Woo Search', 'advanced-woo-search' ), esc_html__( 'Adv. Woo Search', 'advanced-woo-search' ), 'manage_options', 'aws-options', array( &$this, 'display_admin_page' ), 'dashicons-search', 70 );
+        add_submenu_page( 'aws-options', __( 'Settings', 'advanced-woo-search' ), __( 'Settings', 'advanced-woo-search'), 'manage_options', 'aws-options', array( $this, 'display_admin_page' ) );
+        add_submenu_page( 'aws-options', __( 'Premium', 'advanced-woo-search' ),  '<span style="color:rgba(255, 255, 91, 0.8);">' . __( 'Premium', 'advanced-woo-search' ) . '</span>', 'manage_options', admin_url( 'admin.php?page=aws-options&tab=premium' ) );
     }
 
     /**
@@ -72,7 +78,8 @@ class AWS_Admin {
         $tabs = array(
             'general' => esc_html__( 'General', 'advanced-woo-search' ),
             'form'    => esc_html__( 'Search Form', 'advanced-woo-search' ),
-            'results' => esc_html__( 'Search Results', 'advanced-woo-search' )
+            'results' => esc_html__( 'Search Results', 'advanced-woo-search' ),
+            'premium' => esc_html__( 'Get Premium', 'advanced-woo-search' )
         );
 
         $current_tab = empty( $_GET['tab'] ) ? 'general' : sanitize_text_field( $_GET['tab'] );
@@ -83,8 +90,6 @@ class AWS_Admin {
             $tabs_html .= '<a href="' . admin_url( 'admin.php?page=aws-options&tab=' . $name ) . '" class="nav-tab ' . ( $current_tab == $name ? 'nav-tab-active' : '' ) . '">' . $label . '</a>';
 
         }
-
-        $tabs_html .= '<a href="https://advanced-woo-search.com/?utm_source=plugin&utm_medium=settings-tab&utm_campaign=aws-pro-plugin" class="nav-tab premium-tab" target="_blank">' . esc_html__( 'Get Premium', 'advanced-woo-search' ) . '</a>';
 
         $tabs_html = '<h2 class="nav-tab-wrapper woo-nav-tab-wrapper">'.$tabs_html.'</h2>';
 
@@ -109,8 +114,11 @@ class AWS_Admin {
             case('results'):
                 new AWS_Admin_Fields( 'results' );
                 break;
+            case('premium'):
+                new AWS_Admin_Page_Premium();
+                break;
             default:
-                $this->update_table();
+                echo AWS_Admin_Meta_Boxes::get_general_tab_content();
                 new AWS_Admin_Fields( 'general' );
         }
 
@@ -119,61 +127,6 @@ class AWS_Admin {
         echo '</form>';
 
         echo '</div>';
-
-    }
-
-    /*
-     * Reindex table
-     */
-    private function update_table() {
-
-        echo '<table class="form-table">';
-        echo '<tbody>';
-
-        echo '<tr>';
-
-            echo '<th>' . esc_html__( 'Activation', 'advanced-woo-search' ) . '</th>';
-            echo '<td>';
-                echo '<div class="description activation">';
-                    echo esc_html__( 'In case you need to add plugin search form on your website, you can do it in several ways:', 'advanced-woo-search' ) . '<br>';
-                    echo '<div class="list">';
-                        echo '1. ' . esc_html__( 'Enable a "Seamless integration" option ( may not work with some themes )', 'advanced-woo-search' ) . '<br>';
-                        echo '2. ' . sprintf( esc_html__( 'Add search form using shortcode %s', 'advanced-woo-search' ), "<code>[aws_search_form]</code>" ) . '<br>';
-                        echo '3. ' . esc_html__( 'Add search form as widget for one of your theme widget areas. Go to Appearance -> Widgets and drag&drop AWS Widget to one of your widget areas', 'advanced-woo-search' ) . '<br>';
-                        echo '4. ' . sprintf( esc_html__( 'Add PHP code to the necessary files of your theme: %s', 'advanced-woo-search' ), "<code>&lt;?php if ( function_exists( 'aws_get_search_form' ) ) { aws_get_search_form(); } ?&gt;</code>" ) . '<br>';
-                    echo '</div>';
-                echo '</div>';
-            echo '</td>';
-
-        echo '</tr>';
-
-        echo '<tr>';
-
-            echo '<th>' . esc_html__( 'Reindex table', 'advanced-woo-search' ) . '</th>';
-            echo '<td>';
-                echo '<div id="aws-reindex"><input class="button" type="button" value="' . esc_attr__( 'Reindex table', 'advanced-woo-search' ) . '"><span class="loader"></span><span class="reindex-progress">0%</span></div><br><br>';
-                echo '<span class="description">' .
-                    sprintf( esc_html__( 'This action only need for %s one time %s - after you activate this plugin. After this all products changes will be re-indexed automatically.', 'advanced-woo-search' ), '<strong>', '</strong>' ) . '<br>' .
-                    __( 'Update all data in plugins index table. Index table - table with products data where plugin is searching all typed terms.<br>Use this button if you think that plugin not shows last actual data in its search results.<br><strong>CAUTION:</strong> this can take large amount of time.', 'advanced-woo-search' ) . '<br><br>' .
-                    esc_html__( 'Products in index:', 'advanced-woo-search' ) . '<span id="aws-reindex-count"> <strong>' . AWS_Helpers::get_indexed_products_count() . '</strong></span>';
-                echo '</span>';
-            echo '</td>';
-
-        echo '</tr>';
-
-
-        echo '<tr>';
-
-            echo '<th>' . esc_html__( 'Clear cache', 'advanced-woo-search' ) . '</th>';
-            echo '<td>';
-                echo '<div id="aws-clear-cache"><input class="button" type="button" value="' . esc_attr__( 'Clear cache', 'advanced-woo-search' ) . '"><span class="loader"></span></div><br>';
-                echo '<span class="description">' . esc_html__( 'Clear cache for all search results.', 'advanced-woo-search' ) . '</span>';
-            echo '</td>';
-
-        echo '</tr>';
-
-        echo '</tbody>';
-        echo '</table>';
 
     }
 
@@ -207,6 +160,35 @@ class AWS_Admin {
                 'ajax_nonce' => wp_create_nonce( 'aws_admin_ajax_nonce' ),
             ) );
         }
+
+    }
+
+    /*
+     * Change current class for premium tab
+     */
+    public function submenu_file( $submenu_file, $parent_file ) {
+        if ( $parent_file === 'aws-options' && isset( $_GET['tab'] ) && $_GET['tab'] === 'premium' ) {
+            $submenu_file = admin_url( 'admin.php?page=aws-options&tab=premium' );
+        }
+        return $submenu_file;
+    }
+
+    /*
+     * Add welcome notice
+     */
+    public function display_welcome_header() {
+
+        if ( ! isset( $_GET['page'] ) || $_GET['page'] !== 'aws-options' ) {
+            return;
+        }
+
+        $hide_notice = get_option( 'aws_hide_welcome_notice' );
+
+        if ( ! $hide_notice || $hide_notice === 'true' ) {
+            return;
+        }
+
+        echo AWS_Admin_Meta_Boxes::get_welcome_notice();
 
     }
 

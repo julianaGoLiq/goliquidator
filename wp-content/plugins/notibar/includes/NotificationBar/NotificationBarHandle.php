@@ -65,10 +65,10 @@ class NotificationBarHandle
     $isdevicesDisplay = $this->njt_nofi_devicesDisplay();
 
     if($this->njt_nofi_checkDisplayNotification() && $isdevicesDisplay) {
-      wp_register_style('njt-nofi', NJT_NOFI_PLUGIN_URL . 'assets/home/css/home-notification-bar.css', array(), NJT_NOFI_VERSION);
+      wp_register_style('njt-nofi', NJT_NOFI_PLUGIN_URL . 'assets/frontend/css/notibar.css', array(), NJT_NOFI_VERSION);
       wp_enqueue_style('njt-nofi');
 
-      wp_register_script('njt-nofi', NJT_NOFI_PLUGIN_URL . 'assets/home/js/home-notification-bar.js', array('jquery'),NJT_NOFI_VERSION, true );
+      wp_register_script('njt-nofi', NJT_NOFI_PLUGIN_URL . 'assets/frontend/js/notibar.js', array('jquery'),NJT_NOFI_VERSION, true );
       wp_enqueue_script('njt-nofi');
 
       wp_localize_script('njt-nofi', 'wpData', array(
@@ -80,8 +80,10 @@ class NotificationBarHandle
         'presetColor' => get_theme_mod( 'njt_nofi_preset_color', $this->valueDefault['preset_color']),
         'alignContent' => get_theme_mod( 'njt_nofi_alignment', $this->valueDefault['align_content']),
         'textColorNotification' => get_theme_mod('njt_nofi_text_color', $this->valueDefault['text_color']),
+        'textButtonColor' => get_theme_mod('njt_nofi_lb_text_color',$this->valueDefault['lb_text_color']),
         'wp_is_mobile' => wp_is_mobile(),
-        'is_customize_preview' => is_customize_preview()
+        'is_customize_preview' => is_customize_preview(),
+        'wp_get_theme' => wp_get_theme()->get( 'Name' )
       ));
     }
   }
@@ -169,12 +171,38 @@ class NotificationBarHandle
 
   public function display_notification()
   {
-    $contentWidth = get_theme_mod('njt_nofi_content_width') != null ? get_theme_mod('njt_nofi_content_width').'px' : '100%';
+    
+    if(wp_get_theme()->get( 'Name' ) == 'Nayma') {
+      $widthStyle = 'auto';
+    } else {
+      $widthStyle = '100%';
+    }
+
+    if (wp_is_mobile()) {
+      $contentWidth = $widthStyle;
+    } else {
+      $contentWidth = get_theme_mod('njt_nofi_content_width') != null ? get_theme_mod('njt_nofi_content_width').'px' : $widthStyle;
+    }
+  
     $isPositionFix = get_theme_mod('njt_nofi_position_type', $this->valueDefault['position_type']) == 'fixed' ? true : false;
     $bgColorNotification = get_theme_mod('njt_nofi_bg_color', $this->valueDefault['bg_color']);
     $textColorNotification = get_theme_mod('njt_nofi_text_color', $this->valueDefault['text_color']);
     $lbColorNotification = get_theme_mod('njt_nofi_lb_color', $this->valueDefault['lb_color']);
     $notificationFontSize = get_theme_mod('njt_nofi_font_size', $this->valueDefault['font_size']);
+
+
+
+    if(wp_get_theme()->get( 'Name' ) == 'Nayma') {
+      ?>
+        <style>
+            .njt-nofi-notification-bar .njt-nofi-hide .njt-nofi-close-icon,
+            .njt-nofi-display-toggle .njt-nofi-display-toggle-icon {
+              width: 10px !important;
+              height: 10px !important;
+            }
+        </style>
+      <?php
+    }
 
     ?>
       <style>

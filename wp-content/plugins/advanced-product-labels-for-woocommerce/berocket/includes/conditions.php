@@ -334,6 +334,9 @@ if( ! class_exists('BeRocket_conditions') ) {
                     $max_depth = $term->depth;
                 }
             }
+            if( isset($term) ) {
+                unset($term);
+            }
             if( is_array($array_sort) && is_array($terms) && count($array_sort) == count($terms) ) {
                 array_multisort($array_sort, SORT_ASC, SORT_NUMERIC, $terms);
             }
@@ -637,8 +640,8 @@ if( ! class_exists('BeRocket_conditions') ) {
                     }
                 }
             }
-            $show = ( ( ! empty($condition['in_stock']) && $additional['product']->is_in_stock() ) 
-                   || ( ! empty($condition['out_of_stock']) && ! $additional['product']->is_in_stock() )
+            $show = ( ( ! empty($condition['in_stock']) && $additional['product']->is_in_stock() && ! $additional['product']->is_on_backorder() ) 
+                   || ( ! empty($condition['out_of_stock']) && ! $additional['product']->is_in_stock() && ! $additional['product']->is_on_backorder() )
                    || ( ! empty($condition['is_on_backorder']) && $additional['product']->is_on_backorder() ) );
             return $show;
         }
@@ -650,6 +653,9 @@ if( ! class_exists('BeRocket_conditions') ) {
         }
     
         public static function check_condition_product_category($show, $condition, $additional) {
+            if( ! array_key_exists('category', $condition) ) {
+                $condition['category'] = array();
+            }
             if( ! is_array($condition['category']) ) {
                 $condition['category'] = array($condition['category']);
             }
@@ -777,7 +783,13 @@ if( ! class_exists('BeRocket_conditions') ) {
                     $product_stock += intval($variation_obj->get_stock_quantity('edit'));
                 }
             } else {
-                if( method_exists($product, 'get_stock_quantity') ) {
+                if( method_exists($product, 'get_manage_stock') && ! $product->get_manage_stock() ) {
+                    if( $condition == 'equal_more' ) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } elseif( method_exists($product, 'get_stock_quantity') ) {
                     $product_stock = $product->get_stock_quantity('edit');
                 } else {
                     $product_stock = $product->stock;

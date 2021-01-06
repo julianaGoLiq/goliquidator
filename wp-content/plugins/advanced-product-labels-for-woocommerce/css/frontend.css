@@ -7,7 +7,44 @@
     text-align: center;
     box-sizing: border-box;
     border: 0px solid transparent;
+    position: relative;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
 }
+
+/*.br_alabel.br_alabel_template_type_advanced > span b {
+    bottom: 0;
+    top: 0;
+}*/
+
+/*.br_alabel.br_alabel_template_type_css > span b.br-labels-css {
+    left: 0;
+    position: absolute !important;
+    right: 0;    
+    top: 50%;
+    transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+}*/
+
+.br_alabel.br_alabel_template_type_image > span {
+    background-color: transparent !important;
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: contain;
+}
+
+.br_alabel.br_alabel_template_type_image > span b {
+    display: none;
+}
+
 .br_alabel_label {
     line-height: 1.75;
     margin-top: 0.5em;
@@ -89,7 +126,28 @@
 
 /************** css templates ***************/
 
+/*.br_alabel.br_alabel_template_type_css > span b.br-labels-css-10 {
+    top: 0;
+}
+
+.br_alabel.br_alabel_template_type_css > span b.br-labels-css-16 {
+    transform: none;
+}
+*/
+/*.br-labels-css-21-i1 {}*/
+
+.br-labels-css-21-i1::before {
+    background: rgba(255, 255, 255, 0.3) !important;
+    content: '';
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 50%;
+}
+
 /************** advanced templates ***************/
+
 .br-labels-advanced-1,
 .br-labels-advanced-2,
 .br-labels-advanced-4,
@@ -116,16 +174,6 @@
     -webkit-transform: scaleX(-1);
 }
 
-.br-labels-advanced-2.rotated .b_span_before {
-    left: 1.2em;
-    right: auto;
-}
-
-.br-labels-advanced-2.rotated .b_span_text {
-    left: auto;
-    right: 0.1em;
-}
-
 .br-labels-advanced-1 .b_span_text {
     font-size: 1.7em;
     position: absolute;
@@ -150,23 +198,28 @@
     right: auto;    
 }
 
-.br-labels-advanced-2 {
+/*.br-labels-advanced-2 {
     overflow: hidden;
-}
+}*/
 
 .br-labels-advanced-2 .b_span_before {
+    display: inline-block;
     font-size: 1em;
     line-height: 1;
     position: absolute;
     right: 6%;
     top: 16%;
+    width: 40%;
 }
 
 .br-labels-advanced-2 .b_span_text {
+    display: inline-block;
     font-size: 1.7em;
     left: 15%;
     position: absolute;
+    text-align: center;
     top: 22%;
+    width: 50%;
 }
 
 .br-labels-advanced-2 .b_span_after {
@@ -178,20 +231,18 @@
     white-space: nowrap;
 }
 
-.br-labels-advanced-3 {
-    left: 0;
-    position: absolute !important;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    -moz-transform: translateY(-50%);
-    -ms-transform: translateY(-50%);
-    -webkit-transform: translateY(-50%);
-    -o-transform: translateY(-50%);
+.br-labels-advanced-2.rotated .b_span_before {
+    left: 1.2em;
+    right: auto;
 }
 
-.br-labels-advanced-3 .b_span_before {
-    font-size: 0.8em;
+.br-labels-advanced-2.rotated .b_span_text {
+    left: auto;
+    right: 0.1em;
+}
+
+.br_alabel.br_alabel_template_type_advanced > span b.br-labels-advanced-3 {
+    top: 14%;
 }
 
 .br-labels-advanced-3 .b_span_text {
@@ -203,21 +254,24 @@
     font-size: 0.8em;
 }
 
-.br-labels-advanced-4 {
+.br-labels-advanced-3 .b_span_before {
+    font-size: 0.8em;
+}
+
+/*.br-labels-advanced-4 {
     left: 50%;
-    overflow: hidden;
     transform: translateX(-50%);
     -moz-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
-    -webkit-transform: translateX(-50%);
     -o-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
     width: 74%;
-}
+}*/
 
 .br-labels-advanced-4 .b_span_before {
     left: 0;
     position: absolute;
-    top: 38%;
+    top: 37%;
     right: 0;
     font-size: 0.6em;
     text-transform: uppercase;
@@ -240,32 +294,21 @@
     white-space: nowrap;
 }
 
-.br-labels-advanced-5 {
-    left: 50%;
-    overflow: hidden;
-    transform: translateX(-50%);
-    -moz-transform: translateX(-50%);
-    -ms-transform: translateX(-50%);
-    -webkit-transform: translateX(-50%);
-    -o-transform: translateX(-50%);
-    width: 74%;
-}
-
 .br-labels-advanced-5 .b_span_before {
+    font-size: 0.6em;
     left: 0;
     position: absolute;
-    top: 48%;
     right: 0;
-    font-size: 0.6em;
     text-transform: uppercase;
+    top: 45%;
 }
 
 .br-labels-advanced-5 .b_span_text {
     font-size: 1.5em;
     left: 0;
-    position: absolute;
     right: 0;
-    top: 0.5em;
+    position: absolute;
+    top: 0.4em;
     white-space: nowrap;
 }
 
@@ -322,8 +365,7 @@
     white-space: nowrap;
 }
 
-.br-labels-advanced-7-i3 {
-}
+.br-labels-advanced-7-i3 {}
 
 .br-labels-advanced-7-i3:before {
     background-color: rgba(255, 255, 255, 0.3);
@@ -338,6 +380,7 @@
 
 .br-labels-advanced-8 {
     font-size: 2.2em;
+    height: 70%;
     left: 0;
     position: absolute !important;
     right: 0;
@@ -359,7 +402,7 @@
     line-height: 50%;
 }
 
-.br-labels-advanced-8-i3 {}
+/*.br-labels-advanced-8-i3 {}*/
 
 .br-labels-advanced-8-i3::before {
     background-color: rgba(255, 255, 255, 0.2);
@@ -375,23 +418,12 @@
 }
 
 .br-labels-advanced-8 .b_span_after .woocommerce-Price-amount {
-    white-space: nowrap;
+    white-space: nowrap; 
 }
 
-.br-labels-advanced-9 {
-    overflow: hidden;
-}
-
-.br-labels-advanced-9 .b_span_before {
-    font-size: 1.2em;
-    left: 0.5em;
-    line-height: 1.1;
-    position: absolute;
-    right: 0.5em;
-    top: 10%;
-    -webkit-filter: invert(60%);
-    filter: invert(60%);
-}
+/*.br_alabel.br_alabel_template_type_advanced > span b.br-labels-advanced-9 {
+    bottom: 13%;
+}*/
 
 .br-labels-advanced-9 .b_span_text {
     font-size: 1em;
@@ -413,8 +445,15 @@
     white-space: nowrap;
 }
 
-.br-labels-advanced-10 {
-    z-index: 200 !important;
+.br-labels-advanced-9 .b_span_before {
+    font-size: 1.2em;
+    left: 0.5em;
+    line-height: 1.1;
+    position: absolute;
+    right: 0.5em;
+    top: 10%;
+    -webkit-filter: invert(60%);
+    filter: invert(60%);
 }
 
 .br-labels-advanced-10 .b_span_text {
@@ -443,10 +482,6 @@
 .br-labels-advanced-10.rotated .b_span_after {
     left: 0.5em;
     right: auto;
-}
-
-.br-labels-advanced-11 {
-    overflow: hidden;
 }
 
 .br-labels-advanced-11 .b_span_before {
@@ -487,6 +522,15 @@
     left: 0;
 }
 
+.br-labels-advanced-12 .b_span_before {
+    bottom: 37%;
+    font-size: 0.6em;
+    left: 0;
+    position: absolute;
+    right: 0;
+    text-transform: uppercase;
+}
+
 .br-labels-advanced-12 .b_span_text {
     font-size: 1.4em;
     left: 0;
@@ -503,12 +547,16 @@
     right: 0;
 }
 
-.br-labels-advanced-12 .b_span_before {
-    bottom: 37%;
-    font-size: 0.6em;
-    left: 0;
-    position: absolute;
-    right: 0;
-    text-transform: uppercase;
+
+/************* tippy styles ************************/
+.tippy-content {
+    text-align: center;
 }
 
+.berocket_tooltip_image {
+    display: block;
+}
+
+.berocket_tooltip_text {
+    white-space: pre-wrap;
+}

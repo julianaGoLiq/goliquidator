@@ -119,14 +119,21 @@ var br_something_changed = false;
                 multiple: false 
             }).on('select', function() {
                 var attachment = custom_uploader.state().get('selection').first().toJSON();
-                $p.prevAll(".berocket_selected_image").html('<image src="'+attachment.url+'" alt="">');
                 $p.prevAll(".berocket_image_value").val(attachment.url).trigger('change');
+				if ( attachment.url ) {
+					$p.nextAll(".berocket_remove_image").show();
+					$p.prevAll(".berocket_selected_image").html('<image src="'+attachment.url+'" alt="">').show();
+				} else {
+					$p.nextAll(".berocket_remove_image").hide();
+					$p.prevAll(".berocket_selected_image").html('').hide();
+				}
             }).open();
         });
         $(document).on('click', '.br_framework_settings .berocket_remove_image',function(event) {
             event.preventDefault();
-            $(this).prevAll(".berocket_selected_image").html("");
+            $(this).prevAll(".berocket_selected_image").html("").hide();
             $(this).prevAll(".berocket_image_value").val("").trigger('change');
+			$(this).hide();
         });
         var berocket_fa_select_for = $('.berocket_fa_dark');
         $(document).on('click', '.berocket_select_fontawesome .berocket_select_fa',function(event) {
@@ -156,9 +163,15 @@ var br_something_changed = false;
         $(document).on('click', '.berocket_select_fontawesome .berocket_fa_hover',function(event) {
             event.preventDefault();
             var value = $(this).parents('.berocket_fa_icon').first().find('.berocket_fa_preview span').text();
-            $(berocket_fa_select_for).parents('.berocket_select_fontawesome').find('.berocket_selected_fa').html('<i class="fa '+value+'"></i>');
             $(berocket_fa_select_for).parents('.berocket_select_fontawesome').find('.berocket_fa_value').val(value).trigger('change');
             $('.berocket_fa_dark').hide();
+			if ( value ) {
+				$(berocket_fa_select_for).parents('.berocket_select_fontawesome').find('.berocket_selected_fa').html('<i class="fa '+value+'"></i>').show();
+				$(berocket_fa_select_for).parents('.berocket_select_fontawesome').find(".berocket_remove_image").show();
+			} else {
+				$(berocket_fa_select_for).parents('.berocket_select_fontawesome').find('.berocket_selected_fa').html('').hide();
+				$(berocket_fa_select_for).parents('.berocket_select_fontawesome').find(".berocket_remove_image").hide();
+			}
         });
         $(document).on('click', '.berocket_select_fontawesome .berocket_remove_fa',function(event) {
             event.preventDefault();

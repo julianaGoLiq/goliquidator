@@ -597,7 +597,7 @@ __webpack_require__.r(__webpack_exports__);
  */
 
 var allowedBlocks = [];
-var excludedBlocks = ['core/nextpage'];
+var excludedBlocks = pum_block_editor_vars.popup_trigger_excluded_blocks || ['core/nextpage'];
 
 function isAllowedForBlockType(name) {
   if (!allowedBlocks.length && !excludedBlocks.length) {

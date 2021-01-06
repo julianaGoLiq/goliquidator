@@ -6,6 +6,7 @@ defined('ABSPATH') || exit;
 use NjtNotificationBar\NotificationBar\WpCustomControlColorBg;
 use NjtNotificationBar\NotificationBar\WpCustomControlColorText;
 use NjtNotificationBar\NotificationBar\WpCustomControlColorLb;
+use NjtNotificationBar\NotificationBar\WpCustomControlTextColorLb;
 use NjtNotificationBar\NotificationBar\WpCustomControlColorPreset;
 use NjtNotificationBar\NotificationBar\WpCustomControlPositionType;
 use NjtNotificationBar\NotificationBar\WpCustomControlHandleButton;
@@ -34,7 +35,7 @@ class WpCustomNotification
       'lb_text'           => esc_html('Learn more'),
       'lb_url'            => '',
       'new_windown'       => true,
-      'text_mobile'       =>'',
+      'text_mobile'       => esc_html('This is default text for notification bar'),
       'lb_text_mobile'    => esc_html('Learn more'),
       'lb_url_mobile'     => '',
       'new_windown_mobile'=> true,
@@ -42,6 +43,7 @@ class WpCustomNotification
       'bg_color'          => '#9af4cf',
       'text_color'        => '#1919cf',
       'lb_color'          => '#1919cf',
+      'lb_text_color'     => '#ffffff',
       'font_size'         => '15',
       'dp_homepage'       => true,
       'dp_pages'          => true,
@@ -50,10 +52,16 @@ class WpCustomNotification
       'dp_pp_id'          => ''
     )) ;
 
+    //Set default value for each option text ues wpml translate
+    update_option('njt_nofi_text_wpml_translate', get_theme_mod('njt_nofi_text', $this->valueDefault['text']));
+    update_option('njt_nofi_text_mobile_wpml_translate', get_theme_mod('njt_nofi_text_mobile', $this->valueDefault['text_mobile']));
+    update_option('njt_nofi_lb_text_wpml_translate', get_theme_mod('njt_nofi_lb_text', $this->valueDefault['lb_text']));
+    update_option('njt_nofi_lb_text_mobile_wpml_translate', get_theme_mod('njt_nofi_lb_text_mobile', $this->valueDefault['lb_text_mobile']));
+
     add_action('customize_register', array( $this, 'njt_nofi_customizeNotification'), 10);
     add_action('admin_enqueue_scripts', array($this, 'addScriptsCustomizer'));
     add_action('wp_enqueue_scripts', array( $this, 'njt_nofi_enqueueCustomizeControls'));
-  
+    add_action('customize_save_after', array( $this, 'njt_nofi_customize_save_after'));
   }
 
    /**
@@ -73,6 +81,14 @@ class WpCustomNotification
       wp_register_style('njt-nofi-cus-control', NJT_NOFI_PLUGIN_URL . 'assets/admin/css/admin-customizer-control.css', array(), NJT_NOFI_VERSION);
       wp_enqueue_style('njt-nofi-cus-control');
     }
+  }
+
+  public function njt_nofi_customize_save_after()
+  {
+    update_option('njt_nofi_text_wpml_translate', get_theme_mod('njt_nofi_text', $this->valueDefault['text']));
+    update_option('njt_nofi_text_mobile_wpml_translate', get_theme_mod('njt_nofi_text_mobile', $this->valueDefault['text_mobile']));
+    update_option('njt_nofi_lb_text_wpml_translate', get_theme_mod('njt_nofi_lb_text', $this->valueDefault['lb_text']));
+    update_option('njt_nofi_lb_text_mobile_wpml_translate', get_theme_mod('njt_nofi_lb_text_mobile', $this->valueDefault['lb_text_mobile']));
   }
   
   public function njt_nofi_sanitizeSelect( $input, $setting ){
@@ -443,6 +459,22 @@ class WpCustomNotification
         'label'    => __('Button Color', NJT_NOFI_DOMAIN ),
         'section'  => 'njt_nofi_style',
         'settings' => 'njt_nofi_lb_color'
+      )
+    ));
+
+    //Button Text Color
+    $customNoti->add_setting('njt_nofi_lb_text_color', array(
+      'default'           =>$this->valueDefault['lb_text_color'],
+      'sanitize_callback' => 'sanitize_hex_color',
+      'transport'         => 'postMessage',
+    ));
+
+    $customNoti->add_control(
+      new WpCustomControlTextColorLb( $customNoti, 'njt_nofi_lb_text_color',
+      array(
+        'label'    => __('Button Text Color', NJT_NOFI_DOMAIN ),
+        'section'  => 'njt_nofi_style',
+        'settings' => 'njt_nofi_lb_text_color'
       )
     ));
 

@@ -28,7 +28,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Groupssettings extends Google_Service
+class Google_Service_Groupssettings extends UDP_Google_Service
 {
   /** View and manage the settings of a Google Apps Group. */
   const APPS_GROUPS_SETTINGS =
@@ -42,7 +42,7 @@ class Google_Service_Groupssettings extends Google_Service
    *
    * @param Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(UDP_Google_Client $client)
   {
     parent::__construct($client);
     $this->servicePath = 'groups/v1/groups/';

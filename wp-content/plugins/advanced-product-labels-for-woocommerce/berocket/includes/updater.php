@@ -232,11 +232,10 @@ if ( ! class_exists( 'BeRocket_updater' ) ) {
                             'start'         => 0,
                             'end'           => 0,
                             'name'          => $plugin[ 'name' ],
-                            'html'          => '<strong>'.__('Please', 'BeRocket_domain'). '
-                                <a class="berocket_button" href="' . ( is_network_admin() ? admin_url( 'network/admin.php?page=berocket_account' ) : admin_url( 'admin.php?page=berocket_account' ) ) . '">' . __('activate plugin', 'BeRocket_domain') . '</a> ' . $plugin[ 'name' ] . ' ' . __('with help of Plugin/Account Key from', 'BeRocket_domain') . '
-                                <a class="berocket_button" href="' . BeRocket_update_path . 'user' . $meta_data . '" target="_blank">' . __('BeRocket account', 'BeRocket_domain') . '</a></strong>.
-                                ' . __('You can activate plugin in', 'BeRocket_domain') . ' 
-                                <a class="berocket_button" href="' . ( is_network_admin() ? admin_url( 'network/admin.php?page=berocket_account' ) : admin_url( 'admin.php?page=berocket_account' ) ) . '">' . __('BeRocket Account settings', 'BeRocket_domain') . '</a>
+                            'html'          => __('Please', 'BeRocket_domain'). ' ' . __('activate plugin', 'BeRocket_domain') . ' ' . $plugin[ 'name' ] . ' ' . __('with help of plugin/account key from', 'BeRocket_domain'). ' '
+                                               . '<a href="' . BeRocket_update_path . 'user' . $meta_data . '" target="_blank">' . __('BeRocket account', 'BeRocket_domain') . '</a>. '
+                                               . __('You can activate plugin in', 'BeRocket_domain')
+                                               . '<a class="berocket_button" href="' . ( is_network_admin() ? admin_url( 'network/admin.php?page=berocket_account' ) : admin_url( 'admin.php?page=berocket_account' ) ) . '">' . __('BeRocket Account settings', 'BeRocket_domain') . '</a>
                                 ',
                             'righthtml'     => '',
                             'rightwidth'    => 0,
@@ -634,6 +633,7 @@ if ( ! class_exists( 'BeRocket_updater' ) ) {
                     }
                 });
             </script>
+			<style>.notice:not(.berocket_admin_notice){display:none!important;}</style>
             <?php
         }
 

@@ -134,8 +134,12 @@ if ( ! class_exists('BeRocket_custom_post_class') ) {
             global $post;
             if ( ! empty( $post ) and $post->post_type == $this->post_name ) {
                 wp_register_style( 'font-awesome', plugins_url( '../assets/css/font-awesome.min.css', __FILE__ ) );
+				add_action('admin_footer', array($this, 'wp_footer_remove_notice'));
             }
         }
+		public function wp_footer_remove_notice() {
+			echo '<style>.notice:not(.berocket_admin_notice){display:none!important;}</style>';
+		}
 
         public function post_row_actions($actions, $post) {
             if( $post->post_type == $this->post_name ) {

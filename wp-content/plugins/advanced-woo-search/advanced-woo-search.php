@@ -3,12 +3,12 @@
 /*
 Plugin Name: Advanced Woo Search
 Description: Advance ajax WooCommerce product search.
-Version: 2.14
+Version: 2.18
 Author: ILLID
 Author URI: https://advanced-woo-search.com/
 Text Domain: advanced-woo-search
 WC requires at least: 3.0.0
-WC tested up to: 4.6.0
+WC tested up to: 4.8.0
 */
 
 
@@ -16,16 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'AWS_VERSION', '2.14' );
-
-
-define( 'AWS_DIR', dirname( __FILE__ ) );
-define( 'AWS_URL', plugins_url( '', __FILE__ ) );
-
-
-define( 'AWS_INDEX_TABLE_NAME', 'aws_index' );
-define( 'AWS_CACHE_TABLE_NAME', 'aws_cache' );
-
+if ( ! defined( 'AWS_FILE' ) ) {
+    define( 'AWS_FILE', __FILE__ );
+}
 
 if ( ! class_exists( 'AWS_Main' ) ) :
 
@@ -71,6 +64,8 @@ final class AWS_Main {
 	 */
 	public function __construct() {
 
+        $this->define_constants();
+
         $this->data['settings'] = get_option( 'aws_settings' );
 
 		add_filter( 'widget_text', 'do_shortcode' );
@@ -97,6 +92,21 @@ final class AWS_Main {
     }
 
     /**
+     * Define constants
+     */
+    private function define_constants() {
+
+        $this->define( 'AWS_VERSION', '2.18' );
+
+        $this->define( 'AWS_DIR', plugin_dir_path( AWS_FILE ) );
+        $this->define( 'AWS_URL', plugin_dir_url( AWS_FILE ) );
+
+        $this->define( 'AWS_INDEX_TABLE_NAME', 'aws_index' );
+        $this->define( 'AWS_CACHE_TABLE_NAME', 'aws_cache' );
+
+    }
+
+    /**
      * Include required core files used in admin and on the frontend.
      */
     public function includes() {
@@ -119,6 +129,8 @@ final class AWS_Main {
         include_once( 'includes/admin/class-aws-admin-ajax.php' );
         include_once( 'includes/admin/class-aws-admin-fields.php' );
         include_once( 'includes/admin/class-aws-admin-options.php' );
+        include_once( 'includes/admin/class-aws-admin-meta-boxes.php' );
+        include_once( 'includes/admin/class-aws-admin-page-premium.php' );
 
     }
 
@@ -179,7 +191,7 @@ final class AWS_Main {
 			$setting_link = '<a href="' . admin_url('admin.php?page=aws-options') . '">'.esc_html__( 'Settings', 'advanced-woo-search' ).'</a>';
 			array_unshift( $links, $setting_link );
 
-            $premium_link = '<a href="https://advanced-woo-search.com/?utm_source=plugin&utm_medium=settings-link&utm_campaign=aws-pro-plugin" target="_blank">'.esc_html__( 'Get Premium', 'advanced-woo-search' ).'</a>';
+            $premium_link = '<a href="' . admin_url( 'admin.php?page=aws-options&tab=premium' ) . '">'.esc_html__( 'Premium Version', 'advanced-woo-search' ).'</a>';
             array_unshift( $links, $premium_link );
 		}
 
@@ -193,6 +205,15 @@ final class AWS_Main {
         $plugin_options = $this->data['settings'];
 		$return_value = isset( $plugin_options[ $name ] ) ? $plugin_options[ $name ] : '';
         return $return_value;
+    }
+
+    /*
+     * Define constant if not already set
+     */
+    private function define( $name, $value ) {
+        if ( ! defined( $name ) ) {
+            define( $name, $value );
+        }
     }
 
     /*
@@ -262,6 +283,25 @@ function aws_install_woocommerce_admin_notice() {
 	</div>
 	<?php
 }
+
+
+/*
+ * Activation hook
+ */
+register_activation_hook( __FILE__, 'aws_on_activation' );
+function aws_on_activation() {
+    $hide_notice = get_option( 'aws_hide_welcome_notice' );
+    if ( ! $hide_notice ) {
+        $free_plugin_version = get_option( 'aws_plugin_ver' );
+        $pro_plugin_version = get_option( 'aws_pro_plugin_ver' );
+        $hide = 'false';
+        if ( $free_plugin_version || $pro_plugin_version ) {
+            $hide = 'true';
+        }
+        update_option( 'aws_hide_welcome_notice', $hide, false );
+    }
+}
+
 
 /*
  * Init AWS plugin

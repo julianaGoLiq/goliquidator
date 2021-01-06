@@ -29,7 +29,7 @@
  *
  * @author Google, Inc.
  */
-class Google_Service_Reports extends Google_Service
+class Google_Service_Reports extends UDP_Google_Service
 {
   /** View audit reports of Google Apps for your domain. */
   const ADMIN_REPORTS_AUDIT_READONLY =
@@ -49,7 +49,7 @@ class Google_Service_Reports extends Google_Service
    *
    * @param Google_Client $client
    */
-  public function __construct(Google_Client $client)
+  public function __construct(UDP_Google_Client $client)
   {
     parent::__construct($client);
     $this->servicePath = 'admin/reports/v1/';

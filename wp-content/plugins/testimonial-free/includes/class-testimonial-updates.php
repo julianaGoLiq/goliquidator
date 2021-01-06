@@ -56,10 +56,18 @@ class Testimonial_Updates {
 	 */
 	public function is_needs_update() {
 		$installed_version = get_option( 'testimonial_version' );
+		$first_version = get_option( 'testimonial_first_version' );
+		$activation_date = get_option( 'testimonial_activation_date' );
 
 		if ( false === $installed_version ) {
 			update_option( 'testimonial_version', SP_TFREE_VERSION );
 			update_option( 'testimonial_db_version', SP_TFREE_VERSION );
+		}
+		if ( false === $first_version ) {
+			update_option( 'testimonial_first_version', SP_TFREE_VERSION );
+		}
+		if ( false === $activation_date ) {
+			update_option( 'testimonial_activation_date', current_time( 'timestamp' ) );
 		}
 
 		if ( version_compare( $installed_version, SP_TFREE_VERSION, '<' ) ) {

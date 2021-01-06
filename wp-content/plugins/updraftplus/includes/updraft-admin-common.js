@@ -110,7 +110,7 @@ function updraft_delete(key, nonce, showremote) {
 	jQuery('#updraft_delete_timestamp').val(key);
 	jQuery('#updraft_delete_nonce').val(nonce);
 	if (showremote) {
-		jQuery('#updraft-delete-remote-section, #updraft_delete_remote').removeAttr('disabled').show();
+		jQuery('#updraft-delete-remote-section, #updraft_delete_remote').prop('disabled', false).show();
 	} else {
 		jQuery('#updraft-delete-remote-section, #updraft_delete_remote').hide().attr('disabled','disabled');
 	}
@@ -142,7 +142,7 @@ function set_email_report_storage_interface(value) {
 	jQuery('#cb_not_email_storage_label').css('display', true === value ? 'none' : 'inline');
 	jQuery('#cb_email_storage_label').css('display', true === value ? 'inline' : 'none');
 	if (true === value) {
-		jQuery('#updraft-navtab-settings-content #updraft_report_row_no_addon input#updraft_email').click(function(e) {
+		jQuery('#updraft-navtab-settings-content #updraft_report_row_no_addon input#updraft_email').on('click', function(e) {
 			return false;
 		});
 	} else {
@@ -200,18 +200,18 @@ function updraft_remote_storage_tabs_setup() {
 	}
 	
 	// To allow labelauty remote storage buttons to be used with keyboard
-	jQuery(document).keyup(function(event) {
+	jQuery(document).on('keyup', function(event) {
 		if (32 === event.keyCode || 13 === event.keyCode) {
 			if (jQuery(document.activeElement).is("input.labelauty + label")) {
 				var for_box = jQuery(document.activeElement).attr("for");
 				if (for_box) {
-					jQuery("#"+for_box).change();
+					jQuery("#"+for_box).trigger('change');
 				}
 			}
 		}
 	});
 	
-	jQuery('.updraft_servicecheckbox').change(function() {
+	jQuery('.updraft_servicecheckbox').on('change', function() {
 		var sclass = jQuery(this).attr('id');
 		if ('updraft_servicecheckbox_' == sclass.substring(0,24)) {
 			var serv = sclass.substring(24);
@@ -243,7 +243,7 @@ function updraft_remote_storage_tabs_setup() {
 	});
 	
 	// Add stuff for free version
-	jQuery('.updraft_servicecheckbox:not(.multi)').change(function() {
+	jQuery('.updraft_servicecheckbox:not(.multi)').on('change', function() {
 		set_email_report_storage_interface(false);
 		var svalue = jQuery(this).attr('value');
 		if (jQuery(this).is(':not(:checked)')) {
@@ -439,7 +439,7 @@ function updraft_delete_old_dirs() {
 }
 
 function updraft_initiate_restore(whichset) {
-	jQuery('#updraft-navtab-backups-content .updraft_existing_backups button[data-backup_timestamp="'+whichset+'"]').click();
+	jQuery('#updraft-navtab-backups-content .updraft_existing_backups button[data-backup_timestamp="'+whichset+'"]').trigger('click');
 }
 
 function updraft_restore_setoptions(entities) {
@@ -450,7 +450,7 @@ function updraft_restore_setoptions(entities) {
 		var eregex = new RegExp(epat);
 		var ematch = entities.match(eregex);
 		if (ematch) {
-			jQuery(y).removeAttr('disabled').data('howmany', ematch[1]).parent().show();
+			jQuery(y).prop('disabled', false).data('howmany', ematch[1]).parent().show();
 			howmany++;
 			if ('db' == entity) { howmany += 4.5;}
 			if (jQuery(y).is(':checked')) {
@@ -733,7 +733,8 @@ var updraft_backups_selection = {};
 		if ("undefined" === typeof updraft_backups_selection.firstMultipleSelectionIndex) return;
 		delete updraft_backups_selection.firstMultipleSelectionIndex;
 		$('#updraft-navtab-backups-content .updraft_existing_backups .updraft_existing_backups_row').removeClass('range-selection range-selection-start');
-		$('#updraft-navtab-backups-content').off('hover', '.updraft_existing_backups .updraft_existing_backups_row', this.hightlight_backup_rows);
+		$('#updraft-navtab-backups-content').off('mouseenter', '.updraft_existing_backups .updraft_existing_backups_row', this.hightlight_backup_rows);
+		$('#updraft-navtab-backups-content').off('mouseleave', '.updraft_existing_backups .updraft_existing_backups_row', this.hightlight_backup_rows);
 		$(document).off('mouseleave', this.unregister_highlight_mode);
 	}
 
@@ -742,7 +743,8 @@ var updraft_backups_selection = {};
 	 */
 	updraft_backups_selection.register_highlight_mode = function() {
 		$(document).on('mouseleave', updraft_backups_selection.unregister_highlight_mode);
-		$('#updraft-navtab-backups-content').on('hover', '.updraft_existing_backups .updraft_existing_backups_row', updraft_backups_selection.hightlight_backup_rows);
+		$('#updraft-navtab-backups-content').on('mouseenter', '.updraft_existing_backups .updraft_existing_backups_row', updraft_backups_selection.hightlight_backup_rows);
+		$('#updraft-navtab-backups-content').on('mouseleave', '.updraft_existing_backups .updraft_existing_backups_row', updraft_backups_selection.hightlight_backup_rows);
 	}
 })(jQuery);
 // @codingStandardsIgnoreEnd
@@ -1121,7 +1123,7 @@ function update_backupnow_modal(response) {
 function updraft_exclude_entity_update(include_entity_name) {
 	var exclude_entities = [];
 	jQuery('#updraft_include_'+include_entity_name+'_exclude_container .updraft_exclude_entity_wrapper .updraft_exclude_entity_field').each(function() {
-		var data_val = jQuery.trim(jQuery(this).data('val'));
+		var data_val = jQuery(this).data('val').trim();
 		if ('' != data_val) {
 			exclude_entities.push(data_val);
 		}
@@ -1178,13 +1180,13 @@ function updraft_intervals_monthly_or_not(selector_id, now_showing) {
 		var select_mday = (updraft_interval_month_val === false) ? 1 : updraft_interval_month_val;
 		// Convert from day of the month (ordinal) to option index (starts at 0)
 		select_mday = select_mday - 1;
-		jQuery(selector+" option:eq("+select_mday+")").prop('selected', true);
+		jQuery(selector+" option").eq(select_mday).prop('selected', true);
 	} else {
 		// Save the old value
 		updraft_interval_month_val = jQuery(selector+' option:selected').val();
 		jQuery(selector).html(updraftlion.dayselector);
 		var select_day = (updraft_interval_week_val === false) ? 1 : updraft_interval_week_val;
-		jQuery(selector+" option:eq("+select_day+")").prop('selected', true);
+		jQuery(selector+" option").eq(select_day).prop('selected', true);
 	}
 }
 
@@ -1306,7 +1308,18 @@ function updraft_iframe_modal(getwhat, title) {
 	var width = 780;
 	var height = 500;
 	jQuery('#updraft-iframe-modal-innards').html('<iframe width="100%" height="430px" src="'+ajaxurl+'?action=updraft_ajax&subaction='+getwhat+'&nonce='+updraft_credentialtest_nonce+'"></iframe>');
-	jQuery('#updraft-iframe-modal').dialog('option', 'title', title).dialog('option', 'width', width).dialog('option', 'height', height).dialog('open');
+	jQuery('#updraft-iframe-modal').dialog({
+		title: title, resizeOnWindowResize: true, scrollWithViewport: true, resizeAccordingToViewport: true, useContentSize: false,
+		open: function(event, ui) {
+			jQuery(this).dialog('option', 'width', width),
+			jQuery(this).dialog('option', 'minHeight', 260);
+			if (jQuery(window).height() > height) {
+				jQuery(this).dialog('option', 'height', height);
+			} else {
+				jQuery(this).dialog('option', 'height', jQuery(window).height()-30);
+			}
+		}
+	}).dialog('open');
 }
 
 function updraft_html_modal(showwhat, title, width, height) {
@@ -1316,7 +1329,18 @@ function updraft_html_modal(showwhat, title, width, height) {
 		updraft_html_modal_buttons[updraftlion.close] = function() {
  jQuery(this).dialog("close"); };
 	}
-	jQuery('#updraft-iframe-modal').dialog('option', 'title', title).dialog('option', 'width', width).dialog('option', 'height', height).dialog('option', 'buttons', updraft_html_modal_buttons).dialog('open');
+	jQuery('#updraft-iframe-modal').dialog({
+		title: title, buttons: updraft_html_modal_buttons, resizeOnWindowResize: true, scrollWithViewport: true, resizeAccordingToViewport: true, useContentSize: false,
+		open: function(event, ui) {
+			jQuery(this).dialog('option', 'width', width),
+			jQuery(this).dialog('option', 'minHeight', 260);
+			if (jQuery(window).height() > height) {
+				jQuery(this).dialog('option', 'height', height);
+			} else {
+				jQuery(this).dialog('option', 'height', jQuery(window).height()-30);
+			}
+		}
+	}).dialog('open');
 }
 
 function updraftplus_diskspace() {
@@ -1402,7 +1426,7 @@ function zip_files_jstree(entity, timestamp, type, findex) {
 
 	// Search function for jstree, this will hide nodes that don't match the search
 	var timeout = false;
-	jQuery('#zip_files_jstree_search').keyup(function () {
+	jQuery('#zip_files_jstree_search').on('keyup', function () {
 		if (timeout) { clearTimeout(timeout); }
 		timeout = setTimeout(function () {
 			var value = jQuery('#zip_files_jstree_search').val();
@@ -1423,7 +1447,7 @@ function zip_files_jstree(entity, timestamp, type, findex) {
 		}
 	});
 
-	jQuery('#updraft_zip_download_item').click(function(event) {
+	jQuery('#updraft_zip_download_item').on('click', function(event) {
 		
 		event.preventDefault();
 		
@@ -1901,7 +1925,7 @@ jQuery(function($) {
 	});
 
 	// Advanced settings new menu button listeners
-	$('.expertmode .advanced_settings_container .advanced_tools_button').click(function() {
+	$('.expertmode .advanced_settings_container .advanced_tools_button').on('click', function() {
 		advanced_tool_hide($(this).attr("id"));
 	});
 	
@@ -1929,7 +1953,7 @@ jQuery(function($) {
 		$('#updraftcentral_keys_table').slideDown();
 	});
 	
-	$('#updraftcentral_keycreate_altmethod_moreinfo_get').click(function(e) {
+	$('#updraftcentral_keycreate_altmethod_moreinfo_get').on('click', function(e) {
 		e.preventDefault();
 		$(this).remove();
 		$('#updraftcentral_keycreate_altmethod_moreinfo').slideDown();
@@ -2007,6 +2031,35 @@ jQuery(function($) {
 			updraft_backups_selection.deselectAll();
 		}
 	});
+
+	$('#updraft-wrap').on('click', '#updraftplus_manual_authorisation_submit_dropbox', function(e) {
+		e.preventDefault();
+		var dropbox_auth_data = $('#updraftplus_manual_authentication_data_dropbox').val();
+		$('#updraftplus_manual_authentication_error_dropbox').text();
+		$('#updraft-wrap #updraftplus_manual_authorisation_template_dropbox .updraftplus_spinner.spinner').addClass('visible');
+		$('#updraftplus_manual_authorisation_submit_dropbox').prop('disabled', true);
+		manual_remote_storage_auth('dropbox', dropbox_auth_data);
+	});
+
+	/**
+	 * This method will send the ajax request to manually authenticate the remote storage method and then update the page with the response
+	 *
+	 * @param {string} method    - the remote storage method
+	 * @param {string} auth_data - the auth data as a base64 json encoded string
+	 */
+	function manual_remote_storage_auth(method, auth_data) {
+		updraft_send_command('manual_remote_storage_authentication', {method: method, auth_data: auth_data}, function(response) {
+			$('#updraft-wrap #updraftplus_manual_authorisation_template_'+method+' .updraftplus_spinner.spinner').removeClass('visible');
+			if (response.hasOwnProperty('result') && 'success' === response.result) {
+				$('#updraft-wrap .updraftplus-top-menu').before(response.data);
+				$('#updraft-wrap #updraftplus_manual_authorisation_template_'+method).parent().remove();
+				$('#updraft-wrap .updraft_authenticate_'+method).remove();
+			} else if (response.hasOwnProperty('result') && 'error' === response.result) {
+				$('#updraftplus_manual_authentication_error_'+method).text(response.data);
+				$('#updraftplus_manual_authorisation_submit_'+method).prop('disabled', false);
+			}
+		});
+	}
 	
 	
 	$('#updraft-navtab-backups-content').on('click', '.js--select-all-backups', function(e) {
@@ -2299,7 +2352,7 @@ jQuery(function($) {
 
 	updraftplus_com_login.hide_loader = function() {
 		$('#updraft-navtab-addons-content .wrap').find('.updraftplus_spinner.spinner').removeClass('visible').text(updraftlion.processing);
-		$('#updraft-navtab-addons-content .wrap').find('.ud_connectsubmit').removeProp('disabled');
+		$('#updraft-navtab-addons-content .wrap').find('.ud_connectsubmit').prop('disabled', false);
 	}
 
 	/*
@@ -2358,7 +2411,7 @@ jQuery(function($) {
 
 				} else {
 					updraftplus_com_login.hide_loader();
-					$('#updraft-navtab-addons-content .wrap .updraftplus_com_login').submit();
+					$('#updraft-navtab-addons-content .wrap .updraftplus_com_login').trigger('submit');
 				}
 			} else if (response.hasOwnProperty('error')) {
 				updraftplus_com_login.hide_loader();
@@ -2444,7 +2497,7 @@ jQuery(function($) {
 						container.find('.tfa_fields').hide();
 						container.find('.non_tfa_fields').show();
 						container.find('input#updraftplus-addons_options_two_factor_code').val('');
-						container.find('input#updraftplus-addons_options_password').val('').focus();
+						container.find('input#updraftplus-addons_options_password').val('').trigger('focus');
 					}
 					if ('no_key_found' === data.code) {
 						this.stage = 'create_key';
@@ -2470,7 +2523,7 @@ jQuery(function($) {
 					$('#updraft-navtab-addons-content .wrap .updraftplus_com_login_status').html('').hide();
 					container.find('.non_tfa_fields').hide();
 					container.find('.tfa_fields').show();
-					container.find('input#updraftplus-addons_options_two_factor_code').focus();
+					container.find('input#updraftplus-addons_options_two_factor_code').trigger('focus');
 					this.stage = 'connect_udc_TFA';
 				}
 
@@ -2485,7 +2538,7 @@ jQuery(function($) {
 
 					// submit the form (to reload the page).
 					setTimeout(function() {
-						$('#updraft-navtab-addons-content .wrap form.updraftplus_com_login').submit();
+						$('#updraft-navtab-addons-content .wrap form.updraftplus_com_login').trigger('submit');
 					}, 1000);
 				}
 
@@ -2521,7 +2574,7 @@ jQuery(function($) {
 				if (response.hasOwnProperty('tfa_enabled') && true == response.tfa_enabled) {
 					$('#updraft-navtab-migrate-content .updraft_migrate_widget_module_content .updraft_migrate_widget_temporary_clone_stage1 .non_tfa_fields').hide();
 					$('#updraft-navtab-migrate-content .updraft_migrate_widget_module_content .updraft_migrate_widget_temporary_clone_stage1 .tfa_fields').show();
-					$('#updraft-navtab-migrate-content .updraft_migrate_widget_module_content .updraft_migrate_widget_temporary_clone_stage1 input#temporary_clone_options_two_factor_code').focus();
+					$('#updraft-navtab-migrate-content .updraft_migrate_widget_module_content .updraft_migrate_widget_temporary_clone_stage1 input#temporary_clone_options_two_factor_code').trigger('focus');
 				}
 
 				if ('authenticated' === response.status) {
@@ -2793,7 +2846,7 @@ jQuery(function($) {
 
 	$('#updraft-navtab-settings-content #remote-storage-holder').on('click', '.updraftplusmethod .updraft_edit_label_instance', function(e) {
 		$(this).find('span').hide();
-		$(this).attr('contentEditable', true).focus();
+		$(this).attr('contentEditable', true).trigger('focus');
 	});
 	
 	$('#updraft-navtab-settings-content #remote-storage-holder').on('keyup', '.updraftplusmethod .updraft_edit_label_instance', function(e) {
@@ -2813,7 +2866,7 @@ jQuery(function($) {
 		if (13 === e.which) {
 			$(this).attr('contentEditable', false);
 			$(this).find('span').show();
-			$(this).blur();
+			$(this).trigger('blur');
 		}
 	});
 
@@ -2830,8 +2883,16 @@ jQuery(function($) {
 		context['instance_id'] = 's-' + generate_instance_id(32);
 		context['instance_enabled'] = 1;
 		context['instance_label'] = method_name + ' (' + (jQuery('.' + method + '_updraft_remote_storage_border').length + 1) + ')';
+		context['instance_conditional_logic'] = {
+			type: '', // always by default
+			rules: [],
+			day_of_the_week_options: updraftlion.conditional_logic.day_of_the_week_options,
+			logic_options: updraftlion.conditional_logic.logic_options,
+			operand_options: updraftlion.conditional_logic.operand_options,
+			operator_options: updraftlion.conditional_logic.operator_options,
+		};
 		var html = template(context);
-		jQuery(html).hide().insertAfter('.' + method + '_add_instance_container:first').show('slow');
+		jQuery(html).hide().insertAfter(jQuery('.' + method + '_add_instance_container').first()).show('slow');
 	}
 
 	/**
@@ -2860,6 +2921,66 @@ jQuery(function($) {
 			jQuery(this).siblings('label').html(updraftlion.instance_disabled);
 		}
 	});
+
+	jQuery('#updraft-navtab-settings-content #remote-storage-holder').on("change", "select[class='logic_type']", function () {
+		updraft_settings_form_changed = true;
+		if ('' !== this.value) {
+			jQuery('div.logic', jQuery(this).parents('tr.updraftplusmethod')).show();
+			jQuery(this).parents('tr.updraftplusmethod').find('div.logic ul.rules > li').each(function() {
+				jQuery(this).find('select').each(function() {
+					jQuery(this).prop('disabled', false);
+				})
+			});
+		} else {
+			jQuery(this).parents('tr.updraftplusmethod').find('div.logic ul.rules > li').each(function() {
+				jQuery(this).find('select').each(function() {
+					jQuery(this).prop('disabled', true);
+				})
+			});
+			jQuery(this).parents('tr.updraftplusmethod').find('div.logic').hide();
+		}
+	});
+
+	jQuery('#updraft-navtab-settings-content #remote-storage-holder').on("change", "select[class='conditional_logic_operand']", function () {
+		updraft_settings_form_changed = true;
+		jQuery(this).parent().find('select:nth(2)').empty();
+		if ('day_of_the_week' === jQuery(this).val()) {
+			for (i=0; i<updraftlion.conditional_logic.day_of_the_week_options.length; i++) {
+				jQuery(this).parent().find('select:nth(2)').append(jQuery('<option value="'+updraftlion.conditional_logic.day_of_the_week_options[i].index+'"></option>').text(updraftlion.conditional_logic.day_of_the_week_options[i].value));
+			}
+		} else if ('day_of_the_month' === jQuery(this).val()) {
+			for (i=1; i<=31; i++) {
+				jQuery(this).parent().find('select:nth(2)').append(jQuery('<option value="'+i+'"></option>').text(i));
+			}
+		}
+	});
+
+	jQuery('#updraft-navtab-settings-content #remote-storage-holder').on("click", "div.conditional_remote_backup ul.rules li span", function () {
+		updraft_settings_form_changed = true;
+		var $ul = jQuery(this).parents('ul.rules');
+		if (jQuery(this).hasClass('remove-rule')) {
+			jQuery(this).parent().slideUp(function() {
+				jQuery(this).remove();
+				if (jQuery($ul).find('> li').length < 2) {
+					jQuery('li:nth(0) span.remove-rule', $ul).remove();
+				}
+			});
+		}
+	});
+
+	jQuery('#updraft-navtab-settings-content #remote-storage-holder').on("click", "div.conditional_remote_backup input.add-new-rule", function () {
+		var $ul = jQuery(this).parent().find('ul.rules');
+		if (jQuery($ul).find('> li').length < 2) {
+			jQuery($ul).find('li:nth(0)').append('<span class="remove-rule"><svg viewbox="0 0 25 25"><line x1="6.5" y1="18.5" x2="18.5" y2="6.5" fill="none" stroke="#FF6347" stroke-width="3" vector-effect="non-scaling-stroke" ></line><line y1="6.5" x1="6.5" y2="18.5" x2="18.5" fill="none" stroke="#FF6347" stroke-width="3" vector-effect="non-scaling-stroke" ></line></svg></span>');
+		}
+		$cloned_item = jQuery($ul).find('> li').last().clone();
+		jQuery($cloned_item).find('> select').each(function() {
+			jQuery(this).prop('name', jQuery(this).prop('name').replace(/\[instance_conditional_logic\]\[rules\]\[[0-9]+\]/gi, '[instance_conditional_logic][rules]['+jQuery($ul).data('rules')+']'));
+		});
+		jQuery($ul).append($cloned_item);
+		jQuery($ul).data('rules', parseInt(jQuery($ul).data('rules')) + 1);
+		jQuery($cloned_item).find('select[name*="[operand]"]').trigger('change');
+	});
 	
 	jQuery('#updraft-navtab-settings-content #remote-storage-holder').on('click', '.updraftplusmethod button.updraft-test-button', function() {
 
@@ -2885,16 +3006,16 @@ jQuery(function($) {
 		}, instance_id);
 	});
 	
-	$('#updraft-navtab-settings-content select.updraft_interval, #updraft-navtab-settings-content select.updraft_interval_database').change(function() {
+	$('#updraft-navtab-settings-content select.updraft_interval, #updraft-navtab-settings-content select.updraft_interval_database').on('change', function() {
 		updraft_check_same_times();
 	});
 	
-	$('#backupnow_includefiles_showmoreoptions').click(function(e) {
+	$('#backupnow_includefiles_showmoreoptions').on('click', function(e) {
 		e.preventDefault();
 		$('#backupnow_includefiles_moreoptions').toggle();
 	});
 
-	$('#backupnow_database_showmoreoptions').click(function(e) {
+	$('#backupnow_database_showmoreoptions').on('click', function(e) {
 		e.preventDefault();
 		$('#backupnow_database_moreoptions').toggle();
 	});
@@ -2910,7 +3031,7 @@ jQuery(function($) {
 	});
 	
 	// For Advanced Tools > Site information > Web-server disk space in use by UpdraftPlus
-	$('.advanced_settings_content a.updraft_diskspaceused_update').click(function(e) {
+	$('.advanced_settings_content a.updraft_diskspaceused_update').on('click', function(e) {
 		e.preventDefault();
 		jQuery('.advanced_settings_content .updraft_diskspaceused').html('<em>'+updraftlion.calculating+'</em>');
 		updraft_send_command('get_fragment', { fragment: 'disk_usage', data: 'updraft' }, function(response) {
@@ -2918,23 +3039,23 @@ jQuery(function($) {
 		}, { type: 'GET' });
 	});
 	
-	$('#updraft-navtab-backups-content a.updraft_uploader_toggle').click(function(e) {
+	$('#updraft-navtab-backups-content a.updraft_uploader_toggle').on('click', function(e) {
 		e.preventDefault();
 		$('#updraft-plupload-modal').slideToggle();
 	});
 	
-	$('#updraft-navtab-backups-content a.updraft_rescan_local').click(function(e) {
+	$('#updraft-navtab-backups-content a.updraft_rescan_local').on('click', function(e) {
 		e.preventDefault();
 		updraft_updatehistory(1, 0);
 	});
 	
-	$('#updraft-navtab-backups-content a.updraft_rescan_remote').click(function(e) {
+	$('#updraft-navtab-backups-content a.updraft_rescan_remote').on('click', function(e) {
 		e.preventDefault();
 		if (!confirm(updraftlion.remote_scan_warning)) return;
 		updraft_updatehistory(1, 1);
 	});
 	
-	$('#updraftplus-remote-rescan-debug').click(function(e) {
+	$('#updraftplus-remote-rescan-debug').on('click', function(e) {
 		e.preventDefault();
 		updraft_updatehistory(1, 1, 1);
 	});
@@ -2948,7 +3069,7 @@ jQuery(function($) {
 			} else {
 				jQuery('.updraftcentral_wizard_self_hosted_stage2').show();
 				jQuery('#updraftcentral_keycreate_mothership_firewalled_container').slideDown();
-				jQuery('#updraftcentral_keycreate_mothership').focus();
+				jQuery('#updraftcentral_keycreate_mothership').trigger('focus');
 			}
 		} else {
 			jQuery('#updraftcentral_keycreate_mothership').prop('disabled', true);
@@ -3160,17 +3281,17 @@ jQuery(function($) {
 		});
 	});
 	
-	jQuery('#updraft_reset_sid').click(function(e) {
+	jQuery('#updraft_reset_sid').on('click', function(e) {
 		e.preventDefault();
 		updraft_send_command('reset_site_id', null, function(response) {
 			jQuery('#updraft_show_sid').html(response);
 		}, { json_parse: false });
 	});
 	
-	jQuery("#updraft-navtab-settings-content form input:not('.udignorechange'), #updraft-navtab-settings-content form select").change(function(e) {
+	jQuery("#updraft-navtab-settings-content form input:not('.udignorechange'), #updraft-navtab-settings-content form select").on('change', function(e) {
 		updraft_settings_form_changed = true;
 	});
-	jQuery("#updraft-navtab-settings-content form input[type='submit']").click(function (e) {
+	jQuery("#updraft-navtab-settings-content form input[type='submit']").on('click', function (e) {
 		updraft_settings_form_changed = false;
 	});
 	
@@ -3191,7 +3312,7 @@ jQuery(function($) {
 	setTimeout(function() {
 		jQuery('#setting-error-settings_updated').slideUp();}, 5000);
 	
-	jQuery('#updraft_restore_db').change(function() {
+	jQuery('#updraft_restore_db').on('change', function() {
 		if (jQuery('#updraft_restore_db').is(':checked') && 1 == jQuery(this).data('encrypted')) {
 			jQuery('#updraft_restorer_dboptions').slideDown();
 		} else {
@@ -3206,7 +3327,17 @@ jQuery(function($) {
 		 jQuery(this).dialog("close");
 	};
 	jQuery("#updraft-message-modal").dialog({
-		autoOpen: false, height: 350, width: 520, modal: true,
+		autoOpen: false, resizeOnWindowResize: true, scrollWithViewport: true, resizeAccordingToViewport: true, useContentSize: false,
+		open: function(event, ui) {
+			$(this).dialog('option', 'width', 520);
+			$(this).dialog('option', 'minHeight', 260);
+			if ($(window).height() > 360 ) {
+				$(this).dialog('option', 'height', 360);
+			} else {
+				$(this).dialog('option', 'height', $(window).height()-30);
+			}
+		},
+		modal: true,
 		buttons: updraft_message_modal_buttons
 	});
 	
@@ -3316,7 +3447,11 @@ jQuery(function($) {
 	updraft_delete_modal_buttons[updraftlion.cancel] = function() {
  jQuery(this).dialog("close"); };
 	jQuery("#updraft-delete-modal").dialog({
-		autoOpen: false, height: 322, width: 430, modal: true,
+		autoOpen: false, resizeOnWindowResize: true, scrollWithViewport: true, resizeAccordingToViewport: true, useContentSize: false,
+		open: function(event, ui) {
+			$(this).css('minHeight', 83);
+		},
+		modal: true,
 		buttons: updraft_delete_modal_buttons
 	});
 
@@ -3524,7 +3659,7 @@ jQuery(function($) {
 					$('#updraft_restorer_restore_options').val(restore_options);
 					// This must be done last, as it wipes out the section with #updraft_restoreoptions_ui
 					$('#updraft-restore-modal-stage2a').html(updraftlion.restore_proceeding);
-					$('#updraft_restore_form').submit();
+					$('#updraft_restore_form').trigger('submit');
 					// In progress; prevent the button being pressed again
 					updraft_restore_stage = 4;
 				}
@@ -3539,7 +3674,12 @@ jQuery(function($) {
 	});
 
 	jQuery("#updraft-backupnow-inpage-modal").dialog({
-		autoOpen: false, height: 380, width: 580, modal: true
+		autoOpen: false, modal: true, resizeOnWindowResize: true, scrollWithViewport: true, resizeAccordingToViewport: true, useContentSize: false,
+		open: function(event, ui) {
+			$(this).dialog('option', 'width', 580);
+			$(this).dialog('option', 'minHeight', 261);
+			$(this).dialog('option', 'height', 380);
+		},
 	});
 	
 	var backupnow_modal_buttons = {};
@@ -3611,20 +3751,35 @@ jQuery(function($) {
 	jQuery(this).dialog("close"); };
 
 	jQuery("#updraft-backupnow-modal").dialog({
-		autoOpen: false, height: 472, width: 610, modal: true,
+		autoOpen: false, resizeOnWindowResize: true, scrollWithViewport: true, resizeAccordingToViewport: true, useContentSize: false,
+		open: function(event, ui) {
+			$(this).dialog('option', 'width', 610);
+			$(this).dialog('option', 'minHeight', 300);
+			$(this).dialog('option', 'height', 472);
+		},
+		modal: true,
 		buttons: backupnow_modal_buttons,
 		create: function () {
 			$(this).closest(".ui-dialog")
-				.find(".ui-dialog-buttonpane .ui-button:first") // the first button
+				.find(".ui-dialog-buttonpane .ui-button").first() // the first button
 				.addClass("js-tour-backup-now-button");
 		}
 	});
 
 	jQuery("#updraft-poplog").dialog({
-		autoOpen: false, height: 600, width: '75%', modal: true,
+		autoOpen: false, modal: true, resizeOnWindowResize: true, scrollWithViewport: true, resizeAccordingToViewport: true, useContentSize: false,
+		open: function(event, ui) {
+			$(this).dialog('option', 'width', 860);
+			$(this).dialog('option', 'minHeight', 260);
+			if ($(window).height() > 600) {
+				$(this).dialog('option', 'height', 600);
+			} else {
+				$(this).dialog('option', 'height', $(window).height()-50);
+			}
+		},
 	});
 	
-	jQuery('#updraft-navtab-settings-content .enableexpertmode').click(function() {
+	jQuery('#updraft-navtab-settings-content .enableexpertmode').on('click', function() {
 		jQuery('#updraft-navtab-settings-content .expertmode').fadeIn();
 		jQuery('#updraft-navtab-settings-content .enableexpertmode').off('click');
 		return false;
@@ -3650,7 +3805,7 @@ jQuery(function($) {
 		}
 	}
 	
-	jQuery('#updraft-navtab-settings-content .updraft_include_entity').click(function() {
+	jQuery('#updraft-navtab-settings-content .updraft_include_entity').on('click', function() {
 		var has_exclude_field = jQuery(this).data('toggle_exclude_field');
 		if (has_exclude_field) {
 			setup_file_entity_exclude_field(has_exclude_field, false);
@@ -3673,7 +3828,7 @@ jQuery(function($) {
 		event.preventDefault();
 		var wrapper = jQuery(this).hide().closest('.updraft_exclude_entity_wrapper');
 		var input = wrapper.find('input');
-		input.removeProp('readonly').focus();
+		input.prop('readonly', false).trigger('focus');
 
 		// place carret at the end of the text
 		var input_val = input.val();
@@ -3687,7 +3842,7 @@ jQuery(function($) {
 		event.preventDefault();
 		var wrapper = jQuery(this).closest('.updraft_exclude_entity_wrapper');
 		var include_backup_file = jQuery(this).data('include-backup-file')
-		var exclude_item_val = jQuery.trim(wrapper.find('input').val());
+		var exclude_item_val = wrapper.find('input').val().trim();
 		
 		var should_be_updated = false;
 		if (exclude_item_val == wrapper.find('input').data('val')) {
@@ -3708,16 +3863,23 @@ jQuery(function($) {
 	});
 	
 	jQuery('#updraft_exclude_modal').dialog({
-		autoOpen: false,
-		modal: true,
-		width: 520,
-		height: 'auto',
+		autoOpen: false, modal: true, resizeOnWindowResize: true, scrollWithViewport: true, resizeAccordingToViewport: true, useContentSize: false,
 		open: function(event,ui) {
-			$(this).parent().focus();
+			$(this).parent().trigger('focus');
+			$(this).dialog('option', 'width', 520);
+			$(this).dialog('option', 'minHeight', 260);
+			if ($(window).height() > 579) {
+				$(this).css('height', 'auto');
+			} else if ($(window).height() < 580 && $(window).height() > 410) {
+				$(this).dialog('option', 'height', 410);
+				$(this).css('height', 'auto');
+			} else {
+				$(this).dialog('option', 'height', $(window).height()-20);
+			}
 		}
 	});
 	
-	jQuery('.updraft_exclude_container .updraft_add_exclude_item').click(function(event) {
+	jQuery('.updraft_exclude_container .updraft_add_exclude_item').on('click', function(event) {
 		event.preventDefault();
 		var backup_entity = jQuery(this).data('include-backup-file');
 		jQuery('#updraft_exclude_modal_for').val(backup_entity);
@@ -3729,7 +3891,7 @@ jQuery(function($) {
 		jQuery('#updraft_exclude_modal').dialog('open');
 	});
 	
-	jQuery('.updraft-exclude-link').click(function(event) {
+	jQuery('.updraft-exclude-link').on('click', function(event) {
 		event.preventDefault();
 		var panel = jQuery(this).data('panel');
 		if ('file-dir' == panel) {
@@ -3774,7 +3936,7 @@ jQuery(function($) {
 		jQuery('.updraft-exclude-panel[data-panel='+panel+']').slideDown();
 	});
 	
-	jQuery('.updraft-exclude-modal-reset').click(function(event) {
+	jQuery('.updraft-exclude-modal-reset').on('click', function(event) {
 		event.preventDefault();
 		jQuery('#updraft_exclude_files_folders_jstree').jstree("destroy");
 		jQuery('#updraft_exclude_extension_field').val('');
@@ -3783,7 +3945,7 @@ jQuery(function($) {
 		jQuery('#updraft_exclude_modal_main').slideDown();
 	});
 	
-	jQuery('.updraft-exclude-submit').click(function() {
+	jQuery('.updraft-exclude-submit').on('click', function() {
 		var panel = jQuery(this).data('panel');
 		var exclude_item_val = '';
 		switch (panel) {
@@ -3843,30 +4005,30 @@ jQuery(function($) {
 	});
 	
 	// TODO: This is suspected to be obsolete. Confirm + remove.
-	jQuery('#updraft-navtab-settings-content .updraft-service').change(function() {
+	jQuery('#updraft-navtab-settings-content .updraft-service').on('change', function() {
 		var active_class = jQuery(this).val();
 		jQuery('#updraft-navtab-settings-content .updraftplusmethod').hide();
 		jQuery('#updraft-navtab-settings-content .'+active_class).show();
 	});
 
-	jQuery('#updraft-navtab-settings-content a.updraft_show_decryption_widget').click(function(e) {
+	jQuery('#updraft-navtab-settings-content a.updraft_show_decryption_widget').on('click', function(e) {
 		e.preventDefault();
 		jQuery('#updraftplus_db_decrypt').val(jQuery('#updraft_encryptionphrase').val());
 		jQuery('#updraft-manualdecrypt-modal').slideToggle();
 	});
 	
-	jQuery('#updraftplus-phpinfo').click(function(e) {
+	jQuery('#updraftplus-phpinfo').on('click', function(e) {
 		e.preventDefault();
 		updraft_iframe_modal('phpinfo', updraftlion.phpinfo);
 	});
 
-	jQuery('#updraftplus-rawbackuphistory').click(function(e) {
+	jQuery('#updraftplus-rawbackuphistory').on('click', function(e) {
 		e.preventDefault();
 		updraft_iframe_modal('rawbackuphistory', updraftlion.raw);
 	});
 
 	// + Added addons navtab
-	jQuery('#updraft-navtab-status').click(function(e) {
+	jQuery('#updraft-navtab-status').on('click', function(e) {
 		e.preventDefault();
 		updraft_open_main_tab('status');
 		updraft_page_is_visible = 1;
@@ -3874,12 +4036,12 @@ jQuery(function($) {
 		// Refresh the console, as its next update might be far away
 		updraft_activejobs_update(true);
 	});
-	jQuery('#updraft-navtab-expert').click(function(e) {
+	jQuery('#updraft-navtab-expert').on('click', function(e) {
 		e.preventDefault();
 		updraft_open_main_tab('expert');
 		updraft_page_is_visible = 1;
 	});
-	jQuery('#updraft-navtab-settings, #updraft-navtab-settings2, #updraft_backupnow_gotosettings').click(function(e) {
+	jQuery('#updraft-navtab-settings, #updraft-navtab-settings2, #updraft_backupnow_gotosettings').on('click', function(e) {
 		e.preventDefault();
 		// These next two should only do anything if the relevant selector was clicked
 		jQuery(this).parents('.updraftmessage').remove();
@@ -3887,21 +4049,21 @@ jQuery(function($) {
 		updraft_open_main_tab('settings');
 		updraft_page_is_visible = 1;
 	});
-	jQuery('#updraft-navtab-addons').click(function(e) {
+	jQuery('#updraft-navtab-addons').on('click', function(e) {
 		e.preventDefault();
 		jQuery(this).addClass('b#nav-tab-active');
 		updraft_open_main_tab('addons');
 		updraft_page_is_visible = 1;
 	});
 
-	jQuery('#updraft-navtab-backups').click(function(e) {
+	jQuery('#updraft-navtab-backups').on('click', function(e) {
 		e.preventDefault();
 		updraft_console_focussed_tab = 'backups';
 		updraft_historytimertoggle(1);
 		updraft_open_main_tab('backups');
 	});
 	
-	jQuery('#updraft-navtab-migrate').click(function(e) {
+	jQuery('#updraft-navtab-migrate').on('click', function(e) {
 		e.preventDefault();
 		jQuery('#updraft_migrate_tab_alt').html('').hide();
 		updraft_open_main_tab('migrate');
@@ -3942,14 +4104,14 @@ jQuery(function($) {
 			if (up.features.dragdrop) {
 				uploaddiv.addClass('drag-drop');
 				jQuery('#drag-drop-area')
-				.bind('dragover.wp-uploader', function() {
+				.on('dragover.wp-uploader', function() {
  uploaddiv.addClass('drag-over'); })
-				.bind('dragleave.wp-uploader, drop.wp-uploader', function() {
+				.on('dragleave.wp-uploader, drop.wp-uploader', function() {
  uploaddiv.removeClass('drag-over'); });
 				
 			} else {
 				uploaddiv.removeClass('drag-drop');
-				jQuery('#drag-drop-area').unbind('.wp-uploader');
+				jQuery('#drag-drop-area').off('.wp-uploader');
 			}
 		});
 					
@@ -4062,17 +4224,17 @@ jQuery(function($) {
 	}
 	
 	// Functions in the debugging console
-	jQuery('#updraftplus_httpget_go').click(function(e) {
+	jQuery('#updraftplus_httpget_go').on('click', function(e) {
 		e.preventDefault();
 		updraftplus_httpget_go(0);
 	});
 
-	jQuery('#updraftplus_httpget_gocurl').click(function(e) {
+	jQuery('#updraftplus_httpget_gocurl').on('click', function(e) {
 		e.preventDefault();
 		updraftplus_httpget_go(1);
 	});
 	
-	jQuery('#updraftplus_callwpaction_go').click(function(e) {
+	jQuery('#updraftplus_callwpaction_go').on('click', function(e) {
 		e.preventDefault();
 		params = { wpaction: jQuery('#updraftplus_callwpaction').val() };
 		updraft_send_command('call_wordpress_action', params, function(response) {
@@ -4205,7 +4367,20 @@ jQuery(function($) {
 	};
 
 	jQuery("#updraft-upload-modal").dialog({
-		autoOpen: false, height: 322, width: 430, modal: true,
+		autoOpen: false, modal: true, resizeOnWindowResize: true, scrollWithViewport: true, resizeAccordingToViewport: true, useContentSize: false,
+		open: function(event, ui) {
+			$(this).parent().focus();
+			$(this).dialog('option', 'width', 308);
+			if (jQuery(window).height() > 460) {
+				$(this).dialog('option', 'height', 218);
+				$(this).css('height', 'auto');
+			} else if (jQuery(window).height() > 250 && jQuery(window).height() < 461) {
+				$(this).dialog('option', 'height', 460);
+				$(this).css('height', 'auto');
+			} else {
+				$(this).dialog('option', 'height', jQuery(window).height() - 20);
+			}
+		},
 		buttons: updraft_upload_modal_buttons
 	});
 
@@ -4279,14 +4454,29 @@ jQuery(function($) {
 		updraft_downloader(base, backup_timestamp, what, whicharea, set_contents, prettydate, async);
 	});
 	
-	jQuery('#updraft-navtab-backups-content .updraft_existing_backups').on('dblclick', '.updraft_existingbackup_date', function(e) {
+	jQuery('#updraft-navtab-backups-content .updraft_existing_backups').on('dblclick', '.updraft_existingbackup_date', function (e) {
 		e.preventDefault();
-		var data = jQuery(this).data('rawbackup');
-		if (data != null && data != '') {
-			updraft_html_modal(data, updraftlion.raw, 780, 500);
-		}
+		var nonce = jQuery(this).data('nonce').toString();
+		var timestamp = jQuery(this).data('timestamp').toString();
+		updraft_send_command('rawbackup_history', { timestamp: timestamp, nonce: nonce }, function (response) {
+			var textArea = document.createElement('textarea');
+			textArea.innerHTML = response;
+			updraft_html_modal(textArea.value, updraftlion.raw, 780, 500);
+		}, { type: 'POST', json_parse: false });
+
+		updraft_html_modal('<div style="margin:auto;text-align:center;margin-top:150px;"><img src="' + updraftlion.ud_url + '/images/udlogo-rotating.gif" /> <br>'+ updraftlion.loading +'</div>', updraftlion.raw, 780, 500);
 	});
 
+	jQuery('#backupnow_database_moreoptions').on('click', 'div.backupnow-db-tables > a', function(e) {
+		e.preventDefault();
+		jQuery('> input', jQuery(this).parents('div.backupnow-db-tables')).prop('checked', false);
+		if (jQuery(this).hasClass('backupnow-select-all-table')) {
+			jQuery('> input', jQuery(this).parents('div.backupnow-db-tables')).prop('checked', true);
+		} else if (jQuery(this).hasClass('backupnow-select-all-this-site')) {
+			jQuery('> input', jQuery(this).parents('div.backupnow-db-tables')).not('[data-non_wp_table]').prop('checked', true);
+			
+		}
+	});
 });
 
 // UpdraftPlus Vault
@@ -4305,7 +4495,7 @@ jQuery(function($) {
 	// Prevent default event when pressing return in the form
 	$(settings_css_prefix).on('keypress','#updraftvault_settings_connect input', function(e) {
 		if (13 == e.which) {
-			$(settings_css_prefix+'#updraftvault_connect_go').click();
+			$(settings_css_prefix+'#updraftvault_connect_go').trigger('click');
 			return false;
 		}
 	});
@@ -4480,13 +4670,13 @@ jQuery(function($) {
 			if (up.features.dragdrop) {
 				uploaddiv.addClass('drag-drop');
 				jQuery('#drag-drop-area2')
-				.bind('dragover.wp-uploader', function() {
+				.on('dragover.wp-uploader', function() {
  uploaddiv.addClass('drag-over'); })
-				.bind('dragleave.wp-uploader, drop.wp-uploader', function() {
+				.on('dragleave.wp-uploader, drop.wp-uploader', function() {
  uploaddiv.removeClass('drag-over'); });
 			} else {
 				uploaddiv.removeClass('drag-drop');
-				jQuery('#drag-drop-area2').unbind('.wp-uploader');
+				jQuery('#drag-drop-area2').off('.wp-uploader');
 			}
 		});
 		
@@ -4601,6 +4791,91 @@ jQuery(function($) {
 		return encodeURIComponent(uri);
 	});
 
+	/**
+	 * Handlebars helper function to compare two values using a specifed operator
+	 *
+	 * @see https://stackoverflow.com/questions/8853396/logical-operator-in-a-handlebars-js-if-conditional#answer-16315366
+	 *
+	 * @param {mixed} v1 the first value to compare
+	 * @param {mixed} v2 the second value to compare
+	 *
+	 * @return {boolean} true if the first value matched against the second value, false otherwise
+	 */
+	Handlebars.registerHelper('ifCond', function(v1, operator, v2, options) {
+		switch (operator) {
+			case '==':
+				return (v1 == v2) ? options.fn(this) : options.inverse(this);
+			case '===':
+				return (v1 === v2) ? options.fn(this) : options.inverse(this);
+			case '!=':
+				return (v1 != v2) ? options.fn(this) : options.inverse(this);
+			case '!==':
+				return (v1 !== v2) ? options.fn(this) : options.inverse(this);
+			case '<':
+				return (v1 < v2) ? options.fn(this) : options.inverse(this);
+			case '<=':
+				return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+			case '>':
+				return (v1 > v2) ? options.fn(this) : options.inverse(this);
+			case '>=':
+				return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+			case '&&':
+				return (v1 && v2) ? options.fn(this) : options.inverse(this);
+			case '||':
+				return (v1 || v2) ? options.fn(this) : options.inverse(this);
+			case 'typeof':
+				return (v1 === typeof v2) ? options.fn(this) : options.inverse(this);
+			case 'not_typeof':
+				return (v1 !== typeof v2) ? options.fn(this) : options.inverse(this);
+			default:
+				return options.inverse(this);
+		}
+	});
+
+	/**
+	 * Handlebars helper function for looping through a block of code a specified number of times
+	 *
+	 * @param {mixed} from the start value
+	 * @param {mixed} to   the end value where the loop will stop
+	 * @param {mixed} incr the increment number
+	 *
+	 * @return {mixed} the current processing number
+	 */
+	Handlebars.registerHelper('for', function(from, to, incr, block) {
+		var accum = '';
+		for (var i = from; i < to; i += incr)
+			accum += block.fn(i);
+		return accum;
+	});
+
+	/**
+	 * Assign value into a variable
+	 *
+	 * @param {string} name the variable name
+	 * @param {mixed}  val  the value
+	 */
+	Handlebars.registerHelper('set_var', function(name, val, options) {
+		if (!options.data.root) {
+			options.data.root = {};
+		}
+		options.data.root[name] = val;
+	});
+
+	/**
+	 * Get length of an array/object
+	 *
+	 * @param {mixed} object the object
+	 */
+	Handlebars.registerHelper('get_length', function(object) {
+		if ("undefined" !== typeof object && false === object instanceof Array) {
+			return Object.keys(object).length;
+		} else if (true === object instanceof Array) {
+			return object.length;
+		} else {
+			return 0;
+		}
+	});
+
 	// Add remote methods html using handlebarjs
 	if ($('#remote-storage-holder').length) {
 		var html = '';
@@ -4613,6 +4888,31 @@ jQuery(function($) {
 					if ('default' === instance_id) continue;
 					
 					var context = updraftlion.remote_storage_options[method][instance_id];
+
+					if ('undefined' == typeof context['instance_conditional_logic']) {
+						context['instance_conditional_logic'] = {
+							type: '', // always by default
+							rules: [],
+						};
+					}
+					context['instance_conditional_logic'].day_of_the_week_options = updraftlion.conditional_logic.day_of_the_week_options;
+					context['instance_conditional_logic'].logic_options = updraftlion.conditional_logic.logic_options;
+					context['instance_conditional_logic'].operand_options = updraftlion.conditional_logic.operand_options;
+					context['instance_conditional_logic'].operator_options = updraftlion.conditional_logic.operator_options;
+					// work around the UpdraftVault conditional logic
+					if ("updraftvault" === method && "object" === typeof context.settings) {
+						for (var ins_id in context['settings']) {
+							if (context['settings'][ins_id]['instance_conditional_logic']['rules'] instanceof Array && context.settings[ins_id]['instance_conditional_logic']['rules'].length > 0) {
+								context['instance_conditional_logic']['rules'] = context.settings[ins_id]['instance_conditional_logic']['rules'];
+							}
+							if ("string" === typeof context['settings'][ins_id]['instance_conditional_logic']['type'] && context.settings[ins_id]['instance_conditional_logic']['type'].length > 0) {
+								context['instance_conditional_logic']['type'] = context.settings[ins_id]['instance_conditional_logic']['type'];
+							}
+							break;
+						}
+					}
+					// #end updraftvault
+
 					context['first_instance'] = first_instance;
 					if ('undefined' == typeof context['instance_enabled']) {
 						context['instance_enabled'] = 1;
@@ -4650,14 +4950,14 @@ jQuery(function($) {
 	my_image.src = updraftlion.ud_url+'/images/notices/updraft_logo.png';
 
 	// When inclusion options for file entities in the settings tab, reflect that in the "Backup Now" dialog, to prevent unexpected surprises
-	$('#updraft-navtab-settings-content input.updraft_include_entity').change(function(e) {
+	$('#updraft-navtab-settings-content input.updraft_include_entity').on('change', function(e) {
 		var event_target = $(this).attr('id');
 		var checked = $(this).is(':checked');
 		var backup_target = '#backupnow_files_'+event_target;
 		$(backup_target).prop('checked', checked);
 	});
 
-	$('#updraftplus-settings-save').click(function(e) {
+	$('#updraftplus-settings-save').on('click', function(e) {
 		e.preventDefault();
 		$.blockUI({
 			css: {
@@ -4706,14 +5006,14 @@ jQuery(function($) {
 			}, nonce: updraftplus_settings_nonce});
 	});
 
-	$('#updraftplus-settings-export').click(function() {
+	$('#updraftplus-settings-export').on('click', function() {
 		if (updraft_settings_form_changed) {
 			alert(updraftlion.unsaved_settings_export);
 		}
 		export_settings();
 	});
 
-	$('#updraftplus-settings-import').click(function() {
+	$('#updraftplus-settings-import').on('click', function() {
 		$.blockUI({
 			css: {
 				width: '300px',
@@ -4896,7 +5196,7 @@ jQuery(function($) {
 			$('#updraft-backupnow-button').attr('title', backup_button_title);
 			$('.backupdirrow').css('display', 'table-row');
 		} else {
-			$('#updraft-backupnow-button').removeAttr('disabled');
+			$('#updraft-backupnow-button').prop('disabled', false);
 			$('#updraft-backupnow-button').removeAttr('title');
 			// $('.backupdirrow').hide();
 		}
@@ -4941,11 +5241,12 @@ jQuery(function($) {
  jQuery(this).dialog("close"); };
 
 			jQuery('#updraft-authenticate-modal').dialog({autoOpen: true,
-				modal: true,
-				resizable: false,
-				draggable: false,
-				buttons: updraft_authenticate_modal_buttons,
-				width:'auto'}).dialog('open');
+				modal: true, resizable: false, draggable: false, resizeOnWindowResize: true, scrollWithViewport: true, resizeAccordingToViewport: true, useContentSize: false,
+				open: function(event, ui) {
+					$(this).dialog('option', 'width', 860);
+					$(this).dialog('option', 'height', 260);
+				},
+				buttons: updraft_authenticate_modal_buttons}).dialog('open');
 		}
 	}
 
@@ -5126,7 +5427,7 @@ jQuery(function($) {
 						$(modal).find('.updraftcentral_cloud_form_container .tfa_fields').hide();
 						$(modal).find('.updraftcentral_cloud_form_container .non_tfa_fields').show();
 						$(modal).find('input#two_factor_code').val('');
-						$(modal).find('input#password').val('').focus();
+						$(modal).find('input#password').val('').trigger('focus');
 					}
 
 					if ('email_not_registered' === data.code) {
@@ -5145,7 +5446,7 @@ jQuery(function($) {
 					$(modal).find('.updraftcentral_cloud_form_container .non_tfa_fields').hide();
 					$(modal).find('.updraftcentral_cloud_form_container .tfa_fields').show();
 
-					$(modal).find('input#two_factor_code').focus();
+					$(modal).find('input#two_factor_code').trigger('focus');
 				}
 
 				if ('authenticated' === data.status) {
@@ -5194,7 +5495,7 @@ jQuery(function($) {
 		$(modal).find('.updraftcentral_cloud_notices .updraftcentral_cloud_redirect_link').off('click').on('click', function(e) {
 			e.preventDefault();
 
-			form.submit();
+			form.trigger('submit');
 			$(modal).find('.updraftcentral_cloud_notices .updraftcentral_cloud_close_link').trigger('click');
 		});
 
@@ -5285,10 +5586,8 @@ jQuery(function($) {
 	function updraftcentral_cloud_login_modal() {
 		var form_template = $('#updraftcentral_cloud_login_form');
 		if (form_template.length) {
-			$('#updraft-iframe-modal-innards').html(form_template.html());
 
-			var modal = $('#updraft-iframe-modal').dialog('option', 'title', updraftlion.updraftcentral_cloud).dialog('option', 'width', 520).dialog('option', 'height', 450).dialog('option', 'buttons', {});
-			modal.dialog('open');
+			updraft_html_modal(form_template.html(), updraftlion.updraftcentral_cloud, 520, 400);
 
 			var consent_container = modal.find('.updraftcentral-data-consent');
 			var name = consent_container.find('input').attr('name');
@@ -5383,6 +5682,13 @@ function updraft_process_status_check(resp, response_raw, original_parameters) {
 				if (resp.hosting_restriction && resp.hosting_restriction.includes('only_one_incremental_per_day')) {
 					updraftlion.hosting_restriction.push('only_one_incremental_per_day');
 				}
+			}
+		}
+
+		if (!jQuery('#updraft-wrap #updraft-navtab-settings-content').is(':hidden')) {
+			// auto-updates synchronised setting
+			if (resp.hasOwnProperty('automatic_updates')) {
+				jQuery('input[name="updraft_auto_updates"]').prop('checked', resp.automatic_updates);
 			}
 		}
 		

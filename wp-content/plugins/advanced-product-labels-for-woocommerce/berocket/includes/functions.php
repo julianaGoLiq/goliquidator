@@ -191,11 +191,11 @@ if ( ! function_exists( 'br_upload_image' ) ) {
         $extra = htmlentities( ( isset($additional['extra']) && trim( $additional['extra'] ) ) ? ' ' . trim( $additional['extra'] ) : '' );
         $value = htmlentities($value);
         $result = '<div>';
-        $result .= '<input type="hidden" name="' . $name . '" value="' . $value . '" readonly class="berocket_image_value ' . $class . '"' . $extra . '/>
-        <span class="berocket_selected_image">' . ( empty($value) ? '' : '<image src="' . $value . '">' ) . '</span>
-        <input type="button" class="berocket_upload_image button" value="'.__('Upload', 'BeRocket_domain').'"/> ';
+        $result .= '<input type="hidden" name="' . $name . '" value="' . $value . '" readonly class="berocket_image_value ' . $class . '"' . $extra . '/>';
+		$result .= ( empty($value) ? '<span class="berocket_selected_image" style="display:none;"></span>' : '<span class="berocket_selected_image"><image src="' . $value . '"></span>' );
+        $result .= '<input type="button" class="berocket_upload_image button" value="'.__('Upload', 'BeRocket_domain').'"> ';
         if ( $remove_button ) {
-            $result .= '<input type="button" class="berocket_remove_image button" value="'.__('Remove', 'BeRocket_domain').'"/>';
+            $result .= '<input type="button" class="berocket_remove_image button" value="'.__('Remove', 'BeRocket_domain').'"'.( empty($value) ? ' style="display:none;"' : '' ).'>';
         }
         $result .= '</div>';
 
@@ -243,12 +243,12 @@ if ( ! function_exists( 'br_fontawesome_image' ) ) {
         $value = htmlentities($value);
         $result = '<div class="berocket_select_fontawesome berocket_select_image">';
         $result .= berocket_fa_dark();
-        $result .= '<input type="hidden" name="' . $name . '" value="' . $value . '" readonly class="berocket_image_value berocket_fa_value ' . $class . '"' . $extra . '/>
-        <span class="berocket_selected_image berocket_selected_fa">' . ( empty($value) ? '' : (substr($value, 0, 3) == 'fa-' ? '<i class="fa ' . $value . '"></i>' : '<image src="' . $value . '">' ) ) . '</span>
-        <input type="button" class="berocket_upload_image button" value="'.__('Upload', 'BeRocket_domain').'"/>
-        <input type="button" class="berocket_select_fa button" value="'.__('Font Awesome', 'BeRocket_domain').'"/>';
+        $result .= '<input type="hidden" name="' . $name . '" value="' . $value . '" readonly class="berocket_image_value berocket_fa_value ' . $class . '"' . $extra . '/>';
+		$result .= ( empty($value) ? '<span class="berocket_selected_image berocket_selected_fa" style="display:none;"></span>' : '<span class="berocket_selected_image berocket_selected_fa">' . (substr($value, 0, 3) == 'fa-' ? '<i class="fa ' . $value . '"></i>' : '<image src="' . $value . '">' ) . '</span>' );
+        $result .= '<input type="button" class="berocket_upload_image button" value="'.__('Upload', 'BeRocket_domain').'">
+        <input type="button" class="berocket_select_fa button" value="'.__('Font Awesome', 'BeRocket_domain').'">';
         if ( $remove_button ) {
-            $result .= '<input type="button" class="berocket_remove_image button" value="'.__('Remove', 'BeRocket_domain').'"/>';
+            $result .= '<input type="button" class="berocket_remove_image button" value="'.__('Remove', 'BeRocket_domain').'"'.( empty($value) ? ' style="display:none;"' : '' ).'>';
         }
         $result .= '</div>';
 
@@ -507,7 +507,7 @@ if( ! function_exists( 'berocket_sanitize_array' ) ){
             }
             while ($old_data !== $filtered);
 
-            $filtered = str_replace('fromCharCode', 'fr0mCharC0de', $filtered);
+            $filtered = str_replace('fromCharCode', '', $filtered);
 
             $found = false;
             while ( preg_match('/%[a-f0-9]{2}/i', $filtered, $match) ) {
