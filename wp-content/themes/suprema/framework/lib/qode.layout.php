@@ -2895,52 +2895,79 @@ class SupremaQodefTwitterFramework implements  iSupremaQodefRender {
 }
 
 class SupremaQodefInstagramFramework implements  iSupremaQodefRender {
-    public function render($factory) {
+    public function render( $factory ) {
         $instagram_api = QodefInstagramApi::getInstance();
-        $message = '';
+        $message       = '';
 
-        //if code wasn't saved to database
-		if(!get_option('qodef_instagram_code')) {
-			//check if code parameter is set in URL. That means that user has connected with Instagram
-			if(!empty($_GET['code'])) {
-				//update code option so we can use it later
-				$instagram_api->storeCode();
-				$instagram_api->getAccessToken();
-				$message = esc_html__('You have successfully connected with your Instagram account. If you have any issues fetching data from Instagram try reconnecting.', 'suprema');
-				
-			} else {
-				$instagram_api->storeCodeRequestURI();
-			}
-		}
+        //check if code parameter and instagram parameter is set in URL
+        if ( ! empty( $_GET['code'] ) && ! empty( $_GET['instagram'] ) ) {
+            //update code option so we can use it later
+            $instagram_api->setConnectionType( 'instagram' );
+            $instagram_api->instagramStoreCode();
+            $instagram_api->instagramExchangeCodeForToken();
+            $message = esc_html__( 'You have successfully connected with your Instagram Personal account.', 'suprema' );
+        }
 
-		$buttonText = $instagram_api->hasUserConnected() ? esc_html__('Re-connect with Instagram', 'suprema') : esc_html__('Connect with Instagram', 'suprema');
+        //check if code parameter and instagram parameter is set in URL
+        if ( ! empty( $_GET['access_token'] ) && ! empty( $_GET['facebook'] ) ) {
+            //update code option so we can use it later
+            $instagram_api->setConnectionType( 'facebook' );
+            $instagram_api->facebookStoreToken();
+            $message = esc_html__( 'You have successfully connected with your Instagram Business account.', 'suprema' );
+        }
 
-    ?>
-        <?php if($message !== '') { ?>
-            <div class="alert alert-success" style="margin-top: 20px;">
-                <span><?php echo esc_html($message); ?></span>
+        //check if code parameter and instagram parameter is set in URL
+        if ( ! empty( $_GET['disconnect'] ) ) {
+            //update code option so we can use it later
+            $instagram_api->disconnect();
+            $message = esc_html__( 'You have have been disconnected from all Instagram accounts.', 'suprema' );
+
+        }
+        ?>
+
+        <?php if ( $message !== '' ) { ?>
+            <div class="alert alert-success">
+                <span><?php echo esc_html( $message ); ?></span>
             </div>
         <?php } ?>
         <div class="qodef-page-form-section" id="qodef_enable_social_share">
-
             <div class="qodef-field-desc">
-                <h4><?php esc_html_e('Connect with Instagram', 'suprema'); ?></h4>
-
-                <p><?php esc_html_e('Connecting with Instagram will enable you to show your latest photos on your site', 'suprema'); ?></p>
+                <h4><?php esc_html_e( 'Connect with Instagram', 'suprema' ); ?></h4>
+                <p><?php esc_html_e( 'Connecting with Instagram will enable you to show your latest photos on your site', 'suprema' ); ?></p>
             </div>
-            <!-- close div.qodef-field-desc -->
-
             <div class="qodef-section-content">
                 <div class="container-fluid">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <a class="btn btn-primary" href="<?php echo esc_url($instagram_api->getAuthorizeUrl()); ?>"><?php echo esc_html($buttonText); ?></a>
+                    <?php
+                    $instagram_user_id = get_option( $instagram_api::INSTAGRAM_USER_ID );
+                    $connection_type   = get_option( $instagram_api::CONNECTION_TYPE );
+                    if ( $instagram_user_id ) { ?>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <p><?php echo esc_html__( 'You are currently connected to Instagram ID: ', 'suprema' );
+                                    echo esc_attr( $instagram_user_id ) ?></p>
+                            </div>
                         </div>
+                    <?php } ?>
+                    <div class="row">
+                        <?php if ( ! empty( $_GET['disconnect'] ) ) { ?>
+                            <div class="col-lg-4">
+                                <a class="btn btn-primary" href="<?php echo esc_url( $instagram_api->reloadURL() ); ?>"><?php echo esc_html__( 'Reload Page', 'suprema' ); ?></a>
+                            </div>
+                        <?php } else if ( empty( $connection_type ) ) { ?>
+                            <div class="col-lg-4">
+                                <a class="btn btn-primary" href="<?php echo esc_url( $instagram_api->instagramRequestCode() ); ?>"><?php echo esc_html__( 'Connect with Instagram Personal account', 'suprema' ); ?></a>
+                            </div>
+                            <div class="col-lg-4">
+                                <a class="btn btn-primary" href="<?php echo esc_url( $instagram_api->facebookRequestCode() ); ?>"><?php echo esc_html__( 'Connect with Instagram Business account', 'suprema' ); ?></a>
+                            </div>
+                        <?php } else { ?>
+                            <div class="col-lg-4">
+                                <a class="btn btn-primary" href="<?php echo esc_url( $instagram_api->disconnectURL() ); ?>"><?php echo esc_html__( 'Disconnect Instagram account', 'suprema' ) ?></a>
+                            </div>
+                        <?php } ?>
                     </div>
                 </div>
             </div>
-            <!-- close div.qodef-section-content -->
-
         </div>
     <?php }
 }

@@ -25,7 +25,7 @@
     qodef.qodefOnWindowScroll = qodefOnWindowScroll;
 
     $(document).ready(qodefOnDocumentReady);
-    $(window).load(qodefOnWindowLoad);
+    $(window).on('load', qodefOnWindowLoad);
     $(window).resize(qodefOnWindowResize);
     $(window).scroll(qodefOnWindowScroll);
     

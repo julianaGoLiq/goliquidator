@@ -786,8 +786,6 @@ if(!function_exists('suprema_qodef_load_blog_assets')) {
 	/**
 	 * Function that checks if blog assets should be loaded
 	 *
-	 * @see suprema_qodef_is_ajax_enabled()
-	 * @see suprema_qodef_is_ajax_enabled_is_blog_template()
 	 * @see is_home()
 	 * @see is_single()
 	 * @see qode_has_blog_shortcode()
@@ -797,7 +795,7 @@ if(!function_exists('suprema_qodef_load_blog_assets')) {
 	 * @return bool
 	 */
 	function suprema_qodef_load_blog_assets() {
-		return suprema_qodef_is_ajax_enabled() || suprema_qodef_is_blog_template() || is_home() || is_single() || suprema_qodef_has_blog_shortcode() || is_archive() || is_search() || suprema_qodef_has_blog_widget();
+		return suprema_qodef_is_blog_template() || is_home() || is_single() || suprema_qodef_has_blog_shortcode() || is_archive() || is_search() || suprema_qodef_has_blog_widget();
 	}
 }
 

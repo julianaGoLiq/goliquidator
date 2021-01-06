@@ -23,7 +23,7 @@
     header.qodefOnWindowScroll = qodefOnWindowScroll;
 
     $(document).ready(qodefOnDocumentReady);
-    $(window).load(qodefOnWindowLoad);
+    $(window).on('load', qodefOnWindowLoad);
     $(window).resize(qodefOnWindowResize);
     $(window).scroll(qodefOnWindowScroll);
     
@@ -748,12 +748,13 @@
             } else {
                 var holders = thisMenu;
             }
-            holders.hover(
+            holders.on('mouseenter',
               function() {
                 setTimeout(function(){
                     itemHover.addClass('qodef-appeared');
                 },20); //prevent 'false leave'
-              }, 
+              });
+            holders.on('mouseleave',
               function() {
                 itemHover.removeClass('qodef-appeared');
               }

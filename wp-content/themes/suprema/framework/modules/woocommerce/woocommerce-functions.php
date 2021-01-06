@@ -10,7 +10,7 @@ if(!function_exists('suprema_qodef_woocommerce_assets')) {
     function suprema_qodef_woocommerce_assets() {
         //is woocommerce installed?
         if(suprema_qodef_is_woocommerce_installed()) {
-            if(suprema_qodef_load_woo_assets() || suprema_qodef_is_ajax_enabled()) {
+            if(suprema_qodef_load_woo_assets()) {
 
                 //include theme's woocommerce styles
                 wp_enqueue_style('qode_woocommerce', QODE_ASSETS_ROOT.'/css/woocommerce.min.css');
@@ -269,60 +269,6 @@ if(!function_exists('suprema_qodef_has_woocommerce_widgets')) {
 
 		return false;
 	}
-}
-
-if(!function_exists('suprema_qodef_get_woocommerce_pages')) {
-	/**
-	 * Function that returns all url woocommerce pages
-	 * @return array array of WooCommerce pages
-	 *
-	 * @version 0.1
-	 */
-	function suprema_qodef_get_woocommerce_pages() {
-		$woo_pages_array = array();
-
-		if(suprema_qodef_is_woocommerce_installed()) {
-			if(get_option('woocommerce_shop_page_id') != '') {
-				$woo_pages_array[] = get_permalink(get_option('woocommerce_shop_page_id'));
-			}
-			if(get_option('woocommerce_cart_page_id') != '') {
-				$woo_pages_array[] = get_permalink(get_option('woocommerce_cart_page_id'));
-			}
-			if(get_option('woocommerce_checkout_page_id') != '') {
-				$woo_pages_array[] = get_permalink(get_option('woocommerce_checkout_page_id'));
-			}
-			if(get_option('woocommerce_pay_page_id') != '') {
-				$woo_pages_array[] = get_permalink(get_option(' woocommerce_pay_page_id '));
-			}
-			if(get_option('woocommerce_thanks_page_id') != '') {
-				$woo_pages_array[] = get_permalink(get_option(' woocommerce_thanks_page_id '));
-			}
-			if(get_option('woocommerce_myaccount_page_id') != '') {
-				$woo_pages_array[] = get_permalink(get_option(' woocommerce_myaccount_page_id '));
-			}
-			if(get_option('woocommerce_edit_address_page_id') != '') {
-				$woo_pages_array[] = get_permalink(get_option(' woocommerce_edit_address_page_id '));
-			}
-			if(get_option('woocommerce_view_order_page_id') != '') {
-				$woo_pages_array[] = get_permalink(get_option(' woocommerce_view_order_page_id '));
-			}
-			if(get_option('woocommerce_terms_page_id') != '') {
-				$woo_pages_array[] = get_permalink(get_option(' woocommerce_terms_page_id '));
-			}
-
-			$woo_products = get_posts(array('post_type'      => 'product',
-				'post_status'    => 'publish',
-				'posts_per_page' => '-1'
-			));
-
-			foreach($woo_products as $product) {
-				$woo_pages_array[] = get_permalink($product->ID);
-			}
-		}
-
-		return $woo_pages_array;
-	}
-
 }
 
 if(!function_exists('suprema_qodef_woocommerce_share')) {

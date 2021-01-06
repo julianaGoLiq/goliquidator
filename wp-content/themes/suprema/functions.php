@@ -203,127 +203,6 @@ if(!function_exists('suprema_qodef_is_ajax_request')) {
     }
 }
 
-if(!function_exists('suprema_qodef_is_ajax_enabled')) {
-    /**
-     * Function that checks if ajax is enabled
-     */
-    function suprema_qodef_is_ajax_enabled() {
-
-        return suprema_qodef_options()->getOptionValue('smooth_page_transitions') === 'yes' && suprema_qodef_options()->getOptionValue('smooth_pt_true_ajax') != 'no';
-
-    }
-}
-
-if(!function_exists('suprema_qodef_ajax_meta')) {
-    /**
-     * Function that echoes meta data for ajax
-     *
-     * @since 4.3
-     * @version 0.2
-     */
-    function suprema_qodef_ajax_meta() {
-
-        $id = suprema_qodef_get_page_id();
-
-        $page_transition = get_post_meta($id, "qodef_page_transition_type", true);
-        ?>
-
-        <div class="qodef-seo-title"><?php echo wp_get_document_title(); ?></div>
-
-        <?php if($page_transition !== ''){ ?>
-            <div class="qodef-page-transition"><?php echo esc_html($page_transition); ?></div>
-        <?php } else if(suprema_qodef_options()->getOptionValue('default_page_transition')) {?>
-            <div class="qodef-page-transition"><?php echo esc_html(suprema_qodef_options()->getOptionValue('default_page_transition')); ?></div>
-        <?php }
-    }
-
-    add_action('suprema_qodef_ajax_meta', 'suprema_qodef_ajax_meta');
-}
-
-if(!function_exists('suprema_qodef_no_ajax_pages')) {
-    /**
-     * Function that echoes pages on which ajax should not be applied
-     *
-     * @since 4.3
-     * @version 0.2
-     */
-    function suprema_qodef_no_ajax_pages($global_variables) {
-
-        //is ajax enabled?
-        if(suprema_qodef_is_ajax_enabled()) {
-            $no_ajax_pages = array();
-
-            //get posts that have ajax disabled and merge with main array
-            $no_ajax_pages = array_merge($no_ajax_pages, suprema_qodef_get_objects_without_ajax());
-
-            //is wpml installed?
-            if(suprema_qodef_is_wpml_installed()) {
-                //get translation pages for current page and merge with main array
-                $no_ajax_pages = array_merge($no_ajax_pages, suprema_qodef_get_wpml_pages_for_current_page());
-            }
-
-            //is woocommerce installed?
-            if(suprema_qodef_is_woocommerce_installed()) {
-                //get all woocommerce pages and products and merge with main array
-                $no_ajax_pages = array_merge($no_ajax_pages, suprema_qodef_get_woocommerce_pages());
-            }
-            //do we have some internal pages that want to be without ajax?
-            if ( suprema_qodef_options()->getOptionValue('internal_no_ajax_links') !== '' ) {
-                //get array of those pages
-                $options_no_ajax_pages_array = explode(',', suprema_qodef_options()->getOptionValue('internal_no_ajax_links'));
-
-                if(is_array($options_no_ajax_pages_array) && count($options_no_ajax_pages_array)) {
-                    $no_ajax_pages = array_merge($no_ajax_pages, $options_no_ajax_pages_array);
-                }
-            }
-
-            //add logout url to main array
-            $no_ajax_pages[] = wp_specialchars_decode(wp_logout_url());
-
-            $global_variables['no_ajax_pages'] = $no_ajax_pages;
-        }
-
-        return $global_variables;
-
-    }
-
-    add_filter('suprema_qodef_js_global_variables', 'suprema_qodef_no_ajax_pages');
-}
-
-if(!function_exists('suprema_qodef_get_objects_without_ajax')) {
-   /**
-     * Function that returns urls of objects that have ajax disabled.
-     * Works for posts, pages and portfolio pages.
-     * @return array array of urls of posts that have ajax disabled
-     *
-     * @version 0.1
-     */
-    function suprema_qodef_get_objects_without_ajax() {
-        $posts_without_ajax = array();
-
-        $posts_args =  array(
-            'post_type'  => array('post', 'portfolio-item', 'page'),
-            'post_status' => 'publish',
-            'meta_key' => 'qodef_page_transition_type',
-            'meta_value' => 'no-animation'
-        );
-
-        $posts_query = new WP_Query($posts_args);
-
-        if($posts_query->have_posts()) {
-            while($posts_query->have_posts()) {
-                $posts_query->the_post();
-                $posts_without_ajax[] = get_permalink(get_the_ID());
-            }
-        }
-
-        wp_reset_postdata();
-
-        return $posts_without_ajax;
-    }
-}
-
-
 //defined content width variable
 if (!isset( $content_width )) $content_width = 1060;
 
@@ -441,7 +320,7 @@ if(!function_exists('suprema_qodef_header_meta')) {
     function suprema_qodef_header_meta() { ?>
 
         <meta charset="<?php bloginfo('charset'); ?>"/>
-        <link rel="profile" href="https://gmpg.org/xfn/11"/>
+        <link rel="profile" href="http://gmpg.org/xfn/11"/>
         <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>"/>
 
     <?php }
@@ -733,7 +612,7 @@ if( !function_exists('suprema_qodef_register_page_custom_style') ) {
      */
 
     function suprema_qodef_register_page_custom_style() {
-       add_action( (suprema_qodef_is_ajax_enabled() && suprema_qodef_is_ajax_request()) ? 'suprema_qodef_ajax_meta' : 'wp_head', 'suprema_qodef_page_custom_style' );
+       add_action( 'wp_head', 'suprema_qodef_page_custom_style' );
     }
 
     add_action( 'suprema_qodef_after_options_map', 'suprema_qodef_register_page_custom_style' );
@@ -769,25 +648,6 @@ if( !function_exists('suprema_qodef_vc_custom_style') ) {
     }
 
 }
-
-
-if( !function_exists('suprema_qodef_register_vc_custom_style') ) {
-
-    /**
-     * Function that print custom page style
-     */
-
-    function suprema_qodef_register_vc_custom_style() {
-        if (suprema_qodef_is_ajax_enabled() && suprema_qodef_is_ajax_request()) {
-            add_action( 'suprema_qodef_ajax_meta', 'suprema_qodef_vc_custom_style' );
-        }
-
-    }
-
-    add_action( 'suprema_qodef_after_options_map', 'suprema_qodef_register_vc_custom_style' );
-}
-
-
 
 if( !function_exists('suprema_qodef_container_style') ) {
 

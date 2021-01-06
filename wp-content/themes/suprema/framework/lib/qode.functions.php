@@ -1366,26 +1366,6 @@ if(!function_exists('suprema_qodef_get_meta_field_intersect')) {
 	}
 }
 
-if (!function_exists('suprema_qodef_paged_home')) {
-	/**
-	 * Set false to on paged url on homepage
-	 *
-	 * @return int
-	 */
-	function suprema_qodef_paged_home()
-	{
-		global $wp_query;
-
-		if (is_page() && !is_feed() && 'page' == get_option('show_on_front') && $wp_query->queried_object->ID == get_option('page_on_front')) {
-			$redirect_url = false;
-
-			return $redirect_url;
-		}
-	}
-
-	add_filter('redirect_canonical', 'suprema_qodef_paged_home');
-}
-
 if(!function_exists('suprema_qodef_register_button')) {
 	/**
 	 * Register button with shortcodes for WP editor

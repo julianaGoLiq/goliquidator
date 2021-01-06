@@ -50,13 +50,6 @@ if ((!suprema_qodef_is_ajax_request()) && suprema_qodef_options()->getOptionValu
 		<?php } ?>
 
 		<div class="qodef-content">
-            <?php if(suprema_qodef_is_ajax_enabled()) { ?>
-            <div class="qodef-meta">
-                <?php do_action('suprema_qodef_ajax_meta'); ?>
-                <span id="qodef-page-id"><?php echo esc_html($wp_query->get_queried_object_id()); ?></span>
-                <div class="qodef-body-classes"><?php echo esc_html(implode( ',', get_body_class())); ?></div>
-            </div>
-            <?php } ?>
 			<div class="qodef-content-inner">
 				<?php get_template_part( 'title' ); ?>
 				<?php get_template_part('slider');?>

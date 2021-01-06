@@ -34,7 +34,7 @@
     shortcodes.qodefOnWindowScroll = qodefOnWindowScroll;
 
     $(document).ready(qodefOnDocumentReady);
-    $(window).load(qodefOnWindowLoad);
+    $(window).on('load', qodefOnWindowLoad);
     $(window).resize(qodefOnWindowResize);
     $(window).scroll(qodefOnWindowScroll);
 
@@ -1140,7 +1140,7 @@
 
 					toggleAccordionTitle.each(function(){
 						var thisTitle = $(this);
-						thisTitle.hover(function(){
+						thisTitle.on('mouseenter mouseleave',function(){
 							thisTitle.toggleClass("ui-state-hover");
 						});
 

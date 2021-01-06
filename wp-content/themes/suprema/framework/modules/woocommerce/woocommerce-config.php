@@ -179,4 +179,3 @@ add_filter('woocommerce_order_button_html', 'suprema_qodef_woocommerce_order_but
 
 //Add to cart button shortcode
 add_action('suprema_qodef_woocommerce_custom_add_to_cart_button_shortocde', 'woocommerce_template_single_add_to_cart');
-

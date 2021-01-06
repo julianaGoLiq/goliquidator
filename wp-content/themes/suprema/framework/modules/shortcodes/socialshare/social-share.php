@@ -178,23 +178,20 @@ class SocialShare implements ShortcodeInterface {
 	private function getSocialNetworkShareLink($net, $image) {
 
 		switch ($net) {
-            case 'facebook':
-                if(wp_is_mobile()) {
-                    $link = 'window.open(\'http://m.facebook.com/sharer.php?u=' . urlencode(get_permalink()) .'\');';
-                } else {
-                    $link = 'window.open(\'http://www.facebook.com/sharer.php?s=100&amp;p[title]=' . urlencode(suprema_qodef_addslashes(get_the_title())) . '&amp;p[url]=' . urlencode(get_permalink()) . '&amp;p[images][0]=' . $image[0] . '&amp;p[summary]=' . urlencode(suprema_qodef_addslashes(get_the_excerpt())) . '\', \'sharer\', \'toolbar=0,status=0,width=620,height=280\');';
-                }
-                break;
+			case 'facebook':
+				if (wp_is_mobile()) {
+					$link = 'window.open(\'https://m.facebook.com/sharer.php?u=' . urlencode(get_permalink()) . '\');';
+				} else {
+					$link = 'window.open(\'https://www.facebook.com/sharer.php?u=' . urlencode(get_permalink()) . '\', \'sharer\', \'toolbar=0,status=0,width=620,height=280\');';
+				}
+				break;
             case 'twitter':
                 $count_char = (is_ssl()) ? 23 : 22;
                 $twitter_via = (suprema_qodef_options()->getOptionValue('twitter_via') !== '') ? ' via ' . suprema_qodef_options()->getOptionValue('twitter_via') . ' ' : '';
 
-                if(wp_is_mobile()) {
-                    $link = 'window.open(\'https://twitter.com/intent/tweet?text=' . urlencode(suprema_qodef_the_excerpt_max_charlength($count_char) . $twitter_via) . get_permalink() . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');';
-                } else {
-                    $link = 'window.open(\'http://twitter.com/home?status=' . urlencode(suprema_qodef_the_excerpt_max_charlength($count_char) . $twitter_via) . get_permalink() . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');';
-                }
-                break;
+				$link =  'window.open(\'https://twitter.com/intent/tweet?text=' . urlencode( suprema_qodef_the_excerpt_max_charlength( $count_char ) . $twitter_via ) . ' ' . get_permalink() . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');';
+
+				break;
 			case 'google_plus':
 				$link = 'popUp=window.open(\'https://plus.google.com/share?url=' . urlencode(get_permalink()) . '\', \'popupwindow\', \'scrollbars=yes,width=800,height=400\');popUp.focus();return false;';
 				break;

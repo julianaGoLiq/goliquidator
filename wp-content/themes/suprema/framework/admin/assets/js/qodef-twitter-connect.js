@@ -21,7 +21,7 @@
                     action: 'qode_twitter_obtain_request_token',
                     currentPageUrl: currentPageUrl,
                     twitter_connect_nonce: $('input[name="qodef_twitter_connect_nonce"]').val()
-                }
+                };
 
                 $.ajax({
                     type: 'POST',
@@ -43,4 +43,4 @@
             });
         }
     }
-})(jQuery)
+})(jQuery);

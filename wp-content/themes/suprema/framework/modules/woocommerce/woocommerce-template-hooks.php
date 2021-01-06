@@ -265,6 +265,7 @@ if ( ! function_exists('suprema_qodef_woocommerce_single_variation_add_to_cart_b
 		global $product;
 
 		$html = '<div class="variations_button">';
+		do_action( 'woocommerce_before_add_to_cart_button' );
 		woocommerce_quantity_input( array( 'input_value' => isset( $_POST['quantity'] ) ? wc_stock_amount( $_POST['quantity'] ) : 1 ) );
 
 		$button = suprema_qodef_get_button_html(array(

@@ -30,7 +30,7 @@
     common.qodefOnWindowScroll = qodefOnWindowScroll;
 
     $(document).ready(qodefOnDocumentReady);
-    $(window).load(qodefOnWindowLoad);
+    $(window).on('load', qodefOnWindowLoad);
     $(window).resize(qodefOnWindowResize);
     $(window).scroll(qodefOnWindowScroll);
     
@@ -158,7 +158,7 @@
                     });
                 }
             }else{
-                $(window).load(function(){ preloadBackground.removeClass('qodef-preload-background'); }); //make sure that qodef-preload-background class is removed from elements with forced background none in css
+                $(window).on('load', function(){ preloadBackground.removeClass('qodef-preload-background'); }); //make sure that qodef-preload-background class is removed from elements with forced background none in css
             }
         });
     }
@@ -409,7 +409,7 @@ var qodefInitAnchor = qodef.modules.common.qodefInitAnchor = function() {
             if($('[data-qodef-anchor]').length) {
                 anchorClick();
                 checkActiveStateOnScroll();
-                $(window).load(function() { checkActiveStateOnLoad(); });
+                $(window).on('load', function() { checkActiveStateOnLoad(); });
             }
         }
     };
@@ -484,26 +484,26 @@ function qodefInitVideoBackground(){
     function qodefDisableScroll() {
 
         if (window.addEventListener) {
-            window.addEventListener('DOMMouseScroll', qodefWheel, false);
+            window.addEventListener('wheel', qodefWheel, {passive: false});
         }
-        window.onmousewheel = document.onmousewheel = qodefWheel;
+        // window.onmousewheel = document.onmousewheel = qodefWheel;
         document.onkeydown = qodefKeydown;
 
         if(qodef.body.hasClass('qodef-smooth-scroll')){
-            window.removeEventListener('mousewheel', smoothScrollListener, false);
-            window.removeEventListener('DOMMouseScroll', smoothScrollListener, false);
+            window.removeEventListener('mousewheel', smoothScrollListener, {passive: false});
+            window.removeEventListener('wheel', smoothScrollListener, {passive: false});
         }
     }
 
     function qodefEnableScroll() {
         if (window.removeEventListener) {
-            window.removeEventListener('DOMMouseScroll', qodefWheel, false);
+            window.removeEventListener('wheel', qodefWheel, {passive: false});
         }
         window.onmousewheel = document.onmousewheel = document.onkeydown = null;
 
         if(qodef.body.hasClass('qodef-smooth-scroll')){
-            window.addEventListener('mousewheel', smoothScrollListener, false);
-            window.addEventListener('DOMMouseScroll', smoothScrollListener, false);
+            window.addEventListener('mousewheel', smoothScrollListener, {passive: false});
+            window.addEventListener('wheel', smoothScrollListener, {passive: false});
         }
     }
 

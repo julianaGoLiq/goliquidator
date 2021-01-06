@@ -52,7 +52,6 @@ if ( ! function_exists('suprema_qodef_configure_visual_composer') ) {
 		vc_remove_element("vc_posts_grid");
 		vc_remove_element("vc_carousel");
 		vc_remove_element("vc_gmaps");
-		vc_remove_element("vc_btn");
 		vc_remove_element("vc_cta");
 		vc_remove_element("vc_round_chart");
 		vc_remove_element("vc_line_chart");

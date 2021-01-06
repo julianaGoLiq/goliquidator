@@ -1648,6 +1648,18 @@
   font-weight: 500;
 }
 
+.qodef-single-product-summary .group_table td label {
+  text-align: left;
+}
+
+.qodef-single-product-summary .group_table td label a {
+  font-family: Poppins, sans-serif;
+  font-size: 15px;
+  color: #101010;
+  letter-spacing: -0.2px;
+  font-weight: 500;
+}
+
 .qodef-single-product-summary .group_table td.price {
   text-align: right;
 }
@@ -1788,6 +1800,10 @@
 
 .qodef-single-product-info-bottom .qodef-social-share-holder.qodef-social-col-1 li {
   width: 100%;
+}
+
+.qodef-single-product-info-bottom .qodef-tabs.qodef-vertical-tab .qodef-tab-container {
+  padding: 0 30px 60px;
 }
 
 .qodef-woocommerce-page .woocommerce-tabs.qodef-tabs {
@@ -3124,6 +3140,11 @@
   vertical-align: middle;
 }
 
+.qodef-woocommerce-page .woocommerce-checkout #terms,
+.woocommerce .woocommerce-checkout #terms {
+  visibility: visible;
+}
+
 .qodef-woocommerce-page .woocommerce-checkout .col2-set:before,
 .qodef-woocommerce-page .woocommerce-checkout .col2-set:after,
 .woocommerce .woocommerce-checkout .col2-set:before,
@@ -3763,6 +3784,10 @@
   line-height: 19px;
   font-size: 12px;
   margin-top: 4px;
+}
+
+.qodef-shopping-cart-dropdown .qodef-item-info-holder .qodef-item-left span.amount .woocommerce-Price-currencySymbol {
+  display: inline;
 }
 
 .qodef-shopping-cart-dropdown .qodef-item-info-holder .qodef-item-right {

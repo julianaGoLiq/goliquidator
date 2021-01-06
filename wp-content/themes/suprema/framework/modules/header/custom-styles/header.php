@@ -902,10 +902,13 @@ if(!function_exists('suprema_qodef_main_menu_styles')) {
         <?php } ?>
 
         <?php if(!empty($suprema_qodef_options['dropdown_background_hovercolor'])) { ?>
-			.qodef-drop-down li:not(.wide) .second .inner > ul > li:hover a,
-			.qodef-page-header .qodef-login-widget-holder .qodef-account-dropdown ul li:hover a{
+			.qodef-drop-down li:not(.wide) .second .inner > ul > li:hover > a,
+			.qodef-page-header .qodef-login-widget-holder .qodef-account-dropdown ul li:hover > a{
             background-color: <?php echo esc_attr($suprema_qodef_options['dropdown_background_hovercolor']); ?>;
             }
+		    .qodef-page-header .qodef-drop-down .second ul li a:before {
+		    background: none;
+		    }
         <?php } ?>
 
         <?php if(!empty($suprema_qodef_options['dropdown_padding_top_bottom'])) { ?>

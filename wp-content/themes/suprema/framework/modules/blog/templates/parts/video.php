@@ -14,7 +14,7 @@
 				<object width="320" height="240" type="application/x-shockwave-flash" data="<?php echo esc_url(get_template_directory_uri().'/js/flashmediaelement.swf'); ?>">
 					<param name="movie" value="<?php echo esc_url(get_template_directory_uri().'/js/flashmediaelement.swf'); ?>" />
 					<param name="flashvars" value="controls=true&file=<?php echo esc_url($meta_temp_mp4);  ?>" />
-					<img src="<?php echo esc_url($meta_temp_image);  ?>" width="1920" height="800" title="No video playback capabilities" alt="<?php esc_html_e('video thumb','suprema'); ?>" />
+					<img src="<?php echo esc_url($meta_temp_image);  ?>" width="1920" height="800" title="No video playback capabilities" alt="Video Thumb" />
 				</object>
 			</video>
 		</div>

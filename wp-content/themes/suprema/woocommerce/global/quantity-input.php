@@ -12,10 +12,14 @@
  *
  * @see     https://docs.woocommerce.com/document/template-structure/
  * @package WooCommerce/Templates
- * @version 3.6.0
+ * @version 4.0.0
  */
 
 defined( 'ABSPATH' ) || exit;
+
+if ( ! isset( $input_id ) ) {
+    $input_id = uniqid( 'quantity_' );
+}
 
 if ( $max_value && $min_value === $max_value ) {
 	?>
@@ -25,27 +29,29 @@ if ( $max_value && $min_value === $max_value ) {
 	<?php
 } else {
 	/* translators: %s: Quantity. */
-	$labelledby = ! empty( $args['product_name'] ) ? sprintf( __( '%s quantity', 'suprema' ), strip_tags( $args['product_name'] ) ) : '';
+    $label = ! empty( $args['product_name'] ) ? sprintf( esc_html__( '%s quantity', 'suprema' ), wp_strip_all_tags( $args['product_name'] ) ) : esc_html__( 'Quantity', 'suprema' );
 	?>
 	<div class="quantity qodef-quantity-buttons">
-		<input 
+		<?php do_action( 'woocommerce_before_quantity_input_field' ); ?>
+        <label class="screen-reader-text" for="<?php echo esc_attr( $input_id ); ?>"><?php echo esc_attr( $label ); ?></label>
+        <input
 			type="text" 
 			id="<?php echo esc_attr( $input_id ); ?>"
-			step="<?php echo esc_attr( $step ); ?>" 
-			min="<?php echo esc_attr( $min_value ); ?>" 
-			max="<?php echo esc_attr( 0 < $max_value ? $max_value : '' ); ?>" 
-			name="<?php echo esc_attr( $input_name ); ?>" 
-			value="<?php echo esc_attr( $input_value ); ?>" 
-			title="<?php echo esc_attr_x( 'Qty', 'Product quantity input tooltip', 'suprema' ) ?>"
-			class="input-text qty text qodef-quantity-input" 
-			size="4" 
-			pattern="<?php echo esc_attr( $pattern ); ?>" 
-			inputmode="<?php echo esc_attr( $inputmode ); ?>" 
-			aria-labelledby="<?php echo ! empty( $args['product_name'] ) ? sprintf( esc_attr__( '%s quantity', 'suprema' ), $args['product_name'] ) : ''; ?>" />
+            title="<?php echo esc_attr_x( 'Qty', 'Product quantity input tooltip', 'suprema' ) ?>"
+            step="<?php echo esc_attr( $step ); ?>"
+            min="<?php echo esc_attr( $min_value ); ?>"
+            max="<?php echo esc_attr( 0 < $max_value ? $max_value : '' ); ?>"
+            name="<?php echo esc_attr( $input_name ); ?>"
+            value="<?php echo esc_attr( ! empty( $input_value ) ? $input_value : 0 ); ?>"
+            class="input-text qty text qodef-quantity-input"
+			size="4"
+			placeholder="<?php echo esc_attr( $placeholder ); ?>"
+			inputmode="<?php echo esc_attr( $inputmode ); ?>" />
 		<div class="qodef-quantity-buttons-holder">
 			<span class="qodef-quantity-plus"><i class="fa fa-angle-up"></i></span>
 			<span class="qodef-quantity-minus"><i class="fa fa-angle-down"></i></span>
 		</div>
+		<?php do_action( 'woocommerce_after_quantity_input_field' ); ?>
 	</div>
 	<?php
 }

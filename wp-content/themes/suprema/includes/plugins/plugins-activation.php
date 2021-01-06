@@ -11,7 +11,7 @@ if(!function_exists('suprema_qodef_register_required_plugins')) {
                 'slug'               => 'js_composer',
                 'source'             => get_template_directory().'/includes/plugins/js_composer.zip',
                 'required'           => true,
-                'version'            => '6.0.3',
+                'version'            => '6.4.1',
                 'force_activation'   => false,
                 'force_deactivation' => false,
                 'external_url'       => ''
@@ -20,7 +20,7 @@ if(!function_exists('suprema_qodef_register_required_plugins')) {
                 'name'               => 'Revolution Slider',
                 'slug'               => 'revslider',
                 'source'             => get_template_directory().'/includes/plugins/revslider.zip',
-                'version'            => '6.0.2',
+                'version'            => '6.2.23',
                 'required'           => true,
                 'force_activation'   => false,
                 'force_deactivation' => false,
@@ -41,7 +41,7 @@ if(!function_exists('suprema_qodef_register_required_plugins')) {
                 'slug'               => 'select-instagram-feed',
                 'source'             => get_template_directory().'/includes/plugins/select-instagram-feed.zip',
                 'required'           => true,
-                'version'            => '1.0',
+                'version'            => '2.0',
                 'force_activation'   => false,
                 'force_deactivation' => false,
                 'external_url'       => ''
@@ -51,7 +51,7 @@ if(!function_exists('suprema_qodef_register_required_plugins')) {
                 'slug'               => 'select-twitter-feed',
                 'source'             => get_template_directory().'/includes/plugins/select-twitter-feed.zip',
                 'required'           => true,
-                'version'            => '1.0',
+                'version'            => '1.0.2',
                 'force_activation'   => false,
                 'force_deactivation' => false,
                 'external_url'       => ''

@@ -1,3 +1,30 @@
+2.5
+- Added WordPress 5.5 compatibility
+- Added WooCommerce 4.6.1 compatibility
+- Updated Select Instagram Feed plugin to 2.0
+- Updated WPBakery Page Builder to 6.4.1
+- Updated Revolution Slider to 6.2.23
+- Fixed missing product meta on variable products issue
+- Minor improvements
+
+2.4
+- Added WooCommerce 3.8.0 compatibility
+- Updated Revolution Slider to 6.1.5
+- Removed unused file instagram-redirect.php from Select Instagram Feed plugin
+- Removed unused file twitter-redirect.php from Select Twitter Feed plugin
+- Updated Select Instagram Feed plugin to 1.0.1
+- Updated Select Twitter Feed plugin to 1.0.2
+- Improved theme performance
+
+2.3
+- Added WooCommerce 3.7.0 compatibility
+- Updated WPBakery Page Builder to 6.0.5
+- Updated Revolution Slider to 6.1.2
+- Updated Select Twitter Feed plugin to 1.0.1
+- Fixed issue with duplicated cart totals
+- Fixed issue with connecting to Twitter
+- Minor improvements
+
 2.2
 - Added WooCommerce 3.6.5 compatibility
 - Updated WPBakery Page Builder to 6.0.3

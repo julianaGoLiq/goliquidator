@@ -44,21 +44,6 @@ $general_meta_box = suprema_qodef_create_meta_box(
 
     suprema_qodef_create_meta_box_field(
         array(
-            'name'        => 'qodef_page_transition_type',
-            'type'        => 'selectblank',
-            'label'       => 'Page Transition',
-            'description' => 'Choose the type of transition to this page',
-            'parent'      => $general_meta_box,
-            'default_value' => '',
-            'options'     => array(
-                'no-animation' => 'No animation',
-                'fade' => 'Fade'
-            )
-        )
-    );
-
-    suprema_qodef_create_meta_box_field(
-        array(
             'name'        => 'qodef_page_comments_meta',
             'type'        => 'selectblank',
             'label'       => 'Show Comments',

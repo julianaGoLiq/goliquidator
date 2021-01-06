@@ -7682,6 +7682,15 @@ footer .qodef-footer-bottom-holder .widget .qodef-footer-widget-title {
   top: 8px;
 }
 
+.qodef-fullscreen-menu-opened {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden;
+}
+
 .qodef-fullscreen-menu-opened .qodef-page-header,
 .qodef-fullscreen-menu-opened .qodef-top-bar {
   visibility: hidden;
@@ -7695,6 +7704,11 @@ footer .qodef-footer-bottom-holder .widget .qodef-footer-widget-title {
 .qodef-fullscreen-menu-opened .qodef-fullscreen-menu-holder-outer {
   visibility: visible !important;
   opacity: 1 !important;
+}
+
+.qodef-fullscreen-menu-opened.admin-bar {
+  top: 32px;
+  height: calc(100% - 32px);
 }
 
 .qodef-fullscreen-menu-holder-outer {
