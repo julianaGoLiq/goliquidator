@@ -282,3 +282,16 @@ function wpb_hook_javascript_footer() {
     <?php
 }
 
+function dynamic_select_contact_trusted_advisor( $scanned_tag, $replace ) {
+    if ( $scanned_tag['name'] != 'advisors' )
+        return $scanned_tag;
+
+    $pipes = new WPCF7_Pipes($scanned_tag['raw_values']);
+
+    $scanned_tag['values'] = $pipes->collect_afters();
+    $scanned_tag['pipes'] = $pipes;
+
+    return $scanned_tag;
+}
+
+add_filter( 'wpcf7_form_tag', 'dynamic_select_contact_trusted_advisor', 10, 2);
