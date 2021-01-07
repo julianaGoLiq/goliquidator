@@ -295,3 +295,4 @@ function dynamic_select_contact_trusted_advisor( $scanned_tag, $replace ) {
 }
 
 add_filter( 'wpcf7_form_tag', 'dynamic_select_contact_trusted_advisor', 10, 2);
+

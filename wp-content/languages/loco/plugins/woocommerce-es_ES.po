@@ -17319,8 +17319,8 @@ msgid "Showing the single result"
 msgstr "Mostrando el único resultado"
 
 #: templates/loop/no-products-found.php:21
-msgid "No products were found matching your selection."
-msgstr "No se encontraron productos que concuerden con la selección."
+msgid "No offers were found matching your search. You may be interested in:"
+msgstr "No se encontraron ofertas que concuerden con su búsqueda. Le puede interesar:"
 
 #: templates/global/quantity-input.php:42
 msgctxt "Product quantity input tooltip"
