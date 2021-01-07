@@ -21,5 +21,5 @@ defined( 'ABSPATH' ) || exit;
 <p class="woocommerce-info"><?php esc_html_e( 'No offers were found matching your search. You may be interested in:', 'woocommerce' ); ?></p>
 
 <?php
-echo do_shortcode('[recent_products per_page="6" columns="4" orderby="rand" order="rand"]');
+echo do_shortcode('[products per_page="6" orderby="rand" order="desc"]');
 ?>
