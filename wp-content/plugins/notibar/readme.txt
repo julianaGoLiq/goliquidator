@@ -97,6 +97,10 @@ Upon activation, you will see a new **Notification Bar** menu. Simply click to c
 
 == Changelog ==
 
+= 1.9.2 =
+Fixed: Notibar displays again when scroll on Safari
+Improved: Set style max-width for text content
+
 = 1.9.1 =
 - Improved: Compatible with WordPress 5.6
 

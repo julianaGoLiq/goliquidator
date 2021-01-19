@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: widget, plugin, woocommerce, search, product search, woocommerce search, ajax search, live search, custom search, ajax, shortcode, better search, relevance search, relevant search, search by sku, search plugin, shop, store, wordpress search, wp ajax search, wp search, wp search plugin, sidebar, ecommerce, merketing, products, category search, instant-search, search highlight, woocommerce advanced search, woocommerce live search, WooCommerce Plugin, woocommerce product search
 Requires at least: 4.0
 Tested up to: 5.6
-Stable tag: 2.18
+Stable tag: 2.19
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -111,6 +111,18 @@ Yep. This plugin is always compatible with the latest version of Woocommerce?
 4. Plugin settings page. Search results options
 
 == Changelog ==
+
+= 2.19 ( 2021-01-18 ) =
+* Add - Support for WooCommerce Product Filter by WooBeWoo plugin
+* Add - Integration for Martfury theme
+* Add - Integration for ATUM Inventory Management for WooCommerce plugin ( Product level addon ). Hide not sellable products
+* Update - Dynamic strings translation. Load translation from .po file for default strings if no dynamic translation specified
+* Update - WCFM - Multivendor Marketplace plugin integration. Add vendors shop name and logo inside search results list
+* Fix - GA tracking code
+* Fix - Do not index and search for password protected products
+* Fix - Hide product with visibility = catalog from the AJAX search results
+* Dev - Update taxonomies search results response. Add parent term value.
+* Dev - Add aws_search_page_custom_data filter
 
 = 2.18 ( 2021-01-04 ) =
 * Add - Support for Walker WordPress theme

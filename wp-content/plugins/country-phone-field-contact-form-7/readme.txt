@@ -135,3 +135,9 @@ Please use contact form 7 standard featured minlength and maxlength option. It w
 * Tested upto WordPress 5.5.1
 2.2.4
 * Tested upto WordPress 5.6
+2.2.5
+* Added a wordpress notice box for affiliation.
+2.2.6
+* Added a wordpress notice box image missing issue fixed.
+2.2.7
+* Remove affiliation notice box.
