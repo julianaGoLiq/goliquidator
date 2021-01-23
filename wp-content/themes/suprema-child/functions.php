@@ -296,3 +296,15 @@ function dynamic_select_contact_trusted_advisor( $scanned_tag, $replace ) {
 
 add_filter( 'wpcf7_form_tag', 'dynamic_select_contact_trusted_advisor', 10, 2);
 
+add_filter('style_loader_tag', 'style_loader_tag_function', 10, 2);
+
+function style_loader_tag_function($tag, $handle){
+
+    if($handle=="font-awesome"){
+        return str_replace("rel='stylesheet'",
+                           "rel='preload' as='font' type='font/woff2' crossorigin='anonymous'", $tag);
+    }
+
+    return $tag;
+}
+
