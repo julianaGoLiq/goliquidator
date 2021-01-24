@@ -307,7 +307,7 @@ function style_loader_tag_function($tag, $handle){
         $handle=="qodef_simple_line_icons" ||
         $handle=="qodef_linea_icons"){
         return str_replace("rel='stylesheet'",
-                           "rel='preload' as='font' type='font/woff2' crossorigin='anonymous'", $tag);
+                           "rel='preload' ", $tag);
     }
 
     return $tag;
