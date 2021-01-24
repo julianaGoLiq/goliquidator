@@ -305,6 +305,7 @@ function style_loader_tag_function($tag, $handle){
         $handle=="qodef_ion_icons" ||
         $handle=="qodef_linear_icons" ||
         $handle=="qodef_simple_line_icons" ||
+        $handle=="font-awesome" ||
         $handle=="qodef_linea_icons"){
         return str_replace("rel='stylesheet'",
                            "rel='preload' ", $tag);
