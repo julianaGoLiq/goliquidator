@@ -300,13 +300,13 @@ add_filter('style_loader_tag', 'style_loader_tag_function', 10, 2);
 
 function style_loader_tag_function($tag, $handle){
 
+    //$handle=="qodef_font_elegant" ||
     if($handle=="tfree-font-awesome" ||
         $handle=="qodef_font_awesome" ||
         $handle=="qodef_ion_icons" ||
         $handle=="qodef_linear_icons" ||
         $handle=="qodef_simple_line_icons" ||
         $handle=="font-awesome" ||
-        $handle=="qodef_font_elegant" ||
         $handle=="qodef_linea_icons"){
         return str_replace("rel='stylesheet'",
                            "rel='preload' ", $tag);
